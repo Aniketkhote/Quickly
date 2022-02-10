@@ -1,4 +1,85 @@
-include: package:flutter_lints/flutter.yaml
+linter:
+  rules:
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+    always_put_required_named_parameters_first: true
+    
+    avoid_classes_with_only_static_members: false
+
+    sort_constructors_first: true
+
+    public_member_api_docs: false
+    
+    always_specify_types: true
+ 
+    annotate_overrides: true
+    
+    avoid_empty_else: true
+    
+    avoid_print: true
+    
+    avoid_relative_lib_imports: true
+    
+    empty_statements: true
+    
+    valid_regexps: true
+    
+    always_declare_return_types: true
+    
+    prefer_asserts_with_message: true
+    
+    prefer_conditional_assignment: true
+    
+    prefer_is_empty: true
+    
+    prefer_is_not_empty: true
+    
+    prefer_mixin: false
+    
+    prefer_null_aware_method_calls: true
+    
+    prefer_spread_collections: true
+    
+    provide_deprecation_message: true
+    
+    slash_for_doc_comments: true
+    
+    unnecessary_getters_setters: true
+    
+    unnecessary_null_aware_assignments: true
+    
+    unnecessary_this: true
+    
+    use_if_null_to_convert_nulls_to_bools: true
+    
+    use_function_type_syntax_for_parameters: true
+    
+    unnecessary_parenthesis: true
+    
+    unnecessary_null_in_if_null_operators: true
+    
+    prefer_is_not_operator: true
+    
+    prefer_inlined_adds: true
+    
+    prefer_foreac: true
+    
+    prefer_final_fields: true
+        
+    prefer_contains: true
+    
+    prefer_constructors_over_static_methods: true
+    
+    prefer_collection_literals: true
+    
+    parameter_assignments: true
+    
+    null_closures: true
+    
+    no_runtimeType_toString: true
+    
+    library_private_types_in_public_api: true
+    
+    library_names: true
+    
+    empty_constructor_bodies: true
+    
