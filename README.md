@@ -1,198 +1,168 @@
-<div align="center" >
-  
-  ## Quicker is awesome flutter package to rapid development.
-  
-</div>
+<div id="top"></div>
 
 <br />
+<div align="center">
+  <a href="https://github.com/Aniketkhote/quicker">
+    <img src="https://cdn-icons.flaticon.com/png/512/3649/premium/3649458.png?token=exp=1644607289~hmac=a29d04e140831c83c39399bbe5bff6ba" alt="Logo" width="80" height="80">
+  </a>
 
-![Pub Version](https://img.shields.io/pub/v/quicker?color=blue&style=the-badge)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Aniketkhote/Quicker/CI?style=the-badge)](https://github.com/Aniketkhote/Quicker)
-[![pub points](https://badges.bar/quicker/pub%20points)](https://pub.dev/packages/quicker/score)
-[![popularity](https://badges.bar/quicker/popularity)](https://pub.dev/packages/quicker/score)
-[![likes](https://badges.bar/quicker/likes)](https://pub.dev/packages/quicker/score)
-![Discord](https://img.shields.io/discord/940916716081397771?logo=Discord&logoColor=white)
+<h3 align="center">Quicker</h3>
+
+  <p align="center">
+    Quicker is awesome flutter package for rapid development.
+    <br />
+    <a href="https://github.com/Aniketkhote/Quicker_docs"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/Aniketkhote/Quicker">View Demo</a>
+    ·
+    <a href="https://github.com/Aniketkhote/Quicker/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Aniketkhote/Quicker/issues">Request Feature</a>
+  </p>
+</div>
 
 
-[`Quicker`](https://pub.dev/packages/quicker) is build as a tool to enhance your Flutter UI development experience and make code easier. It is highly inspired by Bootstrap and Tailwind CSS. 
-It also provide lots of extension methods on String, List and Map.
 
-## How to Use
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <!-- <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li> -->
+    <li><a href="#how-to-use">How To Use</a></li>
+    <!-- <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li> -->
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+Quicker is build as a tool to enhance your Flutter UI development experience and make code easier. It is highly inspired by Bootstrap and Tailwind CSS. It also provide lots of extension methods on String, List and Map.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+### Built With
+
+* [Flutter](https://flutter.dev/)
+* [Dart](https://dart.dev/)
+* [Get](https://pub.dev/packages/get)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- How To Use -->
+## How To Use
+
+
+- Add this line to your dependencies and replace [version] with the latest version:
 
 ```yaml
-# add this line to your dependencies and replace [version] with the latest version:
   quicker: ^[version]
 ```
+
+- Import package
 
 ```dart
 import 'package:quicker/quicker.dart';
 ```
 
-<!-- ***
 
-## Basic Dart Example
-```dart
- List mapList = [
-    {'id': 1, 'name': 'Desk', 'price': 200},
-    {'id': 2, 'name': 'Chair', 'price': 100},
-    {'id': 3, 'name': 'Bookcase', 'price': 150},
-  ];
-
-  //Get only those object whose price is 150 & 200
-  print(mapList.whereIn('price', [150,200]));
-
-  [
-    {'id': 3, 'name': 'Bookcase', 'price': 150}, 
-    {'id': 1, 'name': 'Desk', 'price': 200}
-  ]
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
-  //Get only those object whose price is not 150 & 200
-  print(mapList.whereNotIn('price', [150,200]));
 
-  [
-    {'id': 2, 'name': 'Chair', 'price': 100}
-  ]
+<!-- USAGE EXAMPLES -->
+<!-- ## Usage
 
-   //Get only those key/values which is this keys
-  print(mapList.only(['name','price']));
+Use this package
 
-  [
-    {'name': 'Bookcase', 'price': 150}, 
-    {'name': 'Chair', 'price': 100},
-    {'name': 'Desk', 'price': 200}
-  ]
+_For more examples, please refer to the [Documentation](https://example.com)_
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+ -->
 
 
-  //Get all key/values excepted this key
-  print(mapList.notOnly(['price']));
+<!-- ROADMAP -->
+<!-- ## Roadmap
 
-  [
-    {'id': 1, 'name': 'Desk'},
-    {'id': 2, 'name': 'Chair'},
-    {'id': 3, 'name': 'Bookcase'}
-  ]
+- [ ] Feature 1
+- [ ] Feature 2
+- [ ] Feature 3
+    - [ ] Nested Feature
 
-```
-</br>
+See the [open issues](https://github.com/Aniketkhote/Quicker/issues) for a full list of proposed features (and known issues).
 
----
+<p align="right">(<a href="#top">back to top</a>)</p>
+ -->
 
 
-## Some other methods and Widgets
+<!-- CONTRIBUTING -->
+## Contributing
 
-<details>
-<summary>Widgets</summary>
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-* FxAlert
-* FxIconBox
-* FxButton
-* FxHBox
-* FxWBox
-* SquareBox
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-</details>
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-<details>
-<summary>String Methods</summary>
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-* isAlphabet
-* isEmail
-* isNumber
-* isMobileNumber
-* removeWhitespace
-* toSlug
-* minLength()
-* maxLength()
-* range()
-* mask()
-* countBy()
-* toTitleCase()
-* toSentenceCase()
-* toCapitalCase()
-* Checks file extensions likes(eg. png,svg,pdf,audio,video and more).
 
-[String API Reference](https://pub.dev/documentation/quicker/latest/quicker/StringExtensions.html).
 
-</details>
+<!-- LICENSE -->
+## License
 
-<details>
-<summary>List Methods</summary>
-    
-* flatten
-* flatMap
-* random
-* min
-* max
-* sum
-* avg
-* median
-* mode
-* groupBy
-* countBy()
-* groupByKey()
-* pluck()
-* sorted()
-* sortBy()
-* diff()
-* chunk()
-* only()
-* notOnly()
-* whereIn()
-* whereNotIn()
-* whereBetween()
-* whereNotBetween()
-* hasKeyValue()
-* hasKey()
-* hasValue()
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-[List API Reference](https://pub.dev/documentation/quicker/latest/quicker/ListExtensions.html).
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-</details>
 
-<details>
-<summary>Map Methods</summary>
 
-* getId
-* isEmptyOrNull
-* isNotEmptyOrNull
-* contains()
-* diffKeys()
-* diffValues()
-* getBool()
-* getInt()
-* getDouble()
-* getString()
-* getList()
+<!-- CONTACT -->
+## Contact
 
-[Map API Reference](https://pub.dev/documentation/quicker/latest/quicker/MapExtensions.html).
+Aniket Khote - [@aniketkhote99](https://twitter.com/aniketkhote99) - aniketkhote99@gmail.com
 
-</details>
+Project Link: [https://github.com/Aniketkhote/Quicker](https://github.com/Aniketkhote/Quicker)
 
-<br />
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-**Read the full** [API reference](https://pub.dev/documentation/quicker/latest/).
 
-**Read** [Documentation](https://aniketkhote.github.io/quicker-docs/#/).
 
-*** -->
+<!-- ACKNOWLEDGMENTS -->
+<!-- ## Acknowledgments
 
-## Contributing 
-quicker is 100% free and open source. We encourage and support an active, healthy community that accepts contributions from the public – including you.
+* []()
+* []()
+* []()
 
-- Pick up any issue marked with label "[good first issue](https://github.com/Aniketkhote/Quicker/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)"
-- Fix a bug
-- Write and improve some documentation. Documentation is very critical to us. We would appreciate help in adding multiple languages to our docs.
-- If you are a developer, feel free to check out the source and submit pull requests.
-- Please don't forget to like, follow, and star our repo! Join our growing community to keep up to date with the latest GetWidget development.
-
-Code and documentation Copyright 2022 [Aniket Khote](https://github.com/Aniketkhote)
-
----
-
-<div align="center" >
-
-### **Show some ❤️ to Like, Follow, and Star our repo!**
-
-</div>
-</br>
+<p align="right">(<a href="#top">back to top</a>)</p> -->

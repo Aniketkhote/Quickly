@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Gives predefined Padding
-abstract class QxPadding {
+abstract class FxPadding {
   /// get padding only on given values non-zero.
   EdgeInsets only({
     double? top,

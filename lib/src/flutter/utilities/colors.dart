@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Custom color palette
-abstract class QxColor {
+abstract class FxColor {
   static const Color primary = Color(0xff4E73DF);
   static const Color secondary = Color(0xFFE4E6EF);
   static const Color success = Color(0xFF1CC88A);
