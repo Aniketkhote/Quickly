@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quicker/quicker.dart';
+import '../utilities/colors.dart';
 
 /// Custom color palette
 extension TextWidget on Text {

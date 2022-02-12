@@ -3,25 +3,25 @@ import 'dart:io';
 ///String extensions to get basic functionality on strings
 extension StringExtension on String {
   ///match string with regex pattern
-  bool regex(String string, String source) => RegExp(source).hasMatch(this);
+  bool regex(String source) => RegExp(source).hasMatch(this);
 
   ///Checks [string] is letter or not and return [bool]
-  bool get isAlphabet => regex(this, "[a-zA-Z]+");
+  bool get isAlphabet => regex(r'^[a-zA-Z]+$');
 
   ///Checks [string] is Number or not and return [bool]
-  bool get isNumber => regex(this, "[0-9]+");
+  bool get isNumber => regex(r'^[0-9]+$');
 
   ///Checks [string] is Alpha Numerical or not and return [bool]
-  bool get isAlphaNumeric => regex(this, "[a-zA-z0-9]+");
+  bool get isAlphaNumeric => regex(r'^[a-zA-z0-9]+$');
 
   ///Checks [string] is valid email or not and return [bool]
-  bool get isEmail => regex(this,
+  bool get isEmail => regex(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
   ///Checks [string] is valid mobile number or not and return [bool]
   ///
   ///eg. 7xxxxxxxxxx, 8xxxxxxxxxx, 9xxxxxxxxxx
-  bool get isINDMobile => regex(this, "^([789]{1}[0-9]{9})");
+  bool get isINDMobile => regex("^([789]{1}[0-9]{9})");
 
   ///Check this string min length, if satisfied condition then return true
   bool minLen(int min) => length >= min;
