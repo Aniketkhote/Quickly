@@ -2,23 +2,23 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/Aniketkhote/quicker">
+  <a href="https://github.com/Aniketkhote/quickly">
     <img src="https://cdn-icons.flaticon.com/png/512/3649/premium/3649458.png?token=exp=1644607289~hmac=a29d04e140831c83c39399bbe5bff6ba" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Quicker</h3>
+<h3 align="center">Quickly</h3>
 
   <p align="center">
-    Quicker is awesome flutter package for rapid development.
+    Quickly is awesome flutter package for rapid development.
     <br />
-    <a href="https://github.com/Aniketkhote/Quicker_docs"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Aniketkhote/Quickly_docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Aniketkhote/Quicker">View Demo</a>
+    <a href="https://github.com/Aniketkhote/Quickly">View Demo</a>
     ·
-    <a href="https://github.com/Aniketkhote/Quicker/issues">Report Bug</a>
+    <a href="https://github.com/Aniketkhote/Quickly/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Aniketkhote/Quicker/issues">Request Feature</a>
+    <a href="https://github.com/Aniketkhote/Quickly/issues">Request Feature</a>
   </p>
 </div>
 
@@ -58,7 +58,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Quicker is build as a tool to enhance your Flutter UI development experience and make code easier. It is highly inspired by Bootstrap and Tailwind CSS. It also provide lots of extension methods on String, List and Map.
+Quickly is build as a tool to enhance your Flutter UI development experience and make code easier. It is highly inspired by Bootstrap and Tailwind CSS. It also provide lots of extension methods on String, List and Map.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -81,13 +81,13 @@ Quicker is build as a tool to enhance your Flutter UI development experience and
 - Add this line to your dependencies and replace [version] with the latest version:
 
 ```yaml
-  quicker: ^[version]
+  quickly: ^[version]
 ```
 
 - Import package
 
 ```dart
-import 'package:quicker/quicker.dart';
+import 'package:quickly/quickly.dart';
 ```
 
 
@@ -114,7 +114,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Feature 3
     - [ ] Nested Feature
 
-See the [open issues](https://github.com/Aniketkhote/Quicker/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/Aniketkhote/Quickly/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
  -->
@@ -152,7 +152,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Aniket Khote - [@aniketkhote99](https://twitter.com/aniketkhote99) - aniketkhote99@gmail.com
 
-Project Link: [https://github.com/Aniketkhote/Quicker](https://github.com/Aniketkhote/Quicker)
+Project Link: [https://github.com/Aniketkhote/Quickly](https://github.com/Aniketkhote/Quickly)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

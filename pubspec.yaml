@@ -1,7 +1,7 @@
-name: quicker
-description: Quicker is awesome flutter package to rapid development.
+name: quickly
+description: Quickly is awesome flutter package to rapid development.
 version: 1.0.0
-homepage: "https://github.com/Aniketkhote/Quicker"
+homepage: "https://github.com/Aniketkhote/Quickly"
 
 environment:
   sdk: ">=2.16.0 <3.0.0"

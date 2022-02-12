@@ -1,4 +1,4 @@
-library quicker;
+library quickly;
 
 export 'src/flutter/utilities/utilities.dart';
 
