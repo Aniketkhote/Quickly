@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 /// Gives predefined Padding
-abstract class FxPadding {
+class FxPadding {
   /// get padding only on given values non-zero.
-  EdgeInsets only({
+  static EdgeInsets only({
     double? top,
     double? bottom,
     double? left,
@@ -18,19 +18,19 @@ abstract class FxPadding {
   static EdgeInsets get none => _padding(all: 0);
 
   /// get padding except left on given values non-zero.
-  EdgeInsets pnl(double value) =>
+  static EdgeInsets pnl(double value) =>
       _padding(top: value, bottom: value, right: value);
 
   /// get padding except right on given values non-zero.
-  EdgeInsets pnr(double value) =>
+  static EdgeInsets pnr(double value) =>
       _padding(top: value, bottom: value, left: value);
 
   /// get padding except top on given values non-zero.
-  EdgeInsets pnt(double value) =>
+  static EdgeInsets pnt(double value) =>
       _padding(left: value, bottom: value, right: value);
 
   /// get padding except bottom on given values non-zero.
-  EdgeInsets pnb(double value) =>
+  static EdgeInsets pnb(double value) =>
       _padding(top: value, left: value, right: value);
 
   /// get horizontaly padding
