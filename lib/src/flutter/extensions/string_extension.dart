@@ -33,7 +33,8 @@ extension StringExtension on String {
   bool range(int min, int max) => length >= min && length <= max;
 
   ///Checks [string] is empty or null and return [bool]
-  bool get isEmptyOrNull => isEmpty;
+  // ignore: unnecessary_null_comparison
+  bool get isEmptyOrNull => this == null || isEmpty;
 
   ///Checks [string] is not empty or not null and return [bool]
   bool get isNotEmptyOrNull => !isEmptyOrNull;
