@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 ///Text extension to directly style on Text
 extension TextExtension on Text {
   ///Apply [TextStyle] to existing textstyle
-  Text textStyle({
+  Text style({
     Key? key,
     TextStyle? style,
     StrutStyle? strutStyle,
@@ -98,7 +98,7 @@ extension TextExtension on Text {
   Text get rtl => _copyWith(textDirection: TextDirection.rtl);
 
   ///If false, the glyphs in the text will be positioned as if there was unlimited horizontal space.
-  Text setSoftWrap(bool softWrap) => _copyWith(softWrap: softWrap);
+  Text softWrap(bool softWrap) => _copyWith(softWrap: softWrap);
 
   /// Render overflowing text outside of its container.
   Text get visible => _copyWith(overflow: TextOverflow.visible);
