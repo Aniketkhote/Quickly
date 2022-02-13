@@ -11,7 +11,7 @@
   <p align="center">
     Quickly is awesome flutter package for rapid development.
     <br />
-    <a href="https://github.com/Aniketkhote/Quickly_docs"><strong>Explore the docs »</strong></a>
+    <a href="https://pub.dev/documentation/quickly/latest/customize/quickly-library.html"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Aniketkhote/Quickly">View Demo</a>
@@ -25,8 +25,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
+  ### Table of Contents
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -49,14 +48,11 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
-</details>
 
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Quickly is build as a tool to enhance your Flutter UI development experience and make code easier. It is highly inspired by Bootstrap and Tailwind CSS. It also provide lots of extension methods on String, List and Map.
 
@@ -141,7 +137,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -153,6 +149,12 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 Aniket Khote - [@aniketkhote99](https://twitter.com/aniketkhote99) - aniketkhote99@gmail.com
 
 Project Link: [https://github.com/Aniketkhote/Quickly](https://github.com/Aniketkhote/Quickly)
+
+<div align="center" >
+
+### **Show some ❤️ to Like, Follow, and Star our repo!**
+
+</div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

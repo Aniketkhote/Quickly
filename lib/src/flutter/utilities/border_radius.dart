@@ -114,19 +114,19 @@ abstract class FxRadius {
   static BorderRadius get topRight50 => _copyWith(topRight: 50);
 
   ///Gives [BorderRadius] 5 for bottom left side
-  static BorderRadius get bottonLeft5 => _copyWith(bottomLeft: 5);
+  static BorderRadius get bottomLeft5 => _copyWith(bottomLeft: 5);
 
   ///Gives [BorderRadius] 10 for bottom left side
-  static BorderRadius get bottonLeft10 => _copyWith(bottomLeft: 10);
+  static BorderRadius get bottomLeft10 => _copyWith(bottomLeft: 10);
 
   ///Gives [BorderRadius] 20 for bottom left side
-  static BorderRadius get bottonLeft20 => _copyWith(bottomLeft: 20);
+  static BorderRadius get bottomLeft20 => _copyWith(bottomLeft: 20);
 
   ///Gives [BorderRadius] 30 for bottom left side
-  static BorderRadius get bottonLeft30 => _copyWith(bottomLeft: 30);
+  static BorderRadius get bottomLeft30 => _copyWith(bottomLeft: 30);
 
   ///Gives [BorderRadius] 50 for bottom left side
-  static BorderRadius get bottonLeft50 => _copyWith(bottomLeft: 50);
+  static BorderRadius get bottomLeft50 => _copyWith(bottomLeft: 50);
 
   ///Gives [BorderRadius] 5 for bottom right side
   static BorderRadius get bottomRight5 => _copyWith(bottomRight: 5);
