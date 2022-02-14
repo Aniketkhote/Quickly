@@ -126,10 +126,10 @@ extension StringExtension on String {
   bool get isCapital => this == toCapitalCase ? true : false;
 
   ///check string is in lower case or not
-  bool get isLower => this == toLowerCase ? true : false;
+  bool get isLower => this == toLowerCase() ? true : false;
 
   ///check string is in upper case or not
-  bool get isUpper => this == toUpperCase ? true : false;
+  bool get isUpper => this == toUpperCase() ? true : false;
 
   ///Check image is svg or not
   bool get isSvg => toLowerCase().endsWith(".svg");

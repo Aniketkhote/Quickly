@@ -38,10 +38,12 @@ extension WidgetExtension on Widget {
   Visibility show() => _visibility(true);
 
   /// Hide widget if condition satisfied
-  Visibility hideIf(bool condition) => _visibility(false);
+  Visibility hideIf(bool condition) =>
+      condition ? _visibility(false) : _visibility(true);
 
   /// Show widget if condition satisfied
-  Visibility showIf(bool condition) => _visibility(true);
+  Visibility showIf(bool condition) =>
+      condition ? _visibility(true) : _visibility(false);
 
   /// Set icon to child widget
   Icon icon(IconData? icon,
