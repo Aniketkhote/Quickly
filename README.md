@@ -11,7 +11,7 @@
   <p align="center">
     Quickly is awesome flutter package for rapid development.
     <br />
-    <a href="https://pub.dev/documentation/quickly/latest/customize/quickly-library.html"><strong>Explore the docs »</strong></a>
+    <a href="https://pub.dev/documentation/quickly/latest/quickly/quickly-library.html"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Aniketkhote/Quickly">View Demo</a>
@@ -22,7 +22,12 @@
   </p>
 </div>
 
-
+![Pub Version](https://img.shields.io/pub/v/quickly?color=blue&style=the-badge)
+![GitHub Release Date](https://img.shields.io/github/release-date/Aniketkhote/quickly?style=the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Aniketkhote/quickly/CI?style=the-badge)
+[![pub points](https://badges.bar/quickly/pub%20points)](https://pub.dev/packages/quickly/score)
+[![popularity](https://badges.bar/quickly/popularity)](https://pub.dev/packages/quickly/score)
+[![likes](https://badges.bar/quickly/likes)](https://pub.dev/packages/quickly/score)
 
 <!-- TABLE OF CONTENTS -->
   ### Table of Contents

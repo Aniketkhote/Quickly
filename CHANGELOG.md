@@ -1,3 +1,8 @@
+## 1.2.0
+
+### Fixed
+- Fix Text color extensions.
+
 ## 1.1.0
 
 ### Added

@@ -11,9 +11,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
-          child: Text('Quickly'.toTitleCase).lg.blue500.bold.italic,
+          child: Text('Quickly'.toTitleCase)
+              .h1
+              .red500
+              .bold
+              .italic
+              .underline
+              .center,
         ),
       ),
     );
