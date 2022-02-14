@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 ///Text extension to directly style on Text
 extension TextExtension on Text {
@@ -37,22 +36,38 @@ extension TextExtension on Text {
   Text fs(double fontSize) => _copyWith(style: TextStyle(fontSize: fontSize));
 
   ///Sets [fontSize] to 96 logical pixel and [fontWeight] to light
-  Text get h1 => _copyWith(style: Get.textTheme.headline1);
+  Text get h1 => _copyWith(
+      style: const TextStyle(fontSize: 96.0, fontWeight: FontWeight.w300));
 
   ///Sets [fontSize] to 60 logical pixel and [fontWeight] to light
-  Text get h2 => _copyWith(style: Get.textTheme.headline2);
+  Text get h2 => _copyWith(
+      style: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.w300));
 
   ///Sets [fontSize] to 48 logical pixel and [fontWeight] to regular
-  Text get h3 => _copyWith(style: Get.textTheme.headline3);
+  Text get h3 => _copyWith(style: const TextStyle(fontSize: 48.0));
 
   ///Sets [fontSize] to 34 logical pixel and [fontWeight] to regular
-  Text get h4 => _copyWith(style: Get.textTheme.headline4);
+  Text get h4 => _copyWith(style: const TextStyle(fontSize: 34.0));
 
   ///Sets [fontSize] to 24 logical pixel and [fontWeight] to regular
-  Text get h5 => _copyWith(style: Get.textTheme.headline5);
+  Text get h5 => _copyWith(style: const TextStyle(fontSize: 24.0));
 
   ///Sets [fontSize] to 20 logical pixel and [fontWeight] to medium
-  Text get h6 => _copyWith(style: Get.textTheme.headline6);
+  Text get h6 => _copyWith(
+      style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500));
+
+  ///Sets [fontSize] to 16 logical pixel and [fontWeight] to Light
+  Text get body1 => _copyWith(style: const TextStyle(fontSize: 16.0));
+
+  ///Sets [fontSize] to 14 logical pixel and [fontWeight] to Light
+  Text get body2 => _copyWith(
+      style: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500));
+
+  ///Sets [fontSize] to 12 logical pixel and [fontWeight] to Light
+  Text get caption1 => _copyWith(style: const TextStyle(fontSize: 12.0));
+
+  ///Sets [fontSize] to 10 logical pixel and [fontWeight] to Light
+  Text get caption2 => _copyWith(style: const TextStyle(fontSize: 10.0));
 
   /// Sets [lineHeight] to 0.75
   Text get heightTight => _copyWith(style: const TextStyle(height: 0.75));

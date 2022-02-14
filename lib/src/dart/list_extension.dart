@@ -36,6 +36,29 @@ extension ListExtension on List<dynamic> {
   ///```
   List<dynamic> get sortedDesc => sorted(true);
 
+  ///The sortBy method sorts the list of objects by the given key.
+  ///
+  ///Example:
+  ///```dart
+  ///list.sortBy("price") // create new list with soreted list according to price
+  ///```
+  List<dynamic> sortBy(String key, [bool isDesc = false]) {
+    sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
+
+    return isDesc ? reversed.toList() : this;
+  }
+
+  ///The sortBy method sorts the list of objects by the given key.
+  ///
+  ///Example:
+  ///```dart
+  ///list.sortBy("price")
+  ///
+  ///This method has the same signature as the sortBy method,
+  ///but will sort the collection in the opposite order
+  ///```
+  List<dynamic> sortByDesc(String key) => sortBy(key, true);
+
   ///Get minimum number
   dynamic get min => sorted().first;
 
