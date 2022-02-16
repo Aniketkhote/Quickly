@@ -62,5 +62,14 @@ extension WidgetExtension on Widget {
   SizedBox sizedBox({double? h, double? w}) =>
       SizedBox(child: this, height: h, width: w);
 
+  ///Creates a fixed sized square box.
+  SizedBox sq(double size) => sizedBox(h: size, w: size);
+
+  ///Creates a fixed sized height box.
+  SizedBox h(double height) => sizedBox(h: height);
+
+  ///Creates a fixed sized width box.
+  SizedBox w(double? width) => sizedBox(w: width);
+
   Visibility _visibility(bool value) => Visibility(child: this, visible: value);
 }

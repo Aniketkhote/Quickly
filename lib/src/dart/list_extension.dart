@@ -6,7 +6,7 @@ extension ListExtension on List<dynamic> {
   ///```dart
   ///list.isEmptyOrNull // false
   ///```
-  bool get isEmptyOrNull => isEmpty;
+  bool get isEmptyOrNull => this == null || isEmpty;
 
   ///check list is neither empty nor null
   /// ///check list is empty or null

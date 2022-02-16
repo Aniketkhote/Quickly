@@ -6,10 +6,10 @@
     <img src="https://cdn-icons.flaticon.com/png/512/3649/premium/3649458.png?token=exp=1644607289~hmac=a29d04e140831c83c39399bbe5bff6ba" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Quickly</h3>
+<h1 align="center" style="font-size:50px">Quickly</h1>
 
   <p align="center">
-    Quickly is awesome flutter package for rapid development.
+    Quickly is awesome flutter package for faster and cleaner development.
     <br />
     <a href="https://pub.dev/documentation/quickly/latest/quickly/quickly-library.html"><strong>Explore the docs »</strong></a>
     <br />
@@ -46,8 +46,8 @@
       </ul>
     </li> -->
     <li><a href="#how-to-use">How To Use</a></li>
-    <!-- <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li> -->
+    <li><a href="#usage">Usage</a></li>
+    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -97,14 +97,78 @@ import 'package:quickly/quickly.dart';
 
 
 <!-- USAGE EXAMPLES -->
-<!-- ## Usage
+## Usage
 
-Use this package
+### Flutter
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+```dart
+
+// Display big bold red string in italic
+Text('Quickly').red500.xl.bold.italic
+
+// Apply padding to Widget
+Text('12 Padding from all side').p12
+
+Text('4 Padding from top and bottom side').py4
+
+Text('16 Padding from all side except top').pnt16
+
+// Visibility
+Container(child:Text('hide')).hide
+
+Container(child:Text('show')).show
+
+Container(
+  child:Text('hide if condition true'),
+  ).hideIf(condition)
+
+Container(
+  child:Text('show if condition true'),
+  ).showIf(condition)
+```
+
+### Dart
+
+```dart
+
+// get sorted list
+list.sorted()    // pass true for desc
+
+list.sortedDec()
+
+// get sorted list by key from list of object
+list.sortedByKey(key)
+
+// checks given key/value pair is present or not
+map.contains("key","value")   // true
+
+// return id if key present else return 0
+map.getId
+
+// key is NULL or not [String] type return empty string else return value of key
+map.getString('key')
+
+// Get suffix
+1.suffix()   // 1st
+2.suffix()   // 2nd
+8.suffix()   // 8th
+
+10.5.suffix('%') // 10.5$
+
+// getMonthName
+1.getMonthName()     // January
+2.getMonthName(true) // Feb
+
+// getWeekName
+1.getWeekName()     // Monday
+2.getWeekName(true) // Mon
+
+```
+
+_For more examples, please refer to the [Documentation](https://pub.dev/documentation/quickly/latest/quickly/quickly-library.html)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
- -->
+
 
 
 <!-- ROADMAP -->

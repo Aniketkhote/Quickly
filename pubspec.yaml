@@ -1,6 +1,6 @@
 name: quickly
-description: Quickly is build as a tool to enhance your Flutter UI development experience and make code easier. It is highly inspired by Bootstrap and Tailwind CSS. It also provide lots of extension methods on String, List and Map.
-version: 1.2.0
+description: Quickly is build for faster and cleaner development. It provides lots of extension methods on Widget, String, List and Map.
+version: 1.3.0
 homepage: "https://github.com/Aniketkhote/Quickly"
 
 environment:

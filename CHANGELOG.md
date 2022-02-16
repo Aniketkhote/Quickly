@@ -1,3 +1,9 @@
+## 1.3.0
+
+### Added
+- Added `sq`, `w`, `h` num and widget extensions
+- Added `Duration` num extensions like seconds, minutes, etc
+
 ## 1.2.0
 
 ### Added
