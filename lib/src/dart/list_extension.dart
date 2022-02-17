@@ -6,6 +6,7 @@ extension ListExtension on List<dynamic> {
   ///```dart
   ///list.isEmptyOrNull // false
   ///```
+  // ignore: unnecessary_null_comparison
   bool get isEmptyOrNull => this == null || isEmpty;
 
   ///check list is neither empty nor null
@@ -43,6 +44,9 @@ extension ListExtension on List<dynamic> {
   ///list.sortBy("price") // create new list with soreted list according to price
   ///```
   List<dynamic> sortBy(String key, [bool isDesc = false]) {
+    if (first is! Map<dynamic, dynamic> || !first.containsKey(key))
+      return <dynamic>[];
+
     sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
 
     return isDesc ? reversed.toList() : this;
@@ -58,6 +62,48 @@ extension ListExtension on List<dynamic> {
   ///but will sort the collection in the opposite order
   ///```
   List<dynamic> sortByDesc(String key) => sortBy(key, true);
+
+  ///Returns random value from this list
+  ///
+  ///Example:
+  ///```dart
+  ///list.random // [1,2,3,4,5] -> 4
+  ///```
+  dynamic get random => (this..shuffle()).first;
+
+  ///The chunk method breaks the list into multiple, smaller list of a given size
+  ///
+  ///Example:
+  ///```dart
+  ///list.chunk(2) // [1,2,3,4,5] -> [[1,2], [3,4], [5]]
+  ///```
+  List<dynamic> chunk(int size) {
+    List<dynamic> _chunks = <dynamic>[];
+
+    if (size < 1) return <dynamic>[];
+
+    for (int i = 0; i < length; i += size)
+      _chunks.add(sublist(i, i + size > length ? length : i + size));
+
+    return _chunks;
+  }
+
+  ///The split method breaks the list into equal sized lists of a given size
+  ///
+  ///Example:
+  ///```dart
+  ///list.split(2) // [1,2,3,4,5] -> [[1,2,3], [4,5]]
+  ///```
+  List<dynamic> split(int parts) {
+    if (parts < 1) return <dynamic>[];
+
+    int _size = (length / parts).round();
+
+    return List<dynamic>.generate(
+        parts,
+        (int i) => sublist(
+            _size * i, (i + 1) * _size <= length ? (i + 1) * _size : null));
+  }
 
   ///Get minimum number
   dynamic get min => sorted().first;

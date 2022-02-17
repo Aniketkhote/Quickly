@@ -1,8 +1,15 @@
+## 1.4.0
+
+### Added
+- Added `random` | `chunk`| `split` list extensions
+### Fixed
+- Fixed `sortBy` error when list doesn't have this key or it doesn't have list of map 
+
 ## 1.3.0
 
 ### Added
-- Added `sq`, `w`, `h` num and widget extensions
-- Added `Duration` num extensions like seconds, minutes, etc
+- Added `sq` | `w` | `h` num and widget extensions
+- Added `Duration` num extensions like `seconds`, `minutes`, etc
 
 ## 1.2.0
 

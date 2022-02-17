@@ -137,7 +137,7 @@ list.sorted()    // pass true for desc
 list.sortedDec()
 
 // get sorted list by key from list of object
-list.sortedByKey(key)
+list.sortedBy(key)
 
 // checks given key/value pair is present or not
 map.contains("key","value")   // true
