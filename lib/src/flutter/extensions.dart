@@ -1,4 +1,4 @@
-export 'extensions/text_extenion.dart';
+export 'extensions/text_extension.dart';
 
 export 'extensions/text_color_extension.dart';
 

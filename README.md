@@ -153,15 +153,21 @@ map.getString('key')
 2.suffix()   // 2nd
 8.suffix()   // 8th
 
-10.5.suffix('%') // 10.5$
+10.5.suffix('$') // 10.5$
 
 // getMonthName
 1.getMonthName()     // January
-2.getMonthName(true) // Feb
+2.getMonthName(true) // Jan
 
 // getWeekName
 1.getWeekName()     // Monday
 2.getWeekName(true) // Mon
+
+// divide list into equal elements
+[1,2,3,4,5].chunk(2)    // [[1,2], [3,4], [5]];
+
+// divide list into equal parts
+[1,2,3,4,5].split(2)    // [[1,2,3], [4,5]];
 
 ```
 
