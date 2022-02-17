@@ -1,3 +1,11 @@
+## 1.5.0
+
+### Added
+- Added tests on `List`
+### Changed
+- Changed `.textScaleFactor` => `.textScale`
+- Changed `.fs` => `.fontSize`
+
 ## 1.4.0
 
 ### Added

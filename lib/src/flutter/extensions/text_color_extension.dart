@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../utilities.dart';
 
 /// Custom color palette
-extension TextWidget on Text {
+extension TextColorExtension on Text {
   Text get primary => _color(FxColor.primary);
   Text get secondary => _color(FxColor.secondary);
   Text get success => _color(FxColor.success);

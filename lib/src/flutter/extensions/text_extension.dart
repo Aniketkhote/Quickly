@@ -33,7 +33,8 @@ extension TextExtension on Text {
       );
 
   ///Sets [fontSize] to this text
-  Text fs(double fontSize) => _copyWith(style: TextStyle(fontSize: fontSize));
+  Text fontSize(double fontSize) =>
+      _copyWith(style: TextStyle(fontSize: fontSize));
 
   ///Sets [fontSize] to 96 logical pixel and [fontWeight] to light
   Text get h1 => _copyWith(
@@ -168,8 +169,7 @@ extension TextExtension on Text {
       _copyWith(style: TextStyle(fontFamily: fontFamily));
 
   ///set [textScaleFactor] to text
-  Text textScaleFactor(double textScaleFactor) =>
-      _copyWith(textScaleFactor: textScaleFactor);
+  Text textScale(double textScale) => _copyWith(textScaleFactor: textScale);
 
   /// Sets [textScaleFactor] to extra small i.e. 0.75
   Text get xs => _copyWith(textScaleFactor: 0.75);
