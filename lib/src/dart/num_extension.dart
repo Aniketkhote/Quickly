@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ///Num extension to extend List functionality
-extension NumExt on num {
+extension NumExtension on num {
   /// Add suffix to the number
   String suffix([String suffix = '']) {
     if (suffix.isNotEmpty) return '${this}$suffix';

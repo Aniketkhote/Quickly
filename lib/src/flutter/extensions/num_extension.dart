@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ///Num extension to extend num functionality
-extension NumExtension on num {
+extension NumExt on num {
   /// Creates a fixed square sized box.
   SizedBox box(Widget child) =>
       SizedBox(height: toDouble(), width: toDouble(), child: child);
