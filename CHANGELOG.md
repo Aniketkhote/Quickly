@@ -1,3 +1,11 @@
+## 1.6.0
+
+### Added
+- Added `match()` extension on `Object`
+
+    The `match()` function also works similarly to `switch` 
+    i.e, it finds the matching case according to the parameter passed in it. 
+
 ## 1.5.0
 
 ### Added

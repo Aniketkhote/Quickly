@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'extensions.dart';
 
 ///Num extension to extend List functionality
 extension NumExtension on num {
   /// Add suffix to the number
   String suffix([String suffix = '']) {
     if (suffix.isNotEmpty) return '${this}$suffix';
-    switch (this % 10) {
-      case 1:
-        return '${this}st';
-      case 2:
-        return '${this}nd';
-      case 3:
-        return '${this}rd';
-    }
-    return '${this}th';
+
+    return (this % 10).match(<int, String>{
+      1: '${this}st',
+      2: '${this}nd',
+      3: '${this}rd',
+    }, '${this}th');
   }
 
   ///Creates a fixed sized square box.

@@ -7,3 +7,5 @@ export 'num_extension.dart';
 export 'int_extension.dart';
 
 export 'string_extension.dart';
+
+export 'object_extension.dart';
