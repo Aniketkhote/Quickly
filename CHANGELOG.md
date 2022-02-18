@@ -1,7 +1,8 @@
 ## 1.5.0
 
 ### Added
-- Added tests on `List`
+- Write tests for `List`
+- Write tests for `Map`
 ### Changed
 - Changed `.textScaleFactor` => `.textScale`
 - Changed `.fs` => `.fontSize`

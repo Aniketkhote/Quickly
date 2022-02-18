@@ -9,12 +9,12 @@ extension MapExtensions on Map<dynamic, dynamic> {
   ///map.contains("key","value") // true
   ///```
   bool contains(String key, dynamic value) {
-    bool isContain = false;
+    bool _isContain = false;
 
     forEach((dynamic k, dynamic v) {
-      if (k == key && v == value) isContain = true;
+      if (k == key && v == value) _isContain = true;
     });
-    return isContain;
+    return _isContain;
   }
 
   ///Returns the ID of the object if exists otherwise return 0;

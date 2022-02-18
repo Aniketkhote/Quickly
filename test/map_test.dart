@@ -1,0 +1,76 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:quickly/quickly.dart';
+
+void main() {
+  group('Map Extensions', () {
+    Map<dynamic, dynamic> input1 = <dynamic, dynamic>{};
+    Map<dynamic, dynamic> input2 = <dynamic, dynamic>{
+      'name': 'P 1',
+      'price': 49,
+      'qty': 10
+    };
+    Map<dynamic, dynamic> input3 = <dynamic, dynamic>{
+      'id': 1,
+      'name': 'P 1',
+      'price': 49,
+      'stock': true,
+    };
+
+    group('.getId', () {
+      test('.getId - map is empty so return 0',
+          () => expect(input1.getId, equals(0)));
+      test('.getId - map does not have given key return 0',
+          () => expect(input2.getId, equals(0)));
+      test('.getId - map have given key so return value of key which is 1',
+          () => expect(input3.getId, equals(1)));
+    });
+
+    group('.getBool(key)', () {
+      test('.getBool() - map is empty so return false',
+          () => expect(input1.getBool('stock'), equals(false)));
+      test('.getBool() - map does not have given key return false',
+          () => expect(input2.getBool('color'), equals(false)));
+      test('.getBool() - map have given key but not bool type return false',
+          () => expect(input3.getBool('name'), equals(false)));
+      test(
+          '.getBool() - map have given key so return value of key which is true',
+          () => expect(input3.getBool('stock'), equals(true)));
+    });
+
+    group('.getString(key)', () {
+      test('.getString() - map is empty so return empty string',
+          () => expect(input1.getString('stock'), equals('')));
+      test('.getString() - map does not have given key return empty string',
+          () => expect(input2.getString('color'), equals('')));
+      test(
+          '.getString() - map have given key but not String type return empty string',
+          () => expect(input3.getString('price'), equals('')));
+      test(
+          '.getString() - map have given key so return value of key which is 49',
+          () => expect(input3.getString('name'), equals('P 1')));
+    });
+
+    group('map1.diffKeys(map2)', () {
+      test(
+          '.diffKeys() - return all entries of input1 according to keys which is not in input2',
+          () => expect(
+              input2.diffKeys(input3), equals(<dynamic, dynamic>{'qty': 10})));
+    });
+    group('map1.diffValues(map2)', () {
+      test(
+          '.diffValues() - return all entries of input1 according to values which is not in input2',
+          () => expect(input2.diffValues(input3),
+              equals(<dynamic, dynamic>{'qty': 10})));
+    });
+
+    group('.contains(key, value)', () {
+      test('.contains(key, value) - return true key/value present in map',
+          () => expect(input3.contains('price', 49), equals(true)));
+      test('.contains(key, value) - return false value not present in map',
+          () => expect(input2.contains('price', 'red'), equals(false)));
+      test(
+          '.contains(key, value) - return false key & value not present in map',
+          () => expect(input2.contains('color', 'red'), equals(false)));
+    });
+  });
+}

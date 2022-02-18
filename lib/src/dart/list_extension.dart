@@ -26,7 +26,7 @@ extension ListExtension on List<dynamic> {
   ///list.sortBy("price") // create new list with soreted list according to price
   ///```
   List<dynamic> sortBy(String key, [bool isDesc = false]) {
-    if (isEmpty | first is! Map<dynamic, dynamic> || !first.containsKey(key))
+    if (isEmpty || first is! Map<dynamic, dynamic> || !first.containsKey(key))
       return <dynamic>[];
 
     sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
