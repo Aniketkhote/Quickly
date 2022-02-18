@@ -5,6 +5,7 @@
 ### Changed
 - Changed `.textScaleFactor` => `.textScale`
 - Changed `.fs` => `.fontSize`
+- Removed `isEmptyOrNull` & `isNotEmptyOrNull`
 
 ## 1.4.0
 

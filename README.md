@@ -45,7 +45,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li> -->
-    <li><a href="#how-to-use">How To Use</a></li>
     <li><a href="#usage">Usage</a></li>
     <!-- <li><a href="#roadmap">Roadmap</a></li> -->
     <li><a href="#contributing">Contributing</a></li>
@@ -72,28 +71,6 @@ Quickly is build as a tool to enhance your Flutter UI development experience and
 * [Get](https://pub.dev/packages/get)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- How To Use -->
-## How To Use
-
-
-- Add this line to your dependencies and replace [version] with the latest version:
-
-```yaml
-  quickly: ^[version]
-```
-
-- Import package
-
-```dart
-import 'package:quickly/quickly.dart';
-```
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->

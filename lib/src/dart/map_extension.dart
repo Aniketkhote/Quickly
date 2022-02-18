@@ -1,22 +1,5 @@
 ///Map extension to extend Map functionality
 extension MapExtensions on Map<dynamic, dynamic> {
-  ///Check map is either empty or null
-  ///
-  ///Example:
-  ///```dart
-  ///map.isEmptyOrNull // false
-  ///```
-  // ignore: unnecessary_null_comparison
-  bool get isEmptyOrNull => this == null || isEmpty;
-
-  ///Check map is neither empty nor null
-  ///
-  ///Example:
-  ///```dart
-  ///map.isNotEmptyOrNull // true
-  ///```
-  bool get isNotEmptyOrNull => !isEmptyOrNull;
-
   ///Whether this map contains the given [key]/[value] pair.
   ///
   ///Returns true if any of the key / value pair in the map are equal.

@@ -3,12 +3,6 @@ import 'package:quickly/quickly.dart';
 
 void main() {
   group('List Extensions', () {
-    test('.isEmptyOrNull - [] is Empty',
-        () => expect(<dynamic>[].isEmptyOrNull, equals(true)));
-    test('.isNotEmptyOrNull - [] is Empty',
-        () => expect(<dynamic>[].isNotEmptyOrNull, equals(false)));
-    test('.isNotEmptyOrNull - [1, 3, 4, 2, 5] is not Empty',
-        () => expect(<dynamic>[1, 3, 4, 2, 5].isNotEmptyOrNull, equals(true)));
     test('.sum - sum of [1, 3, 4, 2, 5] is 15',
         () => expect(<dynamic>[1, 3, 4, 2, 5].sum, equals(15)));
     test('.avg - avg of [1, 3, 4, 2, 5] is 3',

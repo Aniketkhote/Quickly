@@ -32,13 +32,6 @@ extension StringExtension on String {
   ///Check this string length between [minLen] & [maxLen], if satisfied condition then return true
   bool range(int min, int max) => length >= min && length <= max;
 
-  ///Checks [string] is empty or null and return [bool]
-  // ignore: unnecessary_null_comparison
-  bool get isEmptyOrNull => this == null || isEmpty;
-
-  ///Checks [string] is not empty or not null and return [bool]
-  bool get isNotEmptyOrNull => !isEmptyOrNull;
-
   ///Remove first element of [string]
   String removeFirst([int? upto]) =>
       minLen(2) ? substring(upto ?? 1, length) : "";
@@ -71,7 +64,7 @@ extension StringExtension on String {
   }
 
   ///Counts the number of occurrences of value.
-  int get occurrence => isEmptyOrNull ? 0 : allMatches(this).length;
+  int get occurrence => isEmpty ? 0 : allMatches(this).length;
 
   ///Counts the number of words in
   int get countWord {
@@ -80,14 +73,13 @@ extension StringExtension on String {
   }
 
   ///Get default value if string is empty.
-  String withDefault([String value = 'default']) =>
-      isEmptyOrNull ? value : this;
+  String withDefault([String value = 'default']) => isEmpty ? value : this;
 
   ///Convert string to [int]
-  int get toInt => isEmptyOrNull ? int.parse('$this') : 0;
+  int get toInt => isEmpty ? int.parse('$this') : 0;
 
   ///Convert string to [double]
-  double get toDouble => isEmptyOrNull ? double.parse('$this') : 0.0;
+  double get toDouble => isEmpty ? double.parse('$this') : 0.0;
 
   ///Get file name from this
   String get fileName => split(Platform.pathSeparator).last;

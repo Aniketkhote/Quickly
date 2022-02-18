@@ -1,23 +1,5 @@
 ///List extension to extend List functionality
 extension ListExtension on List<dynamic> {
-  ///check list is empty or null
-  ///
-  ///Example:
-  ///```dart
-  ///list.isEmptyOrNull // false
-  ///```
-  // ignore: unnecessary_null_comparison
-  bool get isEmptyOrNull => this == null || isEmpty;
-
-  ///check list is neither empty nor null
-  /// ///check list is empty or null
-  ///
-  ///Example:
-  ///```dart
-  ///list.isNotEmptyOrNull // false
-  ///```
-  bool get isNotEmptyOrNull => !isEmptyOrNull;
-
   ///Get sorted list
   ///
   ///Example:
@@ -44,9 +26,8 @@ extension ListExtension on List<dynamic> {
   ///list.sortBy("price") // create new list with soreted list according to price
   ///```
   List<dynamic> sortBy(String key, [bool isDesc = false]) {
-    if (isEmptyOrNull ||
-        first is! Map<dynamic, dynamic> ||
-        !first.containsKey(key)) return <dynamic>[];
+    if (isEmpty | first is! Map<dynamic, dynamic> || !first.containsKey(key))
+      return <dynamic>[];
 
     sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
 
