@@ -3,6 +3,7 @@
 ### Added
 - Added `black` and `white` color
 - Added `context` extension on Build Context
+- Added Responsive extension
 ### Changed
 - changed `.h` & `.w` child widget to optional in num extension
 - changed `.maxLine` to optional in Text extension

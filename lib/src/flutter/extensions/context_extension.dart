@@ -12,10 +12,10 @@ extension ContextExtension on BuildContext {
   double get height => mq.size.height;
 
   /// Check if the window size is of Mobile Size
-  bool get isMobile => width < 850;
+  bool get isMobile => width < 650;
 
   /// Check if the window size is of Tablet Size
-  bool get isTablet => width < 1100 && width >= 850;
+  bool get isTablet => width < 1100 && width >= 650;
 
   /// Check if the window size is of Desktop Size
   bool get isDesktop => width >= 1100;
