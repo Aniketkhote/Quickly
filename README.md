@@ -3,10 +3,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/Aniketkhote/quickly">
-    <img src="https://cdn-icons.flaticon.com/png/512/3649/premium/3649458.png?token=exp=1644607289~hmac=a29d04e140831c83c39399bbe5bff6ba" alt="Logo" width="80" height="80">
+    <img src="logo.png" alt="Logo">
   </a>
-
-<h1 align="center" style="font-size:50px">Quickly</h1>
 
   <p align="center">
     Quickly is awesome flutter package for faster and cleaner development.

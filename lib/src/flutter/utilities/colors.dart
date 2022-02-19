@@ -10,6 +10,8 @@ abstract class FxColor {
   static const Color danger = Color(0xFFF64E60);
   static const Color light = Color(0xFFF3F6F9);
   static const Color dark = Color(0xFF222428);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
 
   static const Color kcText = Color(0xFF565360);
   static const Color kcLabel = Color(0xFF908E9B);

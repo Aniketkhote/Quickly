@@ -296,7 +296,7 @@ extension TextExtension on Text {
   ///
   ///If the text exceeds the given number of lines, it will be truncated according to [overflow].
   ///If this is 1, text will not wrap. Otherwise, text will be wrapped at the edge of the box.
-  Text maxLine(int maxLines) => _copyWith(maxLines: maxLines);
+  Text maxLine([int? maxLines]) => _copyWith(maxLines: maxLines ?? 1);
 
   Text _copyWith(
           {Key? key,

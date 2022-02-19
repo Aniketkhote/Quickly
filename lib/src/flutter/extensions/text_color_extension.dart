@@ -11,6 +11,8 @@ extension TextColorExtension on Text {
   Text get danger => _color(FxColor.danger);
   Text get light => _color(FxColor.light);
   Text get dark => _color(FxColor.dark);
+  Text get black => _color(FxColor.black);
+  Text get white => _color(FxColor.white);
 
   Text get kcText => _color(FxColor.kcText);
   Text get kcLabel => _color(FxColor.kcLabel);

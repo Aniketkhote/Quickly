@@ -1,3 +1,11 @@
+## 1.7.0
+
+### Added
+- `black` and `white` color added
+### Changed
+- Chnaged `.h` & `.w` child widget to optional in num extension
+- Chnaged `.maxLine` to optional in Text extension
+
 ## 1.6.0
 
 ### Added
