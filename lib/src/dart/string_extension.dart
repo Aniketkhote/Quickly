@@ -47,8 +47,11 @@ extension StringExtension on String {
   String concat(String concat) => '$this $concat';
 
   ///Replaces all but the last num runes of a string with the specified mask.
-  String mask({int upto = 4, String mask = '*'}) =>
-      substring(length - upto).padLeft(length, mask);
+  String mask({int upto = 4, String mask = '*', bool atEnd = false}) {
+    if (atEnd) return substring(0, length - upto).padRight(length, mask);
+
+    return substring(upto).padLeft(length, mask);
+  }
 
   ///Counts the number of occurrences of string
   Map<String, int> get count {

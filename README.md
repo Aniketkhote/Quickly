@@ -148,8 +148,8 @@ map.getString('key')
 
 // match the the condition with key and return value
 {1: 'One', 2: 'Two'}.match(2)   // Two
-{1: 'One', 2: 'Two'}.match(2)   // Invalid input
-{1: 'One', 2: 'Two'}.match(2,'Does not match')   // Does not match
+{1: 'One', 2: 'Two'}.match(3)   // Invalid input
+{1: 'One', 2: 'Two'}.match(4,'Does not match')   // Does not match
 
 ```
 

@@ -35,5 +35,21 @@ void main() {
 
     test('.isAlphaNumeric - str123ing is alphaNumeric',
         () => expect('str12ing'.isAlphaNumeric, equals(true)));
+    test('.isEmail - abc@gmail.com is valid email return true',
+        () => expect('abc@gmail.com'.isEmail, equals(true)));
+    test('.isEmail - abcgmail.com is invalid email return false',
+        () => expect('abcgmail.com'.isEmail, equals(false)));
+    test('.isEmail - abc@gmail is invalid email return false',
+        () => expect('abc@gmail'.isEmail, equals(false)));
+    test('.minLen - length of abc is 3 return true',
+        () => expect('abc'.minLen(3), equals(true)));
+    test('.minLen - length of ab is less then 3 return false',
+        () => expect('ab'.minLen(3), equals(false)));
+    test('.mask - mask 1234 to **34',
+        () => expect('1234'.mask(upto: 2, mask: '*'), equals('**34')));
+    test(
+        '.mask - mask 1234 to 12**',
+        () => expect(
+            '1234'.mask(upto: 2, mask: '*', atEnd: true), equals('12**')));
   });
 }
