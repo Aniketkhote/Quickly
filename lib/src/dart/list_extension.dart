@@ -1,3 +1,5 @@
+import 'map_extension.dart';
+
 ///List extension to extend List functionality
 extension ListExtension on List<dynamic> {
   ///Get sorted list
@@ -125,4 +127,18 @@ extension ListExtension on List<dynamic> {
     }
     return maxValue;
   }
+
+  ///Checks given key/value is exists or not
+  bool hasKeyValue(dynamic key, dynamic value) =>
+      any((dynamic element) => (element is Map<dynamic, dynamic>)
+          ? element.contains(key, value)
+          : false);
+
+  ///Checks given key is exists or not
+  bool hasKey(dynamic key) =>
+      any((dynamic element) => element.containsKey(key));
+
+  ///Checks given value is exists or not
+  bool hasValue(dynamic value) =>
+      any((dynamic element) => element.containsValue(value));
 }

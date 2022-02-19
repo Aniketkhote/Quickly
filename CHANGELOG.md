@@ -4,7 +4,8 @@
 - Added `match()` extension on `Object`
 
     The `match()` function also works similarly to `switch` 
-    i.e, it finds the matching case according to the parameter passed in it. 
+    i.e, it finds the matching case according to the parameter passed in it.
+- Added `hasKey` | `hasValue` | `hasKeyValue` extensions on list
 
 ## 1.5.0
 

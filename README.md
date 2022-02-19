@@ -146,6 +146,11 @@ map.getString('key')
 // divide list into equal parts
 [1,2,3,4,5].split(2)    // [[1,2,3], [4,5]];
 
+// match the the condition with key and return value
+{1: 'One', 2: 'Two'}.match(2)   // Two
+{1: 'One', 2: 'Two'}.match(2)   // Invalid input
+{1: 'One', 2: 'Two'}.match(2,'Does not match')   // Does not match
+
 ```
 
 _For more examples, please refer to the [Documentation](https://pub.dev/documentation/quickly/latest/quickly/quickly-library.html)_

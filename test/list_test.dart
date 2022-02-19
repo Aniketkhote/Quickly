@@ -80,5 +80,40 @@ void main() {
       List<dynamic> output = <dynamic>[];
       expect(input.sortByDesc('name'), equals(output));
     });
+
+    group('has', () {
+      List<dynamic> list = <dynamic>[
+        <dynamic, dynamic>{
+          'id': 1,
+          'name': 'P 1',
+          'price': 49,
+          'stock': true,
+        },
+        <dynamic, dynamic>{
+          'id': 1,
+          'name': 'P 1',
+          'price': 49,
+          'stock': true,
+        },
+      ];
+
+      test('.hasKey() - return true list have this key',
+          () => expect(list.hasKey('name'), equals(true)));
+
+      test('.hasKey() - return false list dosen\\t have this key',
+          () => expect(list.hasKey('unit'), equals(false)));
+
+      test('.hasValue() - return true list have this Value',
+          () => expect(list.hasValue(49), equals(true)));
+
+      test('.hasValue() - return false list dosen\\t have this Value',
+          () => expect(list.hasValue('49'), equals(false)));
+
+      test('.hasKeyValue() - return true list have this Key/Value',
+          () => expect(list.hasKeyValue('price', 49), equals(true)));
+
+      test('.hasKeyValue() - return false list dosen\\t have this Key/Value',
+          () => expect(list.hasKeyValue('price', 50), equals(false)));
+    });
   });
 }

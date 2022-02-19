@@ -7,11 +7,11 @@ extension NumExtension on num {
   String suffix([String suffix = '']) {
     if (suffix.isNotEmpty) return '${this}$suffix';
 
-    return (this % 10).match(<int, String>{
+    return <int, String>{
       1: '${this}st',
       2: '${this}nd',
       3: '${this}rd',
-    }, '${this}th');
+    }.match(this % 10, '${this}th');
   }
 
   ///Creates a fixed sized square box.

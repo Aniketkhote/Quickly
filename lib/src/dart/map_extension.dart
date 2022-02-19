@@ -104,4 +104,10 @@ extension MapExtensions on Map<dynamic, dynamic> {
   ///```
   List<T> getList<T>(String key) =>
       (containsKey(key) && this[key] is List<T>) ? this[key] : <T>[];
+
+  /// The match() function also works similarly to switch
+  ///
+  /// i.e, it finds the matching case according to the parameter passed in it.
+  dynamic match(Object condition, [String byDefault = 'Invalid input']) =>
+      containsKey(condition) ? this[condition] : byDefault;
 }

@@ -72,5 +72,14 @@ void main() {
           '.contains(key, value) - return false key & value not present in map',
           () => expect(input2.contains('color', 'red'), equals(false)));
     });
+
+    group('.match()', () {
+      Map<int, String> map = <int, String>{1: 'One', 2: 'Two'};
+
+      test('.match() - condition match return value',
+          () => expect(map.match(2), equals('Two')));
+      test('.match() - condtion dose not match return default value',
+          () => expect(map.match(12), equals('Invalid input')));
+    });
   });
 }
