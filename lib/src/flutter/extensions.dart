@@ -13,3 +13,5 @@ export 'extensions/opacity_extension.dart';
 export 'extensions/gesture_extension.dart';
 
 export 'extensions/padding_extension.dart';
+
+export 'extensions/context_extension.dart';

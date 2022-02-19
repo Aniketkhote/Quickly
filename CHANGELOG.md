@@ -1,10 +1,12 @@
 ## 1.7.0
 
 ### Added
-- `black` and `white` color added
+- Added `black` and `white` color
+- Added `context` extension on Build Context
 ### Changed
-- Chnaged `.h` & `.w` child widget to optional in num extension
-- Chnaged `.maxLine` to optional in Text extension
+- changed `.h` & `.w` child widget to optional in num extension
+- changed `.maxLine` to optional in Text extension
+- changed `.box` => `.sq` in num extension
 
 ## 1.6.0
 
