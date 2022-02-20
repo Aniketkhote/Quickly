@@ -11,8 +11,9 @@ extension MapExtension<T> on Map<T, T> {
   bool has(String key, T value) {
     bool _isContain = false;
 
-    forEach((T k, T v) =>
-        (k == key && v == value) ? _isContain = true : _isContain = false);
+    forEach((T k, T v) {
+      if (k == key && v == value) _isContain = true;
+    });
     return _isContain;
   }
 

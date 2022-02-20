@@ -3,13 +3,13 @@ import 'package:quickly/quickly.dart';
 
 void main() {
   group('Map Extensions', () {
-    Map<dynamic, dynamic> input1 = <dynamic, dynamic>{};
-    Map<dynamic, dynamic> input2 = <dynamic, dynamic>{
+    Map<String, dynamic> input1 = <String, dynamic>{};
+    Map<String, dynamic> input2 = <String, dynamic>{
       'name': 'P 1',
       'price': 49,
       'qty': 10
     };
-    Map<dynamic, dynamic> input3 = <dynamic, dynamic>{
+    Map<String, dynamic> input3 = <String, dynamic>{
       'id': 1,
       'name': 'P 1',
       'price': 49,
@@ -78,7 +78,7 @@ void main() {
       test('.match() - condition match return value',
           () => expect(map.match(2), equals('Two')));
       test('.match() - condtion dose not match return default value',
-          () => expect(map.match(12), equals('Invalid input')));
+          () => expect(map.match(12), equals(null)));
     });
   });
 }

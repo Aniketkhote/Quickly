@@ -116,7 +116,7 @@ extension ListExtension<T> on List<T> {
     List<T?> _list = <T>[];
     forEach((T element) => ((element as Map<T, T>).containsKey(key))
         ? _list.add(element[key])
-        : element.forEach((T k, T v) => _list.add(v)));
+        : _list);
     return _list;
   }
 

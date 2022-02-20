@@ -18,8 +18,8 @@ void main() {
           () => expect(1.seconds, equals(Duration(seconds: 1))));
       test('.milliseconds - return duration in milliseconds',
           () => expect(1.milliseconds, equals(Duration(milliseconds: 1))));
-      test('.milliseconds - return duration in milliseconds',
-          () => expect(1.milliseconds, equals(Duration(milliseconds: 1))));
+      test('.microseconds - return duration in microseconds',
+          () => expect(1.microseconds, equals(Duration(microseconds: 1))));
       test('.minutes - return duration in minutes',
           () => expect(1.minutes, equals(Duration(minutes: 1))));
       test('.hours - return duration in hours',
