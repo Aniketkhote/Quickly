@@ -69,79 +69,79 @@ abstract class FxRadius {
       _copyWith(topRight: radius, bottomRight: radius);
 
   ///Gives [BorderRadius] 5 for all sides
-  static BorderRadius get r5 => _copyWith(all: 5);
+  static BorderRadius get r5 => all(5);
 
   ///Gives [BorderRadius] 10 for all sides
-  static BorderRadius get r10 => _copyWith(all: 10);
+  static BorderRadius get r10 => all(10);
 
   ///Gives [BorderRadius] 20 for all sides
-  static BorderRadius get r20 => _copyWith(all: 20);
+  static BorderRadius get r20 => all(20);
 
   ///Gives [BorderRadius] 30 for all sides
-  static BorderRadius get r30 => _copyWith(all: 30);
+  static BorderRadius get r30 => all(30);
 
   ///Gives [BorderRadius] 50 for all sides
-  static BorderRadius get r50 => _copyWith(all: 50);
+  static BorderRadius get r50 => all(50);
 
   ///Gives [BorderRadius] 5 for top left side
-  static BorderRadius get topLeftl5 => _copyWith(topLeft: 5);
+  static BorderRadius get topLeftl5 => topLeft(5);
 
   ///Gives [BorderRadius] 10 for top left side
-  static BorderRadius get topLeft10 => _copyWith(topLeft: 10);
+  static BorderRadius get topLeft10 => topLeft(10);
 
   ///Gives [BorderRadius] 20 for top left side
-  static BorderRadius get topLeft20 => _copyWith(topLeft: 20);
+  static BorderRadius get topLeft20 => topLeft(20);
 
   ///Gives [BorderRadius] 30 for top left side
-  static BorderRadius get topLeft30 => _copyWith(topLeft: 30);
+  static BorderRadius get topLeft30 => topLeft(30);
 
   ///Gives [BorderRadius] 50 for top left side
-  static BorderRadius get topLeft50 => _copyWith(topLeft: 50);
+  static BorderRadius get topLeft50 => topLeft(50);
 
   ///Gives [BorderRadius] 5 for top right side
-  static BorderRadius get topRight5 => _copyWith(topRight: 5);
+  static BorderRadius get topRight5 => topRight(5);
 
   ///Gives [BorderRadius] 10 for top right side
-  static BorderRadius get topRight10 => _copyWith(topRight: 10);
+  static BorderRadius get topRight10 => topRight(10);
 
   ///Gives [BorderRadius] 20 for top right side
-  static BorderRadius get topRight20 => _copyWith(topRight: 20);
+  static BorderRadius get topRight20 => topRight(20);
 
   ///Gives [BorderRadius] 30 for top right side
-  static BorderRadius get topRight30 => _copyWith(topRight: 30);
+  static BorderRadius get topRight30 => topRight(30);
 
   ///Gives [BorderRadius] 50 for top right side
-  static BorderRadius get topRight50 => _copyWith(topRight: 50);
+  static BorderRadius get topRight50 => topRight(50);
 
   ///Gives [BorderRadius] 5 for bottom left side
-  static BorderRadius get bottomLeft5 => _copyWith(bottomLeft: 5);
+  static BorderRadius get bottomLeft5 => bottomLeft(5);
 
   ///Gives [BorderRadius] 10 for bottom left side
-  static BorderRadius get bottomLeft10 => _copyWith(bottomLeft: 10);
+  static BorderRadius get bottomLeft10 => bottomLeft(10);
 
   ///Gives [BorderRadius] 20 for bottom left side
-  static BorderRadius get bottomLeft20 => _copyWith(bottomLeft: 20);
+  static BorderRadius get bottomLeft20 => bottomLeft(20);
 
   ///Gives [BorderRadius] 30 for bottom left side
-  static BorderRadius get bottomLeft30 => _copyWith(bottomLeft: 30);
+  static BorderRadius get bottomLeft30 => bottomLeft(30);
 
   ///Gives [BorderRadius] 50 for bottom left side
-  static BorderRadius get bottomLeft50 => _copyWith(bottomLeft: 50);
+  static BorderRadius get bottomLeft50 => bottomLeft(50);
 
   ///Gives [BorderRadius] 5 for bottom right side
-  static BorderRadius get bottomRight5 => _copyWith(bottomRight: 5);
+  static BorderRadius get bottomRight5 => bottomRight(5);
 
   ///Gives [BorderRadius] 10 for bottom right side
-  static BorderRadius get bottomRight10 => _copyWith(bottomRight: 10);
+  static BorderRadius get bottomRight10 => bottomRight(10);
 
   ///Gives [BorderRadius] 20 for bottom right side
-  static BorderRadius get bottomRight20 => _copyWith(bottomRight: 20);
+  static BorderRadius get bottomRight20 => bottomRight(20);
 
   ///Gives [BorderRadius] 30 for bottom right side
-  static BorderRadius get bottomRight30 => _copyWith(bottomRight: 30);
+  static BorderRadius get bottomRight30 => bottomRight(30);
 
   ///Gives [BorderRadius] 50 for bottom right side
-  static BorderRadius get bottomRight50 => _copyWith(bottomRight: 50);
+  static BorderRadius get bottomRight50 => bottomRight(50);
 
   static BorderRadius _copyWith({
     double? topLeft,

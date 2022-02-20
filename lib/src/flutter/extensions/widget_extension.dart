@@ -45,16 +45,6 @@ extension WidgetExtension on Widget {
   Visibility showIf(bool condition) =>
       condition ? _visibility(true) : _visibility(false);
 
-  /// Set icon to child widget
-  Icon icon(IconData? icon,
-          {Color? color, double? size, String? semanticLabel}) =>
-      Icon(
-        icon,
-        color: color,
-        size: size,
-        semanticLabel: semanticLabel,
-      );
-
   ///Creates a fixed size box.
   ///
   ///The [width] and [height] parameters can be null to indicate that
@@ -63,13 +53,13 @@ extension WidgetExtension on Widget {
       SizedBox(child: this, height: h, width: w);
 
   ///Creates a fixed sized square box.
-  SizedBox sq(double size) => sizedBox(h: size, w: size);
+  SizedBox sqBox(double size) => sizedBox(h: size, w: size);
 
   ///Creates a fixed sized height box.
-  SizedBox h(double height) => sizedBox(h: height);
+  SizedBox hBox(double height) => sizedBox(h: height);
 
   ///Creates a fixed sized width box.
-  SizedBox w(double? width) => sizedBox(w: width);
+  SizedBox wBox(double? width) => sizedBox(w: width);
 
   Visibility _visibility(bool value) => Visibility(child: this, visible: value);
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../extensions.dart';
+import 'extensions.dart';
 
 class FxResponsive extends StatelessWidget {
   const FxResponsive({

@@ -1,14 +1,14 @@
 import 'map_extension.dart';
 
 ///List extension to extend List functionality
-extension ListExtension on List<dynamic> {
+extension ListExtension<T> on List<T> {
   ///Get sorted list
   ///
   ///Example:
   ///```dart
-  ///list.sorted(true) // create new list with descending order
+  ///list.sorted(true) // create new list with ascending order
   ///```
-  List<dynamic> sorted([bool isDesc = false]) {
+  List<T> sorted([bool isDesc = false]) {
     sort();
     return isDesc ? reversed.toList() : this;
   }
@@ -19,17 +19,18 @@ extension ListExtension on List<dynamic> {
   ///```dart
   ///list.sortedDesc() // create new list with descending order
   ///```
-  List<dynamic> get sortedDesc => sorted(true);
+  List<T> get sortedDesc => sorted(true);
 
-  ///The sortBy method sorts the list of objects by the given key.
+  ///The sortBy method sorts the list of maps by the given key.
   ///
   ///Example:
   ///```dart
-  ///list.sortBy("price") // create new list with soreted list according to price
+  ///list.sortBy("price") // create new list with ascending order by according to price
   ///```
-  List<dynamic> sortBy(String key, [bool isDesc = false]) {
-    if (isEmpty || first is! Map<dynamic, dynamic> || !first.containsKey(key))
-      return <dynamic>[];
+  List<T> sortBy(String key, [bool isDesc = false]) {
+    if (isEmpty || first is! Map<T, T>) return <T>[];
+
+    if (!(first as Map<T, T>).containsKey(key)) return <T>[];
 
     sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
 
@@ -45,7 +46,7 @@ extension ListExtension on List<dynamic> {
   ///This method has the same signature as the sortBy method,
   ///but will sort the collection in the opposite order
   ///```
-  List<dynamic> sortByDesc(String key) => sortBy(key, true);
+  List<T> sortByDesc(String key) => sortBy(key, true);
 
   ///Returns random value from this list
   ///
@@ -53,7 +54,7 @@ extension ListExtension on List<dynamic> {
   ///```dart
   ///list.random // [1,2,3,4,5] -> 4
   ///```
-  dynamic get random => (this..shuffle()).first;
+  T get random => (this..shuffle()).first;
 
   ///The chunk method breaks the list into multiple, smaller list of a given size
   ///
@@ -61,15 +62,15 @@ extension ListExtension on List<dynamic> {
   ///```dart
   ///list.chunk(2) // [1,2,3,4,5] -> [[1,2], [3,4], [5]]
   ///```
-  List<dynamic> chunk(int size) {
+  List<T> chunk(int size) {
     List<dynamic> _chunks = <dynamic>[];
 
-    if (size < 1) return <dynamic>[];
+    if (size < 1) return <T>[];
 
     for (int i = 0; i < length; i += size)
       _chunks.add(sublist(i, i + size > length ? length : i + size));
 
-    return _chunks;
+    return _chunks as List<T>;
   }
 
   ///The split method breaks the list into equal sized lists of a given size
@@ -89,11 +90,41 @@ extension ListExtension on List<dynamic> {
             _size * i, (i + 1) * _size <= length ? (i + 1) * _size : null));
   }
 
+  ///Merge list of lists into single list
+  ///
+  ///Example:
+  ///```dart
+  ///list.flatten // [[1,2],[3,4]] -> [1,2,3,4]
+  ///```
+  List<T> get flatten => expand((T i) => i as List<T>).toList();
+
+  ///The [pluck] method retrieves all of the values for a given key
+  ///
+  ///Example:
+  ///```dart
+  ///
+  ///list.pluck("id")
+  ///
+  /// [
+  ///     {"id":1,"name":"Tony"},
+  ///     {"id":2,"name":"Thor"}
+  /// ]
+  ///
+  /// [1,2]
+  ///```
+  List<T?> pluck(String key) {
+    List<T?> _list = <T>[];
+    forEach((T element) => ((element as Map<T, T>).containsKey(key))
+        ? _list.add(element[key])
+        : element.forEach((T k, T v) => _list.add(v)));
+    return _list;
+  }
+
   ///Get minimum number
-  dynamic get min => sorted().first;
+  T get min => sorted().first;
 
   ///Get maximum number
-  dynamic get max => sortedDesc.first;
+  T get max => sortedDesc.first;
 
   ///Get sum of numbers
   num get sum => cast<num>().reduce((num a, num b) => a + b);
@@ -105,9 +136,10 @@ extension ListExtension on List<dynamic> {
   num get median {
     num middle = length ~/ 2;
     if (length.isOdd)
-      return this[middle as int];
+      return this[middle as int] as num;
     else
-      return (this[middle - 1 as int] + this[middle as int]) / 2.0;
+      return ((this[middle - 1 as int] as num) + (this[middle as int] as num)) /
+          2.0;
   }
 
   ///Get mode of numbers
@@ -122,17 +154,15 @@ extension ListExtension on List<dynamic> {
 
       if (count > maxCount) {
         maxCount = count;
-        maxValue = this[i as int];
+        maxValue = this[i as int] as num;
       }
     }
     return maxValue;
   }
 
   ///Checks given key/value is exists or not
-  bool hasKeyValue(dynamic key, dynamic value) =>
-      any((dynamic element) => (element is Map<dynamic, dynamic>)
-          ? element.contains(key, value)
-          : false);
+  bool hasKeyValue(dynamic key, dynamic value) => any((dynamic element) =>
+      (element is Map<dynamic, dynamic>) ? element.has(key, value) : false);
 
   ///Checks given key is exists or not
   bool hasKey(dynamic key) =>

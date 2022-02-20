@@ -1,19 +1,18 @@
 ///Map extension to extend Map functionality
-extension MapExtensions on Map<dynamic, dynamic> {
+extension MapExtension<T> on Map<T, T> {
   ///Whether this map contains the given [key]/[value] pair.
   ///
   ///Returns true if any of the key / value pair in the map are equal.
   ///
   ///Example:
   ///```dart
-  ///map.contains("key","value") // true
+  ///map.has("key","value") // true
   ///```
-  bool contains(String key, dynamic value) {
+  bool has(String key, T value) {
     bool _isContain = false;
 
-    forEach((dynamic k, dynamic v) {
-      if (k == key && v == value) _isContain = true;
-    });
+    forEach((T k, T v) =>
+        (k == key && v == value) ? _isContain = true : _isContain = false);
     return _isContain;
   }
 
@@ -23,8 +22,8 @@ extension MapExtensions on Map<dynamic, dynamic> {
   ///```dart
   ///map.getId // 111
   ///```
-  dynamic get getId =>
-      (containsKey('id') && this['id'] != null) ? this['id'] : 0;
+  int get getId =>
+      (containsKey('id') && this['id'] != null) ? this['id'] as int : 0;
 
   ///Returns all entries of this map according to keys.
   ///
@@ -34,8 +33,8 @@ extension MapExtensions on Map<dynamic, dynamic> {
   ///```dart
   ///map.diffKeys(map2)
   ///```
-  Map<dynamic, dynamic> diffKeys(Map<dynamic, dynamic> map) {
-    removeWhere((dynamic key, dynamic value) => map.containsKey(key));
+  Map<T, T> diffKeys(Map<T, T> map) {
+    removeWhere((T key, T value) => map.containsKey(key));
     return this;
   }
 
@@ -47,8 +46,8 @@ extension MapExtensions on Map<dynamic, dynamic> {
   ///```dart
   ///map.diffValues(map2)
   ///```
-  Map<dynamic, dynamic> diffValues(Map<dynamic, dynamic> map) {
-    removeWhere((dynamic key, dynamic value) => map.containsValue(value));
+  Map<T, T> diffValues(Map<T, T> map) {
+    removeWhere((T key, T value) => map.containsValue(value));
     return this;
   }
 
@@ -61,38 +60,42 @@ extension MapExtensions on Map<dynamic, dynamic> {
   ///map.getBool("isAdmin") // true
   ///```
   bool getBool(String key) =>
-      (containsKey(key) && this[key] is bool) ? this[key] : false;
+      (containsKey(key) && this[key] is bool) ? this[key] as bool : false;
 
   /// Reads a [key] value of [int] type from [Map].
   ///
-  /// If value/map  is NULL or not [int] type return default value [0]
+  /// If value/map is NULL or not [int] type return null
   ///
   /// Example:
   ///```dart
   ///map.getInt("id") // 11
   ///```
-  int getInt(String key) => containsKey(key) ? this[key].toInt : 0;
+  int? getInt(String key) =>
+      containsKey(key) ? int.tryParse('${this[key]}') : null;
 
   /// Reads a [key] value of [double] type from [Map].
   ///
-  /// If value/map  is NULL or not [double] type return default value [0.0]
+  /// If value/map is NULL or not [double] type return null
   ///
   /// Example:
   ///```dart
   ///map.getDouble("price") // 27.32
   ///```
-  double getDouble(String key) => containsKey(key) ? this[key].toDouble : 0.0;
+  double? getDouble(String key) =>
+      containsKey(key) ? double.tryParse('${this[key]}') : null;
 
   /// Reads a [key] value of [String] type from [Map].
   ///
-  /// If value/map  is NULL or not [String] type return default value ['']
+  /// If value/map is NULL or not [String] type return empty string
   ///
   /// Example:
   ///```dart
   ///map.getString("username") // thor
   ///```
   String getString(String key, [String defaultString = '']) =>
-      (containsKey(key) && this[key] is String) ? this[key] : defaultString;
+      (containsKey(key) && this[key] is String)
+          ? this[key] as String
+          : defaultString;
 
   /// Reads a [key] value of [List] type from [Map].
   ///
@@ -103,11 +106,11 @@ extension MapExtensions on Map<dynamic, dynamic> {
   ///map.getList(productList) // return list if exists otherwise return empty list
   ///```
   List<T> getList<T>(String key) =>
-      (containsKey(key) && this[key] is List<T>) ? this[key] : <T>[];
+      (containsKey(key) && this[key] is List<T>) ? this[key] as List<T> : <T>[];
 
   /// The match() function also works similarly to switch
   ///
-  /// i.e, it finds the matching case according to the parameter passed in it.
-  dynamic match(Object condition, [String byDefault = 'Invalid input']) =>
+  /// i.e, it finds the matching case according to the condition passed in it.
+  dynamic match(T condition, [String? byDefault]) =>
       containsKey(condition) ? this[condition] : byDefault;
 }

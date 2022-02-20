@@ -1,3 +1,23 @@
+## 2.0.0
+
+### Braking Changes
+
+- Added `append()` and `prepend()` string extension
+- Added `flatten` and `pluck()` list extension
+
+- Changed `w` => `wBox` & `h` => `hBox` in num extension
+- Changed `range` => `inRange` in String extension
+- Changed `count` => `occurrences` in String extension
+- Changed `occurrence` => `countOccurrences` in String extension
+- Changed `withDefault` => `ifEmpty` in String extension
+- Changed `getId` data type `dynamic` => `int` in map extension
+- Changed `contains` => `has` in map extension
+
+
+- Fixed `mask` now return `null` when string is empty
+- Fixed `getInt` & `getDouble` now return `null` when key is empty or null
+- Fixed Typo
+
 ## 1.7.0
 
 ### Added
@@ -61,4 +81,4 @@
 
 ## 1.0.0
 
-- initial release.
+- Initial release.

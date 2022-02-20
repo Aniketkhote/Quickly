@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///Context extension to extend widget functionality
 extension ContextExtension on BuildContext {
-  /// similar to [MediaQuery]
+  /// similar to [MediaQuery.of(this)]
   MediaQueryData get mq => MediaQuery.of(this);
 
   /// Get MediaQuery Screen Width

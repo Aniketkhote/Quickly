@@ -30,7 +30,7 @@ extension StringExtension on String {
   bool maxLen(int max) => length <= max;
 
   ///Check this string length between [minLen] & [maxLen], if satisfied condition then return true
-  bool range(int min, int max) => length >= min && length <= max;
+  bool inRange(int min, int max) => length >= min && length <= max;
 
   ///Remove first element of [string]
   String removeFirst([int? upto]) =>
@@ -46,15 +46,23 @@ extension StringExtension on String {
   ///Concatenate [string] with whitespace
   String concat(String concat) => '$this $concat';
 
+  ///append to start [string]
+  String append(String string) => this + string;
+
+  ///prepend to start [string]
+  String prepend(String string) => string + this;
+
   ///Replaces all but the last num runes of a string with the specified mask.
-  String mask({int upto = 4, String mask = '*', bool atEnd = false}) {
+  String? mask({int upto = 4, String mask = '*', bool atEnd = false}) {
+    if (length <= 1) return null;
+
     if (atEnd) return substring(0, length - upto).padRight(length, mask);
 
     return substring(upto).padLeft(length, mask);
   }
 
   ///Counts the number of occurrences of string
-  Map<String, int> get count {
+  Map<String, int> get occurrences {
     String _str = removeWhitespace;
 
     Map<String, int> map = <String, int>{};
@@ -67,7 +75,7 @@ extension StringExtension on String {
   }
 
   ///Counts the number of occurrences of value.
-  int get occurrence => isEmpty ? 0 : allMatches(this).length;
+  int countOccurrence(String string) => isEmpty ? 0 : allMatches(string).length;
 
   ///Counts the number of words in
   int get countWord {
@@ -76,7 +84,7 @@ extension StringExtension on String {
   }
 
   ///Get default value if string is empty.
-  String withDefault([String value = 'default']) => isEmpty ? value : this;
+  String ifEmpty([String value = 'null']) => isEmpty ? value : this;
 
   ///Convert string to [int]
   int get toInt => isEmpty ? int.parse('$this') : 0;
@@ -146,10 +154,7 @@ extension StringExtension on String {
   bool get isTxt => toLowerCase().endsWith(".txt");
 
   ///check string is image
-  bool get isImage {
-    String _ext = toLowerCase();
-    return _ext.isJpg || _ext.isPng || _ext.isSvg;
-  }
+  bool get isImage => isJpg || isPng || isSvg;
 
   ///check string is video
   bool get isVideo {
