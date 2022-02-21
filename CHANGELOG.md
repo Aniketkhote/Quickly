@@ -1,3 +1,10 @@
+## 2.1.0
+
+### Added
+- Added `groupBy()` and `groupByKey()` in list extension
+### Changed
+- changed `sortByDesc()` => `sortDescBy()` in list extension
+
 ## 2.0.0
 
 ### Braking Changes

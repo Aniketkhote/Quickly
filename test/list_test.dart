@@ -72,28 +72,28 @@ void main() {
       ];
       expect(input.sortBy('price'), equals(output));
     });
-    test('.sortByDesc() - sorted list by descending according to key', () {
+    test('.sortDescBy() - sorted list by descending according to key', () {
       List<dynamic> output = <dynamic>[
         <dynamic, dynamic>{'price': 100},
         <dynamic, dynamic>{'price': 89},
         <dynamic, dynamic>{'price': 45},
       ];
-      expect(input.sortByDesc('price'), equals(output));
+      expect(input.sortDescBy('price'), equals(output));
     });
-    test('.sortByDesc() - return [] list when given list is empty', () {
+    test('.sortDescBy() - return [] list when given list is empty', () {
       List<dynamic> output = <dynamic>[];
-      expect(<dynamic>[].sortByDesc('price'), equals(output));
+      expect(<dynamic>[].sortDescBy('price'), equals(output));
     });
-    test('.sortByDesc() - return [] list when given list is doesn\\t have map',
+    test('.sortDescBy() - return [] list when given list is doesn\\t have map',
         () {
       List<dynamic> output = <dynamic>[];
-      expect(<dynamic>[1, 2, 3, 4, 5].sortByDesc('price'), equals(output));
+      expect(<dynamic>[1, 2, 3, 4, 5].sortDescBy('price'), equals(output));
     });
     test(
-        '.sortByDesc() - return [] list when given list is does not contains this key',
+        '.sortDescBy() - return [] list when given list is does not contains this key',
         () {
       List<dynamic> output = <dynamic>[];
-      expect(input.sortByDesc('name'), equals(output));
+      expect(input.sortDescBy('name'), equals(output));
     });
 
     group('Lists of maps', () {
@@ -135,6 +135,19 @@ void main() {
 
       test('.pluck() - return null if Key list dosen\\t have this Key',
           () => expect(list.pluck('qty'), equals(<dynamic>[])));
+
+      Map<dynamic, List<dynamic>> map = <dynamic, List<dynamic>>{
+        "P 1": <dynamic>[
+          <dynamic, dynamic>{"id": 1, "name": "P 1", "price": 49, "stock": true}
+        ],
+        "P 2": <dynamic>[
+          <dynamic, dynamic>{"id": 1, "name": "P 2", "price": 49, "stock": true}
+        ]
+      };
+      test('.groupBy() - Group the objects according to function',
+          () => expect(list.groupBy((dynamic v) => v['name']), equals(map)));
+      test('.groupByKey() - Group the objects according to function',
+          () => expect(list.groupByKey('name'), equals(map)));
     });
   });
 }

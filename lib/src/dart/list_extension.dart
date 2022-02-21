@@ -37,16 +37,37 @@ extension ListExtension<T> on List<T> {
     return isDesc ? reversed.toList() : this;
   }
 
-  ///The sortBy method sorts the list of objects by the given key.
+  ///The sortDescBy method sorts the list of objects by the given key.
   ///
   ///Example:
   ///```dart
-  ///list.sortBy("price")
+  ///list.sortDescBy("price")
   ///
   ///This method has the same signature as the sortBy method,
   ///but will sort the collection in the opposite order
   ///```
-  List<T> sortByDesc(String key) => sortBy(key, true);
+  List<T> sortDescBy(String key) => sortBy(key, true);
+
+  ///Group by objects according to condition
+  ///
+  ///Example:
+  ///```dart
+  ///list.groupBy(fn)
+  ///```
+  Map<T, List<T>> groupBy(T Function(dynamic) fn) {
+    return Map<T, List<T>>.fromIterable(map(fn).toSet(),
+        value: (dynamic i) => where((dynamic v) => fn(v) == i).toList());
+  }
+
+  ///Group the objects according to key
+  ///
+  ///Example:
+  ///```dart
+  ///list.groupByKey("key")
+  ///```
+  Map<T, List<T>> groupByKey(String key) {
+    return groupBy((dynamic e) => e[key]);
+  }
 
   ///Returns random value from this list
   ///
@@ -161,14 +182,14 @@ extension ListExtension<T> on List<T> {
   }
 
   ///Checks given key/value is exists or not
-  bool hasKeyValue(dynamic key, dynamic value) => any((dynamic element) =>
-      (element is Map<dynamic, dynamic>) ? element.has(key, value) : false);
+  bool hasKeyValue(String key, T value) => any(
+      (T element) => (element is Map<T, T>) ? element.has(key, value) : false);
 
   ///Checks given key is exists or not
-  bool hasKey(dynamic key) =>
-      any((dynamic element) => element.containsKey(key));
+  bool hasKey(String key) =>
+      any((T element) => (element as Map<T, T>).containsKey(key));
 
   ///Checks given value is exists or not
-  bool hasValue(dynamic value) =>
-      any((dynamic element) => element.containsValue(value));
+  bool hasValue(T value) =>
+      any((T element) => (element as Map<T, T>).containsValue(value));
 }

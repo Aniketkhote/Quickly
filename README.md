@@ -144,10 +144,32 @@ map.getString('key')
 // divide list into equal parts
 [1,2,3,4,5].split(2)    // [[1,2,3], [4,5]];
 
+// create new ascending order list
+[4,3,1,2,5].sorted()    // [1,2,3,4,5]
+
+// create new descending order list
+[4,3,1,2,5].sortedDesc    // [5,4,3,2,1]
+
 // match the the condition with key and return value
 {1: 'One', 2: 'Two'}.match(2)   // Two
 {1: 'One', 2: 'Two'}.match(3)   // Invalid input
 {1: 'One', 2: 'Two'}.match(4,'Does not match')   // Does not match
+
+ List list = 
+ [
+  {
+    'id': 1,
+    'name': 'P 1',
+  },
+  {
+    'id': 2,
+    'name': 'P 2',
+  },
+];
+
+// retrieves all of the values for a given key
+list.pluck('name')    // ["P 1", "P 2"]
+list.pluck('price')    // []
 
 ```
 
