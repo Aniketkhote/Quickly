@@ -141,7 +141,7 @@ void main() {
           <dynamic, dynamic>{"id": 1, "name": "P 1", "price": 49, "stock": true}
         ],
         "P 2": <dynamic>[
-          <dynamic, dynamic>{"id": 1, "name": "P 2", "price": 49, "stock": true}
+          <dynamic, dynamic>{"id": 2, "name": "P 2", "price": 49, "stock": true}
         ]
       };
       test('.groupBy() - Group the objects according to function',
