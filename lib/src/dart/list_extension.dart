@@ -65,9 +65,56 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.groupByKey("key")
   ///```
-  Map<T, List<T>> groupByKey(String key) {
-    return groupBy((dynamic e) => e[key]);
+  Map<T, List<T>> groupByKey(String key) => groupBy((dynamic e) => e[key]);
+
+  ///The latest methods allow you to easily order results by id in descending order.
+  ///By default, the result will be ordered by the id field.
+  ///Or, you may pass the key that you wish to sort by:
+  ///
+  ///Example:
+  ///```dart
+  ///list.latest()
+  ///```
+  List<T> latest([String key = 'id']) {
+    if (!hasKey(key)) return <T>[];
+    sort((dynamic a, dynamic b) => b[key].compareTo(a[key]));
+    return this;
   }
+
+  ///The latestFirst methods allow you to easily order results by
+  ///id in descending order and get first record.
+  ///By default, the result will be ordered by the id field.
+  ///Or, you may pass the key that you wish to sort by:
+  ///
+  ///Example:
+  ///```dart
+  ///list.latestFirst()
+  ///```
+  Map<T, T> latestFirst([String key = 'id']) => latest(key).first as Map<T, T>;
+
+  ///The oldest methods allow you to easily order results by id.
+  ///By default, the result will be ordered by the id field.
+  ///Or, you may pass the column name that you wish to sort by:
+  ///
+  ///Example:
+  ///```dart
+  ///list.oldest()
+  ///```
+  List<T> oldest([String key = 'id']) {
+    if (!hasKey(key)) return <T>[];
+    sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
+    return this;
+  }
+
+  ///The oldestFirst methods allow you to easily order results by id and get first record.
+  ///By default, the result will be ordered by the id field.
+  ///Or, you may pass the column name that you wish to sort by:
+  ///
+  ///Example:
+  ///```dart
+  ///list.oldestFirst()
+  ///```
+  Map<T, T> oldestFirst([String key = 'id']) => oldest(key).first as Map<T, T>;
 
   ///Returns random value from this list
   ///

@@ -2,6 +2,8 @@
 
 ### Added
 - Added `groupBy()` and `groupByKey()` in list extension
+- Added `latest()` and `latestFirst()` in list extension
+- Added `oldest()` and `oldestFirst()` in list extension
 ### Changed
 - changed `sortByDesc()` => `sortDescBy()` in list extension
 

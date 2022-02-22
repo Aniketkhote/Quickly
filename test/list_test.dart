@@ -105,7 +105,7 @@ void main() {
           'stock': true,
         },
         <String, dynamic>{
-          'id': 1,
+          'id': 2,
           'name': 'P 2',
           'price': 49,
           'stock': true,
@@ -148,6 +148,35 @@ void main() {
           () => expect(list.groupBy((dynamic v) => v['name']), equals(map)));
       test('.groupByKey() - Group the objects according to function',
           () => expect(list.groupByKey('name'), equals(map)));
+
+      test(
+        '.latestFirst() - Group the objects according to function',
+        () => expect(
+          list.latestFirst(),
+          equals(
+            <String, dynamic>{
+              'id': 2,
+              'name': 'P 2',
+              'price': 49,
+              'stock': true,
+            },
+          ),
+        ),
+      );
+      test(
+        '.oldestFirst() - Group the objects according to function',
+        () => expect(
+          list.oldestFirst('name'),
+          equals(
+            <String, dynamic>{
+              'id': 1,
+              'name': 'P 1',
+              'price': 49,
+              'stock': true,
+            },
+          ),
+        ),
+      );
     });
   });
 }
