@@ -3,14 +3,14 @@ import '../utilities.dart';
 
 /// Custom color palette
 extension TextColorExtension on Text {
-  Text get primary => _color(FxColor.primary);
-  Text get secondary => _color(FxColor.secondary);
-  Text get success => _color(FxColor.success);
-  Text get info => _color(FxColor.info);
-  Text get warning => _color(FxColor.warning);
-  Text get danger => _color(FxColor.danger);
-  Text get light => _color(FxColor.light);
-  Text get dark => _color(FxColor.dark);
+  Text get kcPrimary => _color(FxColor.primary);
+  Text get kcSecondary => _color(FxColor.secondary);
+  Text get kcSuccess => _color(FxColor.success);
+  Text get kcInfo => _color(FxColor.info);
+  Text get kcWarning => _color(FxColor.warning);
+  Text get kcDanger => _color(FxColor.danger);
+  Text get kcLight => _color(FxColor.light);
+  Text get kcDark => _color(FxColor.dark);
   Text get black => _color(FxColor.black);
   Text get white => _color(FxColor.white);
 

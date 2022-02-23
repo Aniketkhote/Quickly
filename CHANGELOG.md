@@ -1,9 +1,19 @@
+## 2.2.0
+
+### Added
+- Added some extra padding extension
+
+### Changed
+- Changed main colors names like `primary` => `kcPrimary` in Text extension.
+- Changed utilities classes to mixins.
+
 ## 2.1.0
 
 ### Added
 - Added `groupBy()` and `groupByKey()` in list extension
 - Added `latest()` and `latestFirst()` in list extension
 - Added `oldest()` and `oldestFirst()` in list extension
+
 ### Changed
 - changed `sortByDesc()` => `sortDescBy()` in list extension
 

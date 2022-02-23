@@ -107,6 +107,180 @@ extension PaddingExtension on Widget {
   ///Gives 64dp padding from all sides
   Padding get p64 => p(64);
 
+  /// Gives 0dp padding from right side
+  Padding get pr0 => pr(0);
+
+  /// Gives 4dp padding from right side
+  Padding get pr4 => pr(4);
+
+  /// Gives 8dp padding from right side
+  Padding get pr8 => pr(8);
+
+  /// Gives 12dp padding from right side
+  Padding get pr12 => pr(12);
+
+  /// Gives 16dp padding from right side
+  Padding get pr16 => pr(16);
+
+  /// Gives 20dp padding from right side
+  Padding get pr20 => pr(20);
+
+  /// Gives 24dp padding from right side
+  Padding get pr24 => pr(24);
+
+  /// Gives 32dp padding from right side
+  Padding get pr32 => pr(32);
+
+  /// Gives 48dp padding from right side
+  Padding get pr48 => pr(48);
+
+  /// Gives 64dp padding from right side
+  Padding get pr64 => pr(64);
+
+  /// Gives 0dp padding from left side
+  Padding get pl0 => pl(0);
+
+  /// Gives 4dp padding from left side
+  Padding get pl4 => pl(4);
+
+  /// Gives 8dp padding from left side
+  Padding get pl8 => pl(8);
+
+  /// Gives 12dp padding from left side
+  Padding get pl12 => pl(12);
+
+  /// Gives 16dp padding from left side
+  Padding get pl16 => pl(16);
+
+  /// Gives 20dp padding from left side
+  Padding get pl20 => pl(20);
+
+  /// Gives 24dp padding from left side
+  Padding get pl24 => pl(24);
+
+  /// Gives 32dp padding from left side
+  Padding get pl32 => pl(32);
+
+  /// Gives 48dp padding from left side
+  Padding get pl48 => pl(48);
+
+  /// Gives 64dp padding from left side
+  Padding get pl64 => pl(64);
+
+  /// Gives 0dp padding from top side
+  Padding get pt0 => pt(0);
+
+  /// Gives 4dp padding from top side
+  Padding get pt4 => pt(4);
+
+  /// Gives 8dp padding from top side
+  Padding get pt8 => pt(8);
+
+  /// Gives 12dp padding from top side
+  Padding get pt12 => pt(12);
+
+  /// Gives 16dp padding from top side
+  Padding get pt16 => pt(16);
+
+  /// Gives 20dp padding from top side
+  Padding get pt20 => pt(20);
+
+  /// Gives 24dp padding from top side
+  Padding get pt24 => pt(24);
+
+  /// Gives 32dp padding from top side
+  Padding get pt32 => pt(32);
+
+  /// Gives 48dp padding from top side
+  Padding get pt48 => pt(48);
+
+  /// Gives 64dp padding from top side
+  Padding get pt64 => pt(64);
+
+  /// Gives 0dp padding from bottom side
+  Padding get pb0 => pb(0);
+
+  /// Gives 4dp padding from bottom side
+  Padding get pb4 => pb(4);
+
+  /// Gives 8dp padding from bottom side
+  Padding get pb8 => pb(8);
+
+  /// Gives 12dp padding from bottom side
+  Padding get pb12 => pb(12);
+
+  /// Gives 16dp padding from bottom side
+  Padding get pb16 => pb(16);
+
+  /// Gives 20dp padding from bottom side
+  Padding get pb20 => pb(20);
+
+  /// Gives 24dp padding from bottom side
+  Padding get pb24 => pb(24);
+
+  /// Gives 32dp padding from bottom side
+  Padding get pb32 => pb(32);
+
+  /// Gives 48dp padding from bottom side
+  Padding get pb48 => pb(48);
+
+  /// Gives 64dp padding from bottom side
+  Padding get pb64 => pb(64);
+
+  /// Gives 4dp padding horizontally
+  Padding get px4 => px(4);
+
+  /// Gives 8dp padding horizontally
+  Padding get px8 => px(8);
+
+  /// Gives 12dp padding horizontally
+  Padding get px12 => px(12);
+
+  /// Gives 16dp padding horizontally
+  Padding get px16 => px(16);
+
+  /// Gives 20dp padding horizontally
+  Padding get px20 => px(20);
+
+  /// Gives 24dp padding horizontally
+  Padding get px24 => px(24);
+
+  /// Gives 32dp padding horizontally
+  Padding get px32 => px(32);
+
+  /// Gives 48dp padding horizontally
+  Padding get px48 => px(48);
+
+  /// Gives 64dp padding horizontally
+  Padding get px64 => px(64);
+
+  /// Gives 4dp padding vertically
+  Padding get py4 => py(4);
+
+  /// Gives 8dp padding vertically
+  Padding get py8 => py(8);
+
+  /// Gives 12dp padding vertically
+  Padding get py12 => py(12);
+
+  /// Gives 16dp padding vertically
+  Padding get py16 => py(16);
+
+  /// Gives 20dp padding vertically
+  Padding get py20 => py(20);
+
+  /// Gives 24dp padding vertically
+  Padding get py24 => py(24);
+
+  /// Gives 32dp padding vertically
+  Padding get py32 => py(32);
+
+  /// Gives 48dp padding vertically
+  Padding get py48 => py(48);
+
+  /// Gives 64dp padding vertically
+  Padding get py64 => py(64);
+
   Padding _padding({
     double? all,
     double? horizontal,

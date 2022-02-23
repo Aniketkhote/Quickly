@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ///Border radius to easliy get predefined radius.
-abstract class FxRadius {
+mixin FxRadius {
   ///Gives [BorderRadius] for each corner of a rectangle.
   static BorderRadius only({
     double? topLeft,
