@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utilities.dart';
+import '../mixins.dart';
 
 /// Custom color palette
 extension TextColorExtension on Text {

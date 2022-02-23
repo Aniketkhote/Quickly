@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 /// Custom color palette
 mixin FxColor {
-  static const Color primary = Color(0xff4E73DF);
+  static const Color primary = Color(0xFF006EFF);
   static const Color secondary = Color(0xFFE4E6EF);
-  static const Color success = Color(0xFF1CC88A);
+  static const Color success = Color(0xFF2ED477);
   static const Color info = Color(0xFF8950FC);
-  static const Color warning = Color(0xFFF6C23E);
-  static const Color danger = Color(0xFFF64E60);
+  static const Color warning = Color(0xFFFF9138);
+  static const Color danger = Color(0xFFF46363);
+
   static const Color light = Color(0xFFF3F6F9);
   static const Color dark = Color(0xFF222428);
+
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
 
