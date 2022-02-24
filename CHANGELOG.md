@@ -2,9 +2,11 @@
 
 ### Added
 - Added some extra padding extension
+- Added `doesntContain()` in map extension
 
 ### Changed
 - Changed main colors names like `primary` => `kcPrimary` in Text extension.
+- Changed slightly main color codes
 - Changed utilities classes to mixins.
 
 ## 2.1.0

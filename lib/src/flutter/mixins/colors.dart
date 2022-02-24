@@ -16,9 +16,9 @@ mixin FxColor {
   static const Color black = Color(0xFF000000);
 
   static const Color kcText = Color(0xFF565360);
-  static const Color kcLabel = Color(0xFF908E9B);
+  static const Color kcLabel = Color(0xFF78858F);
   static const Color kcDisabled = Color(0xFFE1DFE9);
-  static const Color kcTextField = Color(0xFFEFEFF0);
+  static const Color kcTextField = Color(0xFFF3F3F3);
 
   // Status Colors
   static const Color kcWarningStatus = Color(0xFFF9AE3F);

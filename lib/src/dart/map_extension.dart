@@ -6,9 +6,9 @@ extension MapExtension<T> on Map<T, T> {
   ///
   ///Example:
   ///```dart
-  ///map.has("key","value") // true
+  ///map.contain("key","value") // true
   ///```
-  bool has(String key, T value) {
+  bool contain(String key, T value) {
     bool _isContain = false;
 
     forEach((T k, T v) {
@@ -16,6 +16,18 @@ extension MapExtension<T> on Map<T, T> {
     });
     return _isContain;
   }
+
+  ///If this map does not contains the given [key]/[value] pair.
+  ///
+  ///
+  ///Example:
+  ///```dart
+  ///map.doesntContain("key","value") // true
+  ///```
+  bool doesntContain(String key, T value) => !contain(key, value);
+
+  /// alias of `contains()`
+  bool has(String key, T value) => contain(key, value);
 
   ///Returns the ID of the object if exists otherwise return 0;
   ///

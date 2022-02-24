@@ -63,13 +63,18 @@ void main() {
               equals(<dynamic, dynamic>{'qty': 10})));
     });
 
-    group('.has(key, value)', () {
+    group('.methodName(key, value)', () {
       test('.has(key, value) - return true key/value present in map',
           () => expect(input3.has('price', 49), equals(true)));
       test('.has(key, value) - return false value not present in map',
           () => expect(input2.has('price', 'red'), equals(false)));
       test('.has(key, value) - return false key & value not present in map',
           () => expect(input2.has('color', 'red'), equals(false)));
+      test('.doesntContain(key, value) - return false value not present in map',
+          () => expect(input2.doesntContain('price', 'red'), equals(true)));
+      test(
+          '.doesntContain(key, value) - return false key & value not present in map',
+          () => expect(input2.doesntContain('price', 49), equals(false)));
     });
 
     group('.match()', () {
