@@ -1,3 +1,11 @@
+## 2.3.0
+
+### Added
+- Added `flexible` extension
+- Added `border radius` extension
+- Added `whereOnly`, `whereNotOnly`, `whereBetween`, `whereNotBetween`, `whereIn` and `whereNotIn`
+
+
 ## 2.2.0
 
 ### Added
@@ -7,7 +15,7 @@
 ### Changed
 - Changed main colors names like `primary` => `kcPrimary` in Text extension.
 - Changed slightly main color codes
-- Changed utilities classes to mixins.
+- Changed utility classes to mixins.
 
 ## 2.1.0
 

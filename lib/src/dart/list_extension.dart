@@ -228,6 +228,118 @@ extension ListExtension<T> on List<T> {
     return maxValue;
   }
 
+  ///Gets only those values which is given
+  ///
+  ///Example:
+  ///```dart
+  ///list.whereOnly([key1, key2])
+  ///```
+  List<T> whereOnly(List<String> keys) {
+    List<T> _list = <T>[];
+    forEach((T map) {
+      Map<T, T> _map = <T, T>{};
+
+      keys.forEach((dynamic key) {
+        // ignore: always_specify_types
+        if ((map as dynamic).containsKey(key)) _map.addAll({key: map[key]});
+      });
+      _list.forEach((dynamic map) {
+        if (map.isNotEmpty) _list.add(map);
+      });
+    });
+
+    return _list;
+  }
+
+  ///Removes elements from the list which is given
+  ///
+  ///Example:
+  ///```dart
+  ///list.whereNotOnly([key1, key2])
+  ///```
+  List<T> whereNotOnly(List<String> keys) {
+    List<T> _list = <T>[];
+    forEach((T map) => keys.forEach((dynamic key) {
+          if ((map as dynamic).containsKey(key)) (map as dynamic).remove(key);
+        }));
+
+    forEach((T map) {
+      if ((map as dynamic).isNotEmpty) _list.add(map);
+    });
+
+    return _list;
+  }
+
+  ///Removes elements from the list that do not have a specified item value
+  ///
+  ///that is not contained within the given list
+  ///
+  ///Example:
+  ///```dart
+  ///list.whereIn("key", [value1, value2])
+  ///```
+  List<T> whereIn(String key, List<num> params) {
+    List<T> _list = <T>[];
+
+    params.forEach((dynamic param) {
+      forEach((dynamic map) {
+        if (map.contains(key, param)) _list.add(map);
+      });
+    });
+
+    return _list;
+  }
+
+  ///Removes elements from the list that have a specified item value
+  ///
+  ///that is not contained within the given list
+  ///
+  ///Example:
+  ///```dart
+  ///list.whereNotIn("key", [value1, value2])
+  ///```
+  List<T> whereNotIn(List<T> list, String key, List<num> params) {
+    params.forEach((dynamic param) =>
+        list.removeWhere((dynamic map) => map.contains(key, param)));
+    return list;
+  }
+
+  /// Filters the collection by determining if a specified item value is within a given range
+  ///
+  /// Example:
+  ///```dart
+  ///list.whereBetween("key",start, end)
+  ///```
+  List<T> whereBetween(List<T> list, String key, num start, num end) {
+    List<T> _list = <T>[];
+
+    list.forEach((dynamic element) {
+      if (element.containsKey(key) && element[key] != null) {
+        if (element[key] > start && element[key] < end) _list.add(element);
+      }
+    });
+
+    return _list;
+  }
+
+  ///Filters the collection by determining if a specified item value is outside of a given range
+  ///
+  ///Example:
+  ///```dart
+  ///list.whereNotBetween("key", start, end)
+  ///```
+  List<T> whereNotBetween(List<T> list, String key, num start, num end) {
+    List<T> _list = <T>[];
+
+    list.forEach((dynamic element) {
+      if (element.containsKey(key) && element[key] != null) {
+        if (element[key] < start || element[key] > end) _list.add(element);
+      }
+    });
+
+    return _list;
+  }
+
   ///Checks given key/value is exists or not
   bool hasKeyValue(String key, T value) => any(
       (T element) => (element is Map<T, T>) ? element.has(key, value) : false);

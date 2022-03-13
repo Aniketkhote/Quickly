@@ -6,7 +6,11 @@ extension WidgetExtension on Widget {
   Center get center => Center(child: this);
 
   ///Directly access [Expanded] widget using dot operator
-  Expanded expand([int? flex]) => Expanded(child: this, flex: flex ?? 1);
+  Expanded expand([int flex = 1]) => Expanded(child: this, flex: flex);
+
+  ///Directly access [Flexible] widget using dot operator
+  Flexible flexible([int flex = 1, FlexFit fit = FlexFit.loose]) =>
+      Flexible(child: this, flex: flex, fit: fit);
 
   ///Creates a widget that controls where a child of a [Stack] is positioned.
   ///

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quickly/quickly.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,14 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: Text('Quickly'),
-          ),
-        ),
-      ),
+    return Container(
+      height: 200,
+      width: 200,
+      color: FxColor.amber400,
     );
   }
 }
