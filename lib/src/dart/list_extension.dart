@@ -240,7 +240,6 @@ extension ListExtension<T> on List<T> {
       Map<T, T> _map = <T, T>{};
 
       keys.forEach((dynamic key) {
-        // ignore: always_specify_types
         if ((map as dynamic).containsKey(key)) _map.addAll({key: map[key]});
       });
       _list.forEach((dynamic map) {
@@ -282,8 +281,8 @@ extension ListExtension<T> on List<T> {
     List<T> _list = <T>[];
 
     params.forEach((dynamic param) {
-      forEach((dynamic map) {
-        if (map.contains(key, param)) _list.add(map);
+      forEach((T map) {
+        if ((map as Map).has(key, param)) _list.add(map);
       });
     });
 
@@ -298,10 +297,10 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.whereNotIn("key", [value1, value2])
   ///```
-  List<T> whereNotIn(List<T> list, String key, List<num> params) {
+  List<T> whereNotIn(String key, List<num> params) {
     params.forEach((dynamic param) =>
-        list.removeWhere((dynamic map) => map.contains(key, param)));
-    return list;
+        removeWhere((dynamic map) => (map as Map).has(key, param)));
+    return this;
   }
 
   /// Filters the collection by determining if a specified item value is within a given range
@@ -310,12 +309,12 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.whereBetween("key",start, end)
   ///```
-  List<T> whereBetween(List<T> list, String key, num start, num end) {
+  List<T> whereBetween(String key, num start, num end) {
     List<T> _list = <T>[];
 
-    list.forEach((dynamic element) {
+    forEach((dynamic element) {
       if (element.containsKey(key) && element[key] != null) {
-        if (element[key] > start && element[key] < end) _list.add(element);
+        if (element[key] >= start && element[key] <= end) _list.add(element);
       }
     });
 
@@ -328,12 +327,12 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.whereNotBetween("key", start, end)
   ///```
-  List<T> whereNotBetween(List<T> list, String key, num start, num end) {
+  List<T> whereNotBetween(String key, num start, num end) {
     List<T> _list = <T>[];
 
-    list.forEach((dynamic element) {
+    forEach((dynamic element) {
       if (element.containsKey(key) && element[key] != null) {
-        if (element[key] < start || element[key] > end) _list.add(element);
+        if (!(element[key] >= start || element[key] <= end)) _list.add(element);
       }
     });
 

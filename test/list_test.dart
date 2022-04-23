@@ -179,4 +179,79 @@ void main() {
       );
     });
   });
+
+  group("where list extensions", () {
+    List<dynamic> list = <dynamic>[
+      <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
+      <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+      <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+    ];
+
+    test(
+      "whereIn()",
+      () => expect(
+        list.whereIn('price', <int>[150, 200]),
+        <dynamic>[
+          <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+          <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200}
+        ],
+      ),
+    );
+
+    test(
+      "whereNotIn()",
+      () => expect(
+        list.whereNotIn('price', <int>[150, 200]),
+        <dynamic>[
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+        ],
+      ),
+    );
+
+    test(
+      "whereOnly()",
+      () => expect(
+        list.whereOnly(<String>['name', 'price']),
+        <dynamic>[
+          <String, dynamic>{'name': 'Desk', 'price': 200},
+          <String, dynamic>{'name': 'Chair', 'price': 100},
+          <String, dynamic>{'name': 'Bookcase', 'price': 150},
+        ],
+      ),
+    );
+
+    test(
+      "whereNotOnly()",
+      () => expect(
+        list.whereNotOnly(<String>['id']),
+        <dynamic>[
+          <String, dynamic>{'name': 'Desk', 'price': 200},
+          <String, dynamic>{'name': 'Chair', 'price': 100},
+          <String, dynamic>{'name': 'Bookcase', 'price': 150},
+        ],
+      ),
+    );
+
+    test(
+      "whereBetween()",
+      () => expect(
+        list.whereBetween('price', 100, 200),
+        <dynamic>[
+          <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+          <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+        ],
+      ),
+    );
+
+    test(
+      "whereNotBetween()",
+      () => expect(
+        list.whereNotBetween('price', 150, 200),
+        <dynamic>[
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+        ],
+      ),
+    );
+  });
 }

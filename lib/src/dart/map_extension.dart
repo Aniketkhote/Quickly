@@ -84,7 +84,7 @@ extension MapExtension<T> on Map<T, T> {
   ///map.getInt("id") // 11
   ///```
   int? getInt(String key) =>
-      containsKey(key) ? int.tryParse('${this[key]}') : null;
+      containsKey(key) ? int.tryParse('${this[key]}') : 0;
 
   /// Reads a [key] value of [double] type from [Map].
   ///
@@ -95,7 +95,7 @@ extension MapExtension<T> on Map<T, T> {
   ///map.getDouble("price") // 27.32
   ///```
   double? getDouble(String key) =>
-      containsKey(key) ? double.tryParse('${this[key]}') : null;
+      containsKey(key) ? double.tryParse('${this[key]}') : 0.0;
 
   /// Reads a [key] value of [String] type from [Map].
   ///
