@@ -1,3 +1,7 @@
+## 2.5.0
+
+- Minor Bug Fixes
+
 ## 2.4.0
 
 ### Fixed

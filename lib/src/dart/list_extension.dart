@@ -240,7 +240,8 @@ extension ListExtension<T> on List<T> {
       Map<T, T> _map = <T, T>{};
 
       keys.forEach((dynamic key) {
-        if ((map as dynamic).containsKey(key)) _map.addAll({key: map[key]});
+        if ((map as dynamic).containsKey(key))
+          _map.addAll(<T, T>{key: map[key]});
       });
       _list.forEach((dynamic map) {
         if (map.isNotEmpty) _list.add(map);
@@ -282,7 +283,7 @@ extension ListExtension<T> on List<T> {
 
     params.forEach((dynamic param) {
       forEach((T map) {
-        if ((map as Map).has(key, param)) _list.add(map);
+        if ((map as Map<T, T>).has(key, param)) _list.add(map);
       });
     });
 
@@ -299,7 +300,7 @@ extension ListExtension<T> on List<T> {
   ///```
   List<T> whereNotIn(String key, List<num> params) {
     params.forEach((dynamic param) =>
-        removeWhere((dynamic map) => (map as Map).has(key, param)));
+        removeWhere((dynamic map) => (map as Map<T, T>).has(key, param)));
     return this;
   }
 
