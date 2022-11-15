@@ -21,14 +21,15 @@
 </div>
 
 ![Pub Version](https://img.shields.io/pub/v/quickly?color=blue&style=the-badge)
-![GitHub Release Date](https://img.shields.io/github/release-date/Aniketkhote/quickly?style=the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Aniketkhote/quickly/CI?style=the-badge)
 [![pub points](https://badges.bar/quickly/pub%20points)](https://pub.dev/packages/quickly/score)
 [![popularity](https://badges.bar/quickly/popularity)](https://pub.dev/packages/quickly/score)
 [![likes](https://badges.bar/quickly/likes)](https://pub.dev/packages/quickly/score)
 
 <!-- TABLE OF CONTENTS -->
-  ### Table of Contents
+
+### Table of Contents
+
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -51,27 +52,24 @@
     <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
   </ol>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 Quickly is build as a tool to enhance your Flutter UI development experience and make code easier. It is highly inspired by Bootstrap and Tailwind CSS. It also provide lots of extension methods on String, List and Map.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built With
 
-* [Flutter](https://flutter.dev/)
-* [Dart](https://dart.dev/)
-* [Get](https://pub.dev/packages/get)
+- [Flutter](https://flutter.dev/)
+- [Dart](https://dart.dev/)
+- [Get](https://pub.dev/packages/get)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 ### Flutter
@@ -155,7 +153,7 @@ map.getString('key')
 {1: 'One', 2: 'Two'}.match(3)   // Invalid input
 {1: 'One', 2: 'Two'}.match(4,'Does not match')   // Does not match
 
- List list = 
+ List list =
  [
   {
     'id': 1,
@@ -177,8 +175,6 @@ _For more examples, please refer to the [Documentation](https://pub.dev/document
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- ROADMAP -->
 <!-- ## Roadmap
 
@@ -192,8 +188,8 @@ See the [open issues](https://github.com/Aniketkhote/Quickly/issues) for a full 
 <p align="right">(<a href="#top">back to top</a>)</p>
  -->
 
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -209,18 +205,16 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
+
 ## Contact
 
 Aniket Khote - [@aniketkhote99](https://twitter.com/aniketkhote99) - aniketkhote99@gmail.com
@@ -234,8 +228,6 @@ Project Link: [https://github.com/Aniketkhote/Quickly](https://github.com/Aniket
 </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- ACKNOWLEDGMENTS -->
 <!-- ## Acknowledgments
