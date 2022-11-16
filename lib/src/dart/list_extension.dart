@@ -236,16 +236,15 @@ extension ListExtension<T> on List<T> {
   ///```
   List<T> whereOnly(List<String> keys) {
     List<T> _list = <T>[];
-    forEach((T map) {
+    forEach((T obj) {
       Map<T, T> _map = <T, T>{};
 
       keys.forEach((dynamic key) {
-        if ((map as dynamic).containsKey(key))
-          _map.addAll(<T, T>{key: map[key]});
+        if ((obj as dynamic).containsKey(key))
+          _map.addAll(<T, T>{key: obj[key]});
       });
-      _list.forEach((dynamic map) {
-        if (map.isNotEmpty) _list.add(map);
-      });
+
+      if (_map.isNotEmpty) _list.add(_map as T);
     });
 
     return _list;
@@ -329,15 +328,15 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotBetween("key", start, end)
   ///```
   List<T> whereNotBetween(String key, num start, num end) {
-    List<T> _list = <T>[];
+    List<T> list = <T>[];
 
     forEach((dynamic element) {
       if (element.containsKey(key) && element[key] != null) {
-        if (!(element[key] >= start || element[key] <= end)) _list.add(element);
+        if (element[key] < start || element[key] > end) list.add(element);
       }
     });
 
-    return _list;
+    return list;
   }
 
   ///Checks given key/value is exists or not

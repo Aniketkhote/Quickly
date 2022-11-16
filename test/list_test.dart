@@ -181,16 +181,14 @@ void main() {
   });
 
   group("where list extensions", () {
-    List<dynamic> list = <dynamic>[
-      <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
-      <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
-      <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
-    ];
-
     test(
       "whereIn()",
       () => expect(
-        list.whereIn('price', <int>[150, 200]),
+        <dynamic>[
+          <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+          <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+        ].whereIn('price', <int>[150, 200]),
         <dynamic>[
           <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
           <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200}
@@ -201,7 +199,11 @@ void main() {
     test(
       "whereNotIn()",
       () => expect(
-        list.whereNotIn('price', <int>[150, 200]),
+        <dynamic>[
+          <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+          <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+        ].whereNotIn('price', <int>[150, 200]),
         <dynamic>[
           <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
         ],
@@ -211,7 +213,11 @@ void main() {
     test(
       "whereOnly()",
       () => expect(
-        list.whereOnly(<String>['name', 'price']),
+        <dynamic>[
+          <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+          <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+        ].whereOnly(<String>['name', 'price']),
         <dynamic>[
           <String, dynamic>{'name': 'Desk', 'price': 200},
           <String, dynamic>{'name': 'Chair', 'price': 100},
@@ -223,7 +229,11 @@ void main() {
     test(
       "whereNotOnly()",
       () => expect(
-        list.whereNotOnly(<String>['id']),
+        <dynamic>[
+          <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+          <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+        ].whereNotOnly(<String>['id']),
         <dynamic>[
           <String, dynamic>{'name': 'Desk', 'price': 200},
           <String, dynamic>{'name': 'Chair', 'price': 100},
@@ -235,7 +245,11 @@ void main() {
     test(
       "whereBetween()",
       () => expect(
-        list.whereBetween('price', 100, 200),
+        <dynamic>[
+          <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+          <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+        ].whereBetween('price', 100, 200),
         <dynamic>[
           <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
           <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
@@ -247,7 +261,11 @@ void main() {
     test(
       "whereNotBetween()",
       () => expect(
-        list.whereNotBetween('price', 150, 200),
+        <dynamic>[
+          <String, dynamic>{'id': 1, 'name': 'Desk', 'price': 200},
+          <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
+          <String, dynamic>{'id': 3, 'name': 'Bookcase', 'price': 150},
+        ].whereNotBetween('price', 150, 200),
         <dynamic>[
           <String, dynamic>{'id': 2, 'name': 'Chair', 'price': 100},
         ],
