@@ -1,6 +1,10 @@
+## 3.1.0
+
+- Stable Version on flutter 3.8.8
+
 ## 3.0.0
 
-- Minor Bug Fixes
+- Stable Version on flutter 3.8.8
 
 ## 2.5.0
 
