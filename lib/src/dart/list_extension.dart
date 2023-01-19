@@ -181,11 +181,11 @@ extension ListExtension<T> on List<T> {
   /// [1,2]
   ///```
   List<T?> pluck(String key) {
-    List<T?> _list = <T>[];
+    List<T?> list = <T>[];
     forEach((T element) => ((element as Map<T, T>).containsKey(key))
-        ? _list.add(element[key])
-        : _list);
-    return _list;
+        ? list.add(element[key])
+        : list);
+    return list;
   }
 
   ///Get minimum number
@@ -235,19 +235,19 @@ extension ListExtension<T> on List<T> {
   ///list.whereOnly([key1, key2])
   ///```
   List<T> whereOnly(List<String> keys) {
-    List<T> _list = <T>[];
+    List<T> list = <T>[];
     forEach((T obj) {
-      Map<T, T> _map = <T, T>{};
+      Map<T, T> map = <T, T>{};
 
       keys.forEach((dynamic key) {
         if ((obj as dynamic).containsKey(key))
-          _map.addAll(<T, T>{key: obj[key]});
+          map.addAll(<T, T>{key: obj[key]});
       });
 
-      if (_map.isNotEmpty) _list.add(_map as T);
+      if (map.isNotEmpty) list.add(map as T);
     });
 
-    return _list;
+    return list;
   }
 
   ///Removes elements from the list which is given
@@ -257,16 +257,16 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotOnly([key1, key2])
   ///```
   List<T> whereNotOnly(List<String> keys) {
-    List<T> _list = <T>[];
+    List<T> list = <T>[];
     forEach((T map) => keys.forEach((dynamic key) {
           if ((map as dynamic).containsKey(key)) (map as dynamic).remove(key);
         }));
 
     forEach((T map) {
-      if ((map as dynamic).isNotEmpty) _list.add(map);
+      if ((map as dynamic).isNotEmpty) list.add(map);
     });
 
-    return _list;
+    return list;
   }
 
   ///Removes elements from the list that do not have a specified item value
@@ -278,15 +278,15 @@ extension ListExtension<T> on List<T> {
   ///list.whereIn("key", [value1, value2])
   ///```
   List<T> whereIn(String key, List<num> params) {
-    List<T> _list = <T>[];
+    List<T> list = <T>[];
 
     params.forEach((dynamic param) {
       forEach((T map) {
-        if ((map as Map<T, T>).has(key, param)) _list.add(map);
+        if ((map as Map<T, T>).has(key, param)) list.add(map);
       });
     });
 
-    return _list;
+    return list;
   }
 
   ///Removes elements from the list that have a specified item value
@@ -310,15 +310,15 @@ extension ListExtension<T> on List<T> {
   ///list.whereBetween("key",start, end)
   ///```
   List<T> whereBetween(String key, num start, num end) {
-    List<T> _list = <T>[];
+    List<T> list = <T>[];
 
     forEach((dynamic element) {
       if (element.containsKey(key) && element[key] != null) {
-        if (element[key] >= start && element[key] <= end) _list.add(element);
+        if (element[key] >= start && element[key] <= end) list.add(element);
       }
     });
 
-    return _list;
+    return list;
   }
 
   ///Filters the collection by determining if a specified item value is outside of a given range

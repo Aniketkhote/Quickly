@@ -106,8 +106,6 @@ extension TextColorExtension on Text {
   Text get violet800 => _color(FxColor.violet800);
   Text get violet900 => _color(FxColor.violet900);
 
-  Text _color(Color color) => _style(TextStyle(color: color));
-
-  Text _style(TextStyle? style) => Text(data!,
-      style: style != null ? this.style?.merge(style) ?? style : this.style);
+  Text _color(Color color) =>
+      Text(data!, style: style?.merge(TextStyle(color: color)));
 }

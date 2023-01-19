@@ -56,32 +56,36 @@ extension StringExtension on String {
   String? mask({int upto = 4, String mask = '*', bool atEnd = false}) {
     if (length <= 1) return null;
 
-    if (atEnd) return substring(0, length - upto).padRight(length, mask);
-
-    return substring(upto).padLeft(length, mask);
+    String maskedString = '';
+    if (atEnd) {
+      maskedString = substring(0, length - upto);
+      for (int i = 0; i < upto; i++) {
+        maskedString += mask;
+      }
+    } else {
+      for (int i = 0; i < length - upto; i++) {
+        maskedString += mask;
+      }
+      maskedString += substring(length - upto);
+    }
+    return maskedString;
   }
 
   ///Counts the number of occurrences of string
   Map<String, int> get occurrences {
     String _str = removeWhitespace;
-
-    Map<String, int> map = <String, int>{};
-
-    for (int i = 0; i < _str.length; i++) {
-      int count = map[_str[i]] ?? 0;
-      map[_str[i]] = count + 1;
-    }
-    return map;
+    return _str.split('').fold(<String, int>{},
+        (Map<String, int> map, String char) {
+      map[char] = (map[char] ?? 0) + 1;
+      return map;
+    });
   }
 
   ///Counts the number of occurrences of value.
   int countOccurrence(String string) => isEmpty ? 0 : allMatches(string).length;
 
   ///Counts the number of words in
-  int get countWord {
-    final List<String> _l = split(' ');
-    return _l.length;
-  }
+  int get countWord => split(' ').length;
 
   ///Get default value if string is empty.
   String ifEmpty([String value = 'null']) => isEmpty ? value : this;
@@ -158,19 +162,13 @@ extension StringExtension on String {
 
   ///check string is video
   bool get isVideo {
-    String _ext = toLowerCase();
-    return _ext.endsWith(".mp4") ||
-        _ext.endsWith(".avi") ||
-        _ext.endsWith(".mpeg") ||
-        _ext.endsWith(".WEBM");
+    Set<String> ext = <String>{".mp4", ".avi", ".mpeg", ".webm"};
+    return ext.contains(toLowerCase());
   }
 
   ///check string is audio
   bool get isAudio {
-    String _ext = toLowerCase();
-    return _ext.endsWith(".mp3") ||
-        _ext.endsWith(".wav") ||
-        _ext.endsWith(".aac") ||
-        _ext.endsWith(".wma");
+    Set<String> ext = <String>{".mp3", ".wav", ".aac", ".wma"};
+    return ext.contains(toLowerCase());
   }
 }

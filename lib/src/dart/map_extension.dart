@@ -106,9 +106,7 @@ extension MapExtension<T> on Map<T, T> {
   ///map.getString("username") // thor
   ///```
   String getString(String key, [String defaultString = '']) =>
-      (containsKey(key) && this[key] is String)
-          ? this[key] as String
-          : defaultString;
+      this[key] is String ? this[key] as String : defaultString;
 
   /// Reads a [key] value of [List] type from [Map].
   ///
@@ -119,11 +117,11 @@ extension MapExtension<T> on Map<T, T> {
   ///map.getList(productList) // return list if exists otherwise return empty list
   ///```
   List<T> getList<T>(String key) =>
-      (containsKey(key) && this[key] is List<T>) ? this[key] as List<T> : <T>[];
+      this[key] is List<T> ? this[key] as List<T> : <T>[];
 
   /// The match() function also works similarly to switch
   ///
   /// i.e, it finds the matching case according to the condition passed in it.
-  dynamic match(T condition, [String? byDefault]) =>
-      containsKey(condition) ? this[condition] : byDefault;
+  T? match<T>(T condition, [T? byDefault]) =>
+      containsKey(condition) ? this[condition] as T : byDefault;
 }

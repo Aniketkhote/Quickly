@@ -1,6 +1,11 @@
+## 3.2.0
+
+- Optimize the code and removed unnecessary checks
+- removed get package dependency
+
 ## 3.1.0
 
-- Stable Version on flutter 3.8.8
+- Minor Issue fixes
 
 ## 3.0.0
 

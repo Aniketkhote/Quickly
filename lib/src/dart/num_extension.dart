@@ -1,16 +1,14 @@
-import 'extensions.dart';
-
 ///Num extension to extend List functionality
 extension NumExtension on num {
   /// Add suffix to the number
   String suffix([String suffix = '']) {
     if (suffix.isNotEmpty) return '${this}$suffix';
-
     return <int, String>{
-      1: '${this}st',
-      2: '${this}nd',
-      3: '${this}rd',
-    }.match(this % 10, '${this}th');
+          1: '${this}st',
+          2: '${this}nd',
+          3: '${this}rd',
+        }[this % 10] ??
+        '${this}th';
   }
 
   ///Returns Duration of this in seconds.
