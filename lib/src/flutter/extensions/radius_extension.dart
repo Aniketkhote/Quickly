@@ -31,10 +31,7 @@ extension RadiusExtension on Container {
   /// Apply 30 dp circular `Border Radius` to Widget
   Container get roundedXl => _rounded(radius: FxRadius.all(30));
 
-  Container _rounded({
-    BorderRadius? radius,
-  }) =>
-      Container(
+  Container _rounded({BorderRadius? radius}) => Container(
         decoration: BoxDecoration(borderRadius: radius),
         child: this,
       );

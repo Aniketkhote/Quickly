@@ -70,18 +70,6 @@ extension TextExtension on Text {
   ///Sets [fontSize] to 10 logical pixel and [fontWeight] to Light
   Text get caption2 => _copyWith(style: const TextStyle(fontSize: 10.0));
 
-  /// Sets [lineHeight] to 0.75
-  Text get heightTight => _copyWith(style: const TextStyle(height: 0.75));
-
-  /// Sets [lineHeight] to 0.875
-  Text get heightSnug => _copyWith(style: const TextStyle(height: 0.875));
-
-  /// Sets [lineHeight] to 1.25
-  Text get heightRelaxed => _copyWith(style: const TextStyle(height: 1.25));
-
-  /// Sets [lineHeight] to 1.5
-  Text get heightLoose => _copyWith(style: const TextStyle(height: 1.5));
-
   /// Sets custom [lineHeight] with [height]
   Text lineHeight(double height) => _copyWith(style: TextStyle(height: height));
 
@@ -132,38 +120,6 @@ extension TextExtension on Text {
   Text get underline =>
       _copyWith(style: const TextStyle(decoration: TextDecoration.underline));
 
-  /// Draw a line through each line of text
-  Text get lineThrough =>
-      _copyWith(style: const TextStyle(decoration: TextDecoration.lineThrough));
-
-  /// Draw a line above each line of text
-  Text get overline =>
-      _copyWith(style: const TextStyle(decoration: TextDecoration.overline));
-
-  ///Draw a [dashed] line underneath each line of text
-  Text get dashed => _copyWith(
-      style: const TextStyle(decorationStyle: TextDecorationStyle.dashed));
-
-  ///Draw a [doted] line underneath each line of text
-  Text get dotted => _copyWith(
-      style: const TextStyle(decorationStyle: TextDecorationStyle.dotted));
-
-  ///Draw a [double] means two line underneath each line of text
-  Text get doubleLine => _copyWith(
-      style: const TextStyle(decorationStyle: TextDecorationStyle.double));
-
-  ///Draw a [soild] line underneath each line of text
-  Text get solid => _copyWith(
-      style: const TextStyle(decorationStyle: TextDecorationStyle.solid));
-
-  ///Draw a [wavy] means sinusoidal line underneath each line of text
-  Text get wavy => _copyWith(
-      style: const TextStyle(decorationStyle: TextDecorationStyle.wavy));
-
-  ///Sets the color in which to paint the text decorations.
-  Text textDecoraionColor(Color decorationColor) =>
-      _copyWith(style: TextStyle(decorationColor: decorationColor));
-
   ///Set [fontFamily] for the text
   Text fontFamily(String fontFamily) =>
       _copyWith(style: TextStyle(fontFamily: fontFamily));
@@ -205,52 +161,12 @@ extension TextExtension on Text {
   Text letterSpacing(double spacing) =>
       _copyWith(style: TextStyle(letterSpacing: spacing));
 
-  /// Sets [letterSpacing] to -3.0
-  Text get tightestLetter =>
-      _copyWith(style: const TextStyle(letterSpacing: -3.0));
-
-  /// Sets [letterSpacing] to -2.0
-  Text get tighterLetter =>
-      _copyWith(style: const TextStyle(letterSpacing: -2.0));
-
-  /// Sets [letterSpacing] to -1.0
-  Text get tightLetter =>
-      _copyWith(style: const TextStyle(letterSpacing: -1.0));
-
-  /// Sets [letterSpacing] to 1.0
-  Text get wideLetter => _copyWith(style: const TextStyle(letterSpacing: 1.0));
-
-  /// Sets [letterSpacing] to 2.0
-  Text get widerLetter => _copyWith(style: const TextStyle(letterSpacing: 2.0));
-
-  /// Sets [letterSpacing] to 3.0
-  Text get widestLetter =>
-      _copyWith(style: const TextStyle(letterSpacing: 3.0));
-
   ///The amount of space (in logical pixels) to add at each sequence of white-space
   ///
   ///(i.e. between each word).
   ///A negative value can be used to bring the words closer.
   Text wordSpacing(double spacing) =>
       _copyWith(style: TextStyle(wordSpacing: spacing));
-
-  /// Sets [WordSpacing] to -3.0
-  Text get tightestWord => _copyWith(style: const TextStyle(wordSpacing: -3.0));
-
-  /// Sets [WordSpacing] to -2.0
-  Text get tighterWord => _copyWith(style: const TextStyle(wordSpacing: -2.0));
-
-  /// Sets [WordSpacing] to -1.0
-  Text get tightWord => _copyWith(style: const TextStyle(wordSpacing: -1.0));
-
-  /// Sets [WordSpacing] to 1.0
-  Text get wideWord => _copyWith(style: const TextStyle(wordSpacing: 1.0));
-
-  /// Sets [WordSpacing] to 2.0
-  Text get widerWord => _copyWith(style: const TextStyle(wordSpacing: 2.0));
-
-  /// Sets [WordSpacing] to 3.0
-  Text get widestWord => _copyWith(style: const TextStyle(wordSpacing: 3.0));
 
   ///Sets [fontWeight] to [FontWeight.w100]
   Text get thin =>

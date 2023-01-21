@@ -1,3 +1,7 @@
+## 3.3.0
+
+- Removed unnecessary text methods such as `letter spacing`, `word spacing`, `line height` and `text decoration`.
+
 ## 3.2.0
 
 - Optimize the code and removed unnecessary checks
