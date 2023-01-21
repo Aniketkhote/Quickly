@@ -70,12 +70,11 @@ void main() {
           () => expect(input2.has('price', 'red'), equals(false)));
       test('.has(key, value) - return false key & value not present in map',
           () => expect(input2.has('color', 'red'), equals(false)));
+      test('.doesntHave(key, value) - return true key/value not present in map',
+          () => expect(input2.doesntHave('price', 'red'), equals(true)));
       test(
-          '.doesntContain(key, value) - return true key/value not present in map',
-          () => expect(input2.doesntContain('price', 'red'), equals(true)));
-      test(
-          '.doesntContain(key, value) - return false key/value not present in map',
-          () => expect(input2.doesntContain('qty', 10), equals(false)));
+          '.doesntHave(key, value) - return false key/value not present in map',
+          () => expect(input2.doesntHave('qty', 10), equals(false)));
     });
 
     group('.match()', () {
@@ -84,7 +83,7 @@ void main() {
       test('.match() - condition match return value',
           () => expect(map.match(2), equals('Two')));
       test('.match() - condtion dose not match return default value',
-          () => expect(map.match(12), equals(null)));
+          () => expect(map.match(12), equals('Invalid input')));
     });
   });
 }

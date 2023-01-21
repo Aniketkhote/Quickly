@@ -27,14 +27,13 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.sortBy("price") // create new list with ascending order by according to price
   ///```
-  List<T> sortBy(String key, [bool isDesc = false]) {
-    if (isEmpty || first is! Map<T, T>) return <T>[];
-
-    if (!(first as Map<T, T>).containsKey(key)) return <T>[];
-
-    sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
-
-    return isDesc ? reversed.toList() : this;
+  List<Map<T, T>> sortBy(String key, [bool isDesc = false]) {
+    List<Map<T, T>> maps =
+        where((T element) => (element as Map<T, T>).containsKey(key))
+            .cast<Map<T, T>>()
+            .toList();
+    maps.sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
+    return isDesc ? maps.reversed.toList() : maps;
   }
 
   ///The sortDescBy method sorts the list of objects by the given key.
@@ -46,7 +45,7 @@ extension ListExtension<T> on List<T> {
   ///This method has the same signature as the sortBy method,
   ///but will sort the collection in the opposite order
   ///```
-  List<T> sortDescBy(String key) => sortBy(key, true);
+  List<Map<T, T>> sortDescBy(String key) => sortBy(key, true);
 
   ///Group by objects according to condition
   ///
@@ -130,15 +129,13 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.chunk(2) // [1,2,3,4,5] -> [[1,2], [3,4], [5]]
   ///```
-  List<T> chunk(int size) {
-    List<dynamic> _chunks = <dynamic>[];
+  List<List<T>> chunk(int size) {
+    if (size < 1) return <List<T>>[];
 
-    if (size < 1) return <T>[];
-
-    for (int i = 0; i < length; i += size)
-      _chunks.add(sublist(i, i + size > length ? length : i + size));
-
-    return _chunks as List<T>;
+    return List<List<T>>.generate(
+        length ~/ size + (length % size == 0 ? 0 : 1),
+        (int index) => sublist(index * size,
+            (index + 1) * size > length ? length : (index + 1) * size));
   }
 
   ///The split method breaks the list into equal sized lists of a given size
@@ -147,15 +144,15 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.split(2) // [1,2,3,4,5] -> [[1,2,3], [4,5]]
   ///```
-  List<dynamic> split(int parts) {
-    if (parts < 1) return <dynamic>[];
+  List<List<T>> split(int parts) {
+    if (parts < 1) return <List<T>>[];
 
-    int _size = (length / parts).round();
+    int size = (length / parts).round();
 
-    return List<dynamic>.generate(
+    return List<List<T>>.generate(
         parts,
         (int i) => sublist(
-            _size * i, (i + 1) * _size <= length ? (i + 1) * _size : null));
+            size * i, (i + 1) * size <= length ? (i + 1) * size : null));
   }
 
   ///Merge list of lists into single list
@@ -181,6 +178,7 @@ extension ListExtension<T> on List<T> {
   /// [1,2]
   ///```
   List<T?> pluck(String key) {
+    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
     List<T?> list = <T>[];
     forEach((T element) => ((element as Map<T, T>).containsKey(key))
         ? list.add(element[key])
@@ -195,34 +193,44 @@ extension ListExtension<T> on List<T> {
   T get max => sortedDesc.first;
 
   ///Get sum of numbers
-  num get sum => cast<num>().reduce((num a, num b) => a + b);
+  num get sum => whereNumbers.reduce((num a, num b) => a + b);
 
   ///Get average of numbers
-  num get avg => sum / cast<num>().length;
+  num get avg => whereNumbers.sum / whereNumbers.length;
+
+  ///Get numbers from a list
+  List<num> get whereNumbers =>
+      where((T element) => element is num).cast<num>().toList();
 
   ///Get median of numbers
   num get median {
-    num middle = length ~/ 2;
-    if (length.isOdd)
-      return this[middle as int] as num;
-    else
-      return ((this[middle - 1 as int] as num) + (this[middle as int] as num)) /
-          2.0;
+    List<num> list = whereNumbers.sorted();
+    int middleIndex = (list.length / 2).round();
+    if (list.length % 2 == 0) {
+      return (list[middleIndex - 1] + list[middleIndex]) / 2;
+    } else {
+      return list[middleIndex];
+    }
   }
 
   ///Get mode of numbers
   num get mode {
+    List<num> list = whereNumbers;
+
     num maxValue = 0.0;
     num maxCount = 0;
 
-    for (num i = 0; i < length; ++i) {
+    for (int i = 0; i < list.length; ++i) {
       num count = 0;
-      for (num j = 0; j < length; ++j)
-        if (this[j as int] == this[i as int]) ++count;
+      for (int j = 0; j < list.length; ++j) {
+        if (list[j] == list[i]) {
+          count++;
+        }
+      }
 
       if (count > maxCount) {
         maxCount = count;
-        maxValue = this[i as int] as num;
+        maxValue = list[i];
       }
     }
     return maxValue;
@@ -235,6 +243,7 @@ extension ListExtension<T> on List<T> {
   ///list.whereOnly([key1, key2])
   ///```
   List<T> whereOnly(List<String> keys) {
+    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
     List<T> list = <T>[];
     forEach((T obj) {
       Map<T, T> map = <T, T>{};
@@ -257,6 +266,7 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotOnly([key1, key2])
   ///```
   List<T> whereNotOnly(List<String> keys) {
+    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
     List<T> list = <T>[];
     forEach((T map) => keys.forEach((dynamic key) {
           if ((map as dynamic).containsKey(key)) (map as dynamic).remove(key);
@@ -278,6 +288,7 @@ extension ListExtension<T> on List<T> {
   ///list.whereIn("key", [value1, value2])
   ///```
   List<T> whereIn(String key, List<num> params) {
+    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
     List<T> list = <T>[];
 
     params.forEach((dynamic param) {
@@ -298,6 +309,7 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotIn("key", [value1, value2])
   ///```
   List<T> whereNotIn(String key, List<num> params) {
+    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
     params.forEach((dynamic param) =>
         removeWhere((dynamic map) => (map as Map<T, T>).has(key, param)));
     return this;
@@ -310,10 +322,11 @@ extension ListExtension<T> on List<T> {
   ///list.whereBetween("key",start, end)
   ///```
   List<T> whereBetween(String key, num start, num end) {
+    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
     List<T> list = <T>[];
 
     forEach((dynamic element) {
-      if (element.containsKey(key) && element[key] != null) {
+      if (element.containsKey(key) && element[key]) {
         if (element[key] >= start && element[key] <= end) list.add(element);
       }
     });
@@ -328,26 +341,44 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotBetween("key", start, end)
   ///```
   List<T> whereNotBetween(String key, num start, num end) {
-    List<T> list = <T>[];
-
+    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
+    List<T> result = <T>[];
     forEach((dynamic element) {
-      if (element.containsKey(key) && element[key] != null) {
-        if (element[key] < start || element[key] > end) list.add(element);
+      if (element.containsKey(key) && element[key]) {
+        if (element[key] < start || element[key] > end) result.add(element);
       }
     });
 
-    return list;
+    return result;
   }
 
   ///Checks given key/value is exists or not
-  bool hasKeyValue(String key, T value) => any(
-      (T element) => (element is Map<T, T>) ? element.has(key, value) : false);
+  bool hasKeyValue(String key, T value) {
+    if (isEmpty) return false;
+
+    return any((T element) {
+      if (element is! Map<T, T>) return false;
+      return element.has(key, value);
+    });
+  }
 
   ///Checks given key is exists or not
-  bool hasKey(String key) =>
-      any((T element) => (element as Map<T, T>).containsKey(key));
+  bool hasKey(String key) {
+    if (isEmpty) return false;
+
+    return any((T element) {
+      if (element is! Map<T, T>) return false;
+      return element.containsKey(key);
+    });
+  }
 
   ///Checks given value is exists or not
-  bool hasValue(T value) =>
-      any((T element) => (element as Map<T, T>).containsValue(value));
+  bool hasValue(T value) {
+    if (isEmpty) return false;
+
+    return any((T element) {
+      if (element is! Map<T, T>) return false;
+      return element.containsKey(value);
+    });
+  }
 }

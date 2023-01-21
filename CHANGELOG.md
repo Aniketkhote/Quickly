@@ -1,6 +1,8 @@
 ## 3.3.0
 
 - Removed unnecessary text methods such as `letter spacing`, `word spacing`, `line height` and `text decoration`.
+- Added checks list is empty or contains map or not in where methods.
+- Added generic type checking in the list extensions.
 
 ## 3.2.0
 

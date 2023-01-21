@@ -6,15 +6,11 @@ extension MapExtension<T> on Map<T, T> {
   ///
   ///Example:
   ///```dart
-  ///map.contain("key","value") // true
+  ///map.has("key","value") // true
   ///```
-  bool contain(String key, T value) {
-    bool _isContain = false;
-
-    forEach((T k, T v) {
-      if (k == key && v == value) _isContain = true;
-    });
-    return _isContain;
+  bool has(String key, T value) {
+    return entries.any(
+        (MapEntry<T, T> entry) => entry.key == key && entry.value == value);
   }
 
   ///If this map does not contains the given [key]/[value] pair.
@@ -22,12 +18,9 @@ extension MapExtension<T> on Map<T, T> {
   ///
   ///Example:
   ///```dart
-  ///map.doesntContain("key","value") // true
+  ///map.doesntHave("key","value") // true
   ///```
-  bool doesntContain(String key, T value) => !contain(key, value);
-
-  /// alias of `contains()`
-  bool has(String key, T value) => contain(key, value);
+  bool doesntHave(String key, T value) => !has(key, value);
 
   ///Returns the ID of the object if exists otherwise return 0;
   ///
@@ -122,6 +115,6 @@ extension MapExtension<T> on Map<T, T> {
   /// The match() function also works similarly to switch
   ///
   /// i.e, it finds the matching case according to the condition passed in it.
-  T? match<T>(T condition, [T? byDefault]) =>
-      containsKey(condition) ? this[condition] as T : byDefault;
+  dynamic match(T condition, [String? byDefault = 'Invalid input']) =>
+      containsKey(condition) ? this[condition] : byDefault;
 }
