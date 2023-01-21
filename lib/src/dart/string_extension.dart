@@ -54,21 +54,11 @@ extension StringExtension on String {
 
   ///Replaces all but the last num runes of a string with the specified mask.
   String? mask({int upto = 4, String mask = '*', bool atEnd = false}) {
-    if (length <= 1) return null;
+    if (length <= 1 || upto < 1 || length < upto) return null;
 
-    String maskedString = '';
-    if (atEnd) {
-      maskedString = substring(0, length - upto);
-      for (int i = 0; i < upto; i++) {
-        maskedString += mask;
-      }
-    } else {
-      for (int i = 0; i < length - upto; i++) {
-        maskedString += mask;
-      }
-      maskedString += substring(length - upto);
-    }
-    return maskedString;
+    return atEnd
+        ? substring(0, length - upto) + mask * upto
+        : mask * upto + substring(upto);
   }
 
   ///Counts the number of occurrences of string

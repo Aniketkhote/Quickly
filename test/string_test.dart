@@ -45,11 +45,11 @@ void main() {
         () => expect('abc'.minLen(3), equals(true)));
     test('.minLen - length of ab is less then 3 return false',
         () => expect('ab'.minLen(3), equals(false)));
-    test('.mask - mask 1234 to **34',
-        () => expect('1234'.mask(upto: 2, mask: '*'), equals('**34')));
+    test('.mask - mask 12345 to **345',
+        () => expect('12345'.mask(upto: 2, mask: '*'), equals('**345')));
     test(
-        '.mask - mask 1234 to 12**',
+        '.mask - mask 12345 to 123**',
         () => expect(
-            '1234'.mask(upto: 2, mask: '*', atEnd: true), equals('12**')));
+            '12345'.mask(upto: 2, mask: '*', atEnd: true), equals('123**')));
   });
 }
