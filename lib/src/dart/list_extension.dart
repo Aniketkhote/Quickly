@@ -29,7 +29,7 @@ extension ListExtension<T> on List<T> {
   ///```
   List<Map<T, T>> sortBy(String key, [bool isDesc = false]) {
     List<Map<T, T>> maps =
-        where((T element) => (element as Map<T, T>).containsKey(key))
+        where((T element) => element is Map<T, T> && element.containsKey(key))
             .cast<Map<T, T>>()
             .toList();
     maps.sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
@@ -178,12 +178,14 @@ extension ListExtension<T> on List<T> {
   /// [1,2]
   ///```
   List<T?> pluck(String key) {
-    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
-    List<T?> list = <T>[];
-    forEach((T element) => ((element as Map<T, T>).containsKey(key))
-        ? list.add(element[key])
-        : list);
-    return list;
+    if (isEmpty) return <T>[];
+    List<T> result = <T>[];
+    for (T element in this) {
+      if (element is Map<String, dynamic> && element.containsKey(key)) {
+        result.add(element[key]);
+      }
+    }
+    return result;
   }
 
   ///Get minimum number
@@ -243,20 +245,18 @@ extension ListExtension<T> on List<T> {
   ///list.whereOnly([key1, key2])
   ///```
   List<T> whereOnly(List<String> keys) {
-    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
-    List<T> list = <T>[];
-    forEach((T obj) {
-      Map<T, T> map = <T, T>{};
-
-      keys.forEach((dynamic key) {
-        if ((obj as dynamic).containsKey(key))
-          map.addAll(<T, T>{key: obj[key]});
-      });
-
-      if (map.isNotEmpty) list.add(map as T);
-    });
-
-    return list;
+    if (isEmpty) return <T>[];
+    List<T> result = <T>[];
+    for (T element in this) {
+      if (element is Map<String, dynamic>) {
+        Map<String, dynamic> map = <String, dynamic>{};
+        keys.forEach((String key) {
+          if (element.containsKey(key)) map[key] = element[key];
+        });
+        if (map.isNotEmpty) result.add(map as T);
+      }
+    }
+    return result;
   }
 
   ///Removes elements from the list which is given
@@ -266,17 +266,19 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotOnly([key1, key2])
   ///```
   List<T> whereNotOnly(List<String> keys) {
-    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
-    List<T> list = <T>[];
-    forEach((T map) => keys.forEach((dynamic key) {
-          if ((map as dynamic).containsKey(key)) (map as dynamic).remove(key);
-        }));
+    if (isEmpty) return <T>[];
+    List<T> result = <T>[];
 
-    forEach((T map) {
-      if ((map as dynamic).isNotEmpty) list.add(map);
-    });
+    for (T element in this) {
+      if (element is Map<String, dynamic>) {
+        keys.forEach((String key) {
+          if (element.containsKey(key)) element.remove(key);
+        });
+        if (element.isNotEmpty) result.add(element);
+      }
+    }
 
-    return list;
+    return this;
   }
 
   ///Removes elements from the list that do not have a specified item value
@@ -288,16 +290,20 @@ extension ListExtension<T> on List<T> {
   ///list.whereIn("key", [value1, value2])
   ///```
   List<T> whereIn(String key, List<num> params) {
-    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
-    List<T> list = <T>[];
+    if (isEmpty) return <T>[];
+    List<T> result = <T>[];
 
-    params.forEach((dynamic param) {
-      forEach((T map) {
-        if ((map as Map<T, T>).has(key, param)) list.add(map);
-      });
+    params.forEach((num param) {
+      for (T element in this) {
+        if (element is Map<T, T> &&
+            element.containsKey(key) &&
+            element[key] == param) {
+          result.add(element);
+        }
+      }
     });
 
-    return list;
+    return result;
   }
 
   ///Removes elements from the list that have a specified item value
@@ -309,10 +315,13 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotIn("key", [value1, value2])
   ///```
   List<T> whereNotIn(String key, List<num> params) {
-    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
-    params.forEach((dynamic param) =>
-        removeWhere((dynamic map) => (map as Map<T, T>).has(key, param)));
-    return this;
+    if (isEmpty) return <T>[];
+    List<T> result = toList();
+    for (num param in params) {
+      result.removeWhere((T map) =>
+          map is Map<String, T> && map.containsKey(key) && map[key] == param);
+    }
+    return result;
   }
 
   /// Filters the collection by determining if a specified item value is within a given range
@@ -322,16 +331,17 @@ extension ListExtension<T> on List<T> {
   ///list.whereBetween("key",start, end)
   ///```
   List<T> whereBetween(String key, num start, num end) {
-    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
-    List<T> list = <T>[];
-
-    forEach((dynamic element) {
-      if (element.containsKey(key) && element[key]) {
-        if (element[key] >= start && element[key] <= end) list.add(element);
+    if (isEmpty) return <T>[];
+    List<T> result = <T>[];
+    for (T element in this) {
+      if (element is Map<String, dynamic> &&
+          element.containsKey(key) &&
+          element[key] is num) {
+        if (element[key] >= start && element[key] <= end) result.add(element);
       }
-    });
+    }
 
-    return list;
+    return this;
   }
 
   ///Filters the collection by determining if a specified item value is outside of a given range
@@ -341,18 +351,34 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotBetween("key", start, end)
   ///```
   List<T> whereNotBetween(String key, num start, num end) {
-    if (isEmpty || first.runtimeType != Map<T, T>) return <T>[];
+    if (isEmpty) return <T>[];
     List<T> result = <T>[];
-    forEach((dynamic element) {
-      if (element.containsKey(key) && element[key]) {
-        if (element[key] < start || element[key] > end) result.add(element);
+    for (T element in this) {
+      if (element is Map<dynamic, dynamic> &&
+          element.containsKey(key) &&
+          element[key] is num) {
+        num value = element[key] as num;
+        if (value < start || value > end) result.add(element);
       }
-    });
+    }
 
     return result;
   }
 
   ///Checks given key/value is exists or not
+  ///
+  /// [key] is the key of the map.
+  /// [value] is the value of the map.
+  ///
+  /// Returns true if the key/value pair exists in the map.
+  ///
+  /// Example:
+  ///```dart
+  /// var map = {'name': 'John', 'age': 25};
+  /// map.hasKeyValue('name', 'John'); // true
+  /// map.hasKeyValue('age', 25); // true
+  /// map.hasKeyValue('gender', 'male'); // false
+  ///```
   bool hasKeyValue(String key, T value) {
     if (isEmpty) return false;
 
@@ -362,7 +388,14 @@ extension ListExtension<T> on List<T> {
     });
   }
 
-  ///Checks given key is exists or not
+  ///Checks if the given [kry] exists in the map.
+  ///
+  ///Returns true if any of the keys in the map are equal to [key].
+  ///
+  /// Example:
+  ///```dart
+  ///map.hasKey("key") // true
+  ///```
   bool hasKey(String key) {
     if (isEmpty) return false;
 
@@ -372,13 +405,20 @@ extension ListExtension<T> on List<T> {
     });
   }
 
-  ///Checks given value is exists or not
+  ///Checks if the given [value] exists in the map.
+  ///
+  ///Returns true if any of the values in the map are equal to [value].
+  ///
+  /// Example:
+  ///```dart
+  ///map.hasValue("value") // true
+  ///```
   bool hasValue(T value) {
     if (isEmpty) return false;
 
     return any((T element) {
       if (element is! Map<T, T>) return false;
-      return element.containsKey(value);
+      return element.containsValue(value);
     });
   }
 }

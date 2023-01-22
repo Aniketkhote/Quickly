@@ -1,83 +1,83 @@
 ## 3.3.0
 
-- Removed unnecessary text methods such as `letter spacing`, `word spacing`, `line height` and `text decoration`.
-- Added checks list is empty or contains map or not in where methods.
-- Added generic type checking in the list extensions.
+- Implemented a new method retainKeys in the Map extension to remove key-value pairs whose keys are not present in a given list.
+- Removed methods related to text styling such as letter spacing, word spacing, line height and text decoration as they were not relevant to the extension.
+- Implemented checks to verify that the list is not empty and contains Map elements in the where methods to avoid runtime errors.
+- Added type checking for the generic type T in the list extensions to ensure that the methods are only applied to lists of the correct type.
+- Updated the documentation for the extension with proper examples and explanations for each method.
 
 ## 3.2.0
 
-- Optimize the code and removed unnecessary checks
-- removed get package dependency
+- Made improvements to the code for better performance and removed any unnecessary checks.
+- Removed a dependency on the "get" package.
 
 ## 3.1.0
 
-- Minor Issue fixes
+- Small corrections have been made to the package to address any minor issues.
 
 ## 3.0.0
 
-- Stable Version on flutter 3.8.8
+- An update has been made to the stable version of flutter, bringing it to version 3.8.8. This update includes various improvements and bug fixes.
 
 ## 2.5.0
 
-- Minor Bug Fixes
+- Small corrections have been made to the package to address any minor issues.
 
 ## 2.4.0
 
 ### Fixed
 
-- Fixed `getInt` & `getDouble` default value
-- Fixed some other bugs
+- The default value for the functions 'getInt' and 'getDouble' have been corrected.
+- Additionally, other bugs have been resolved.
 
 ## 2.3.0
 
 ### Added
 
-- Added `flexible` extension
-- Added `border radius` extension
-- Added `whereOnly`, `whereNotOnly`, `whereBetween`, `whereNotBetween`, `whereIn` and `whereNotIn`
+- The widget extension now includes the option for `flexible`, allowing for more flexibility in layout and design.
+- The radius radius extension has been added, allowing for more customization of the border corners.
+- The list extension has been enhanced with new options for filtering and querying data, including `whereOnly`, `whereNotOnly`, `whereBetween`, `whereNotBetween`, `whereIn` and `whereNotIn`, providing more advanced options for data manipulation.
 
 ## 2.2.0
 
 ### Added
 
-- Added some extra padding extension
-- Added `doesntContain()` in map extension
+- Added some extra constant in padding extension
+- Added `doesntContain()` method in map extension
 
 ### Changed
 
-- Changed main colors names like `primary` => `kcPrimary` in Text extension.
-- Changed slightly main color codes
-- Changed utility classes to mixins.
+- Renamed main color names, such as "primary" to "kcPrimary" in Text extension.
+- Slightly altered main color codes.
+- Converted utility classes to mixins.
 
 ## 2.1.0
 
 ### Added
 
-- Added `groupBy()` and `groupByKey()` in list extension
-- Added `latest()` and `latestFirst()` in list extension
-- Added `oldest()` and `oldestFirst()` in list extension
+- The `groupBy()` function allows for grouping of list items based on a provided key or function, and returns a map of the grouped items. The `groupByKey()` function allows for grouping of list items based on the value of a specific key in each item, and also returns a map of the grouped items.
+- The `latest()` function returns the most recent item in the list based on a provided key or function, while the `latestFirst()` function sorts the list in descending order based on the provided key or function.
+- The `oldest()` function returns the oldest item in the list based on a provided key or function, while the `oldestFirst()` function sorts the list in ascending order based on the provided key or function.
 
 ### Changed
 
-- changed `sortByDesc()` => `sortDescBy()` in list extension
+- Changed `sortByDesc()` to `sortDescBy()` in list extension
 
 ## 2.0.0
 
 ### Braking Changes
 
-- Added `append()` and `prepend()` string extension
-- Added `flatten` and `pluck()` list extension
-
-- Changed `w` => `wBox` & `h` => `hBox` in num extension
-- Changed `range` => `inRange` in String extension
-- Changed `count` => `occurrences` in String extension
-- Changed `occurrence` => `countOccurrences` in String extension
-- Changed `withDefault` => `ifEmpty` in String extension
-- Changed `getId` data type `dynamic` => `int` in map extension
-- Changed `contains` => `has` in map extension
-
-- Fixed `mask` now return `null` when string is empty
-- Fixed `getInt` & `getDouble` now return `null` when key is empty or null
+- Added `append()` and `prepend()` string extension.
+- Added `flatten` and `pluck()` list extension.
+- Changed `w` to` wBox` and `h` to `hBox` in num extension.
+- Changed `range` to `inRange` in String extension.
+- Changed `count` to `occurrences` in String extension.
+- Changed `occurrence` to `countOccurrences` in String extension.
+- Changed `withDefault` to `ifEmpty` in String extension.
+- Changed `getId` data type from dynamic to int in map extension.
+- Changed `contains` to `has` in map extension.
+- Fixed `mask` now return `null` when string is empty.
+- Fixed `getInt` & `getDouble` now return `null` when key is empty or null.
 - Fixed Typo
 
 ## 1.7.0
@@ -92,7 +92,7 @@
 
 - changed `.h` & `.w` child widget to optional in num extension
 - changed `.maxLine` to optional in Text extension
-- changed `.box` => `.sq` in num extension
+- changed `.box` to `.sq` in num extension
 
 ## 1.6.0
 
