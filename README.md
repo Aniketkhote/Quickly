@@ -56,7 +56,15 @@
 
 ## About The Project
 
-Quickly is build as a tool to enhance your Flutter UI development experience and make code easier. It is highly inspired by Bootstrap and Tailwind CSS. It also provide lots of extension methods on String, List and Map.
+`**Quickly**` is a powerful Flutter package that aims to enhance the development experience by offering a variety of extension methods for types such as String, List and Map, allowing for a more efficient and cleaner coding experience. It is inspired by Bootstrap and Tailwind CSS, and is built using Flutter and Dart. The package offers a wide range of utility functions, such as applying padding, visibility, and text styling to widgets. It can be easily integrated into your code by importing the package and using the provided extension methods on your widgets.
+
+With Quickly, developers can take advantage of features such as:
+
+- A collection of useful widgets and classes for quickly creating common UI elements.
+- Utility functions for common tasks like data validation and formatting.
+- Performance optimization tools for improving the overall performance of your app.
+
+In summary, Quickly is an essential tool for any Flutter developer looking to improve their development workflow and create high-quality, polished apps.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -64,7 +72,6 @@ Quickly is build as a tool to enhance your Flutter UI development experience and
 
 - [Flutter](https://flutter.dev/)
 - [Dart](https://dart.dev/)
-- [Get](https://pub.dev/packages/get)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -77,7 +84,7 @@ Quickly is build as a tool to enhance your Flutter UI development experience and
 ```dart
 
 // Display big bold red string in italic
-Text('Quickly').red500.xl.bold.italic
+Text('Quickly').red500.xl.bold.italic.underline
 
 // Apply padding to Widget
 Text('12 Padding from all side').p12
@@ -155,14 +162,8 @@ map.getString('key')
 
  List list =
  [
-  {
-    'id': 1,
-    'name': 'P 1',
-  },
-  {
-    'id': 2,
-    'name': 'P 2',
-  },
+  {'id': 1, 'name': 'P 1'},
+  {'id': 2, 'name': 'P 2'},
 ];
 
 // retrieves all of the values for a given key
@@ -192,10 +193,19 @@ See the [open issues](https://github.com/Aniketkhote/Quickly/issues) for a full 
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+We welcome and greatly appreciate any contributions to Quickly. Whether you have a bug report, feature suggestion, or are interested in helping to develop the package, we encourage you to get involved.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+Here are a few ways you can contribute:
+
+- **Report a bug**: If you find a bug or issue with the package, please open an issue and provide as much detail as possible about the problem.
+
+- **Suggest a feature**: If you have an idea for a new feature or improvement, please open an issue and share your thoughts.
+
+- **Contribute code**: If you're interested in developing the package further, please fork the repository and submit a pull request with your changes. Before submitting, please make sure to run the tests and ensure that your code follows the project's coding style.
+
+- **Spread the word**: If you find Quickly useful, please tell your friends and colleagues about it and give the project a star on GitHub.
+
+Thank you for your support!
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
