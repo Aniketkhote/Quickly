@@ -1,7 +1,8 @@
 ## 3.4.0
 
-- Added more deatil documentation.
 - upgraded package to `flutter v3.7.0` and `dart v2.19.0`
+- Added more deatil documentation.
+- Rewrite README.md to include more deatil examples with discription
 
 ## 3.3.0
 
