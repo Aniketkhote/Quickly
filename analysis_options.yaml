@@ -60,8 +60,6 @@ linter:
 
     prefer_inlined_adds: true
 
-    prefer_foreac: true
-
     prefer_final_fields: true
 
     prefer_contains: true
