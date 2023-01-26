@@ -21,10 +21,6 @@
 </div>
 
 ![Pub Version](https://img.shields.io/pub/v/quickly?color=blue&style=the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Aniketkhote/quickly/CI?style=the-badge)
-[![pub points](https://badges.bar/quickly/pub%20points)](https://pub.dev/packages/quickly/score)
-[![popularity](https://badges.bar/quickly/popularity)](https://pub.dev/packages/quickly/score)
-[![likes](https://badges.bar/quickly/likes)](https://pub.dev/packages/quickly/score)
 
 <!-- TABLE OF CONTENTS -->
 
@@ -56,7 +52,7 @@
 
 ## About The Project
 
-`**Quickly**` is a powerful Flutter package that aims to enhance the development experience by offering a variety of extension methods for types such as String, List and Map, allowing for a more efficient and cleaner coding experience. It is inspired by Bootstrap and Tailwind CSS, and is built using Flutter and Dart. The package offers a wide range of utility functions, such as applying padding, visibility, and text styling to widgets. It can be easily integrated into your code by importing the package and using the provided extension methods on your widgets.
+**`Quickly`** is a powerful Flutter package that aims to enhance the development experience by offering a variety of extension methods for types such as String, List and Map, allowing for a more efficient and cleaner coding experience. It is inspired by Bootstrap and Tailwind CSS, and is built using Flutter and Dart. The package offers a wide range of utility functions, such as applying padding, visibility, and text styling to widgets. It can be easily integrated into your code by importing the package and using the provided extension methods on your widgets.
 
 With Quickly, developers can take advantage of features such as:
 
@@ -84,7 +80,7 @@ In summary, Quickly is an essential tool for any Flutter developer looking to im
 ```dart
 
 // Display big bold red string in italic
-Text('Quickly').red500.xl.bold.italic.underline
+Text('Quickly').red500.xl.bold.italic.underline.center
 
 // Apply padding to Widget
 Text('12 Padding from all side').p12
@@ -98,77 +94,161 @@ Container(child:Text('hide')).hide
 
 Container(child:Text('show')).show
 
-Container(
-  child:Text('hide if condition true'),
-  ).hideIf(condition)
+Container(child:Text('show')).rounded
 
-Container(
-  child:Text('show if condition true'),
-  ).showIf(condition)
+2.hBox(child:Text(''))
+
+
 ```
 
 ### Dart
 
+The following are a list of extensions on various types (lists, maps, integers, and doubles) to provide additional functionality:
+
+## List Extensions:
+
+**Sample data :**
+
 ```dart
 
-// get sorted list
-list.sorted()    // pass true for desc
+numbers = [5, 2, 9, 1, 7]
+people = [{'name': 'Bob', 'age': 30}, {'name': 'Alice', 'age': 25}]
 
-list.sortedDec()
+```
 
-// get sorted list by key from list of object
-list.sortedBy(key)
+- list.sorted(): Returns a new list with the elements sorted in ascending order.
 
-// checks given key/value pair is present or not
-map.contains("key","value")   // true
+```dart
 
-// return id if key present else return 0
-map.getId
+numbers.sorted()  // [1, 2, 5, 7, 9]
 
-// key is NULL or not [String] type return empty string else return value of key
-map.getString('key')
+```
 
-// Get suffix
-1.suffix()   // 1st
-2.suffix()   // 2nd
-8.suffix()   // 8th
+- list.sortedDec(): Returns a new list with the elements sorted in descending order.
 
-10.5.suffix('$') // 10.5$
+```dart
 
-// getMonthName
-1.getMonthName()     // January
-2.getMonthName(true) // Jan
+numbers.sortedDec()  // [9, 7, 5, 2, 1]
 
-// getWeekName
-1.getWeekName()     // Monday
-2.getWeekName(true) // Mon
+```
 
-// divide list into equal elements
-[1,2,3,4,5].chunk(2)    // [[1,2], [3,4], [5]];
+- list.sortedBy(key): Returns a new list of objects sorted by the provided key.
 
-// divide list into equal parts
-[1,2,3,4,5].split(2)    // [[1,2,3], [4,5]];
+```dart
 
-// create new ascending order list
-[4,3,1,2,5].sorted()    // [1,2,3,4,5]
+people.sortedBy('age')  // [{'name': 'Alice', 'age': 25}, {'name': 'Bob', 'age': 30}]
 
-// create new descending order list
-[4,3,1,2,5].sortedDesc    // [5,4,3,2,1]
+```
 
-// match the the condition with key and return value
-{1: 'One', 2: 'Two'}.match(2)   // Two
-{1: 'One', 2: 'Two'}.match(3)   // Invalid input
-{1: 'One', 2: 'Two'}.match(4,'Does not match')   // Does not match
+- list.chunk(n): Divides the list into equal chunks of size n and returns a list of lists.
 
- List list =
- [
-  {'id': 1, 'name': 'P 1'},
-  {'id': 2, 'name': 'P 2'},
-];
+```dart
 
-// retrieves all of the values for a given key
-list.pluck('name')    // ["P 1", "P 2"]
-list.pluck('price')    // []
+numbers.chunk(2)  // [[5, 2], [9, 1], [7]]
+
+```
+
+- list.split(n): Divides the list into n equal parts and returns a list of lists.
+
+```dart
+
+numbers.split(3)  // [[5, 2], [9], [1, 7]]
+
+```
+
+- list.pluck(key): Retrieves all of the values for a given key from a list of objects.
+
+```dart
+
+people.pluck('name')  // ['Bob', 'Alice', 'Charlie']
+
+```
+
+## Map Extensions:
+
+**Sample data :**
+
+```dart
+
+person = {'name': 'Bob', 'age': 30, 'gender': 'male'}
+
+```
+
+- map.contains("key","value"): Returns a boolean value indicating if the provided key-value pair is present in the map.
+
+```dart
+
+person.contains('gender', 'male')  // true
+
+```
+
+- map.getId: Returns the value associated with the key 'id' if it exists, else returns 0.
+
+```dart
+
+person.getId  // 0
+
+```
+
+- map.getString('key'): Returns the value associated with the provided key if it exists, else returns an empty string.
+
+```dart
+
+person.getString('name')  // 'Bob'
+
+```
+
+- map.getBool('key'): Returns the boolean value associated with the provided key if it exists, else returns false.
+
+```dart
+
+person.getBool('gender')  // false
+
+```
+
+- map.retainKeys(keys): Returns a new map with only the key-value pairs that match the provided keys.
+
+```dart
+
+person.retainKeys(['name', 'age'])  // {'name': 'Bob', 'age': 30}
+
+```
+
+- map.match(key, [defaultValue]): Returns the value associated with the provided key if it exists, else returns the provided default value or "Invalid input" if no default value is provided.
+
+```dart
+
+person.match('age', 'Unknown')  // 30
+
+```
+
+## Num Extensions:
+
+- int.suffix(): Returns the ordinal suffix for the integer (e.g. 1st, 2nd, 8th)
+- double.suffix([suffix]): Returns the double with the provided suffix
+  (e.g. 10.5.suffix('$') Returns '10.5$')
+
+```dart
+
+8.number.suffix()  // '8th'
+
+10.5.price.suffix('$')  // '10.5$'
+
+```
+
+- int.getMonthName([short = false]): Returns the name of the month corresponding to the integer (e.g. 1.getMonthName() returns "January", 2.getMonthName(true) returns "Jan")
+
+```dart
+
+5.getMonthName()  // 'May'
+
+```
+
+- int.getWeekName([short = false]): Returns the name of the day of the week corresponding to the integer (e.g. 1.getWeekName() returns "Monday", 2.getWeekName(true) returns "Mon")
+
+```dart
+
+3.getWeekName(short = True)  // 'Wed'
 
 ```
 

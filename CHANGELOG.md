@@ -1,7 +1,12 @@
+## 3.4.0
+
+- Added more deatil documentation.
+- upgraded package to `flutter v3.7.0` and `dart v2.19.0`
+
 ## 3.3.0
 
-- Implemented a new method retainKeys in the Map extension to remove key-value pairs whose keys are not present in a given list.
-- Removed methods related to text styling such as letter spacing, word spacing, line height and text decoration as they were not relevant to the extension.
+- Implemented a new method `retainKeys` in the Map extension to remove key-value pairs whose keys are not present in a given list.
+- Removed methods related to text styling such as letter spacing, word spacing, line height and text decoration.
 - Implemented checks to verify that the list is not empty and contains Map elements in the where methods to avoid runtime errors.
 - Added type checking for the generic type T in the list extensions to ensure that the methods are only applied to lists of the correct type.
 - Updated the documentation for the extension with proper examples and explanations for each method.
@@ -9,7 +14,7 @@
 ## 3.2.0
 
 - Made improvements to the code for better performance and removed any unnecessary checks.
-- Removed a dependency on the "get" package.
+- Removed a dependency on the `get` package.
 
 ## 3.1.0
 
@@ -17,7 +22,7 @@
 
 ## 3.0.0
 
-- An update has been made to the stable version of flutter, bringing it to version 3.8.8. This update includes various improvements and bug fixes.
+- An update has been made to the stable version of flutter, bringing it to `version 3.3.8`. This update includes various improvements and bug fixes.
 
 ## 2.5.0
 
@@ -27,7 +32,7 @@
 
 ### Fixed
 
-- The default value for the functions 'getInt' and 'getDouble' have been corrected.
+- The default value for the functions `getInt` and `getDouble` have been corrected.
 - Additionally, other bugs have been resolved.
 
 ## 2.3.0
