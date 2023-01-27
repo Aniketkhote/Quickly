@@ -2,30 +2,30 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:quickly/quickly.dart';
 
 void main() {
-  group('num Extensions', () {
-    group('.suffix', () {
-      test('.suffix() - return string with suffix 1st',
-          () => expect(1.suffix(), equals('1st')));
-      test('.suffix() - return string with suffix 3rd',
-          () => expect(3.suffix(), equals('3rd')));
-      test('.suffix() - return string with suffix 20th',
-          () => expect(20.suffix(), equals('20th')));
-      test('.suffix() - return string with suffix 10\$',
-          () => expect(10.suffix('\$'), equals('10\$')));
+  group('NumExtension', () {
+    test('suffix() - returns 5th', () {
+      expect(5.suffix(), equals('5th'));
     });
-    group('duration', () {
-      test('.seconds - return duration in seconds',
-          () => expect(1.seconds, equals(Duration(seconds: 1))));
-      test('.milliseconds - return duration in milliseconds',
-          () => expect(1.milliseconds, equals(Duration(milliseconds: 1))));
-      test('.microseconds - return duration in microseconds',
-          () => expect(1.microseconds, equals(Duration(microseconds: 1))));
-      test('.minutes - return duration in minutes',
-          () => expect(1.minutes, equals(Duration(minutes: 1))));
-      test('.hours - return duration in hours',
-          () => expect(1.hours, equals(Duration(hours: 1))));
-      test('.days - return duration in days',
-          () => expect(1.days, equals(Duration(days: 1))));
+    test('suffix("%") - returns 5%', () {
+      expect(5.suffix('%'), equals('5%'));
+    });
+    test('seconds - returns Duration: 00:00:05.000000', () {
+      expect(5.seconds, equals(Duration(seconds: 5)));
+    });
+    test('milliseconds - returns Duration: 0:00:00.005000', () {
+      expect(5.milliseconds, equals(Duration(milliseconds: 5)));
+    });
+    test('microseconds - returns Duration: 0:00:00.000005', () {
+      expect(5.microseconds, equals(Duration(microseconds: 5)));
+    });
+    test('minutes - returns Duration: 0:05:00.000000', () {
+      expect(5.minutes, equals(Duration(minutes: 5)));
+    });
+    test('hours - returns Duration: 5:00:00.000000', () {
+      expect(5.hours, equals(Duration(hours: 5)));
+    });
+    test('days - returns Duration: 120:00:00.000000', () {
+      expect(5.days, equals(Duration(days: 5)));
     });
   });
 }
