@@ -85,5 +85,16 @@ void main() {
       test('.match() - condtion dose not match return default value',
           () => expect(map.match(12), equals('Invalid input')));
     });
+
+    test('Test retainKeys()', () {
+      Map<String, dynamic> map = <String, dynamic>{
+        "id": 1,
+        "name": "John",
+        "age": 30,
+        "gender": "male"
+      };
+      Map<dynamic, dynamic> newMap = map.retainKeys(<String>["id", "name"]);
+      expect(newMap, <dynamic, dynamic>{"id": 1, "name": "John"});
+    });
   });
 }

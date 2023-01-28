@@ -1,8 +1,12 @@
+## 3.5.0
+
+- Fixed Text Color extension
+
 ## 3.4.0
 
-- upgraded package to `flutter v3.7.0` and `dart v2.19.0`
-- Added more deatil documentation.
-- Rewrite README.md to include more deatil examples with discription
+- Updated package dependencies to the latest versions of `Flutter (3.7.0)` and `Dart (2.19.0)`
+- Expanded documentation to provide more detailed information
+- Revised the **README.md** file to include additional examples and explanations.
 
 ## 3.3.0
 
