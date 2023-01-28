@@ -18,11 +18,6 @@ extension StringExtension on String {
   bool get isEmail => regex(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-  ///Checks [string] is valid mobile number or not and return [bool]
-  ///
-  ///eg. 7xxxxxxxxxx, 8xxxxxxxxxx, 9xxxxxxxxxx
-  bool get isINDMobile => regex("^([789]{1}[0-9]{9})");
-
   ///Check this string min length, if satisfied condition then return true
   bool minLen(int min) => length >= min;
 
@@ -129,36 +124,29 @@ extension StringExtension on String {
   bool get isUpper => this == toUpperCase() ? true : false;
 
   ///Check image is svg or not
-  bool get isSvg => toLowerCase().endsWith(".svg");
+  bool get isSvg => endsWith(".svg");
 
   ///Check image is png or not
-  bool get isPng => toLowerCase().endsWith(".png");
+  bool get isPng => endsWith(".png");
 
   ///Check image is jpg or jpeg or not
-  bool get isJpg =>
-      toLowerCase().endsWith(".jpg") || toLowerCase().endsWith(".jpeg");
+  bool get isJpg => endsWith(".jpg") || endsWith(".jpeg");
 
   ///Check file is pdf or not
-  bool get isPDF => toLowerCase().endsWith(".pdf");
+  bool get isPDF => endsWith(".pdf");
 
   ///Check file is csv or not
-  bool get isCsv => toLowerCase().endsWith(".csv");
+  bool get isCsv => endsWith(".csv");
 
   ///Check file is text or not
-  bool get isTxt => toLowerCase().endsWith(".txt");
+  bool get isTxt => endsWith(".txt");
 
   ///check string is image
   bool get isImage => isJpg || isPng || isSvg;
 
   ///check string is video
-  bool get isVideo {
-    Set<String> ext = <String>{".mp4", ".avi", ".mpeg", ".webm"};
-    return ext.contains(toLowerCase());
-  }
+  bool get isVideo => <String>{".mp4", ".avi", ".mpeg", ".webm"}.contains(this);
 
   ///check string is audio
-  bool get isAudio {
-    Set<String> ext = <String>{".mp3", ".wav", ".aac", ".wma"};
-    return ext.contains(toLowerCase());
-  }
+  bool get isAudio => <String>{".mp3", ".wav", ".aac", ".wma"}.contains(this);
 }

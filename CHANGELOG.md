@@ -1,6 +1,10 @@
 ## 3.5.0
 
-- Fixed Text Color extension
+- Updated Text Color extension to include fixed getters.
+- Altered naming of getters, such as renaming `kcWarningLightStatus` to `kcWarningLight` and similar changes to other status-related getters.
+- Removed unnecessary Text Color extension getters, including `kcText`, `kcLabel`, `kcDisabled`, and `kcTextField`.
+- Updated the documentation for the Extension code to make it more clear and readable.
+- Modified the Border Radius extension from being applied to the Container widget to being applied to the ClipRRect widget. This allows for more precise control over the rounded corners of the widget.
 
 ## 3.4.0
 

@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
-///Widget extension to extend widget functionality
+/// The WidgetExtension extension is an extension on the Widget class in Flutter.
+///
+/// It allows for additional functionality to be added to any widget through the use of dot notation
 extension WidgetExtension on Widget {
-  ///Directly access [Center] widget using dot operator
+  /// Creates a [Center] widget with the current widget as its child
   Center get center => Center(child: this);
 
-  ///Directly access [Expanded] widget using dot operator
+  /// Creates an [Expanded] widget with the current widget as its child
   Expanded expand([int flex = 1]) => Expanded(child: this, flex: flex);
 
-  ///Directly access [Flexible] widget using dot operator
+  /// Creates a [Flexible] widget with the current widget as its child
   Flexible flexible([int flex = 1, FlexFit fit = FlexFit.loose]) =>
       Flexible(child: this, flex: flex, fit: fit);
 
-  ///Creates a widget that controls where a child of a [Stack] is positioned.
-  ///
-  ///Only two out of the three horizontal values ([left], [right], [width]), and
-  ///only two out of the three vertical values ([top], [bottom], [height]), can be set.
-  ///In each case, at least one of the three must be null.
+  /// Creates a [Positioned] widget with the current widget as its child.
+  /// Only two out of the three horizontal values ([left], [right], [width]), and
+  /// only two out of the three vertical values ([top], [bottom], [height]), can be set.
+  /// In each case, at least one of the three must be null.
   Positioned positioned({
     double? top,
     double? bottom,
@@ -35,34 +36,31 @@ extension WidgetExtension on Widget {
         width: width,
       );
 
-  /// Hide widget
+  /// Creates a [Visibility] widget with the current widget as its child and sets its visibility to false
   Visibility hide() => _visibility(false);
 
-  /// Show widget
+  /// Creates a [Visibility] widget with the current widget as its child and sets its visibility to true
   Visibility show() => _visibility(true);
 
-  /// Hide widget if condition satisfied
+  /// Creates a [Visibility] widget with the current widget as its child and sets its visibility based on the passed condition
   Visibility hideIf(bool condition) =>
       condition ? _visibility(false) : _visibility(true);
 
-  /// Show widget if condition satisfied
+  /// Creates a [Visibility] widget with the current widget as its child and sets its visibility based on the passed condition
   Visibility showIf(bool condition) =>
       condition ? _visibility(true) : _visibility(false);
 
-  ///Creates a fixed size box.
-  ///
-  ///The [width] and [height] parameters can be null to indicate that
-  ///the size of the box should not be constrained in the corresponding dimension.
+  /// Creates a [SizedBox] widget with the current widget as its child and sets its height and width
   SizedBox sizedBox({double? h, double? w}) =>
       SizedBox(child: this, height: h, width: w);
 
-  ///Creates a fixed sized square box.
+  /// Creates a square shaped [SizedBox] widget with the current widget as its child and sets its height and width
   SizedBox sqBox(double size) => sizedBox(h: size, w: size);
 
-  ///Creates a fixed sized height box.
+  /// Creates a [SizedBox] widget with the current widget as its child and sets its height
   SizedBox hBox(double height) => sizedBox(h: height);
 
-  ///Creates a fixed sized width box.
+  /// Creates a [SizedBox] widget with the current widget as its child and sets its width
   SizedBox wBox(double? width) => sizedBox(w: width);
 
   Visibility _visibility(bool value) => Visibility(child: this, visible: value);

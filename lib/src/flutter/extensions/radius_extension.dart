@@ -1,38 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:quickly/quickly.dart';
 
 ///Radius extension to extend Container functionality
-extension RadiusExtension on Container {
-  /// Add rounded corner to a Container
-  Container withRounded({required double radius}) =>
-      _rounded(radius: FxRadius.all(radius));
+extension RadiusExtension on ClipRRect {
+  /// The `withRounded` getter adds rounded corners to the `Container` with a specified radius.
+  ///
+  /// The radius can be defined as a double value, and it will be applied to all corners of the `Container`.
+  ClipRRect withRounded({required double radius}) => _rounded(radius: radius);
 
-  /// Removes `Border Radius` from Widget
-  Container get roundedNone => _rounded(radius: FxRadius.none);
+  /// The `roundedNone` getter removes the border radius from the `Container`, making it square.
+  ClipRRect get roundedNone => _rounded(radius: 0);
 
-  /// Apply circular `Border Radius` to Widget
-  Container get roundedFull => _rounded(radius: FxRadius.all(999999));
+  /// The `roundedFull` getter applies a circular border radius to the `Container`, making it a full circle.
+  ClipRRect get roundedFull => _rounded(radius: 999999);
 
-  /// Apply 5 dp circular `Border Radius` to Widget
-  Container get roundedXs => _rounded(radius: FxRadius.all(5));
+  /// The `roundedXs` getter applies a border radius of 5 dp to the `Container`, making it slightly rounded.
+  ClipRRect get roundedXs => _rounded(radius: 5);
 
-  /// Apply 10 dp circular `Border Radius` to Widget
-  Container get roundedSm => _rounded(radius: FxRadius.all(10));
+  /// The `roundedSm` getter applies a border radius of 10 dp to the `Container`, making it more rounded.
+  ClipRRect get roundedSm => _rounded(radius: 10);
 
-  /// Apply 15 dp circular `Border Radius` to Widget
-  Container get rounded => _rounded(radius: FxRadius.all(15));
+  /// The `rounded` getter applies a border radius of 15 dp to the `Container`, making it even more rounded.
+  ClipRRect get rounded => _rounded(radius: 15);
 
-  /// Apply 20 dp circular `Border Radius` to Widget
-  Container get roundedMd => _rounded(radius: FxRadius.all(20));
+  /// The `roundedMd` getter applies a border radius of 20 dp to the `Container`, making it even more rounded.
+  ClipRRect get roundedMd => _rounded(radius: 20);
 
-  /// Apply 25 dp circular `Border Radius` to Widget
-  Container get roundedLg => _rounded(radius: FxRadius.all(25));
+  /// The `roundedLg` getter applies a border radius of 25 dp to the `Container`, making it even more rounded.
+  ClipRRect get roundedLg => _rounded(radius: 25);
 
-  /// Apply 30 dp circular `Border Radius` to Widget
-  Container get roundedXl => _rounded(radius: FxRadius.all(30));
+  /// The `roundedXl` getter applies a border radius of 30 dp to the `Container`, making it even more rounded.
+  ClipRRect get roundedXl => _rounded(radius: 30);
 
-  Container _rounded({BorderRadius? radius}) => Container(
-        decoration: BoxDecoration(borderRadius: radius),
-        child: this,
-      );
+  ClipRRect _rounded({required double radius}) =>
+      ClipRRect(borderRadius: BorderRadius.circular(radius), child: child);
 }
