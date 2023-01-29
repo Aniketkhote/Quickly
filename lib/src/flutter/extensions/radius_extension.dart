@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ///Radius extension to extend Container functionality
-extension RadiusExtension on ClipRRect {
+extension RadiusExtension on Widget {
   /// The `withRounded` getter adds rounded corners to the `Container` with a specified radius.
   ///
   /// The radius can be defined as a double value, and it will be applied to all corners of the `Container`.
@@ -32,5 +32,5 @@ extension RadiusExtension on ClipRRect {
   ClipRRect get roundedXl => _rounded(radius: 30);
 
   ClipRRect _rounded({required double radius}) =>
-      ClipRRect(borderRadius: BorderRadius.circular(radius), child: child);
+      ClipRRect(borderRadius: BorderRadius.circular(radius), child: this);
 }

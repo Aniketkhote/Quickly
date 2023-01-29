@@ -10,10 +10,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 200,
-      color: FxColor.amber400,
+    return Scaffold(
+      appBar: AppBar(title: const Text('Simple UI').black.bold),
+      body: Column(
+        children: <Widget>[
+          const Text('UI design using Quickly.')
+              .h2
+              .red800
+              .bold
+              .underline
+              .p20
+              .center
+              .rounded,
+          10.hBox(),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('Learn More').white,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: FxColor.dark,
+              shape: RoundedRectangleBorder(borderRadius: FxRadius.r20),
+              padding: FxPadding.pxy(h: 40, v: 12),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
