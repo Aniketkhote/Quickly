@@ -1,11 +1,6 @@
 <div id="top"></div>
 
 <br />
-<div align="center">
-  <a href="https://github.com/Aniketkhote/quickly">
-    <img src="logo.png" alt="Logo">
-  </a>
-
   <p align="center">
     Quickly is awesome flutter package for faster and cleaner development.
     <br />
@@ -18,7 +13,6 @@
     ·
     <a href="https://github.com/Aniketkhote/Quickly/issues">Request Feature</a>
   </p>
-</div>
 
 ![Pub Version](https://img.shields.io/pub/v/quickly?color=blue&style=the-badge)
 
@@ -33,26 +27,17 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <!-- <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li> -->
     <li><a href="#usage">Usage</a></li>
-    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
   </ol>
 
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
 
-**`Quickly`** is a powerful Flutter package that aims to enhance the development experience by offering a variety of extension methods for types such as String, List and Map, allowing for a more efficient and cleaner coding experience. It is inspired by Bootstrap and Tailwind CSS, and is built using Flutter and Dart. The package offers a wide range of utility functions, such as applying padding, visibility, and text styling to widgets. It can be easily integrated into your code by importing the package and using the provided extension methods on your widgets.
+**Quickly** is a powerful Flutter package that aims to enhance the development experience by offering a variety of extension methods for types such as String, List and Map, allowing for a more efficient and cleaner coding experience. It is inspired by Bootstrap and Tailwind CSS, and is built using Flutter and Dart. The package offers a wide range of utility functions, such as applying padding, visibility, and text styling to widgets. It can be easily integrated into your code by importing the package and using the provided extension methods on your widgets.
 
 With Quickly, developers can take advantage of features such as:
 
@@ -90,13 +75,13 @@ Text('4 Padding from top and bottom side').py4
 Text('16 Padding from all side except top').pnt16
 
 // Visibility
-Container(child:Text('hide')).hide
+Container(child:Text('Hide this widget')).hide
 
-Container(child:Text('show')).show
+Container(child:Text('Show this widget')).show
 
-Container(child:Text('show')).rounded
+Container(child:Text('Make rounded this widget')).rounded
 
-2.hBox(child:Text(''))
+2.hBox(child:Text('Added 2dp vertical space'))
 
 
 ```
@@ -174,11 +159,11 @@ person = {'name': 'Bob', 'age': 30, 'gender': 'male'}
 
 ```
 
-- map.contains("key","value"): Returns a boolean value indicating if the provided key-value pair is present in the map.
+- map.has("key","value"): Returns a boolean value indicating if the provided key-value pair is present in the map.
 
 ```dart
 
-person.contains('gender', 'male')  // true
+person.has('gender', 'male')  // true
 
 ```
 

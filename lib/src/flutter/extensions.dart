@@ -17,3 +17,5 @@ export 'extensions/padding_extension.dart';
 export 'extensions/context_extension.dart';
 
 export 'extensions/radius_extension.dart';
+
+export 'extensions/shimmer_extension.dart';

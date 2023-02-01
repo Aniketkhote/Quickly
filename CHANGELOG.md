@@ -1,10 +1,11 @@
 ## 3.5.0
 
-- Updated Text Color extension to include fixed getters.
-- Altered naming of getters, such as renaming `kcWarningLightStatus` to `kcWarningLight` and similar changes to other status-related getters.
-- Removed unnecessary Text Color extension getters, including `kcText`, `kcLabel`, `kcDisabled`, and `kcTextField`.
-- Updated the documentation for the Extension code to make it more clear and readable.
-- Modified the Border Radius extension from being applied to the Container widget to being applied to the ClipRRect widget. This allows for more precise control over the rounded corners of the widget.
+- Fixed `Text Color` extension getters.
+- Refined getters naming for the Fixed Text Color extension, such as changing `kcWarningLightStatus` to `kcWarningLight`.
+- Deleted unneeded Text Color extension getters, including `kcText`, `kcLabel`, `kcDisabled`, and `kcTextField`.
+- Improved the Extension code documentation to increase clarity and readability.
+- Changed the application of the `BorderRadius` extension from the Container widget to the `ClipRRect` widget, allowing for improved control over rounded corners.
+- Added the `Shimmer extension` to the Widget.
 
 ## 3.4.0
 
@@ -14,7 +15,7 @@
 
 ## 3.3.0
 
-- Implemented a new method `retainKeys` in the Map extension to remove key-value pairs whose keys are not present in a given list.
+- Implemented a new method `retainKeys()` in the Map extension to remove key-value pairs whose keys are not present in a given list.
 - Removed methods related to text styling such as letter spacing, word spacing, line height and text decoration.
 - Implemented checks to verify that the list is not empty and contains Map elements in the where methods to avoid runtime errors.
 - Added type checking for the generic type T in the list extensions to ensure that the methods are only applied to lists of the correct type.
