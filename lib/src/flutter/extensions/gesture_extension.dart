@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-///Gesture extension to extend widget functionality
+/// Extension class to add gesture handling capabilities to a `Widget`.
 extension GestureExtension on Widget {
-  /// Add on Tap handler to the current widget
+  /// Wraps the current `Widget` in a `GestureDetector` widget with a tap gesture callback.
   GestureDetector onTap(VoidCallback callback) =>
       GestureDetector(child: this, onTap: callback);
 
-  /// Add on Double Tap handler to the current widget
+  /// Wraps the current `Widget` in a `GestureDetector` widget with a double tap gesture callback.
   GestureDetector onDoubleTap(VoidCallback callback) =>
       GestureDetector(child: this, onDoubleTap: callback);
 
-  /// Add on Long Press handler to the current widget
+  /// Wraps the current `Widget` in a `GestureDetector` widget with a long press gesture callback.
   GestureDetector onLongPress(VoidCallback callback) =>
       GestureDetector(child: this, onLongPress: callback);
 
-  /// Add on InkWell Tap handler to the current widget
+  /// Wraps the current `Widget` in an `InkWell` widget with a tap gesture callback and customizable ink splash parameters.
   InkWell onInkTap(
     VoidCallback callback, {
     Color? splashColor,
@@ -38,7 +38,7 @@ extension GestureExtension on Widget {
     );
   }
 
-  /// Add onInkWell Double Tap handler to the current widget
+  /// Wraps the current `Widget` in an `InkWell` widget with a double tap gesture callback and customizable ink splash parameters.
   InkWell onInkDoubleTap(
     VoidCallback callback, {
     Color? splashColor,
