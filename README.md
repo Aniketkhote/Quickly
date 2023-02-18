@@ -215,9 +215,9 @@ person.match('age', 'Unknown')  // 30
 
 ```dart
 
-8.number.suffix()  // '8th'
+8.suffix()  // '8th'
 
-10.5.price.suffix('$')  // '10.5$'
+10.5.suffix('$')  // '10.5$'
 
 ```
 

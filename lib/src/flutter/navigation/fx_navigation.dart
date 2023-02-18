@@ -2,64 +2,83 @@ import 'package:flutter/material.dart';
 import './fx_animation.dart';
 
 class FxNavigation {
-  FxNavigation({required GlobalKey<NavigatorState> key}) : _navigatorKey = key;
-  final GlobalKey<NavigatorState> _navigatorKey;
+  factory FxNavigation() => _instance;
 
-  NavigatorState? get navigator => _navigatorKey.currentState;
-  BuildContext get context {
-    final BuildContext? context = _navigatorKey.currentContext;
-    if (context == null) {
-      throw Exception("The context is not available.");
-    }
-    return context;
+  FxNavigation._internal();
+
+  static final FxNavigation _instance = FxNavigation._internal();
+
+  GlobalKey<NavigatorState>? _navigatorKey;
+
+  GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
+
+  void setNavigatorKey(GlobalKey<NavigatorState> key) {
+    _navigatorKey = key;
   }
 
-  dynamic get arguments => ModalRoute.of(context)!.settings.arguments;
+  NavigatorState? get navigator => _navigatorKey?.currentState;
 
-  Future<Object?>? toNamed({
-    required String routeName,
-    Object? arguments,
-  }) =>
-      navigator?.pushNamed(routeName, arguments: arguments);
+  BuildContext? get context => _navigatorKey?.currentContext;
 
-  Future<Object?>? toPage({
-    required Widget page,
+  Object? get args => ModalRoute.of(context!)?.settings.arguments;
+
+  Map<String, String> _params = <String, String>{};
+
+  Map<String, String> get params => _params;
+
+  Future<T?>? toNamed<T>(
+    String routeName, {
+    Object? args,
+  }) async {
+    String route = _getRouteName(routeName);
+    return await navigator?.pushNamed<T>(route, arguments: args);
+  }
+
+  Future<T?>? toPage<T>(
+    Widget page, {
     AnimationType animationType = AnimationType.fade,
     double animationValue = 1.0,
     Function? onCompleted,
-  }) {
-    return navigator?.push(FxRouteTransition<Object>(
-      page: page,
-      animationType: animationType,
-      animationValue: animationValue,
-      onCompleted: onCompleted,
-    ));
+  }) async {
+    return await navigator?.push<T>(
+      FxRouteTransition<T>(
+        page,
+        animationType: animationType,
+        animationValue: animationValue,
+        onCompleted: onCompleted,
+      ),
+    );
   }
 
-  Future<Object?>? offPage({
-    required Widget page,
+  Future<T?>? offPage<T>(
+    Widget page, {
     AnimationType animationType = AnimationType.fade,
     double animationValue = 1.0,
     Function? onCompleted,
-  }) =>
-      navigator?.pushReplacement(FxRouteTransition<Object>(
-        page: page,
+  }) async {
+    return await navigator?.pushReplacement<T, T>(
+      FxRouteTransition<T>(
+        page,
         animationType: animationType,
         animationValue: animationValue,
         reverse: true,
         onCompleted: onCompleted,
-      ));
+      ),
+    );
+  }
 
-  Future<Object?>? offNamed({
-    required String routeName,
-    Object? arguments,
+  Future<T?>? offNamed<T>(
+    String routeName, {
+    Object? args,
     Function? onCompleted,
-  }) =>
-      navigator?.pushReplacementNamed(routeName, arguments: arguments);
+  }) async {
+    String route = _getRouteName(routeName);
+    return await navigator?.pushReplacementNamed<T, T>(route, arguments: args);
+  }
 
-  void back() => navigator?.pop();
+  void get back => navigator?.pop();
 
-  bool? canPop() => navigator?.canPop();
+  bool? get canPop => navigator?.canPop();
 
   void maybePop<T extends Object>([T? result]) => navigator?.maybePop(result);
 
@@ -69,17 +88,24 @@ class FxNavigation {
       Function? onCompleted,
       bool replace = false}) {
     if (replace) {
-      offPage(
-          page: page,
-          animationType: animationType,
-          animationValue: animationValue,
-          onCompleted: onCompleted);
+      offPage<Object>(
+        page,
+        animationType: animationType,
+        animationValue: animationValue,
+        onCompleted: onCompleted,
+      );
     } else {
-      toPage(
-          page: page,
-          animationType: animationType,
-          animationValue: animationValue,
-          onCompleted: onCompleted);
+      toPage<Object>(
+        page,
+        animationType: animationType,
+        animationValue: animationValue,
+        onCompleted: onCompleted,
+      );
     }
+  }
+
+  String _getRouteName(String routeName) {
+    _params = Uri.parse(routeName).queryParameters;
+    return routeName.substring(0, routeName.indexOf('?'));
   }
 }

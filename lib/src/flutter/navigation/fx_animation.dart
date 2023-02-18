@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 enum AnimationType { fade, scale, slide, rotate, custom }
 
 class FxRouteTransition<T> extends PageRouteBuilder<T> {
-  FxRouteTransition({
-    required this.page,
+  FxRouteTransition(
+    this.page, {
     this.animationType = AnimationType.fade,
     this.animationValue = 1.0,
     this.reverse = false,
@@ -31,8 +31,8 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
               return customTransitionBuilder(
                   context, animation, secondaryAnimation, child, reverse);
             }
-            return _defaultTransition(
-                animation, secondaryAnimation, child, animationType, reverse);
+            return _defaultTransition(animation, secondaryAnimation, child,
+                animationType, reverse, animationValue);
           },
           transitionDuration: Duration(milliseconds: 300),
         );
@@ -46,34 +46,53 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
           BuildContext, Animation<double>, Animation<double>, Widget, bool)?
       customTransitionBuilder;
 
-  static Widget _defaultTransition(Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child, AnimationType type,
-      [bool reverse = false]) {
+  static Widget _defaultTransition(
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+    AnimationType type,
+    bool reverse,
+    double animationValue,
+  ) {
     switch (type) {
       case AnimationType.fade:
         return FadeTransition(
-          opacity: Tween<double>(begin: 0.0, end: 1.0)
-              .animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
+          opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.ease,
+            ),
+          ),
           child: child,
         );
       case AnimationType.scale:
         return ScaleTransition(
-          scale: Tween<double>(begin: 0.0, end: 1.0)
-              .animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
+          scale: Tween<double>(begin: 0.0, end: animationValue).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.ease,
+            ),
+          ),
           child: child,
         );
       case AnimationType.slide:
         return SlideTransition(
           position: Tween<Offset>(
-                  begin: reverse ? Offset.zero : const Offset(1.0, 0.0),
-                  end: reverse ? const Offset(-1.0, 0.0) : Offset.zero)
-              .animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
+            begin: reverse ? Offset.zero : const Offset(1.0, 0.0),
+            end: reverse ? const Offset(-1.0, 0.0) : Offset.zero,
+          ).animate(
+            CurvedAnimation(parent: animation, curve: Curves.ease),
+          ),
           child: child,
         );
       case AnimationType.rotate:
         return RotationTransition(
-          turns: Tween<double>(begin: 0.0, end: 1.0)
-              .animate(CurvedAnimation(parent: animation, curve: Curves.ease)),
+          turns: Tween<double>(begin: 0.0, end: animationValue).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.ease,
+            ),
+          ),
           child: child,
         );
       default:
