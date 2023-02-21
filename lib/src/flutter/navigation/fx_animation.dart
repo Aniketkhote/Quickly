@@ -6,7 +6,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
   FxRouteTransition(
     this.page, {
     this.animationType = AnimationType.fade,
-    this.animationValue = 1.0,
+    this.animationDuration = 1.0,
     this.reverse = false,
     this.onCompleted,
     this.customTransitionBuilder,
@@ -32,14 +32,14 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
                   context, animation, secondaryAnimation, child, reverse);
             }
             return _defaultTransition(animation, secondaryAnimation, child,
-                animationType, reverse, animationValue);
+                animationType, reverse, animationDuration);
           },
           transitionDuration: Duration(milliseconds: 300),
         );
 
   final Widget page;
   final AnimationType animationType;
-  final double animationValue;
+  final double animationDuration;
   final bool reverse;
   final Function? onCompleted;
   final Widget Function(
@@ -52,7 +52,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
     Widget child,
     AnimationType type,
     bool reverse,
-    double animationValue,
+    double animationDuration,
   ) {
     switch (type) {
       case AnimationType.fade:
@@ -67,7 +67,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
         );
       case AnimationType.scale:
         return ScaleTransition(
-          scale: Tween<double>(begin: 0.0, end: animationValue).animate(
+          scale: Tween<double>(begin: 0.0, end: animationDuration).animate(
             CurvedAnimation(
               parent: animation,
               curve: Curves.ease,
@@ -87,7 +87,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
         );
       case AnimationType.rotate:
         return RotationTransition(
-          turns: Tween<double>(begin: 0.0, end: animationValue).animate(
+          turns: Tween<double>(begin: 0.0, end: animationDuration).animate(
             CurvedAnimation(
               parent: animation,
               curve: Curves.ease,
