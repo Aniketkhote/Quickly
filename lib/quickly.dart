@@ -1,6 +1,6 @@
 library quickly;
 
-export 'src/dart/extensions.dart';
+export 'src/dart/extensions/extensions.dart';
 
 export 'src/flutter/mixins/mixins.dart';
 
