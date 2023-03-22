@@ -1,3 +1,15 @@
+## 3.6.0
+
+- Added a Job and Queue feature to support asynchronous operations. The Queue class executes jobs one by one and has an add() method to add a job to the queue. The Job class represents a single unit of work and has an execute() method that completes the job's Completer with either the result of the function or an error if an exception is thrown.
+
+- Added an extension to the FxNavigation class that supports custom route animations for navigating to pages using the `toPage()` and `toNamed()` methods. These methods also support passing arguments to the destination page.
+
+- Added the `offPage()` and `offNamed()` methods to the FxNavigation class to replace the current page with a new one, with custom route animations.
+
+- Added the `navigateTo()` method to the FxNavigation class to navigate to a new page with custom route animations, with an option to replace the current page.
+
+- Added the `back()`, `canPop()`, and `maybePop()` methods to the FxNavigation class to handle navigation history. The `back()` method navigates to the previous page in the history stack. The `canPop()` method returns whether there is a page to go back to. The `maybePop()` method checks if there is a page to go back to and goes back if there is one.
+
 ## 3.5.0
 
 - Fixed `Text Color` extension getters.
