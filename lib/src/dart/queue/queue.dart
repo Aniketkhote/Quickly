@@ -1,7 +1,7 @@
 // Queue class represents a job queue that executes jobs one by one
 import 'dart:async';
 
-import 'package:quickly/src/dart/queue/job.dart';
+import 'job.dart';
 
 class Queue {
   final List<Job<dynamic>> _queue = <Job<dynamic>>[];
@@ -17,7 +17,7 @@ class Queue {
     _queue.clear();
   }
 
-  void _check() async {
+  Future<void> _check() async {
     if (!_active && _queue.isNotEmpty) {
       _active = true;
       final Job<dynamic> job = _queue.removeAt(0);

@@ -32,5 +32,5 @@ extension AlignExtension on Widget {
   ///[Align] child to Center Left of parent widget
   Align get centerLeft => _align(Alignment.centerLeft);
 
-  Align _align(Alignment alignment) => Align(child: this, alignment: alignment);
+  Align _align(Alignment alignment) => Align(alignment: alignment, child: this);
 }

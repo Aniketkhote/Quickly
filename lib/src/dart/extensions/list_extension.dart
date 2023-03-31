@@ -9,8 +9,9 @@ extension ListExtension<T> on List<T> {
   ///list.sorted(true) // create new list with ascending order
   ///```
   List<T> sorted([bool isDesc = false]) {
-    sort();
-    return isDesc ? reversed.toList() : this;
+    final List<T> copy = List<T>.from(this);
+    copy.sort();
+    return isDesc ? copy.reversed.toList() : copy;
   }
 
   ///Get sorted list
@@ -28,11 +29,25 @@ extension ListExtension<T> on List<T> {
   ///list.sortBy("price") // create new list with ascending order by according to price
   ///```
   List<Map<T, T>> sortBy(String key, [bool isDesc = false]) {
-    List<Map<T, T>> maps =
-        where((T element) => element is Map<T, T> && element.containsKey(key))
-            .cast<Map<T, T>>()
-            .toList();
-    maps.sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
+    if (!hasKey(key)) {
+      return <Map<T, T>>[];
+    }
+    final List<Map<T, T>> maps = whereType<Map<T, T>>()
+        .where((Map<T, T> element) => element.containsKey(key))
+        .toList();
+    try {
+      maps.sort((Map<T, T> a, Map<T, T> b) {
+        final T? aValue = a[key];
+        final T? bValue = b[key];
+        if (aValue is int && bValue is int) {
+          return aValue.compareTo(bValue);
+        }
+        throw ArgumentError('Values for key "$key" must be of type int');
+      });
+    } on ArgumentError {
+      // If an error is thrown, return an empty list
+      return <Map<T, T>>[];
+    }
     return isDesc ? maps.reversed.toList() : maps;
   }
 
@@ -53,9 +68,9 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.groupBy(fn)
   ///```
-  Map<T, List<T>> groupBy(T Function(dynamic) fn) {
+  Map<T, List<T>> groupBy(T Function(T) fn) {
     return Map<T, List<T>>.fromIterable(map(fn).toSet(),
-        value: (dynamic i) => where((dynamic v) => fn(v) == i).toList());
+        value: (dynamic i) => where((T v) => fn(v) == i).toList());
   }
 
   ///Group the objects according to key
@@ -64,7 +79,7 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.groupByKey("key")
   ///```
-  Map<T, List<T>> groupByKey(String key) => groupBy((dynamic e) => e[key]);
+  Map<T, List<T>> groupByKey(String key) => groupBy((dynamic e) => e[key] as T);
 
   ///The latest methods allow you to easily order results by id in descending order.
   ///By default, the result will be ordered by the id field.
@@ -74,11 +89,7 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.latest()
   ///```
-  List<T> latest([String key = 'id']) {
-    if (!hasKey(key)) return <T>[];
-    sort((dynamic a, dynamic b) => b[key].compareTo(a[key]));
-    return this;
-  }
+  List<Map<T, T>> latest([String key = 'id']) => sortBy(key, true);
 
   ///The latestFirst methods allow you to easily order results by
   ///id in descending order and get first record.
@@ -89,7 +100,17 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.latestFirst()
   ///```
-  Map<T, T> latestFirst([String key = 'id']) => latest(key).first as Map<T, T>;
+  Map<T, T> latestFirst([String key = 'id']) {
+    final List<Map<T, T>> sortedMaps = latest(key);
+    if (sortedMaps.isEmpty) {
+      return <T, T>{};
+    }
+    final Map<T, T> firstMap = sortedMaps.first;
+    if (firstMap.isEmpty) {
+      return <T, T>{};
+    }
+    return firstMap;
+  }
 
   ///The oldest methods allow you to easily order results by id.
   ///By default, the result will be ordered by the id field.
@@ -99,11 +120,7 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.oldest()
   ///```
-  List<T> oldest([String key = 'id']) {
-    if (!hasKey(key)) return <T>[];
-    sort((dynamic a, dynamic b) => a[key].compareTo(b[key]));
-    return this;
-  }
+  List<Map<T, T>> oldest([String key = 'id']) => sortBy(key);
 
   ///The oldestFirst methods allow you to easily order results by id and get first record.
   ///By default, the result will be ordered by the id field.
@@ -113,7 +130,17 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.oldestFirst()
   ///```
-  Map<T, T> oldestFirst([String key = 'id']) => oldest(key).first as Map<T, T>;
+  Map<T, T> oldestFirst([String key = 'id']) {
+    final List<Map<T, T>> sortedMaps = oldest(key);
+    if (sortedMaps.isEmpty) {
+      return <T, T>{};
+    }
+    final Map<T, T> firstMap = sortedMaps.first;
+    if (firstMap.isEmpty) {
+      return <T, T>{};
+    }
+    return firstMap;
+  }
 
   ///Returns random value from this list
   ///
@@ -130,7 +157,9 @@ extension ListExtension<T> on List<T> {
   ///list.chunk(2) // [1,2,3,4,5] -> [[1,2], [3,4], [5]]
   ///```
   List<List<T>> chunk(int size) {
-    if (size < 1) return <List<T>>[];
+    if (size < 1) {
+      return <List<T>>[];
+    }
 
     return List<List<T>>.generate(
         length ~/ size + (length % size == 0 ? 0 : 1),
@@ -145,9 +174,11 @@ extension ListExtension<T> on List<T> {
   ///list.split(2) // [1,2,3,4,5] -> [[1,2,3], [4,5]]
   ///```
   List<List<T>> split(int parts) {
-    if (parts < 1) return <List<T>>[];
+    if (parts < 1) {
+      return <List<T>>[];
+    }
 
-    int size = (length / parts).round();
+    final int size = (length / parts).round();
 
     return List<List<T>>.generate(
         parts,
@@ -178,11 +209,13 @@ extension ListExtension<T> on List<T> {
   /// [1,2]
   ///```
   List<T?> pluck(String key) {
-    if (isEmpty) return <T>[];
-    List<T> result = <T>[];
-    for (T element in this) {
-      if (element is Map<String, dynamic> && element.containsKey(key)) {
-        result.add(element[key]);
+    if (isEmpty) {
+      return <T>[];
+    }
+    final List<T> result = <T>[];
+    for (final T element in this) {
+      if (element is Map<String, T> && element.containsKey(key)) {
+        result.add(element[key] as T);
       }
     }
     return result;
@@ -206,9 +239,9 @@ extension ListExtension<T> on List<T> {
 
   ///Get median of numbers
   num get median {
-    List<num> list = whereNumbers.sorted();
-    int middleIndex = (list.length / 2).round();
-    if (list.length % 2 == 0) {
+    final List<num> list = whereNumbers.sorted();
+    final int middleIndex = (list.length / 2).round();
+    if ((list.length).isEven) {
       return (list[middleIndex - 1] + list[middleIndex]) / 2;
     } else {
       return list[middleIndex];
@@ -217,7 +250,7 @@ extension ListExtension<T> on List<T> {
 
   ///Get mode of numbers
   num get mode {
-    List<num> list = whereNumbers;
+    final List<num> list = whereNumbers;
 
     num maxValue = 0.0;
     num maxCount = 0;
@@ -245,15 +278,21 @@ extension ListExtension<T> on List<T> {
   ///list.whereOnly([key1, key2])
   ///```
   List<T> whereOnly(List<String> keys) {
-    if (isEmpty) return <T>[];
-    List<T> result = <T>[];
-    for (T element in this) {
+    if (isEmpty) {
+      return <T>[];
+    }
+    final List<T> result = <T>[];
+    for (final T element in this) {
       if (element is Map<String, dynamic>) {
-        Map<String, dynamic> map = <String, dynamic>{};
-        keys.forEach((String key) {
-          if (element.containsKey(key)) map[key] = element[key];
-        });
-        if (map.isNotEmpty) result.add(map as T);
+        final Map<String, dynamic> map = <String, dynamic>{};
+        for (final String key in keys) {
+          if (element.containsKey(key)) {
+            map[key] = element[key];
+          }
+        }
+        if (map.isNotEmpty) {
+          result.add(map as T);
+        }
       }
     }
     return result;
@@ -266,15 +305,21 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotOnly([key1, key2])
   ///```
   List<T> whereNotOnly(List<String> keys) {
-    if (isEmpty) return <T>[];
-    List<T> result = <T>[];
+    if (isEmpty) {
+      return <T>[];
+    }
+    final List<T> result = <T>[];
 
-    for (T element in this) {
+    for (final T element in this) {
       if (element is Map<String, dynamic>) {
-        keys.forEach((String key) {
-          if (element.containsKey(key)) element.remove(key);
-        });
-        if (element.isNotEmpty) result.add(element);
+        for (final String key in keys) {
+          if (element.containsKey(key)) {
+            element.remove(key);
+          }
+        }
+        if (element.isNotEmpty) {
+          result.add(element);
+        }
       }
     }
 
@@ -290,18 +335,20 @@ extension ListExtension<T> on List<T> {
   ///list.whereIn("key", [value1, value2])
   ///```
   List<T> whereIn(String key, List<num> params) {
-    if (isEmpty) return <T>[];
-    List<T> result = <T>[];
+    if (isEmpty) {
+      return <T>[];
+    }
+    final List<T> result = <T>[];
 
-    params.forEach((num param) {
-      for (T element in this) {
+    for (final num param in params) {
+      for (final T element in this) {
         if (element is Map<T, T> &&
             element.containsKey(key) &&
             element[key] == param) {
           result.add(element);
         }
       }
-    });
+    }
 
     return result;
   }
@@ -315,9 +362,11 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotIn("key", [value1, value2])
   ///```
   List<T> whereNotIn(String key, List<num> params) {
-    if (isEmpty) return <T>[];
-    List<T> result = toList();
-    for (num param in params) {
+    if (isEmpty) {
+      return <T>[];
+    }
+    final List<T> result = toList();
+    for (final num param in params) {
       result.removeWhere((T map) =>
           map is Map<String, T> && map.containsKey(key) && map[key] == param);
     }
@@ -331,13 +380,17 @@ extension ListExtension<T> on List<T> {
   ///list.whereBetween("key",start, end)
   ///```
   List<T> whereBetween(String key, num start, num end) {
-    if (isEmpty) return <T>[];
-    List<T> result = <T>[];
-    for (T element in this) {
+    if (isEmpty) {
+      return <T>[];
+    }
+    final List<T> result = <T>[];
+    for (final T element in this) {
       if (element is Map<String, dynamic> &&
           element.containsKey(key) &&
           element[key] is num) {
-        if (element[key] >= start && element[key] <= end) result.add(element);
+        if ((element[key] as int >= start) && (element[key] as int <= end)) {
+          result.add(element);
+        }
       }
     }
 
@@ -351,14 +404,18 @@ extension ListExtension<T> on List<T> {
   ///list.whereNotBetween("key", start, end)
   ///```
   List<T> whereNotBetween(String key, num start, num end) {
-    if (isEmpty) return <T>[];
-    List<T> result = <T>[];
-    for (T element in this) {
+    if (isEmpty) {
+      return <T>[];
+    }
+    final List<T> result = <T>[];
+    for (final T element in this) {
       if (element is Map<dynamic, dynamic> &&
           element.containsKey(key) &&
           element[key] is num) {
-        num value = element[key] as num;
-        if (value < start || value > end) result.add(element);
+        final num value = element[key] as num;
+        if (value < start || value > end) {
+          result.add(element);
+        }
       }
     }
 
@@ -380,10 +437,14 @@ extension ListExtension<T> on List<T> {
   /// map.hasKeyValue('gender', 'male'); // false
   ///```
   bool hasKeyValue(String key, T value) {
-    if (isEmpty) return false;
+    if (isEmpty) {
+      return false;
+    }
 
     return any((T element) {
-      if (element is! Map<T, T>) return false;
+      if (element is! Map<T, T>) {
+        return false;
+      }
       return element.has(key, value);
     });
   }
@@ -397,10 +458,14 @@ extension ListExtension<T> on List<T> {
   ///map.hasKey("key") // true
   ///```
   bool hasKey(String key) {
-    if (isEmpty) return false;
+    if (isEmpty) {
+      return false;
+    }
 
     return any((T element) {
-      if (element is! Map<T, T>) return false;
+      if (element is! Map<T, T>) {
+        return false;
+      }
       return element.containsKey(key);
     });
   }
@@ -414,10 +479,14 @@ extension ListExtension<T> on List<T> {
   ///map.hasValue("value") // true
   ///```
   bool hasValue(T value) {
-    if (isEmpty) return false;
+    if (isEmpty) {
+      return false;
+    }
 
     return any((T element) {
-      if (element is! Map<T, T>) return false;
+      if (element is! Map<T, T>) {
+        return false;
+      }
       return element.containsValue(value);
     });
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quickly/quickly.dart';
+import '../../../quickly.dart';
 
 /// Extension class to apply shimmer effect to any widget.
 extension ShimmerExtension on Widget {
@@ -17,7 +17,7 @@ extension ShimmerExtension on Widget {
     Color highlightColor = FxColor.gray300,
     Color baseColor = FxColor.gray400,
   }) {
-    return Container(
+    return SizedBox(
       height: height,
       width: width,
       child: Stack(
@@ -27,8 +27,6 @@ extension ShimmerExtension on Widget {
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
                   colors: <Color>[
                     highlightColor,
                     baseColor,

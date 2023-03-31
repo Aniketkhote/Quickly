@@ -8,11 +8,11 @@ extension WidgetExtension on Widget {
   Center get center => Center(child: this);
 
   /// Creates an [Expanded] widget with the current widget as its child
-  Expanded expand([int flex = 1]) => Expanded(child: this, flex: flex);
+  Expanded expand([int flex = 1]) => Expanded(flex: flex, child: this);
 
   /// Creates a [Flexible] widget with the current widget as its child
   Flexible flexible([int flex = 1, FlexFit fit = FlexFit.loose]) =>
-      Flexible(child: this, flex: flex, fit: fit);
+      Flexible(flex: flex, fit: fit, child: this);
 
   /// Creates a [Positioned] widget with the current widget as its child.
   /// Only two out of the three horizontal values ([left], [right], [width]), and
@@ -27,13 +27,13 @@ extension WidgetExtension on Widget {
     double? width,
   }) =>
       Positioned(
-        child: this,
         top: top,
         bottom: bottom,
         left: left,
         right: right,
         height: height,
         width: width,
+        child: this,
       );
 
   /// Creates a [Visibility] widget with the current widget as its child and sets its visibility to false
@@ -52,7 +52,7 @@ extension WidgetExtension on Widget {
 
   /// Creates a [SizedBox] widget with the current widget as its child and sets its height and width
   SizedBox sizedBox({double? h, double? w}) =>
-      SizedBox(child: this, height: h, width: w);
+      SizedBox(height: h, width: w, child: this);
 
   /// Creates a square shaped [SizedBox] widget with the current widget as its child and sets its height and width
   SizedBox sqBox(double size) => sizedBox(h: size, w: size);
@@ -63,5 +63,5 @@ extension WidgetExtension on Widget {
   /// Creates a [SizedBox] widget with the current widget as its child and sets its width
   SizedBox wBox(double? width) => sizedBox(w: width);
 
-  Visibility _visibility(bool value) => Visibility(child: this, visible: value);
+  Visibility _visibility(bool value) => Visibility(visible: value, child: this);
 }

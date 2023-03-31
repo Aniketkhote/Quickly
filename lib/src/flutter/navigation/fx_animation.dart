@@ -26,7 +26,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
             if (animationType == AnimationType.custom) {
               if (customTransitionBuilder == null) {
                 throw ArgumentError(
-                    "customTransitionBuilder must not be null for a custom transition type");
+                    'customTransitionBuilder must not be null for a custom transition type');
               }
               return customTransitionBuilder(
                   context, animation, secondaryAnimation, child, reverse);
@@ -34,7 +34,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
             return _defaultTransition(animation, secondaryAnimation, child,
                 animationType, reverse, animationDuration);
           },
-          transitionDuration: Duration(milliseconds: 300),
+          transitionDuration: const Duration(milliseconds: 300),
         );
 
   final Widget page;
@@ -96,7 +96,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
           child: child,
         );
       default:
-        throw ArgumentError('Invalid animation type');
+        throw ArgumentError.value(type, 'Invalid animation type');
     }
   }
 }

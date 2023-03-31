@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quickly/quickly.dart';
+import '../../../quickly.dart';
 
 /// Custom color extension for the Text color. This extension provides getter methods for various commonly used colors in the application.
 extension TextColorExtension on Text {

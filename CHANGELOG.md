@@ -1,3 +1,7 @@
+## 3.6.1
+
+- Improved type safety and null safety checks to reduce runtime errors.
+
 ## 3.6.0
 
 - Added a Job and Queue feature to support asynchronous operations. The Queue class executes jobs one by one and has an add() method to add a job to the queue. The Job class represents a single unit of work and has an execute() method that completes the job's Completer with either the result of the function or an error if an exception is thrown.

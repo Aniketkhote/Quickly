@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FxNavigation navigation = FxNavigation();
-    navigation.setNavigatorKey(GlobalKey<NavigatorState>());
+    navigation.navigatorKey = GlobalKey<NavigatorState>();
 
     return MaterialApp(
       navigatorKey: navigation.navigatorKey,

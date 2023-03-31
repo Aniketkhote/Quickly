@@ -4,20 +4,20 @@ import 'package:quickly/quickly.dart';
 void main() {
   group('String Extensions', () {
     test('.regex("[a-zA-Z]+") - abc is a albhabet', () {
-      String source = "[a-zA-Z]+";
-      String string = 'abc';
+      const String source = '[a-zA-Z]+';
+      const String string = 'abc';
       expect(string.regex(source), equals(true));
     });
 
     test('.regex(source) - abc is not albhabet', () {
-      String source = "[0-9]+";
-      String string = 'abc';
+      const String source = '[0-9]+';
+      const String string = 'abc';
       expect(string.regex(source), equals(false));
     });
 
     test('.regex(source) - 123 is a number', () {
-      String source = "[0-9]+";
-      String string = '123';
+      const String source = '[0-9]+';
+      const String string = '123';
       expect(string.regex(source), equals(true));
     });
 
@@ -46,10 +46,8 @@ void main() {
     test('.minLen - length of ab is less then 3 return false',
         () => expect('ab'.minLen(3), equals(false)));
     test('.mask - mask 12345 to **345',
-        () => expect('12345'.mask(upto: 2, mask: '*'), equals('**345')));
-    test(
-        '.mask - mask 12345 to 123**',
-        () => expect(
-            '12345'.mask(upto: 2, mask: '*', atEnd: true), equals('123**')));
+        () => expect('12345'.mask(upto: 2), equals('**345')));
+    test('.mask - mask 12345 to 123**',
+        () => expect('12345'.mask(upto: 2, atEnd: true), equals('123**')));
   });
 }

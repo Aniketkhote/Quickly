@@ -3,13 +3,13 @@ import 'package:quickly/quickly.dart';
 
 void main() {
   group('Map Extensions', () {
-    Map<String, dynamic> input1 = <String, dynamic>{};
-    Map<String, dynamic> input2 = <String, dynamic>{
+    const Map<String, dynamic> input1 = <String, dynamic>{};
+    const Map<String, dynamic> input2 = <String, dynamic>{
       'name': 'P 1',
       'price': 49,
       'qty': 10
     };
-    Map<String, dynamic> input3 = <String, dynamic>{
+    const Map<String, dynamic> input3 = <String, dynamic>{
       'id': 1,
       'name': 'P 1',
       'price': 49,
@@ -78,7 +78,7 @@ void main() {
     });
 
     group('.match()', () {
-      Map<int, String> map = <int, String>{1: 'One', 2: 'Two'};
+      const Map<int, String> map = <int, String>{1: 'One', 2: 'Two'};
 
       test('.match() - condition match return value',
           () => expect(map.match(2), equals('Two')));
@@ -87,14 +87,15 @@ void main() {
     });
 
     test('Test retainKeys()', () {
-      Map<String, dynamic> map = <String, dynamic>{
-        "id": 1,
-        "name": "John",
-        "age": 30,
-        "gender": "male"
+      final Map<String, dynamic> map = <String, dynamic>{
+        'id': 1,
+        'name': 'John',
+        'age': 30,
+        'gender': 'male'
       };
-      Map<dynamic, dynamic> newMap = map.retainKeys(<String>["id", "name"]);
-      expect(newMap, <dynamic, dynamic>{"id": 1, "name": "John"});
+      final Map<dynamic, dynamic> newMap =
+          map.retainKeys(<String>['id', 'name']);
+      expect(newMap, <dynamic, dynamic>{'id': 1, 'name': 'John'});
     });
   });
 }

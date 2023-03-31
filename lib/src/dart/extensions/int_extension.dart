@@ -11,7 +11,7 @@ extension IntExtension on int {
   /// @param [isShort] If true, returns the short form of the month name. Default is false.
   /// @return Returns the name of the month as a string. If the input number is not a valid month, returns "Invalid number of month".
   String getMonthName([bool isShort = false]) {
-    Map<int, String> monthNames = <int, String>{
+    final Map<int, String> monthNames = <int, String>{
       1: isShort ? 'Jan' : 'January',
       2: isShort ? 'Feb' : 'February',
       3: isShort ? 'Mar' : 'March',
@@ -40,7 +40,7 @@ extension IntExtension on int {
   /// @param [isShort] If true, returns the short form of the week name. Default is false.
   /// @return Returns the name of the week as a string. If the input number is not a valid week, returns "Invalid number of week".
   String getWeekName([bool isShort = false]) {
-    Map<int, String> weekNames = <int, String>{
+    final Map<int, String> weekNames = <int, String>{
       1: isShort ? 'Mon' : 'Monday',
       2: isShort ? 'Tue' : 'Tuesday',
       3: isShort ? 'Wed' : 'Wednesday',

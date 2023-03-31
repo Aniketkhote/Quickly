@@ -57,7 +57,7 @@ extension MapExtension<T> on Map<T, T> {
   /// print(id2); // Output: 0
   ///```
   int get getId =>
-      (containsKey('id') && this['id'] != null) ? this['id'] as int : 0;
+      (containsKey('id') && this['id'] != null) ? this['id']! as int : 0;
 
   ///Returns all entries of this map according to keys.
   ///
@@ -97,8 +97,7 @@ extension MapExtension<T> on Map<T, T> {
   /// print(map.getBool('isActive'));  // Output: false
   /// print(map.getBool('isDeleted'));  // Output: false
   ///```
-  bool getBool(String key) =>
-      (containsKey(key) && this[key] is bool) ? this[key] as bool : false;
+  bool getBool(String key) => containsKey(key) && this[key] is bool;
 
   /// Reads a [key] value of [int] type from [Map].
   ///
@@ -146,7 +145,7 @@ extension MapExtension<T> on Map<T, T> {
   /// print(email); // Output: not_provided@example.com
   ///```
   String getString(String key, [String defaultString = '']) =>
-      this[key] is String ? this[key] as String : defaultString;
+      this[key] is String ? this[key]! as String : defaultString;
 
   /// This method retrieves the list associated with the given key from the map.
   /// If the key is not present or the value associated with the key is not a list,
@@ -162,8 +161,8 @@ extension MapExtension<T> on Map<T, T> {
   /// map.getList<double>('prices') // returns [20.0, 30.0, 40.0]
   /// map.getList<int>('invalidKey') // returns []
   /// ```
-  List<T> getList<T>(String key) =>
-      containsKey(key) && this[key] is List<T> ? this[key] as List<T> : <T>[];
+  List<T> getList<K>(String key) =>
+      containsKey(key) && this[key] is List<T> ? this[key]! as List<T> : <T>[];
 
   /// The match() function also works similarly to switch
   ///

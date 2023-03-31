@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quickly/quickly.dart';
+import '../../quickly.dart';
 
 class FxResponsive extends StatelessWidget {
   const FxResponsive({

@@ -10,11 +10,9 @@ class FxNavigation {
 
   GlobalKey<NavigatorState>? _navigatorKey;
 
-  GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
+  GlobalKey<NavigatorState> get navigatorKey => _navigatorKey!;
 
-  void setNavigatorKey(GlobalKey<NavigatorState> key) {
-    _navigatorKey = key;
-  }
+  set navigatorKey(GlobalKey<NavigatorState> key) => _navigatorKey = key;
 
   NavigatorState? get navigator => _navigatorKey?.currentState;
 
@@ -28,9 +26,9 @@ class FxNavigation {
 
   Future<T?> toNamed<T extends Object?>(
     String routeName, {
-    Object? args = null,
+    Object? args,
   }) {
-    String route = _getRouteName(routeName);
+    final String route = _getRouteName(routeName);
     return navigator!.pushNamed<T>(
       route,
       arguments: args,
@@ -43,7 +41,7 @@ class FxNavigation {
     double animationDuration = 1.0,
     Function? onCompleted,
   }) async {
-    return await navigator?.push<T>(
+    return navigator?.push<T>(
       FxRouteTransition<T>(
         page,
         animationType: animationType,
@@ -59,7 +57,7 @@ class FxNavigation {
     double animationDuration = 1.0,
     Function? onCompleted,
   }) async {
-    return await navigator?.pushReplacement<T, T>(
+    return navigator?.pushReplacement<T, T>(
       FxRouteTransition<T>(
         page,
         animationType: animationType,
@@ -72,11 +70,11 @@ class FxNavigation {
 
   Future<T?>? offNamed<T extends Object?>(
     String routeName, {
-    Object? args = null,
+    Object? args,
     Function? onCompleted,
   }) async {
-    String route = _getRouteName(routeName);
-    return await navigator?.pushReplacementNamed<T, T>(route, arguments: args);
+    final String route = _getRouteName(routeName);
+    return navigator?.pushReplacementNamed<T, T>(route, arguments: args);
   }
 
   void get back => navigator?.pop();
@@ -111,7 +109,7 @@ class FxNavigation {
 
   String _getRouteName(String routeName) {
     _params = Uri.parse(routeName).queryParameters;
-    int queryIndex = routeName.indexOf('?');
+    final int queryIndex = routeName.indexOf('?');
     if (queryIndex != -1) {
       return routeName.substring(0, queryIndex);
     }

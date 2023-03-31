@@ -8,9 +8,9 @@ class Job<T> {
 
   Future<T> get future => _completer.future;
 
-  void execute() async {
+  Future<void> execute() async {
     try {
-      T result = await job();
+      final T result = await job();
       _completer.complete(result);
     } catch (e) {
       _completer.completeError(e);

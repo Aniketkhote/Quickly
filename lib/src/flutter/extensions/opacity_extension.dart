@@ -5,7 +5,7 @@ extension OpacityExtension on Widget {
   /// Wraps the widget in an [Opacity] widget with the given opacity.
   ///
   /// The [opacity] argument must be between 0.0 and 1.0 and must not be null.
-  Opacity opacity(double opacity) => Opacity(child: this, opacity: opacity);
+  Opacity opacity(double opacity) => Opacity(opacity: opacity, child: this);
 
   /// Returns the widget with 0% opacity, making it fully invisible.
   Opacity get opacity0 => opacity(0.0);
