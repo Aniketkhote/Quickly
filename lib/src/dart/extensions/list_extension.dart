@@ -9,7 +9,7 @@ extension ListExtension<T> on List<T> {
   ///list.sorted(true) // create new list with ascending order
   ///```
   List<T> sorted([bool isDesc = false]) {
-    final List<T> copy = List<T>.from(this);
+    final List<T> copy = List<T>.of(this);
     copy.sort();
     return isDesc ? copy.reversed.toList() : copy;
   }
@@ -29,9 +29,6 @@ extension ListExtension<T> on List<T> {
   ///list.sortBy("price") // create new list with ascending order by according to price
   ///```
   List<Map<T, T>> sortBy(String key, [bool isDesc = false]) {
-    if (!hasKey(key)) {
-      return <Map<T, T>>[];
-    }
     final List<Map<T, T>> maps = whereType<Map<T, T>>()
         .where((Map<T, T> element) => element.containsKey(key))
         .toList();
@@ -79,6 +76,7 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.groupByKey("key")
   ///```
+  // ignore: avoid_dynamic_calls
   Map<T, List<T>> groupByKey(String key) => groupBy((dynamic e) => e[key] as T);
 
   ///The latest methods allow you to easily order results by id in descending order.

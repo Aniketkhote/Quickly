@@ -54,49 +54,46 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
     bool reverse,
     double animationDuration,
   ) {
-    switch (type) {
-      case AnimationType.fade:
-        return FadeTransition(
-          opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.ease,
-            ),
+    if (AnimationType.fade == type) {
+      return FadeTransition(
+        opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(
+            parent: animation,
+            curve: Curves.ease,
           ),
-          child: child,
-        );
-      case AnimationType.scale:
-        return ScaleTransition(
-          scale: Tween<double>(begin: 0.0, end: animationDuration).animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.ease,
-            ),
+        ),
+        child: child,
+      );
+    } else if (AnimationType.scale == type) {
+      return ScaleTransition(
+        scale: Tween<double>(begin: 0.0, end: animationDuration).animate(
+          CurvedAnimation(
+            parent: animation,
+            curve: Curves.ease,
           ),
-          child: child,
-        );
-      case AnimationType.slide:
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: reverse ? Offset.zero : const Offset(1.0, 0.0),
-            end: reverse ? const Offset(-1.0, 0.0) : Offset.zero,
-          ).animate(
-            CurvedAnimation(parent: animation, curve: Curves.ease),
+        ),
+        child: child,
+      );
+    } else if (AnimationType.slide == type) {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: reverse ? Offset.zero : const Offset(1.0, 0.0),
+          end: reverse ? const Offset(-1.0, 0.0) : Offset.zero,
+        ).animate(
+          CurvedAnimation(parent: animation, curve: Curves.ease),
+        ),
+        child: child,
+      );
+    } else {
+      return RotationTransition(
+        turns: Tween<double>(begin: 0.0, end: animationDuration).animate(
+          CurvedAnimation(
+            parent: animation,
+            curve: Curves.ease,
           ),
-          child: child,
-        );
-      case AnimationType.rotate:
-        return RotationTransition(
-          turns: Tween<double>(begin: 0.0, end: animationDuration).animate(
-            CurvedAnimation(
-              parent: animation,
-              curve: Curves.ease,
-            ),
-          ),
-          child: child,
-        );
-      default:
-        throw ArgumentError.value(type, 'Invalid animation type');
+        ),
+        child: child,
+      );
     }
   }
 }
