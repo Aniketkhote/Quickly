@@ -17,10 +17,10 @@ void main() {
     };
 
     group('.getId', () {
-      test('.getId - map is empty so return 0',
-          () => expect(input1.getId, equals(0)));
-      test('.getId - map does not have given key return 0',
-          () => expect(input2.getId, equals(0)));
+      test('.getId - map is empty so return null',
+          () => expect(input1.getId, equals(null)));
+      test('.getId - map does not have given key return null',
+          () => expect(input2.getId, equals(null)));
       test('.getId - map have given key so return value of key which is 1',
           () => expect(input3.getId, equals(1)));
     });
@@ -39,12 +39,12 @@ void main() {
 
     group('.getString(key)', () {
       test('.getString() - map is empty so return empty string',
-          () => expect(input1.getString('stock'), equals('')));
+          () => expect(input1.getString('stock'), equals(null)));
       test('.getString() - map does not have given key return empty string',
-          () => expect(input2.getString('color'), equals('')));
+          () => expect(input2.getString('color'), equals(null)));
       test(
           '.getString() - map have given key but not String type return empty string',
-          () => expect(input3.getString('price'), equals('')));
+          () => expect(input3.getString('price'), equals(null)));
       test(
           '.getString() - map have given key so return value of key which is 49',
           () => expect(input3.getString('name'), equals('P 1')));
