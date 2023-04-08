@@ -85,7 +85,7 @@ class SecondWidget extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Text("First Screen : " + args!.getString('arg1')),
+          Text("First Screen : " + args!.getString('arg1')!),
           ElevatedButton(
             onPressed: () => FxNavigation().toPage(const FirstWidget()),
             child: const Text('back').white,

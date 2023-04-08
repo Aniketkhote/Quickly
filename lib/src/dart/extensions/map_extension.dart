@@ -56,8 +56,8 @@ extension MapExtension<T> on Map<T, T> {
   /// int id2 = map2.getId;
   /// print(id2); // Output: 0
   ///```
-  int get getId =>
-      (containsKey('id') && this['id'] != null) ? this['id']! as int : 0;
+  dynamic get getId =>
+      (containsKey('id') && this['id'] != null) ? this['id'] : null;
 
   ///Returns all entries of this map according to keys.
   ///
@@ -68,8 +68,9 @@ extension MapExtension<T> on Map<T, T> {
   ///map.diffKeys(map2)
   ///```
   Map<T, T> diffKeys<K, V>(Map<K, V> map) {
-    removeWhere((T key, T value) => map.containsKey(key));
-    return this;
+    final Map<T, T> copy = Map<T, T>.from(this);
+    copy.removeWhere((T key, T value) => map.containsKey(key));
+    return copy;
   }
 
   ///Returns all entries of this map according to values.
@@ -81,8 +82,9 @@ extension MapExtension<T> on Map<T, T> {
   ///map.diffValues(map2)
   ///```
   Map<T, T> diffValues(Map<T, T> map) {
-    removeWhere((T key, T value) => map.containsValue(value));
-    return this;
+    final Map<T, T> copy = Map<T, T>.from(this);
+    copy.removeWhere((T key, T value) => map.containsValue(value));
+    return copy;
   }
 
   /// Reads a [key] value of [bool] type from [Map].
@@ -111,7 +113,7 @@ extension MapExtension<T> on Map<T, T> {
   /// print(map.getInt('address')); // null
   ///```
   int? getInt(String key) =>
-      containsKey(key) ? int.tryParse('${this[key]}') : 0;
+      containsKey(key) ? int.tryParse('${this[key]}') : null;
 
   /// Reads a [key] value of [double] type from [Map].
   ///
@@ -128,7 +130,7 @@ extension MapExtension<T> on Map<T, T> {
   ///print(map.getDouble("size")); // null
   ///```
   double? getDouble(String key) =>
-      containsKey(key) ? double.tryParse('${this[key]}') : 0.0;
+      containsKey(key) ? double.tryParse('${this[key]}') : null;
 
   /// Reads a [key] value of [String] type from [Map].
   ///
@@ -144,7 +146,7 @@ extension MapExtension<T> on Map<T, T> {
   /// String email = map.getString('email', 'not_provided@example.com');
   /// print(email); // Output: not_provided@example.com
   ///```
-  String getString(String key, [String defaultString = '']) =>
+  String? getString(String key, [String? defaultString]) =>
       this[key] is String ? this[key]! as String : defaultString;
 
   /// This method retrieves the list associated with the given key from the map.
