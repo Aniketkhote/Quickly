@@ -1,3 +1,7 @@
+## 3.6.2
+
+- Minor issues fixed.
+
 ## 3.6.1
 
 - Improved type safety and null safety checks to reduce runtime errors.
