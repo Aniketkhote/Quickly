@@ -21,5 +21,14 @@ void main() {
     test('getWeekName(invalid number) - returns Invalid number of week', () {
       expect(8.getWeekName(), equals('Invalid number of week'));
     });
+    test('getWeekName(invalid number) - returns Sunday', () {
+      expect(7.getWeekName(), equals('Sunday'));
+    });
+    test('getMonthName() - returns December', () {
+      expect(12.getMonthName(), equals('December'));
+    });
+    test('getMonthName(true) - returns Dec', () {
+      expect(12.getMonthName(true), equals('Dec'));
+    });
   });
 }

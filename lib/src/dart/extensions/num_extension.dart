@@ -11,14 +11,28 @@ extension NumExtension on num {
   ///   print(5.suffix()); // prints "5th"
   ///   print(5.suffix('%')); // prints "5%"
   /// ```
-  String suffix([String suffix = '']) => suffix.isNotEmpty
-      ? '$this$suffix'
-      : <int, String>{
-            1: '${this}st',
-            2: '${this}nd',
-            3: '${this}rd',
-          }[this % 10] ??
-          '${this}th';
+  String suffix([String suffix = '']) {
+    if (suffix.isNotEmpty) {
+      return '$this$suffix';
+    }
+    switch (this % 100) {
+      case 11:
+      case 12:
+      case 13:
+        return '${this}th';
+      default:
+        switch (this % 10) {
+          case 1:
+            return '${this}st';
+          case 2:
+            return '${this}nd';
+          case 3:
+            return '${this}rd';
+          default:
+            return '${this}th';
+        }
+    }
+  }
 
   /// Returns a `Duration` object representing the number of seconds represented by this number.
   ///

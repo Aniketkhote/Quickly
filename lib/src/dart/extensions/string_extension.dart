@@ -1,5 +1,3 @@
-import 'dart:io';
-
 ///String extensions to get basic functionality on strings
 extension StringExtension on String {
   ///match string with regex pattern
@@ -32,8 +30,8 @@ extension StringExtension on String {
       minLen(2) ? substring(upto ?? 1, length) : '';
 
   ///Remove last element of [string]
-  String removeLast([int? upto]) =>
-      minLen(2) ? substring(0, length - upto!) : '';
+  String removeLast([int upto = 1]) =>
+      minLen(2) ? substring(0, length - upto) : '';
 
   ///Removes all whitespace
   String get removeWhitespace => replaceAll(' ', '');
@@ -50,7 +48,7 @@ extension StringExtension on String {
   ///Replaces all but the last num runes of a string with the specified mask.
   String? mask({int upto = 4, String mask = '*', bool atEnd = false}) {
     if (length <= 1 || upto < 1 || length < upto) {
-      return null;
+      return this;
     }
 
     return atEnd
@@ -69,46 +67,54 @@ extension StringExtension on String {
   }
 
   ///Counts the number of occurrences of value.
-  int countOccurrence(String string) => isEmpty ? 0 : allMatches(string).length;
+  int countOccurrence(String string) =>
+      isEmpty ? 0 : RegExp(string).allMatches(this).length;
 
   ///Counts the number of words in
   int get countWord => split(' ').length;
 
   ///Get default value if string is empty.
-  String ifEmpty([String value = 'null']) => isEmpty ? value : this;
+  String ifEmpty([String value = 'null']) =>
+      isEmpty || trim().isEmpty ? value : this;
 
   ///Convert string to [int]
-  int get toInt => isEmpty ? int.parse(this) : 0;
+  int? get toInt {
+    try {
+      return isNotEmpty ? double.parse(this).toInt() : null;
+    } catch (e) {
+      return null;
+    }
+  }
 
   ///Convert string to [double]
-  double get toDouble => isEmpty ? double.parse(this) : 0.0;
-
-  ///Get file name from this
-  String get fileName => split(Platform.pathSeparator).last;
-
-  ///Get file extension from this
-  String get fileExt => fileName.split('.').last;
-
-  ///Get file path without file name from this
-  String get filePath => removeLast(fileName.length);
+  double? get toDouble {
+    try {
+      return isNotEmpty ? double.parse(this) : null;
+    } catch (e) {
+      return null;
+    }
+  }
 
   ///Convert [string] into slug
   String get toSlug => trim().toLowerCase().replaceAll(' ', '-');
 
   ///Converts all characters in this string to capital case.
-  String get toCapitalCase => this[0].toUpperCase() + substring(1);
+  String get toCapitalCase => split(' ')
+      .map((String word) => word.isNotEmpty
+          ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+          : '')
+      .join(' ');
 
   ///Converts all first characters in this string to capital case and rest to the lower case.
-  String get toTitleCase => replaceAllMapped(
-          RegExp(
-              r'[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+'),
-          (Match m) =>
-              '${m[0]![0].toUpperCase()}${m[0]!.substring(1).toLowerCase()}')
-      .replaceAll(RegExp(r'(_|-)+'), ' ');
+  String get toTitleCase => split(' ')
+      .map((String word) => word.isNotEmpty
+          ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+          : '')
+      .join(' ');
 
   ///Capitalize first letter of String and convert rest of string into lower case
   String get toSentenceCase =>
-      this[0].toUpperCase() + substring(1).toLowerCase();
+      isNotEmpty ? this[0].toUpperCase() + substring(1).toLowerCase() : '';
 
   ///check string is in Sentence case or not
   bool get isSentence => this == toSentenceCase;
@@ -126,22 +132,23 @@ extension StringExtension on String {
   bool get isUpper => this == toUpperCase();
 
   ///Check image is svg or not
-  bool get isSvg => endsWith('.svg');
+  bool get isSvg => toLowerCase().endsWith('.svg');
 
   ///Check image is png or not
-  bool get isPng => endsWith('.png');
+  bool get isPng => toLowerCase().endsWith('.png');
 
   ///Check image is jpg or jpeg or not
-  bool get isJpg => endsWith('.jpg') || endsWith('.jpeg');
+  bool get isJpg =>
+      toLowerCase().endsWith('.jpg') || toLowerCase().endsWith('.jpeg');
 
   ///Check file is pdf or not
-  bool get isPDF => endsWith('.pdf');
+  bool get isPDF => toLowerCase().endsWith('.pdf');
 
   ///Check file is csv or not
-  bool get isCsv => endsWith('.csv');
+  bool get isCsv => toLowerCase().endsWith('.csv');
 
   ///Check file is text or not
-  bool get isTxt => endsWith('.txt');
+  bool get isTxt => toLowerCase().endsWith('.txt');
 
   ///check string is image
   bool get isImage => isJpg || isPng || isSvg;

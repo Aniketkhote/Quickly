@@ -1,3 +1,8 @@
+## 3.6.3
+
+- Resolved issues related to String extensions.
+- Refactored test cases for extensions of String, Int, and Num types.
+
 ## 3.6.2
 
 - Minor issues fixed.

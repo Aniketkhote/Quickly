@@ -23,23 +23,19 @@ extension ShimmerExtension on Widget {
       child: Stack(
         children: <Widget>[
           // Add shimmer gradient
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: <Color>[
-                    highlightColor,
-                    baseColor,
-                    highlightColor,
-                  ],
-                ),
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: <Color>[
+                  highlightColor,
+                  baseColor,
+                  highlightColor,
+                ],
               ),
             ),
           ),
           // Add original widget
-          Positioned.fill(
-            child: this,
-          ),
+          this,
         ],
       ),
     );

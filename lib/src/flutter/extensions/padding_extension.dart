@@ -4,51 +4,49 @@ import 'package:flutter/material.dart';
 extension PaddingExtension on Widget {
   ///get padding only on given values non-zero.
   Padding pOnly({
-    double? top,
-    double? bottom,
-    double? left,
-    double? right,
+    double top = 0,
+    double bottom = 0,
+    double left = 0,
+    double right = 0,
   }) =>
-      _padding(top: top, bottom: bottom, left: left, right: right);
+      _pad(top: top, bottom: bottom, left: left, right: right);
 
   ///get padding except left on given values non-zero.
-  Padding pnl(double value) =>
-      _padding(top: value, bottom: value, right: value);
+  Padding pnl(double value) => _pad(top: value, bottom: value, right: value);
 
   ///get padding except right on given values non-zero.
-  Padding pnr(double value) => _padding(top: value, bottom: value, left: value);
+  Padding pnr(double value) => _pad(top: value, bottom: value, left: value);
 
   ///get padding except top on given values non-zero.
-  Padding pnt(double value) =>
-      _padding(left: value, bottom: value, right: value);
+  Padding pnt(double value) => _pad(left: value, bottom: value, right: value);
 
   ///get padding except bottom on given values non-zero.
-  Padding pnb(double value) => _padding(top: value, left: value, right: value);
+  Padding pnb(double value) => _pad(top: value, left: value, right: value);
 
   ///get all side padding
-  Padding p(double all) => _padding(all: all);
+  Padding p(double all) => _pad(all: all);
 
   ///get horizontaly padding
-  Padding px(double h) => _padding(horizontal: h);
+  Padding px(double h) => _pad(horizontal: h);
 
   ///get vertically padding
-  Padding py(double v) => _padding(vertical: v);
+  Padding py(double v) => _pad(vertical: v);
 
   ///get [symmetric] vertically and horizontally padding
   Padding pxy({required double h, required double v}) =>
-      _padding(horizontal: h, vertical: v);
+      _pad(horizontal: h, vertical: v);
 
   ///get right side padding
-  Padding pr(double right) => _padding(right: right);
+  Padding pr(double right) => _pad(right: right);
 
   ///get left side padding
-  Padding pl(double left) => _padding(left: left);
+  Padding pl(double left) => _pad(left: left);
 
   ///get top side padding
-  Padding pt(double top) => _padding(top: top);
+  Padding pt(double top) => _pad(top: top);
 
   ///get bottom side padding
-  Padding pb(double bottom) => _padding(bottom: bottom);
+  Padding pb(double bottom) => _pad(bottom: bottom);
 
   ///Gives 0dp padding from all sides
   Padding get p0 => p(0);
@@ -281,22 +279,23 @@ extension PaddingExtension on Widget {
   /// Gives 64dp padding vertically
   Padding get py64 => py(64);
 
-  Padding _padding({
-    double? all,
-    double? horizontal,
-    double? vertical,
-    double? top,
-    double? bottom,
-    double? left,
-    double? right,
-  }) =>
-      Padding(
-        padding: EdgeInsets.only(
-          top: top ?? vertical ?? all ?? 0.0,
-          bottom: bottom ?? vertical ?? all ?? 0.0,
-          left: left ?? horizontal ?? all ?? 0.0,
-          right: right ?? horizontal ?? all ?? 0.0,
-        ),
-        child: this,
-      );
+  Padding _pad({
+    double all = 0,
+    double horizontal = 0,
+    double vertical = 0,
+    double top = 0,
+    double bottom = 0,
+    double left = 0,
+    double right = 0,
+  }) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        left == 0 ? all : left,
+        top == 0 ? all : top,
+        right == 0 ? all : right,
+        bottom == 0 ? all : bottom,
+      ),
+      child: this,
+    );
+  }
 }
