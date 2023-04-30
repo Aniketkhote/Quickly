@@ -43,4 +43,33 @@ extension ContextExtension on BuildContext {
 
   /// similar to [Theme.of(context).textTheme]
   TextTheme get textTheme => theme.textTheme;
+
+  /// Returns the nearest ancestor [Navigator] widget.
+  NavigatorState get navigator => Navigator.of(this);
+
+  /// Shows a [SnackBar] with the given message
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
+  /// Provides a shortcut to push a new route to the navigator.
+  ///
+  /// This is equivalent to calling `Navigator.of(context).push()`.
+  Future<T?> push<T extends Object>(Route<T> route) => navigator.push(route);
+
+  /// Provides a shortcut to push a named route to the navigator.
+  ///
+  /// This is equivalent to calling `Navigator.of(context).pushNamed()`.
+  Future<T?> pushNamed<T extends Object?>(String routeName,
+          {Object? arguments}) =>
+      navigator.pushNamed<T>(routeName, arguments: arguments);
+
+  /// Provides a shortcut to pop the current route off the navigator.
+  ///
+  /// This is equivalent to calling `Navigator.of(context).pop()`.
+  void pop<T extends Object?>([T? result]) => navigator.pop<T>(result);
 }

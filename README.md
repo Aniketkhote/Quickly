@@ -64,7 +64,7 @@ In summary, Quickly is an essential tool for any Flutter developer looking to im
 
 ```dart
 
-// Display big bold red string in italic
+// Display big bold red Text in italic with underline and alligned it to center
 Text('Quickly').red500.xl.bold.italic.underline.center
 
 // Apply padding to Widget
@@ -167,15 +167,15 @@ person.has('gender', 'male')  // true
 
 ```
 
-- map.getId: Returns the value associated with the key 'id' if it exists, else returns 0.
+- map.getId: Returns the value associated with the key 'id' if it exists, else returns NULL.
 
 ```dart
 
-person.getId  // 0
+person.getId  // null
 
 ```
 
-- map.getString('key'): Returns the value associated with the provided key if it exists, else returns an empty string.
+- map.getString('key'): Returns the value associated with the provided key if it exists, else returns NULL.
 
 ```dart
 
@@ -225,7 +225,8 @@ person.match('age', 'Unknown')  // 30
 
 ```dart
 
-5.getMonthName()  // 'May'
+1.getMonthName()  // 'January'
+1.getMonthName(true)  // 'Jan'
 
 ```
 
@@ -233,7 +234,8 @@ person.match('age', 'Unknown')  // 30
 
 ```dart
 
-3.getWeekName(short = True)  // 'Wed'
+3.getWeekName()  // 'Wednesday'
+3.getWeekName(true)  // 'Wed'
 
 ```
 

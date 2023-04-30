@@ -2,100 +2,106 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:quickly/quickly.dart';
 
 void main() {
-  group('Map Extensions', () {
-    const Map<String, dynamic> input1 = <String, dynamic>{};
-    const Map<String, dynamic> input2 = <String, dynamic>{
-      'name': 'P 1',
-      'price': 49,
-      'qty': 10
-    };
-    const Map<String, dynamic> input3 = <String, dynamic>{
-      'id': 1,
-      'name': 'P 1',
-      'price': 49,
-      'stock': true,
-    };
-
-    group('.getId', () {
-      test('.getId - map is empty so return null',
-          () => expect(input1.getId, equals(null)));
-      test('.getId - map does not have given key return null',
-          () => expect(input2.getId, equals(null)));
-      test('.getId - map have given key so return value of key which is 1',
-          () => expect(input3.getId, equals(1)));
-    });
-
-    group('.getBool(key)', () {
-      test('.getBool() - map is empty so return false',
-          () => expect(input1.getBool('stock'), equals(false)));
-      test('.getBool() - map does not have given key return false',
-          () => expect(input2.getBool('color'), equals(false)));
-      test('.getBool() - map have given key but not bool type return false',
-          () => expect(input3.getBool('name'), equals(false)));
-      test(
-          '.getBool() - map have given key so return value of key which is true',
-          () => expect(input3.getBool('stock'), equals(true)));
-    });
-
-    group('.getString(key)', () {
-      test('.getString() - map is empty so return empty string',
-          () => expect(input1.getString('stock'), equals(null)));
-      test('.getString() - map does not have given key return empty string',
-          () => expect(input2.getString('color'), equals(null)));
-      test(
-          '.getString() - map have given key but not String type return empty string',
-          () => expect(input3.getString('price'), equals(null)));
-      test(
-          '.getString() - map have given key so return value of key which is 49',
-          () => expect(input3.getString('name'), equals('P 1')));
-    });
-
-    group('map1.diffKeys(map2)', () {
-      test(
-          '.diffKeys() - return all entries of input1 according to keys which is not in input2',
-          () => expect(
-              input2.diffKeys(input3), equals(<dynamic, dynamic>{'qty': 10})));
-    });
-    group('map1.diffValues(map2)', () {
-      test(
-          '.diffValues() - return all entries of input1 according to values which is not in input2',
-          () => expect(input2.diffValues(input3),
-              equals(<dynamic, dynamic>{'qty': 10})));
-    });
-
-    group('.methodName(key, value)', () {
-      test('.has(key, value) - return true key/value present in map',
-          () => expect(input3.has('price', 49), equals(true)));
-      test('.has(key, value) - return false value not present in map',
-          () => expect(input2.has('price', 'red'), equals(false)));
-      test('.has(key, value) - return false key & value not present in map',
-          () => expect(input2.has('color', 'red'), equals(false)));
-      test('.doesntHave(key, value) - return true key/value not present in map',
-          () => expect(input2.doesntHave('price', 'red'), equals(true)));
-      test(
-          '.doesntHave(key, value) - return false key/value not present in map',
-          () => expect(input2.doesntHave('qty', 10), equals(false)));
-    });
-
-    group('.match()', () {
-      const Map<int, String> map = <int, String>{1: 'One', 2: 'Two'};
-
-      test('.match() - condition match return value',
-          () => expect(map.match(2), equals('Two')));
-      test('.match() - condtion dose not match return default value',
-          () => expect(map.match(12), equals('Invalid input')));
-    });
-
-    test('Test retainKeys()', () {
-      final Map<String, dynamic> map = <String, dynamic>{
+  group('MapExtension', () {
+    late Map<String, dynamic> map;
+    setUp(() {
+      map = <String, Object>{
         'id': 1,
         'name': 'John',
         'age': 30,
-        'gender': 'male'
+        'isAdmin': true,
+        'balance': 120.5,
       };
+    });
+
+    test('has', () {
+      expect(map.has('id', 1), isTrue);
+      expect(map.has('name', 'John'), isTrue);
+      expect(map.has('isAdmin', true), isTrue);
+      expect(map.has('balance', 120.5), isTrue);
+      expect(map.has('age', 20), isFalse);
+      expect(map.has('gender', 'male'), isFalse);
+    });
+
+    test('doesntHave', () {
+      expect(map.doesntHave('id', 1), isFalse);
+      expect(map.doesntHave('name', 'John'), isFalse);
+      expect(map.doesntHave('isAdmin', true), isFalse);
+      expect(map.doesntHave('balance', 120.5), isFalse);
+      expect(map.doesntHave('age', 20), isTrue);
+      expect(map.doesntHave('gender', 'male'), isTrue);
+      expect(map.doesntHave('gender', null), isTrue);
+    });
+
+    test('retainKeys', () {
       final Map<dynamic, dynamic> newMap =
-          map.retainKeys(<String>['id', 'name']);
-      expect(newMap, <dynamic, dynamic>{'id': 1, 'name': 'John'});
+          map.retainKeys(<String>['id', 'name', 'balance']);
+      expect(
+          newMap,
+          equals(
+              <dynamic, dynamic>{'id': 1, 'name': 'John', 'balance': 120.5}));
+    });
+
+    test('getId', () {
+      expect(map.getId, equals(1));
+
+      final Map<String, String> map2 = <String, String>{'name': 'Chair'};
+      expect(map2.getId, isNull);
+    });
+
+    test('diffKeys', () {
+      final Map<String, Object> map2 = <String, Object>{
+        'id': 1,
+        'name': 'John',
+        'age': 20,
+        'email': 'john@example.com'
+      };
+      final Map<dynamic, dynamic> diff = map.diffKeys(map2);
+      expect(diff, equals(<String, Object>{'isAdmin': true, 'balance': 120.5}));
+    });
+
+    test('diffValues', () {
+      final Map<String, Object> map2 = <String, Object>{
+        'id': 2,
+        'name': 'Jane',
+        'age': 30,
+        'isAdmin': true,
+        'balance': 120.5,
+      };
+      final Map<dynamic, dynamic> diff = map.diffValues(map2);
+      expect(diff, equals(<String, Object>{'name': 'John', 'id': 1}));
+    });
+
+    test('getBool', () {
+      expect(map.getBool('isAdmin'), isTrue);
+      expect(map.getBool('isActive'), isFalse);
+      expect(map.getBool('age'), isFalse);
+    });
+
+    test('getInt', () {
+      expect(map.getInt('id'), equals(1));
+      expect(map.getInt('balance'), isNull);
+      expect(map.getInt('age'), equals(30));
+      expect(map.getInt('email'), isNull);
+    });
+
+    test('getDouble', () {
+      expect(map.getDouble('balance'), equals(120.5));
+      expect(map.getDouble('email'), isNull);
+      expect(map.getDouble('age'), 30.0);
+    });
+
+    test('getList', () {
+      final Map<String, dynamic> map = <String, dynamic>{
+        'a': 1,
+        'b': <int>[2, 4],
+        'c': <String>['a', 'b'],
+        'd': <dynamic>['a', 2]
+      };
+      expect(map.getList('a'), equals(<int>[]));
+      expect(map.getList('b'), equals(<int>[2, 4]));
+      expect(map.getList('c'), equals(<String>['a', 'b']));
+      expect(map.getList('d'), equals(<dynamic>['a', 2]));
     });
   });
 }

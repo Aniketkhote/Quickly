@@ -1,3 +1,9 @@
+## 3.6.4
+
+- Corrected a typo in the README file.
+- Expanded the functionality of the BuildContext class by adding some new extensions.
+- Revised and improved the text cases for the Map extension.
+
 ## 3.6.3
 
 - Resolved issues related to String extensions.
