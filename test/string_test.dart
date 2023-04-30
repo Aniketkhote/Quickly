@@ -35,12 +35,25 @@ void main() {
       expect(''.isAlphaNumeric, false);
     });
 
-    test('isEmail should return true if string is a valid email', () {
-      expect('user@example.com'.isEmail, true);
-      expect('user@123.com'.isEmail, true);
-      expect('user@example'.isEmail, false);
-      expect('user@.com'.isEmail, false);
-      expect(''.isEmail, false);
+    group('EmailValidator', () {
+      test('Valid email addresses', () {
+        expect('john.doe@example.com'.isEmail, isTrue);
+        expect('jane@example.co.uk'.isEmail, isTrue);
+        expect('user+label@example.com'.isEmail, isTrue);
+        expect('user.label-01@example.com'.isEmail, isTrue);
+        expect('user123@example.com'.isEmail, isTrue);
+      });
+
+      test('Invalid email addresses', () {
+        expect(''.isEmail, isFalse);
+        expect('@example.com'.isEmail, isFalse);
+        expect('user@.example.com'.isEmail, isFalse);
+        expect('user@example.'.isEmail, isFalse);
+        expect('user@.example.'.isEmail, isFalse);
+        expect('user name@example.com'.isEmail, isFalse);
+        expect('user@name@.example.com'.isEmail, isFalse);
+        expect('user@name@example.com@'.isEmail, isFalse);
+      });
     });
 
     test('minLen() should return true if string is at least n characters long',
