@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'fx_animation.dart';
+import 'fx_route_transition.dart';
 
 /// Represents a navigator instance.
 class FxNavigation {
