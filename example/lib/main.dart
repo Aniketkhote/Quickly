@@ -10,11 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FxNavigation navigation = FxNavigation();
-    navigation.navigatorKey = GlobalKey<NavigatorState>();
-
     return MaterialApp(
-      navigatorKey: navigation.navigatorKey,
+      navigatorKey: FxNavigation.navigatorKey,
       initialRoute: '/',
       routes: {
         '/first': (context) => const FirstWidget(),
@@ -34,7 +31,7 @@ class MyApp extends StatelessWidget {
                 .rounded,
             10.hBox(),
             ElevatedButton(
-              onPressed: () => navigation.toPage(const FirstWidget()),
+              onPressed: () => FxNavigation.toPage(const FirstWidget()),
               child: const Text('Go to First Screen').white,
               style: ElevatedButton.styleFrom(
                 backgroundColor: FxColor.dark,
@@ -59,8 +56,8 @@ class FirstWidget extends StatelessWidget {
         children: [
           const Text("First Screen"),
           ElevatedButton(
-            onPressed: () => FxNavigation()
-                .toNamed('second', args: {'arg1': 'Hello', 'arg2': 'World'}),
+            onPressed: () => FxNavigation.toNamed('second',
+                args: {'arg1': 'Hello', 'arg2': 'World'}),
             child: const Text('Go to Second Screen').white,
             style: ElevatedButton.styleFrom(
               backgroundColor: FxColor.dark,
@@ -87,7 +84,7 @@ class SecondWidget extends StatelessWidget {
         children: [
           Text("First Screen : " + args!.getString('arg1')!),
           ElevatedButton(
-            onPressed: () => FxNavigation().toPage(const FirstWidget()),
+            onPressed: () => FxNavigation.toPage(const FirstWidget()),
             child: const Text('back').white,
             style: ElevatedButton.styleFrom(
               backgroundColor: FxColor.dark,

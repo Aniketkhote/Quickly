@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
-import './fx_animation.dart';
 
+import 'fx_animation.dart';
+
+/// Represents a navigator instance.
 class FxNavigation {
-  factory FxNavigation() => _instance;
+  static GlobalKey<NavigatorState>? _navigatorKey;
 
-  FxNavigation._internal();
+  /// Returns the navigator key.
+  static GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 
-  static final FxNavigation _instance = FxNavigation._internal();
+  /// Sets the navigator key.
+  void setNavigatorKey(GlobalKey<NavigatorState> key) => _navigatorKey = key;
 
-  GlobalKey<NavigatorState>? _navigatorKey;
+  /// Returns the current navigator state.
+  static NavigatorState? get navigator => _navigatorKey?.currentState;
 
-  GlobalKey<NavigatorState> get navigatorKey => _navigatorKey!;
+  /// Returns the current build context.
+  static BuildContext? get context => _navigatorKey?.currentContext;
 
-  set navigatorKey(GlobalKey<NavigatorState> key) => _navigatorKey = key;
+  /// Returns the arguments passed to the current route.
+  static Object? get args => ModalRoute.of(context!)?.settings.arguments;
 
-  NavigatorState? get navigator => _navigatorKey?.currentState;
+  /// Returns the query parameters of the current route.
+  static Map<String, String> _params = <String, String>{};
 
-  BuildContext? get context => _navigatorKey?.currentContext;
+  /// Returns the query parameters of the current route.
+  static Map<String, String> get params => _params;
 
-  Object? get args => ModalRoute.of(context!)?.settings.arguments;
-
-  Map<String, String> _params = <String, String>{};
-
-  Map<String, String> get params => _params;
-
-  Future<T?> toNamed<T extends Object?>(
+  /// Navigates to the named route.
+  static Future<T?> toNamed<T extends Object?>(
     String routeName, {
     Object? args,
   }) {
@@ -35,7 +39,8 @@ class FxNavigation {
     );
   }
 
-  Future<T?>? toPage<T>(
+  /// Navigates to the given page with a transition animation.
+  static Future<T?>? toPage<T>(
     Widget page, {
     AnimationType animationType = AnimationType.fade,
     double animationDuration = 1.0,
@@ -51,7 +56,8 @@ class FxNavigation {
     );
   }
 
-  Future<T?>? offPage<T>(
+  /// Navigates to the given page with a transition animation and replaces the current route.
+  static Future<T?>? offPage<T>(
     Widget page, {
     AnimationType animationType = AnimationType.fade,
     double animationDuration = 1.0,
@@ -68,7 +74,8 @@ class FxNavigation {
     );
   }
 
-  Future<T?>? offNamed<T extends Object?>(
+  /// Replaces the current route with the named route.
+  static Future<T?>? offNamed<T extends Object?>(
     String routeName, {
     Object? args,
     Function? onCompleted,
@@ -77,37 +84,17 @@ class FxNavigation {
     return navigator?.pushReplacementNamed<T, T>(route, arguments: args);
   }
 
-  void get back => navigator?.pop();
+  /// Navigates back to the previous route.
+  static void get back => navigator?.pop();
 
-  bool? get canPop => navigator?.canPop();
+  /// Returns whether there is a previous route to navigate back to.
+  static bool? get canPop => navigator?.canPop();
 
-  void maybePop<T extends Object>([T? result]) => navigator?.maybePop(result);
+  /// Navigates back to the previous route with an optional result.
+  static void maybePop<T extends Object>([T? result]) =>
+      navigator?.maybePop(result);
 
-  void navigateTo(
-    Widget page, {
-    AnimationType animationType = AnimationType.fade,
-    double animationDuration = 1.0,
-    Function? onCompleted,
-    bool replace = false,
-  }) {
-    if (replace) {
-      offPage<Object>(
-        page,
-        animationType: animationType,
-        animationDuration: animationDuration,
-        onCompleted: onCompleted,
-      );
-    } else {
-      toPage<Object>(
-        page,
-        animationType: animationType,
-        animationDuration: animationDuration,
-        onCompleted: onCompleted,
-      );
-    }
-  }
-
-  String _getRouteName(String routeName) {
+  static String _getRouteName(String routeName) {
     _params = Uri.parse(routeName).queryParameters;
     final int queryIndex = routeName.indexOf('?');
     if (queryIndex != -1) {

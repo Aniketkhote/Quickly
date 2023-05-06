@@ -1,3 +1,15 @@
+## 4.0.0
+
+_Breaking changes_
+
+- Revised and improved the navigation.
+- Revised and improved the Queue.
+- Improved FxResponsive Widget
+
+_Added_
+
+- Added FxGrid widget
+
 ## 3.6.4
 
 - Corrected a typo in the README file.
