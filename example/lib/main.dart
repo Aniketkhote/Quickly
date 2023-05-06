@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: FxNavigation.navigatorKey,
       initialRoute: '/',
       routes: {
         '/first': (context) => const FirstWidget(),

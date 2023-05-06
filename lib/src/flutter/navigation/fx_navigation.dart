@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_classes_with_only_static_members
+
 import 'package:flutter/material.dart';
 
 import 'fx_route_transition.dart';
@@ -5,12 +7,6 @@ import 'fx_route_transition.dart';
 /// Represents a navigator instance.
 class FxNavigation {
   static GlobalKey<NavigatorState>? _navigatorKey;
-
-  /// Returns the navigator key.
-  static GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
-
-  /// Sets the navigator key.
-  void setNavigatorKey(GlobalKey<NavigatorState> key) => _navigatorKey = key;
 
   /// Returns the current navigator state.
   static NavigatorState? get navigator => _navigatorKey?.currentState;
