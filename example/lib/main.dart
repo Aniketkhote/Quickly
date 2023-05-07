@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/first': (context) => const FirstWidget(),
-        'second': (context) => const SecondWidget(),
+        '/second': (context) => const SecondWidget(),
       },
       home: Scaffold(
         appBar: AppBar(title: const Text('Simple UI').black.bold),
@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
                 .bold
                 .underline
                 .p20
-                .center
-                .rounded,
+                .center,
             10.hBox(),
             ElevatedButton(
               onPressed: () => FxNavigation.toPage(const FirstWidget()),
