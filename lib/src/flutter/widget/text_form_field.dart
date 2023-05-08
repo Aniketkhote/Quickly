@@ -2,15 +2,50 @@ import 'package:flutter/material.dart';
 
 import '../../../quickly.dart';
 
-final Map<String, Function(String?)> validators = <String, Function(String?)>{
-  'required': (String? value) =>
-      value!.isEmpty ? 'This field is required.' : null,
-  'email': (String? value) =>
-      !value!.isEmail ? 'Please enter a valid email address.' : null,
-  'minLength': (String? value) =>
-      value!.length < 6 ? 'The value must be at least 6 characters.' : null,
-  'maxLength': (String? value) =>
-      value!.length > 12 ? 'The value must be at most 12 characters.' : null,
+typedef ValidatorFunction = String? Function(String);
+
+String? requiredValidator(String value) {
+  return value.isEmpty ? 'This field is required.' : null;
+}
+
+String? emailValidator(String value) {
+  return value.isEmail == false ? 'Please enter a valid email address.' : null;
+}
+
+String? minLengthValidator(String value, [int min = 6]) {
+  return value.length < min
+      ? 'The value must be at least $min characters.'
+      : null;
+}
+
+String? maxLengthValidator(String value, [int max = 12]) {
+  return value.length > max
+      ? 'The value must be at most $max characters.'
+      : null;
+}
+
+String? numericValidator(String value) {
+  return value.isNumber == false ? 'Please enter a valid number.' : null;
+}
+
+String? alphabeticValidator(String value) {
+  return value.isAlphabet == false ? 'Please enter only letters.' : null;
+}
+
+String? alphanumericValidator(String value) {
+  return value.isAlphaNumeric == false
+      ? 'Please enter only letters and numbers.'
+      : null;
+}
+
+final Map<String, ValidatorFunction> validators = <String, ValidatorFunction>{
+  'required': requiredValidator,
+  'email': emailValidator,
+  'minLength': minLengthValidator,
+  'maxLength': maxLengthValidator,
+  'numeric': numericValidator,
+  'alphabetic': alphabeticValidator,
+  'alphanumeric': alphanumericValidator,
 };
 
 class FxTextFormField extends StatelessWidget {
@@ -73,13 +108,18 @@ class FxTextFormField extends StatelessWidget {
                   obscureText: isSecure,
                   maxLines: maxLines ?? 1,
                   validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field is required.';
+                    }
                     if (validations != null) {
                       for (final String validation in validations!) {
-                        final Function(String? p1)? validate =
+                        final ValidatorFunction? validate =
                             validators[validation];
                         if (validate != null) {
-                          final String error = validate(value) as String;
-                          return error;
+                          final String? error = validate(value);
+                          if (error != null) {
+                            return error;
+                          }
                         }
                       }
                     }
