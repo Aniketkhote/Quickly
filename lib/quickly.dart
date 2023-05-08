@@ -8,3 +8,4 @@ export 'src/flutter/navigation/fx_navigation.dart';
 export 'src/flutter/navigation/fx_route_transition.dart';
 export 'src/flutter/responsive/fx_grid.dart';
 export 'src/flutter/responsive/fx_responsive.dart';
+export 'src/flutter/widget/widget.dart';
