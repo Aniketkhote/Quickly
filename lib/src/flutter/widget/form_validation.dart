@@ -7,40 +7,47 @@ String? requiredValidator(String value) {
 }
 
 String? emailValidator(String value) {
-  return value.isEmail == false ? 'Please enter a valid email address.' : null;
+  if (value.isEmpty || !value.isEmail) {
+    return 'Please enter a valid email address.';
+  }
+  return null;
 }
 
-String? minLengthValidator(String value, [int min = 6]) {
-  return value.length < min
-      ? 'The value must be at least $min characters.'
-      : null;
-}
-
-String? maxLengthValidator(String value, [int max = 12]) {
-  return value.length > max
-      ? 'The value must be at most $max characters.'
-      : null;
+String? lengthValidator(String value, {int? min, int? max}) {
+  if (min != null && value.length < min) {
+    return 'The value must be at least $min characters.';
+  }
+  if (max != null && value.length > max) {
+    return 'The value must be at most $max characters.';
+  }
+  return null;
 }
 
 String? numericValidator(String value) {
-  return value.isNumber == false ? 'Please enter a valid number.' : null;
+  if (value.isEmpty || double.tryParse(value) == null) {
+    return 'Please enter a valid number.';
+  }
+  return null;
 }
 
 String? alphabeticValidator(String value) {
-  return value.isAlphabet == false ? 'Please enter only letters.' : null;
+  if (value.isEmpty || !value.isAlphabet) {
+    return 'Please enter only letters.';
+  }
+  return null;
 }
 
 String? alphanumericValidator(String value) {
-  return value.isAlphaNumeric == false
-      ? 'Please enter only letters and numbers.'
-      : null;
+  if (value.isEmpty || !value.isAlphaNumeric) {
+    return 'Please enter only letters and numbers.';
+  }
+  return null;
 }
 
 final Map<String, ValidatorFunction> validators = <String, ValidatorFunction>{
   'required': requiredValidator,
   'email': emailValidator,
-  'minLength': minLengthValidator,
-  'maxLength': maxLengthValidator,
+  'length': lengthValidator,
   'numeric': numericValidator,
   'alphabetic': alphabeticValidator,
   'alphanumeric': alphanumericValidator,
