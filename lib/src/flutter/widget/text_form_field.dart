@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../quickly.dart';
 import 'form_validation.dart';
 
-class FxTextFormField extends StatelessWidget {
+class FxTextFormField extends StatefulWidget {
   const FxTextFormField({
     this.hintText,
     this.label,
@@ -32,60 +32,83 @@ class FxTextFormField extends StatelessWidget {
   final List<String>? validations;
 
   @override
+  State<FxTextFormField> createState() => _FxTextFormFieldState();
+}
+
+class _FxTextFormFieldState extends State<FxTextFormField> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final Map<String, String> _errors = <String, String>{};
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          label ?? '',
-          style: const TextStyle(fontSize: 18, color: FxColor.kcText),
-        ).pb8.hideIf(label == null),
-        Container(
-          padding: FxPadding.px20,
-          decoration: BoxDecoration(
-            color: fieldColor ?? FxColor.kcTextField,
-            border: Border.all(
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            widget.label ?? '',
+            style: const TextStyle(fontSize: 18, color: FxColor.kcText),
+          ).pb8.hideIf(widget.label == null),
+          Container(
+            padding: FxPadding.px20,
+            decoration: BoxDecoration(
+              color: widget.fieldColor ?? FxColor.kcTextField,
+              border: Border.all(
                 color: FxColor.gray300,
-                style: border ? BorderStyle.solid : BorderStyle.none),
-            borderRadius: borderRadius ?? FxRadius.all(10),
-          ),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: TextFormField(
-                  controller: controller,
-                  decoration: InputDecoration(
-                    icon: Icon(leadingIcon).hideIf(leadingIcon == null),
-                    hintText: hintText ?? '',
-                    border: InputBorder.none,
-                  ),
-                  keyboardType: keyboardType,
-                  obscureText: isSecure,
-                  maxLines: maxLines ?? 1,
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'This field is required.';
-                    }
-                    if (validations != null) {
-                      for (final String validation in validations!) {
-                        final ValidatorFunction? validate =
-                            validators[validation];
-                        if (validate != null) {
-                          final String? error = validate(value);
-                          if (error != null) {
-                            return error;
+                style: widget.border ? BorderStyle.solid : BorderStyle.none,
+              ),
+              borderRadius: widget.borderRadius ?? FxRadius.all(10),
+            ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextFormField(
+                    controller: widget.controller,
+                    decoration: InputDecoration(
+                      icon: Icon(widget.leadingIcon)
+                          .hideIf(widget.leadingIcon == null),
+                      hintText: widget.hintText ?? '',
+                      border: InputBorder.none,
+                    ),
+                    keyboardType: widget.keyboardType,
+                    obscureText: widget.isSecure,
+                    maxLines: widget.maxLines ?? 1,
+                    onChanged: (_) {
+                      // Clear error message when input changes
+                      _errors.clear();
+                      _formKey.currentState?.validate();
+                    },
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'This field is required.';
+                      }
+                      if (widget.validations != null) {
+                        for (final String validation in widget.validations!) {
+                          final ValidatorFunction? validate =
+                              validators[validation];
+                          if (validate != null) {
+                            final String? error = _errors[value];
+                            if (error != null) {
+                              return error;
+                            }
+                            final String? result = validate(value);
+                            if (result != null) {
+                              _errors[value] = result;
+                              return result;
+                            }
                           }
                         }
                       }
-                    }
-                    return null;
-                  },
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
