@@ -5,10 +5,14 @@ _Breaking changes_
 - Revised and improved the navigation.
 - Revised and improved the Queue.
 - Improved FxResponsive Widget
+- changed hide() to hide
 
 _Added_
 
 - Added FxGrid widget
+- Added shadow mixin
+- Added FxButton widget
+- Added FxTextFormField Widget
 
 ## 3.6.4
 
