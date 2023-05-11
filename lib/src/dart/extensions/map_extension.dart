@@ -170,14 +170,39 @@ extension MapExtension<T> on Map<T, T> {
   ///
   /// i.e, it finds the matching case according to the condition passed in it.
   ///
-  /// Map<String, dynamic> map = {
+  /// ```dart
+  /// Map<String, String> map = {
   /// 'apple': 'red',
   /// 'banana': 'yellow',
   /// 'orange': 'orange'
   /// };
-
+  ///
   /// print(map.match('apple')); // returns 'red'
   /// print(map.match('pear'));  // returns 'Invalid input'
-  dynamic match(T condition, [String? byDefault = 'Invalid input']) =>
+  /// ```
+  Object? match(T condition, [String? byDefault = 'Invalid input']) =>
       containsKey(condition) ? this[condition] : byDefault;
+
+  /// This extension method picks specific keys from a map and
+  /// returns a new map containing only the selected keys and their corresponding values.
+  ///
+  /// ```dart
+  /// Map<String, String> map = {
+  /// 'apple': 'red',
+  /// 'banana': 'yellow',
+  /// 'orange': 'orange'
+  /// };
+  ///
+  /// print(map.pick(['apple'])); // returns {'apple': 'red'}
+  /// print(map.pick(['orange','pear']));  // returns {'orange': 'orange'}
+  /// ```
+  Map<T, T> pick(List<T> keys) {
+    final Map<T, T> pickedMap = <T, T>{};
+    for (final MapEntry<T, T> entry in entries) {
+      if (keys.contains(entry.key)) {
+        pickedMap[entry.key] = entry.value;
+      }
+    }
+    return pickedMap;
+  }
 }
