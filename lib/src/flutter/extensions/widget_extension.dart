@@ -37,12 +37,12 @@ extension WidgetExtension on Widget {
       );
 
   /// Creates a [Visibility] widget with the current widget as its child and sets its visibility based on the passed condition
-  Visibility hide(bool condition) =>
-      condition ? _visibility(false) : _visibility(true);
+  Visibility hide(bool isVisible, {bool maintainSize = false}) =>
+      _visibility(isVisible = false, maintainSize);
 
   /// Creates a [Visibility] widget with the current widget as its child and sets its visibility based on the passed condition
-  Visibility show(bool condition) =>
-      condition ? _visibility(true) : _visibility(false);
+  Visibility show(bool isVisible, {bool maintainSize = false}) =>
+      _visibility(isVisible = true, maintainSize);
 
   /// Creates a [SizedBox] widget with the current widget as its child and sets its height and width
   SizedBox sizedBox({double? h, double? w}) =>
@@ -57,5 +57,12 @@ extension WidgetExtension on Widget {
   /// Creates a [SizedBox] widget with the current widget as its child and sets its width
   SizedBox wBox(double? width) => sizedBox(w: width);
 
-  Visibility _visibility(bool value) => Visibility(visible: value, child: this);
+  Visibility _visibility(bool isVisible, bool maintainSize) => Visibility(
+        key: key,
+        visible: isVisible,
+        maintainSize: maintainSize,
+        maintainAnimation: maintainSize,
+        maintainState: maintainSize,
+        child: this,
+      );
 }

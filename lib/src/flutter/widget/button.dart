@@ -6,6 +6,7 @@ class FxButton extends StatelessWidget {
   const FxButton({
     required this.text,
     required this.onPressed,
+    this.color = FxColor.primary,
     this.outlineColor = FxColor.primary,
     this.shape = BtnShape.rounded,
     this.size = BtnSize.normal,
@@ -16,7 +17,6 @@ class FxButton extends StatelessWidget {
     this.padding,
     this.margin,
     this.radius,
-    this.color,
     this.shadow,
     this.textColor,
     this.iconColor,
@@ -64,8 +64,8 @@ class FxButton extends StatelessWidget {
             ? textColor ?? getTextColor(color ?? getBtnType())
             : color,
       ),
-      textScaleFactor: getBtnSize(),
-    ).medium.px4.hide(text.isEmpty);
+      textScaleFactor: getBtnSize() * .9,
+    ).px4;
 
     final Color? iconColor = type == BtnType.solid
         ? getTextColor(this.iconColor ?? getBtnType())
