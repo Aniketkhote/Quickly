@@ -36,18 +36,12 @@ extension WidgetExtension on Widget {
         child: this,
       );
 
-  /// Creates a [Visibility] widget with the current widget as its child and sets its visibility to false
-  Visibility get hide => _visibility(false);
-
-  /// Creates a [Visibility] widget with the current widget as its child and sets its visibility to true
-  Visibility get show => _visibility(true);
-
   /// Creates a [Visibility] widget with the current widget as its child and sets its visibility based on the passed condition
-  Visibility hideIf(bool condition) =>
+  Visibility hide(bool condition) =>
       condition ? _visibility(false) : _visibility(true);
 
   /// Creates a [Visibility] widget with the current widget as its child and sets its visibility based on the passed condition
-  Visibility showIf(bool condition) =>
+  Visibility show(bool condition) =>
       condition ? _visibility(true) : _visibility(false);
 
   /// Creates a [SizedBox] widget with the current widget as its child and sets its height and width

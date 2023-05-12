@@ -49,7 +49,7 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
           Text(
             widget.label ?? '',
             style: const TextStyle(fontSize: 18, color: FxColor.kcText),
-          ).pb8.hideIf(widget.label == null),
+          ).pb8.hide(widget.label == null),
           Container(
             padding: FxPadding.px20,
             decoration: BoxDecoration(
@@ -67,7 +67,7 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
                     controller: widget.controller,
                     decoration: InputDecoration(
                       icon: Icon(widget.leadingIcon)
-                          .hideIf(widget.leadingIcon == null),
+                          .hide(widget.leadingIcon == null),
                       hintText: widget.hintText ?? '',
                       border: InputBorder.none,
                     ),

@@ -65,7 +65,7 @@ class FxButton extends StatelessWidget {
             : color,
       ),
       textScaleFactor: getBtnSize(),
-    ).medium.px4.hideIf(text.isEmpty);
+    ).medium.px4.hide(text.isEmpty);
 
     final Color? iconColor = type == BtnType.solid
         ? getTextColor(this.iconColor ?? getBtnType())
