@@ -74,8 +74,7 @@ extension StringExtension on String {
   int get countWord => split(' ').length;
 
   ///Get default value if string is empty.
-  String ifEmpty([String value = 'null']) =>
-      isEmpty || trim().isEmpty ? value : this;
+  String ifEmpty([String value = 'null']) => trim().isEmpty ? value : this;
 
   ///Convert string to [int]
   int? get toInt {
@@ -132,30 +131,41 @@ extension StringExtension on String {
   bool get isUpper => this == toUpperCase();
 
   ///Check image is svg or not
-  bool get isSvg => toLowerCase().endsWith('.svg');
+  bool get isSvg => _endsWith('.svg');
 
   ///Check image is png or not
-  bool get isPng => toLowerCase().endsWith('.png');
+  bool get isPng => _endsWith('.png');
 
   ///Check image is jpg or jpeg or not
-  bool get isJpg =>
-      toLowerCase().endsWith('.jpg') || toLowerCase().endsWith('.jpeg');
+  bool get isJpg => _endsWith('.jpg') || _endsWith('.jpeg');
 
   ///Check file is pdf or not
-  bool get isPDF => toLowerCase().endsWith('.pdf');
+  bool get isPDF => _endsWith('.pdf');
 
   ///Check file is csv or not
-  bool get isCsv => toLowerCase().endsWith('.csv');
+  bool get isCsv => _endsWith('.csv');
 
   ///Check file is text or not
-  bool get isTxt => toLowerCase().endsWith('.txt');
+  bool get isTxt => _endsWith('.txt');
 
   ///check string is image
   bool get isImage => isJpg || isPng || isSvg;
 
   ///check string is video
-  bool get isVideo => <String>{'.mp4', '.avi', '.mpeg', '.webm'}.contains(this);
+  bool get isVideo =>
+      _endsWith('.mp4') ||
+      _endsWith('.avi') ||
+      _endsWith('.mov') ||
+      _endsWith('.mkv');
 
   ///check string is audio
-  bool get isAudio => <String>{'.mp3', '.wav', '.aac', '.wma'}.contains(this);
+  bool get isAudio =>
+      _endsWith('.mp3') ||
+      _endsWith('.wav') ||
+      _endsWith('.aac') ||
+      _endsWith('.m4a');
+
+  bool _endsWith(String pattern) {
+    return toLowerCase().endsWith(pattern.toLowerCase());
+  }
 }

@@ -222,5 +222,14 @@ void main() {
       expect('/path/to/file.svg'.isSvg, true);
       expect('/path/to/file.txt'.isSvg, false);
     });
+    test(
+        'isVideo should correctly identify if the string is a path to an Video file',
+        () {
+      expect('file.mp4'.isVideo, true);
+      expect('file.avi'.isVideo, true);
+      expect('notsvg.mpeg'.isVideo, false);
+      expect('/path/to/file.mkv'.isVideo, true);
+      expect('/path/to/file.mp3'.isVideo, false);
+    });
   });
 }
