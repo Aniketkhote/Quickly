@@ -5,6 +5,9 @@ _Breaking changes_
 - Revised and improved the navigation.
 - Revised and improved the Queue.
 - Improved FxResponsive Widget
+
+_Fixed_
+
 - changed hide() to accept condition and removed hideIf and showIf
 
 _Added_
@@ -13,7 +16,8 @@ _Added_
 - Added shadow mixin
 - Added FxButton widget
 - Added FxTextFormField Widget
-- pick method added into map extension
+- Added `Pick()` method into map extension
+- Added `diffForHumans` method into map extension
 
 ## 3.6.4
 
