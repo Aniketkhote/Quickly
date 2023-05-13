@@ -5,15 +5,24 @@ extension DateTimeExtensions on DateTime {
   /// Returns a human-readable string representation of the difference between
   /// this date and the current date.
   ///
+  /// Optional parameters:
+  ///   - [abbreviatedUnits]: If `true`, displays abbreviated units. Default is `false`.
+  ///   - [showRelativeDates]: If `true`, displays relative dates for time differences within a day (e.g., "today", "yesterday"). Default is `false`.
+  ///   - [precision]: Specifies the number of units to display for the time difference. Default is `2`.
+  ///
   /// Examples:
   /// ```dart
   /// DateTime dateTime = DateTime(2023, 5, 10, 15, 30);
-  /// print(dateTime.diffForHumans()); // Output: 2 days ago
+  /// print(dateTime.diffForHumans()); // Output: "2 days ago"
   ///
   /// DateTime pastDateTime = DateTime(2022, 10, 1);
-  /// print(pastDateTime.diffForHumans()); // Output: 7 months ago
+  /// print(pastDateTime.diffForHumans(showRelativeDates: true)); // Output: "7 months ago"
   /// ```
-  String get diffForHumans {
+  String diffForHumans({
+    bool abbreviatedUnits = false,
+    bool showRelativeDates = false,
+    int precision = 2,
+  }) {
     final DateTime now = DateTime.now();
     final Duration difference = now.difference(this);
     final int seconds = difference.inSeconds;
@@ -21,32 +30,51 @@ extension DateTimeExtensions on DateTime {
     final int hours = difference.inHours;
     final int days = difference.inDays;
 
+    if (showRelativeDates && difference.abs().inDays < 2) {
+      if (difference.isNegative) {
+        return 'yesterday';
+      } else if (difference.inDays == 0) {
+        return 'today';
+      } else {
+        return 'tomorrow';
+      }
+    }
+
     if (seconds < 5) {
       return 'just now';
     } else if (seconds < 60) {
-      return '$seconds seconds ago';
+      return '$seconds${abbreviatedUnits ? 's' : ' seconds'} ago';
     } else if (minutes < 60) {
-      return '$minutes minutes ago';
+      return '$minutes${abbreviatedUnits ? 'm' : ' minutes'} ago';
     } else if (hours < 24) {
-      return '${_pluralize(hours, "hour")} ago';
+      return '${_formatUnit(hours, abbreviatedUnits, 'hour')} ago';
     } else if (days < 30) {
-      return '${_pluralize(days, "day")} ago';
+      return '${_formatUnit(days, abbreviatedUnits, 'day')} ago';
     } else if (days < 365) {
       final int months = _calculateMonths(now, this);
-      return '${_pluralize(months, "month")} ago';
+      return '${_formatUnit(months, abbreviatedUnits, 'month')} ago';
     } else {
       final int years = days ~/ 365;
-      return '${_pluralize(years, "year")} ago';
+      return '${_formatUnit(years, abbreviatedUnits, 'year')} ago';
     }
   }
 
   /// Returns a string representing the given [count] of units, using the
-  /// singular form of the unit if the count is 1, and the plural form otherwise.
-  String _pluralize(int count, String unit) {
+  /// singular or plural form based on the count and the [unit]. If [abbreviated]
+  /// is `true`, returns the abbreviated unit form.
+  ///
+  /// Examples:
+  /// ```dart
+  /// print(_formatUnit(1, false, 'hour'));  // Output: "1 hour"
+  /// print(_formatUnit(3, true, 'day'));    // Output: "3 days"
+  /// ```
+  String _formatUnit(int count, bool abbreviated, String unit) {
+    final String pluralUnit =
+        abbreviated ? '${unit[0]}${unit[1]}' : '$unit${count != 1 ? 's' : ''}';
     if (count == 1) {
-      return '1 $unit';
+      return '1 $pluralUnit';
     } else {
-      return '$count ${unit}s';
+      return '$count $pluralUnit';
     }
   }
 

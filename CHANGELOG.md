@@ -6,10 +6,6 @@ _Breaking changes_
 - Revised and improved the Queue.
 - Improved FxResponsive Widget
 
-_Fixed_
-
-- changed hide() to accept condition and removed hideIf and showIf
-
 _Added_
 
 - Added FxGrid widget
@@ -18,6 +14,13 @@ _Added_
 - Added FxTextFormField Widget
 - Added `Pick()` method into map extension
 - Added `diffForHumans` method into map extension
+
+_Fixed_
+
+- Fixed empty list exception in `chunk()`
+- Fixed empty list exception in `split()`
+- Changed `hide` to `hide()` to accept condition
+- Removed `hideIf()` and `showIf` extensions methods from Widget
 
 ## 3.6.4
 
