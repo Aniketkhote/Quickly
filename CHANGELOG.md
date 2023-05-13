@@ -14,6 +14,7 @@ _Added_
 - Added FxTextFormField Widget
 - Added `Pick()` method into map extension
 - Added `diffForHumans` method into map extension
+- Added custom gradient, animation and direction support in `shimmer()` extension
 
 _Fixed_
 

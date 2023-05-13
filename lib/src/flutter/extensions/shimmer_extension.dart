@@ -16,6 +16,10 @@ extension ShimmerExtension on Widget {
     double width = double.infinity,
     Color highlightColor = FxColor.gray300,
     Color baseColor = FxColor.gray400,
+    Duration duration = const Duration(milliseconds: 1000),
+    Duration interval = const Duration(milliseconds: 500),
+    Gradient? gradient,
+    Axis direction = Axis.horizontal,
   }) {
     return SizedBox(
       height: height,
@@ -25,12 +29,30 @@ extension ShimmerExtension on Widget {
           // Add shimmer gradient
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: <Color>[
-                  highlightColor,
-                  baseColor,
-                  highlightColor,
-                ],
+              gradient: gradient ??
+                  LinearGradient(
+                    begin: direction == Axis.horizontal
+                        ? Alignment.centerLeft
+                        : Alignment.topCenter,
+                    end: direction == Axis.horizontal
+                        ? Alignment.centerRight
+                        : Alignment.bottomCenter,
+                    colors: <Color>[
+                      highlightColor,
+                      baseColor,
+                      highlightColor,
+                    ],
+                  ),
+            ),
+            child: AnimatedContainer(
+              duration: duration,
+              decoration: BoxDecoration(
+                gradient: gradient,
+              ),
+              child: AnimatedOpacity(
+                duration: duration,
+                opacity: 0.5,
+                child: const SizedBox.expand(),
               ),
             ),
           ),
