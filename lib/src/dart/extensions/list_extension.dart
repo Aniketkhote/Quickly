@@ -100,14 +100,10 @@ extension ListExtension<T> on List<T> {
   ///```
   Map<T, T> latestFirst([String key = 'id']) {
     final List<Map<T, T>> sortedMaps = latest(key);
-    if (sortedMaps.isEmpty) {
+    if (sortedMaps.isEmpty || sortedMaps.first.isEmpty) {
       return <T, T>{};
     }
-    final Map<T, T> firstMap = sortedMaps.first;
-    if (firstMap.isEmpty) {
-      return <T, T>{};
-    }
-    return firstMap;
+    return sortedMaps.first;
   }
 
   ///The oldest methods allow you to easily order results by id.
@@ -130,14 +126,10 @@ extension ListExtension<T> on List<T> {
   ///```
   Map<T, T> oldestFirst([String key = 'id']) {
     final List<Map<T, T>> sortedMaps = oldest(key);
-    if (sortedMaps.isEmpty) {
+    if (sortedMaps.isEmpty || sortedMaps.first.isEmpty) {
       return <T, T>{};
     }
-    final Map<T, T> firstMap = sortedMaps.first;
-    if (firstMap.isEmpty) {
-      return <T, T>{};
-    }
-    return firstMap;
+    return sortedMaps.first;
   }
 
   ///Returns random value from this list
@@ -155,7 +147,7 @@ extension ListExtension<T> on List<T> {
   ///list.chunk(2) // [1,2,3,4,5] -> [[1,2], [3,4], [5]]
   ///```
   List<List<T>> chunk(int size) {
-    if (size < 1) {
+    if (size < 1 && length < 1) {
       return <List<T>>[];
     }
 
@@ -172,7 +164,7 @@ extension ListExtension<T> on List<T> {
   ///list.split(2) // [1,2,3,4,5] -> [[1,2,3], [4,5]]
   ///```
   List<List<T>> split(int parts) {
-    if (parts < 1) {
+    if (parts < 1 && length < 1) {
       return <List<T>>[];
     }
 
@@ -447,7 +439,7 @@ extension ListExtension<T> on List<T> {
     });
   }
 
-  ///Checks if the given [kry] exists in the map.
+  ///Checks if the given [key] exists in the map.
   ///
   ///Returns true if any of the keys in the map are equal to [key].
   ///
