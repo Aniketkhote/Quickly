@@ -75,11 +75,11 @@ Text('4 Padding from top and bottom side').py4
 Text('16 Padding from all side except top').pnt16
 
 // Visibility
-Container(child:Text('Hide this widget')).hide
+Text('Hide this widget').hide()
 
-Container(child:Text('Show this widget')).show
+Text('Show this widget').show()
 
-Container(child:Text('Make rounded this widget')).rounded
+Text('Make rounded this widget').rounded
 
 2.hBox(child:Text('Added 2dp vertical space'))
 
@@ -211,7 +211,6 @@ person.match('age', 'Unknown')  // 30
 
 - int.suffix(): Returns the ordinal suffix for the integer (e.g. 1st, 2nd, 8th)
 - double.suffix([suffix]): Returns the double with the provided suffix
-  (e.g. 10.5.suffix('$') Returns '10.5$')
 
 ```dart
 
@@ -221,20 +220,22 @@ person.match('age', 'Unknown')  // 30
 
 ```
 
-- int.getMonthName([short = false]): Returns the name of the month corresponding to the integer (e.g. 1.getMonthName() returns "January", 2.getMonthName(true) returns "Jan")
+- int.getMonthName([short = false]): Returns the name of the month corresponding to the integer
 
 ```dart
 
 1.getMonthName()  // 'January'
+
 1.getMonthName(true)  // 'Jan'
 
 ```
 
-- int.getWeekName([short = false]): Returns the name of the day of the week corresponding to the integer (e.g. 1.getWeekName() returns "Monday", 2.getWeekName(true) returns "Mon")
+- int.getWeekName([short = false]): Returns the name of the day of the week corresponding to the integer
 
 ```dart
 
 3.getWeekName()  // 'Wednesday'
+
 3.getWeekName(true)  // 'Wed'
 
 ```
@@ -242,19 +243,6 @@ person.match('age', 'Unknown')  // 30
 _For more examples, please refer to the [Documentation](https://pub.dev/documentation/quickly/latest/quickly/quickly-library.html)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- ROADMAP -->
-<!-- ## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/Aniketkhote/Quickly/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
- -->
 
 <!-- CONTRIBUTING -->
 
@@ -305,12 +293,3 @@ Project Link: [https://github.com/Aniketkhote/Quickly](https://github.com/Aniket
 </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-<!-- ## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p> -->

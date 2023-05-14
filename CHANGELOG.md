@@ -18,6 +18,7 @@ _Added_
 - Added `diffForHumans` method into map extension
 - Added custom gradient, animation and direction support in `shimmer()` extension
 - Added transparent color in the FxColor
+- Added text theme style extension on build context
 
 _Fixed_
 
