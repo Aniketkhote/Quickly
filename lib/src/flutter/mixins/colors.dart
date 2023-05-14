@@ -32,6 +32,9 @@ mixin FxColor {
   /// Returns black color `0xFF000000`
   static const Color black = Color(0xFF000000);
 
+  /// Returns black color `0x00000000`
+  static const Color transparent = Color(0x00000000);
+
   /// Returns Text color `0xFF565360`
   static const Color kcText = Color(0xFF565360);
 

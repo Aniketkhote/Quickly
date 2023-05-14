@@ -2,9 +2,11 @@
 
 _Breaking changes_
 
-- Revised and improved the navigation.
-- Revised and improved the Queue.
+- Revised and improved the navigation
+- Revised and improved the Queue
 - Improved FxResponsive Widget
+- Changed `hide` to `hide()` to accept condition
+- Removed `hideIf()` and `showIf` extensions methods from Widget
 
 _Added_
 
@@ -15,13 +17,12 @@ _Added_
 - Added `Pick()` method into map extension
 - Added `diffForHumans` method into map extension
 - Added custom gradient, animation and direction support in `shimmer()` extension
+- Added transparent color in the FxColor
 
 _Fixed_
 
 - Fixed empty list exception in `chunk()`
 - Fixed empty list exception in `split()`
-- Changed `hide` to `hide()` to accept condition
-- Removed `hideIf()` and `showIf` extensions methods from Widget
 
 ## 3.6.4
 

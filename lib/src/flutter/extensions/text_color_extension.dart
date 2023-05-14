@@ -27,6 +27,9 @@ extension TextColorExtension on Text {
   /// Returns Text with Dark color
   Text get kcDark => color(FxColor.dark);
 
+  /// Returns Text with Transparent color
+  Text get transparent => color(FxColor.transparent);
+
   /// Returns Text with Black color
   Text get black => color(FxColor.black);
 
