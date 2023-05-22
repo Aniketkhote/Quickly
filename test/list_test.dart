@@ -112,6 +112,9 @@ void main() {
         },
       ];
 
+      test('.hasKey() - return false if list is empty',
+          () => expect(<dynamic>[].hasKey('name'), equals(false)));
+
       test('.hasKey() - return true if list have this key',
           () => expect(list.hasKey('name'), equals(true)));
 

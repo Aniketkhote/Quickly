@@ -427,10 +427,6 @@ extension ListExtension<T> on List<T> {
   /// map.hasKeyValue('gender', 'male'); // false
   ///```
   bool hasKeyValue(String key, T value) {
-    if (isEmpty) {
-      return false;
-    }
-
     return any((T element) {
       if (element is! Map<T, T>) {
         return false;
@@ -448,10 +444,6 @@ extension ListExtension<T> on List<T> {
   ///map.hasKey("key") // true
   ///```
   bool hasKey(String key) {
-    if (isEmpty) {
-      return false;
-    }
-
     return any((T element) {
       if (element is! Map<T, T>) {
         return false;
@@ -469,10 +461,6 @@ extension ListExtension<T> on List<T> {
   ///map.hasValue("value") // true
   ///```
   bool hasValue(T value) {
-    if (isEmpty) {
-      return false;
-    }
-
     return any((T element) {
       if (element is! Map<T, T>) {
         return false;
