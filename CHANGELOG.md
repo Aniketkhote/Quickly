@@ -1,29 +1,29 @@
 ## 4.0.0
 
-_Breaking changes_
+**Breaking Changes:**
 
-- Revised and improved the navigation
-- Revised and improved the Queue
-- Improved FxResponsive Widget
-- Changed `hide` to `hide()` to accept condition
-- Removed `hideIf()` and `showIf` extensions methods from Widget
+- Revised and improved the navigation, providing a better user experience and enhanced functionality.
+- Revised and improved the Queue feature, making it more efficient and reliable.
+- Improved the FxResponsive Widget, enhancing its responsiveness and adaptability.
+- Modified the `hide` method to `hide()` to accept a condition, allowing for more flexible hiding options.
+- Removed the `hideIf()` and `showIf()` extension methods from the Widget, streamlining the API and removing deprecated functionality.
 
-_Added_
+**Added:**
 
-- Added FxGrid widget
-- Added shadow mixin
-- Added FxButton widget
-- Added FxTextFormField Widget
-- Added `Pick()` method into map extension
-- Added `diffForHumans` method into map extension
-- Added custom gradient, animation and direction support in `shimmer()` extension
-- Added transparent color in the FxColor
-- Added text theme style extension on build context
+- Introduced the `FxGrid` widget, which enables developers to create dynamic and responsive grid layouts.
+- Implemented the `shadow` mixin, offering a simple and reusable way to apply shadows to widgets.
+- Introduced the `FxButton` widget, providing a customizable button component with various styles and configurations.
+- Added the `FxTextFormField` Widget, a text input field with built-in validation and error handling capabilities.
+- Included the `Pick()` method in the map extension, allowing for easy retrieval of specific values from a map.
+- Added the `diffForHumans` method to the map extension, enabling developers to obtain human-readable time differences.
+- Expanded the `shimmer()` extension to support custom gradients, animations, and directions.
+- Introduced transparent color support in the FxColor class.
+- Added the text theme style extension on the build context, simplifying the application of consistent text styles.
 
-_Fixed_
+**Fixed:**
 
-- Fixed empty list exception in `chunk()`
-- Fixed empty list exception in `split()`
+- Resolved an issue causing an empty list exception in the `chunk()` function.
+- Fixed a bug causing an empty list exception in the `split()` function.
 
 ## 3.6.4
 
