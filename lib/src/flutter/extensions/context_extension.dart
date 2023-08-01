@@ -6,10 +6,19 @@ extension ContextExtension on BuildContext {
   MediaQueryData get mq => MediaQuery.of(this);
 
   /// Get MediaQuery Screen Width
-  double get width => mq.size.width;
+  Size get size => MediaQuery.sizeOf(this);
+
+  /// Get MediaQuery Screen Density
+  double get screenDensity => MediaQuery.devicePixelRatioOf(this);
+
+  /// Get MediaQuery Screen Padding
+  EdgeInsets get screenPadding => MediaQuery.paddingOf(this);
+
+  /// Get MediaQuery Screen Width
+  double get width => size.width;
 
   /// Get MediaQuery Screen Height
-  double get height => mq.size.height;
+  double get height => size.height;
 
   /// Check if the window size is of Mobile Size
   bool get isMobile => width < 650;
@@ -21,7 +30,7 @@ extension ContextExtension on BuildContext {
   bool get isDesktop => width >= 1100;
 
   /// similar to [MediaQuery.of(context).orientation]
-  Orientation get orientation => mq.orientation;
+  Orientation get orientation => MediaQuery.orientationOf(this);
 
   /// check if device is on landscape mode
   bool get isLandscape => orientation == Orientation.landscape;

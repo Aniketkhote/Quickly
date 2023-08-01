@@ -1,5 +1,11 @@
 ## 4.0.0
 
+**Fixed:**
+
+- Revised and improved context extenion methods.
+
+## 4.0.0
+
 **Breaking Changes:**
 
 - Revised and improved the navigation, providing a better user experience and enhanced functionality.

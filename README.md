@@ -77,10 +77,10 @@ Text('16 Padding from all side except top').pnt16
 // Visibility
 Text('Hide this widget').hide()
 
-Text('Show this widget').show()
-
+// Rounded border
 Text('Make rounded this widget').rounded
 
+// Vertical space
 2.hBox(child:Text('Added 2dp vertical space'))
 
 
