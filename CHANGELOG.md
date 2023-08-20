@@ -1,8 +1,14 @@
+## 4.0.2
+
+**Fixed:**
+
+- Improved FxNavigation.
+
 ## 4.0.1
 
 **Fixed:**
 
-- Revised and improved context extenion methods.
+- Revised and improved context extension methods.
 
 ## 4.0.0
 
