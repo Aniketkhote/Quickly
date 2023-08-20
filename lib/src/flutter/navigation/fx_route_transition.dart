@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-enum AnimationType { fade, scale, slide, rotate, custom }
+enum RouteAnimationType { fade, scale, slide, rotate, custom }
 
 class FxRouteTransition<T> extends PageRouteBuilder<T> {
   FxRouteTransition(
     this.page, {
-    this.animationType = AnimationType.fade,
+    this.animationType = RouteAnimationType.fade,
     this.animationDuration = 1.0,
     this.reverse = false,
     this.onCompleted,
@@ -23,7 +23,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
             Animation<double> secondaryAnimation,
             Widget child,
           ) {
-            if (animationType == AnimationType.custom) {
+            if (animationType == RouteAnimationType.custom) {
               if (customTransitionBuilder == null) {
                 throw ArgumentError(
                   'customTransitionBuilder must not be null for a custom transition type',
@@ -44,7 +44,7 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
         );
 
   final Widget page;
-  final AnimationType animationType;
+  final RouteAnimationType animationType;
   final double animationDuration;
   final bool reverse;
   final Function? onCompleted;
@@ -60,24 +60,24 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
     Widget child,
-    AnimationType type,
+    RouteAnimationType type,
     bool reverse,
     double animationDuration,
   ) {
     switch (type) {
-      case AnimationType.fade:
+      case RouteAnimationType.fade:
         return FadeTransition(
           opacity: _getCurvedAnimation(animation),
           child: child,
         );
-      case AnimationType.scale:
+      case RouteAnimationType.scale:
         return ScaleTransition(
           scale: Tween<double>(begin: 0.0, end: animationDuration).animate(
             _getCurvedAnimation(animation),
           ),
           child: child,
         );
-      case AnimationType.slide:
+      case RouteAnimationType.slide:
         return SlideTransition(
           position: Tween<Offset>(
             begin: reverse ? Offset.zero : const Offset(1.0, 0.0),
@@ -87,14 +87,14 @@ class FxRouteTransition<T> extends PageRouteBuilder<T> {
           ),
           child: child,
         );
-      case AnimationType.rotate:
+      case RouteAnimationType.rotate:
         return RotationTransition(
           turns: Tween<double>(begin: 0.0, end: animationDuration).animate(
             _getCurvedAnimation(animation),
           ),
           child: child,
         );
-      case AnimationType.custom:
+      case RouteAnimationType.custom:
         throw UnimplementedError('Custom transition not implemented');
     }
   }

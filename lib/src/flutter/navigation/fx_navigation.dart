@@ -6,16 +6,16 @@ import 'fx_route_transition.dart';
 
 /// Represents a navigator instance.
 class FxNavigation {
-  static GlobalKey<NavigatorState>? _navigatorKey;
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// Returns the current navigator state.
-  static NavigatorState? get navigator => _navigatorKey?.currentState;
+  static NavigatorState get navigator => navigatorKey.currentState!;
 
   /// Returns the current build context.
-  static BuildContext? get context => _navigatorKey?.currentContext;
+  static BuildContext get context => navigatorKey.currentContext!;
 
   /// Returns the arguments passed to the current route.
-  static Object? get args => ModalRoute.of(context!)?.settings.arguments;
+  static Object? get args => ModalRoute.of(context)?.settings.arguments;
 
   /// Returns the query parameters of the current route.
   static Map<String, String> _params = <String, String>{};
@@ -29,20 +29,20 @@ class FxNavigation {
     Object? args,
   }) {
     final String route = _getRouteName(routeName);
-    return navigator!.pushNamed<T>(
+    return navigator.pushNamed<T>(
       route,
       arguments: args,
     );
   }
 
   /// Navigates to the given page with a transition animation.
-  static Future<T?>? toPage<T>(
+  static Future<T?> toPage<T>(
     Widget page, {
-    AnimationType animationType = AnimationType.fade,
+    RouteAnimationType animationType = RouteAnimationType.fade,
     double animationDuration = 1.0,
     Function? onCompleted,
   }) async {
-    return navigator?.push<T>(
+    return navigator.push<T>(
       FxRouteTransition<T>(
         page,
         animationType: animationType,
@@ -53,13 +53,13 @@ class FxNavigation {
   }
 
   /// Navigates to the given page with a transition animation and replaces the current route.
-  static Future<T?>? offPage<T>(
+  static Future<T?> offPage<T>(
     Widget page, {
-    AnimationType animationType = AnimationType.fade,
+    RouteAnimationType animationType = RouteAnimationType.fade,
     double animationDuration = 1.0,
     Function? onCompleted,
   }) async {
-    return navigator?.pushReplacement<T, T>(
+    return navigator.pushReplacement<T, T>(
       FxRouteTransition<T>(
         page,
         animationType: animationType,
@@ -71,24 +71,24 @@ class FxNavigation {
   }
 
   /// Replaces the current route with the named route.
-  static Future<T?>? offNamed<T extends Object?>(
+  static Future<T?> offNamed<T extends Object?>(
     String routeName, {
     Object? args,
     Function? onCompleted,
   }) async {
     final String route = _getRouteName(routeName);
-    return navigator?.pushReplacementNamed<T, T>(route, arguments: args);
+    return navigator.pushReplacementNamed<T, T>(route, arguments: args);
   }
 
   /// Navigates back to the previous route.
-  static void get back => navigator?.pop();
+  static void get back => navigator.pop();
 
   /// Returns whether there is a previous route to navigate back to.
-  static bool? get canPop => navigator?.canPop();
+  static bool get canPop => navigator.canPop();
 
   /// Navigates back to the previous route with an optional result.
   static void maybePop<T extends Object>([T? result]) =>
-      navigator?.maybePop(result);
+      navigator.maybePop(result);
 
   static String _getRouteName(String routeName) {
     _params = Uri.parse(routeName).queryParameters;
