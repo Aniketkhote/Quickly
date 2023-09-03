@@ -26,6 +26,7 @@ class FxButton extends StatelessWidget {
     this.shadow,
     this.textColor,
     this.iconColor,
+    this.mainAxisAlignment,
     Key? key,
   }) : super(key: key);
 
@@ -90,6 +91,8 @@ class FxButton extends StatelessWidget {
   /// full width available.
   final bool isBlock;
 
+  final MainAxisAlignment? mainAxisAlignment;
+
   @override
   Widget build(BuildContext context) {
     final Widget textWidget = Text(
@@ -99,7 +102,7 @@ class FxButton extends StatelessWidget {
             ? textColor ?? getTextColor(color ?? getBtnType())
             : color,
       ),
-      textScaleFactor: getBtnSize() * .9,
+      textScaleFactor: getBtnSize() * .7,
     ).px4;
 
     final Color? iconColor = type == BtnType.solid
@@ -136,7 +139,7 @@ class FxButton extends StatelessWidget {
         ),
         child: Row(
           mainAxisSize: isBlock ? MainAxisSize.max : MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: <Widget>[
             leadingIconWidget,
             textWidget,

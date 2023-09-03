@@ -1,3 +1,9 @@
+## 4.0.3
+
+**Fixed:**
+
+- Improved Widget style.
+
 ## 4.0.2
 
 **Fixed:**

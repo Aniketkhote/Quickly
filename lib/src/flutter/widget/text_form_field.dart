@@ -53,7 +53,7 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
           Container(
             padding: FxPadding.px20,
             decoration: BoxDecoration(
-              color: widget.fieldColor ?? FxColor.kcTextField,
+              color: widget.fieldColor ?? FxColor.light.withOpacity(.03),
               border: Border.all(
                 color: FxColor.gray300,
                 style: widget.border ? BorderStyle.solid : BorderStyle.none,
