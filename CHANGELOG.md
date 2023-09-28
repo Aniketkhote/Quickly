@@ -1,3 +1,14 @@
+## 4.1.0
+
+**Added:**
+
+- Added prefix and suffix icon size params in FxButton.
+- Added prefix and suffix icons params in FxTextFormField.
+
+**Fixed:**
+
+- Changed leadingIcon to prefixIcon and trailingIcon suffixIcon in FxButton.
+
 ## 4.0.3
 
 **Fixed:**

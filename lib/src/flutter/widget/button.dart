@@ -18,8 +18,8 @@ class FxButton extends StatelessWidget {
     this.size = BtnSize.normal,
     this.type = BtnType.solid,
     this.isBlock = false,
-    this.leadingIcon,
-    this.trailingIcon,
+    this.prefixIcon,
+    this.suffixIcon,
     this.padding,
     this.margin,
     this.radius,
@@ -27,6 +27,8 @@ class FxButton extends StatelessWidget {
     this.textColor,
     this.iconColor,
     this.mainAxisAlignment,
+    this.prefixIconSize,
+    this.suffixIconSize,
     Key? key,
   }) : super(key: key);
 
@@ -37,11 +39,11 @@ class FxButton extends StatelessWidget {
   /// when the button is pressed.
   final VoidCallback onPressed;
 
-  /// The [leadingIcon] and [trailingIcon] parameters specify the icons to be
+  /// The [prefixIcon] and [suffixIcon] parameters specify the icons to be
   /// displayed before and after the button text, respectively.
-  final IconData? leadingIcon;
+  final IconData? prefixIcon;
 
-  final IconData? trailingIcon;
+  final IconData? suffixIcon;
 
   /// The [padding]  parameters allow customization of the button's internal padding
   final EdgeInsetsGeometry? padding;
@@ -66,7 +68,7 @@ class FxButton extends StatelessWidget {
   /// the button's background color.
   final Color? textColor;
 
-  /// The [iconColor] parameter sets the color for the leading and trailing
+  /// The [iconColor] parameter sets the color for the prefix and suffix
   /// icons. If not provided, the icon color will be determined based on the
   /// button's background color.
   final Color? iconColor;
@@ -82,6 +84,12 @@ class FxButton extends StatelessWidget {
   /// The [size] parameter determines the button's size, which can be one of
   /// the values in the [BtnSize] enum.
   final BtnSize size;
+
+  /// The [prefixIconSize] parameter determines the prefix icons's size, which can be one of
+  final double? prefixIconSize;
+
+  /// The [suffixIconSize] parameter determines the suffix icon's size, which can be one of
+  final double? suffixIconSize;
 
   /// The [type] parameter defines the button's type, which can be one of the
   /// values in the [BtnType] enum.
@@ -109,19 +117,19 @@ class FxButton extends StatelessWidget {
         ? getTextColor(this.iconColor ?? getBtnType())
         : color;
 
-    final Widget leadingIconWidget = leadingIcon != null
+    final Widget prefixIconWidget = prefixIcon != null
         ? Icon(
-            leadingIcon,
+            prefixIcon,
             color: iconColor,
-            size: getBtnSize() * 15,
+            size: prefixIconSize ?? getBtnSize() * 15,
           )
         : const SizedBox.shrink();
 
-    final Widget trailingIconWidget = trailingIcon != null
+    final Widget suffixIconWidget = suffixIcon != null
         ? Icon(
-            trailingIcon,
+            suffixIcon,
             color: iconColor,
-            size: getBtnSize() * 15,
+            size: suffixIconSize ?? getBtnSize() * 15,
           )
         : const SizedBox.shrink();
 
@@ -141,9 +149,9 @@ class FxButton extends StatelessWidget {
           mainAxisSize: isBlock ? MainAxisSize.max : MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: <Widget>[
-            leadingIconWidget,
+            prefixIconWidget,
             textWidget,
-            trailingIconWidget,
+            suffixIconWidget,
           ],
         ),
       ),

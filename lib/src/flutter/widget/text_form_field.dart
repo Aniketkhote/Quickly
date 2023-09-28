@@ -8,7 +8,8 @@ class FxTextFormField extends StatefulWidget {
     this.hintText,
     this.label,
     this.fieldColor,
-    this.leadingIcon,
+    this.prefixIcon,
+    this.suffixIcon,
     this.isSecure = false,
     this.borderRadius,
     this.maxLines,
@@ -22,7 +23,8 @@ class FxTextFormField extends StatefulWidget {
   final String? label;
   final String? hintText;
   final Color? fieldColor;
-  final IconData? leadingIcon;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
   final bool isSecure;
   final BorderRadiusGeometry? borderRadius;
   final int? maxLines;
@@ -66,8 +68,10 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
                   child: TextFormField(
                     controller: widget.controller,
                     decoration: InputDecoration(
-                      icon: Icon(widget.leadingIcon)
-                          .hide(widget.leadingIcon == null),
+                      suffixIcon: Icon(widget.suffixIcon)
+                          .hide(widget.suffixIcon == null),
+                      prefixIcon: Icon(widget.prefixIcon)
+                          .hide(widget.prefixIcon == null),
                       hintText: widget.hintText ?? '',
                       border: InputBorder.none,
                     ),
