@@ -48,67 +48,60 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            widget.label ?? '',
-            style: const TextStyle(fontSize: 18, color: FxColor.kcText),
-          ).pb8.hide(widget.label == null),
+          if (widget.label != null)
+            Text(
+              widget.label!,
+              style: const TextStyle(fontSize: 18, color: FxColor.kcText),
+            ).pb8,
           Container(
             padding: FxPadding.px20,
             decoration: BoxDecoration(
               color: widget.fieldColor ?? FxColor.light.withOpacity(.03),
-              border: Border.all(
-                color: FxColor.gray300,
-                style: widget.border ? BorderStyle.solid : BorderStyle.none,
-              ),
+              border: widget.border
+                  ? Border.all(color: Colors.grey.withOpacity(0.3))
+                  : Border.all(style: BorderStyle.none),
               borderRadius: widget.borderRadius ?? FxRadius.all(10),
             ),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextFormField(
-                    controller: widget.controller,
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(widget.suffixIcon)
-                          .hide(widget.suffixIcon == null),
-                      prefixIcon: Icon(widget.prefixIcon)
-                          .hide(widget.prefixIcon == null),
-                      hintText: widget.hintText ?? '',
-                      border: InputBorder.none,
-                    ),
-                    keyboardType: widget.keyboardType,
-                    obscureText: widget.isSecure,
-                    maxLines: widget.maxLines ?? 1,
-                    onChanged: (_) {
-                      // Clear error message when input changes
-                      _errors.clear();
-                      _formKey.currentState?.validate();
-                    },
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'This field is required.';
+            child: TextFormField(
+              controller: widget.controller,
+              decoration: InputDecoration(
+                suffixIcon:
+                    Icon(widget.suffixIcon).hide(widget.suffixIcon == null),
+                prefixIcon:
+                    Icon(widget.prefixIcon).hide(widget.prefixIcon == null),
+                hintText: widget.hintText ?? '',
+                border: InputBorder.none,
+              ),
+              keyboardType: widget.keyboardType,
+              obscureText: widget.isSecure,
+              maxLines: widget.maxLines ?? 1,
+              onChanged: (_) {
+                // Clear error message when input changes
+                _errors.clear();
+                _formKey.currentState?.validate();
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'This field is required.';
+                }
+                if (widget.validations != null) {
+                  for (final String validation in widget.validations!) {
+                    final ValidatorFunction? validate = validators[validation];
+                    if (validate != null) {
+                      final String? error = _errors[value];
+                      if (error != null) {
+                        return error;
                       }
-                      if (widget.validations != null) {
-                        for (final String validation in widget.validations!) {
-                          final ValidatorFunction? validate =
-                              validators[validation];
-                          if (validate != null) {
-                            final String? error = _errors[value];
-                            if (error != null) {
-                              return error;
-                            }
-                            final String? result = validate(value);
-                            if (result != null) {
-                              _errors[value] = result;
-                              return result;
-                            }
-                          }
-                        }
+                      final String? result = validate(value);
+                      if (result != null) {
+                        _errors[value] = result;
+                        return result;
                       }
-                      return null;
-                    },
-                  ),
-                ),
-              ],
+                    }
+                  }
+                }
+                return null;
+              },
             ),
           ),
         ],

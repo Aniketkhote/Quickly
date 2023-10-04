@@ -150,7 +150,7 @@ class FxButton extends StatelessWidget {
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: <Widget>[
             prefixIconWidget,
-            textWidget,
+            textWidget.px4,
             suffixIconWidget,
           ],
         ),
