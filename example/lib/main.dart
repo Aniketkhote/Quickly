@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
           FxNavigation.navigatorKey, // Pass the navigator key to MaterialApp
       initialRoute: '/',
       routes: {
-        // '/': (context) => const HomeWidget(),
         '/first': (context) => const FirstWidget(),
         '/second': (context) => const SecondWidget(),
       },
@@ -33,33 +32,63 @@ class HomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Simple UI').black.bold),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text('UI design using Quickly.')
-              .h6
-              .red800
-              .bold
-              .underline
-              .p20
-              .center,
-          10.hBox(),
-          ElevatedButton(
-            onPressed: () => FxNavigation.toPage(const FirstWidget()),
-            child: const Text('Go to First Screen').white,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: FxColor.dark,
-              shape: RoundedRectangleBorder(borderRadius: FxRadius.r20),
-              padding: FxPadding.pxy(h: 40, v: 12),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            10.hBox(),
+            FxButton(
+              text: "Submit",
+              onPressed: () => FxNavigation.toNamed('/first'),
+              size: BtnSize.tiny,
             ),
-          ),
-          FxButton(
-            text: "Go to First Screen",
-            onPressed: () => FxNavigation.toNamed('/first'),
-            color: FxColor.dark,
-            shape: BtnShape.pill,
-          )
-        ],
+            10.hBox(),
+            FxButton(
+              text: "Submit",
+              onPressed: () => FxNavigation.toNamed('/first'),
+              size: BtnSize.small,
+            ),
+            10.hBox(),
+            FxButton(
+              text: "Submit",
+              onPressed: () => FxNavigation.toNamed('/first'),
+              size: BtnSize.normal,
+              textStyle: TextStyle(fontWeight: FontWeight.bold),
+              prefixIcon: Icons.location_searching,
+            ),
+            10.hBox(),
+            FxButton(
+              text: "Submit",
+              onPressed: () => FxNavigation.toNamed('/first'),
+              size: BtnSize.medium,
+            ),
+            10.hBox(),
+            FxButton(
+              text: "Submit",
+              onPressed: () => FxNavigation.toNamed('/first'),
+              size: BtnSize.large,
+            ),
+            10.hBox(),
+            FxCheckbox(
+              isChecked: true,
+              onChange: (value) {},
+            ),
+            10.hBox(),
+            FxSwitch(
+              value: true,
+              onChanged: (value) {},
+            ),
+            10.hBox(),
+            FxRadio(
+              groupValue: true,
+              value: true,
+              onChanged: (value) {},
+            ),
+            10.hBox(),
+            Switch(value: true, onChanged: ((value) {})),
+          ],
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'form_validation.dart';
 
 class FxTextFormField extends StatefulWidget {
   const FxTextFormField({
+    super.key,
     this.hintText,
     this.label,
     this.fieldColor,
@@ -17,8 +18,8 @@ class FxTextFormField extends StatefulWidget {
     this.border = false,
     this.controller,
     this.validations,
-    Key? key,
-  }) : super(key: key);
+    this.padding,
+  });
 
   final String? label;
   final String? hintText;
@@ -32,6 +33,7 @@ class FxTextFormField extends StatefulWidget {
   final bool border;
   final TextEditingController? controller;
   final List<String>? validations;
+  final EdgeInsets? padding;
 
   @override
   State<FxTextFormField> createState() => _FxTextFormFieldState();
@@ -54,7 +56,7 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
               style: const TextStyle(fontSize: 18, color: FxColor.kcText),
             ).pb8,
           Container(
-            padding: FxPadding.px20,
+            padding: widget.padding ?? FxPadding.px20,
             decoration: BoxDecoration(
               color: widget.fieldColor ?? FxColor.light.withOpacity(.03),
               border: widget.border
@@ -65,6 +67,8 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
             child: TextFormField(
               controller: widget.controller,
               decoration: InputDecoration(
+                suffixIconConstraints: const BoxConstraints(maxWidth: 30),
+                prefixIconConstraints: const BoxConstraints(maxWidth: 30),
                 suffixIcon:
                     Icon(widget.suffixIcon).hide(widget.suffixIcon == null),
                 prefixIcon:

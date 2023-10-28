@@ -12,6 +12,7 @@ class FxButton extends StatelessWidget {
   const FxButton({
     required this.text,
     required this.onPressed,
+    super.key,
     this.color = FxColor.primary,
     this.outlineColor = FxColor.primary,
     this.shape = BtnShape.rounded,
@@ -29,8 +30,8 @@ class FxButton extends StatelessWidget {
     this.mainAxisAlignment,
     this.prefixIconSize,
     this.suffixIconSize,
-    Key? key,
-  }) : super(key: key);
+    this.textStyle,
+  });
 
   /// The [text] parameter is required and specifies the button's label text.
   final String text;
@@ -101,35 +102,44 @@ class FxButton extends StatelessWidget {
 
   final MainAxisAlignment? mainAxisAlignment;
 
+  final TextStyle? textStyle;
+
   @override
   Widget build(BuildContext context) {
     final Widget textWidget = Text(
       text,
-      style: TextStyle(
-        color: type == BtnType.solid
-            ? textColor ?? getTextColor(color ?? getBtnType())
-            : color,
-      ),
-      textScaleFactor: getBtnSize() * .7,
+      style: textStyle != null
+          ? TextStyle(
+              color: type == BtnType.solid
+                  ? textColor ?? getTextColor(color ?? getBtnType())
+                  : color,
+              fontSize: getBtnSize(),
+            ).merge(textStyle)
+          : TextStyle(
+              color: type == BtnType.solid
+                  ? textColor ?? getTextColor(color ?? getBtnType())
+                  : color,
+              fontSize: getBtnSize(),
+            ),
     ).px4;
 
-    final Color? iconColor = type == BtnType.solid
-        ? getTextColor(this.iconColor ?? getBtnType())
+    final Color? getIconColor = type == BtnType.solid
+        ? iconColor ?? getTextColor(color ?? getBtnType())
         : color;
 
     final Widget prefixIconWidget = prefixIcon != null
         ? Icon(
             prefixIcon,
-            color: iconColor,
-            size: prefixIconSize ?? getBtnSize() * 15,
+            color: getIconColor,
+            size: prefixIconSize ?? getBtnSize(),
           )
         : const SizedBox.shrink();
 
     final Widget suffixIconWidget = suffixIcon != null
         ? Icon(
             suffixIcon,
-            color: iconColor,
-            size: suffixIconSize ?? getBtnSize() * 15,
+            color: getIconColor,
+            size: suffixIconSize ?? getBtnSize(),
           )
         : const SizedBox.shrink();
 
@@ -150,7 +160,7 @@ class FxButton extends StatelessWidget {
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: <Widget>[
             prefixIconWidget,
-            textWidget.px4,
+            if (isBlock) textWidget.px8 else textWidget.px4,
             suffixIconWidget,
           ],
         ),
@@ -172,14 +182,14 @@ class FxButton extends StatelessWidget {
   }
 
   static final Map<BtnSize, double> _sizeFactorBySize = <BtnSize, double>{
-    BtnSize.tiny: 0.7,
-    BtnSize.small: 1.0,
-    BtnSize.medium: 1.5,
-    BtnSize.large: 1.8,
+    BtnSize.tiny: 14,
+    BtnSize.small: 16,
+    BtnSize.medium: 22,
+    BtnSize.large: 26,
   };
 
   double getBtnSize() {
-    return _sizeFactorBySize[size] ?? 1.3;
+    return _sizeFactorBySize[size] ?? 20;
   }
 
   Color getTextColor(Color color) => color == Colors.transparent

@@ -1,3 +1,16 @@
+## 4.2.0
+
+**Added:**
+
+- Added new widgets `FxCheckbox` , `FxRadio` and `FxSwitch`.
+- Added extra parameter `textStyle` in FxButton.
+
+**Fixed:**
+
+- Fixed padding horizontal and vertical spacing issue in Padding Extension.
+- Fixed Extra spacing in FxTextField icons.
+- Fixed Icon Color issue in FxButon icons.
+
 ## 4.1.1
 
 **Fixed:**

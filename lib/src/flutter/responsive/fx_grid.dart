@@ -19,13 +19,13 @@ class FxGrid extends StatelessWidget {
   /// The [key] parameter is an optional key that can be used to identify and differentiate this widget.
   const FxGrid({
     required this.children,
+    super.key,
     this.breakpoints = const <int>[576, 768, 992, 1200],
     this.hideOn = const <int>[],
     this.showOn = const <int>[],
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.start,
-    Key? key,
-  }) : super(key: key);
+  });
 
   /// The list of `FxGridColumn` widgets that represent the columns in the grid.
   final List<FxGridColumn> children;

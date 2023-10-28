@@ -22,6 +22,7 @@ class FxGridColumn extends StatelessWidget {
   /// The [key] parameter is an optional key that can be used to identify and differentiate this widget.
   const FxGridColumn({
     required this.child,
+    super.key,
     this.flex,
     this.xs,
     this.sm,
@@ -30,8 +31,7 @@ class FxGridColumn extends StatelessWidget {
     this.xl,
     this.offset,
     this.gutter,
-    Key? key,
-  }) : super(key: key);
+  });
 
   /// The widget to be placed within the column.
   final Widget child;

@@ -15,9 +15,9 @@ class FxResponsive extends StatelessWidget {
   const FxResponsive({
     required this.mobile,
     required this.desktop,
+    super.key,
     this.tablet,
-    Key? key,
-  }) : super(key: key);
+  });
 
   /// The widget to be rendered for mobile screens.
   final Widget mobile;

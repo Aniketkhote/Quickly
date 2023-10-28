@@ -9,51 +9,51 @@ mixin FxPadding {
     double? left,
     double? right,
   }) =>
-      _padding(top: top, bottom: bottom, left: left, right: right);
+      _pad(top: top, bottom: bottom, left: left, right: right);
 
   /// get all side padding
-  static EdgeInsets all(double all) => _padding(all: all);
+  static EdgeInsets all(double all) => _pad(all: all);
 
   /// Gives remove padding from all sides
   static EdgeInsets get none => all(0);
 
   /// get padding except left on given values non-zero.
   static EdgeInsets pnl(double value) =>
-      _padding(top: value, bottom: value, right: value);
+      _pad(top: value, bottom: value, right: value);
 
   /// get padding except right on given values non-zero.
   static EdgeInsets pnr(double value) =>
-      _padding(top: value, bottom: value, left: value);
+      _pad(top: value, bottom: value, left: value);
 
   /// get padding except top on given values non-zero.
   static EdgeInsets pnt(double value) =>
-      _padding(left: value, bottom: value, right: value);
+      _pad(left: value, bottom: value, right: value);
 
   /// get padding except bottom on given values non-zero.
   static EdgeInsets pnb(double value) =>
-      _padding(top: value, left: value, right: value);
+      _pad(top: value, left: value, right: value);
 
   /// get horizontaly padding
-  static EdgeInsets px(double horizontal) => _padding(horizontal: horizontal);
+  static EdgeInsets px(double h) => _pad(h: h);
 
   /// get vertically padding
-  static EdgeInsets py(double vertical) => _padding(vertical: vertical);
+  static EdgeInsets py(double v) => _pad(v: v);
 
   /// get [symmetric] vertically and horizontally padding
   static EdgeInsets pxy({required double h, required double v}) =>
-      _padding(horizontal: h, vertical: v);
+      _pad(h: h, v: v);
 
   /// get right side padding
-  static EdgeInsets pr(double right) => _padding(right: right);
+  static EdgeInsets pr(double right) => _pad(right: right);
 
   /// get left side padding
-  static EdgeInsets pl(double left) => _padding(left: left);
+  static EdgeInsets pl(double left) => _pad(left: left);
 
   /// get top side padding
-  static EdgeInsets pt(double top) => _padding(top: top);
+  static EdgeInsets pt(double top) => _pad(top: top);
 
   /// get bottom side padding
-  static EdgeInsets pb(double bottom) => _padding(bottom: bottom);
+  static EdgeInsets pb(double bottom) => _pad(bottom: bottom);
 
   /// Gives 4dp padding from all sides
   static EdgeInsets get p4 => all(4);
@@ -256,19 +256,19 @@ mixin FxPadding {
   /// Gives 64dp padding vertically
   static EdgeInsets get py64 => py(64);
 
-  static EdgeInsets _padding({
+  static EdgeInsets _pad({
     double? all,
-    double? horizontal,
-    double? vertical,
+    double? h,
+    double? v,
     double? top,
     double? bottom,
     double? left,
     double? right,
   }) =>
       EdgeInsets.only(
-        top: top ?? vertical ?? all ?? 0.0,
-        bottom: bottom ?? vertical ?? all ?? 0.0,
-        left: left ?? horizontal ?? all ?? 0.0,
-        right: right ?? horizontal ?? all ?? 0.0,
+        top: top ?? v ?? all ?? 0.0,
+        bottom: bottom ?? v ?? all ?? 0.0,
+        left: left ?? h ?? all ?? 0.0,
+        right: right ?? h ?? all ?? 0.0,
       );
 }

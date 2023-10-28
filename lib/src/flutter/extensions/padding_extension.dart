@@ -27,14 +27,13 @@ extension PaddingExtension on Widget {
   Padding p(double all) => _pad(all: all);
 
   ///get horizontaly padding
-  Padding px(double h) => _pad(horizontal: h);
+  Padding px(double h) => _pad(h: h);
 
   ///get vertically padding
-  Padding py(double v) => _pad(vertical: v);
+  Padding py(double v) => _pad(v: v);
 
   ///get [symmetric] vertically and horizontally padding
-  Padding pxy({required double h, required double v}) =>
-      _pad(horizontal: h, vertical: v);
+  Padding pxy({required double h, required double v}) => _pad(h: h, v: v);
 
   ///get right side padding
   Padding pr(double right) => _pad(right: right);
@@ -280,20 +279,20 @@ extension PaddingExtension on Widget {
   Padding get py64 => py(64);
 
   Padding _pad({
-    double all = 0,
-    double horizontal = 0,
-    double vertical = 0,
-    double top = 0,
-    double bottom = 0,
-    double left = 0,
-    double right = 0,
+    double? all,
+    double? h,
+    double? v,
+    double? top,
+    double? bottom,
+    double? left,
+    double? right,
   }) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(
-        left == 0 ? all : left,
-        top == 0 ? all : top,
-        right == 0 ? all : right,
-        bottom == 0 ? all : bottom,
+      padding: EdgeInsets.only(
+        left: left ?? h ?? all ?? 0.0,
+        top: top ?? v ?? all ?? 0.0,
+        right: right ?? h ?? all ?? 0.0,
+        bottom: bottom ?? v ?? all ?? 0.0,
       ),
       child: this,
     );
