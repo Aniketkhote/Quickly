@@ -182,14 +182,14 @@ class FxButton extends StatelessWidget {
   }
 
   static final Map<BtnSize, double> _sizeFactorBySize = <BtnSize, double>{
-    BtnSize.tiny: 14,
-    BtnSize.small: 16,
-    BtnSize.medium: 22,
-    BtnSize.large: 26,
+    BtnSize.tiny: 12,
+    BtnSize.small: 14,
+    BtnSize.medium: 18,
+    BtnSize.large: 20,
   };
 
   double getBtnSize() {
-    return _sizeFactorBySize[size] ?? 20;
+    return _sizeFactorBySize[size] ?? 16;
   }
 
   Color getTextColor(Color color) => color == Colors.transparent

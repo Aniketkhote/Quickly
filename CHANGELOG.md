@@ -1,3 +1,7 @@
+## 4.2.1
+
+- Minor improvements
+
 ## 4.2.0
 
 **Added:**
