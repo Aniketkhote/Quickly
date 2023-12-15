@@ -1,3 +1,8 @@
+## 4.2.2
+
+- Replaced the deprecated `TextScalarFactor` with `TextScalar`.
+- Resolved the `FxButton` outline color issue.
+
 ## 4.2.1
 
 - Minor improvements

@@ -12,7 +12,7 @@ extension TextExtension on Text {
     TextDirection? textDirection,
     Locale? locale,
     String? semanticsLabel,
-    double? textScaleFactor,
+    TextScaler? textScaler,
     TextWidthBasis? textWidthBasis,
     int? maxLines,
     TextAlign? textAlign,
@@ -26,7 +26,7 @@ extension TextExtension on Text {
         textDirection: textDirection,
         locale: locale,
         semanticsLabel: semanticsLabel,
-        textScaleFactor: textScaleFactor,
+        textScaler: textScaler,
         textWidthBasis: textWidthBasis,
         maxLines: maxLines,
         textAlign: textAlign,
@@ -124,38 +124,38 @@ extension TextExtension on Text {
   Text fontFamily(String fontFamily) =>
       _copyWith(style: TextStyle(fontFamily: fontFamily));
 
-  ///set [textScaleFactor] to text
-  Text textScale(double textScale) => _copyWith(textScaleFactor: textScale);
+  ///set [TextScaler] to text
+  Text textScale(TextScaler textScaler) => _copyWith(textScaler: textScaler);
 
-  /// Sets [textScaleFactor] to extra small i.e. 0.75
-  Text get xs => _copyWith(textScaleFactor: 0.75);
+  /// Sets [TextScaler] to extra small i.e. 0.75
+  Text get xs => _copyWith(textScaler: const TextScaler.linear(.75));
 
-  /// Sets [textScaleFactor] to small i.e. 0.875
-  Text get sm => _copyWith(textScaleFactor: 0.875);
+  /// Sets [TextScaler] to small i.e. 0.875
+  Text get sm => _copyWith(textScaler: const TextScaler.linear(0.875));
 
-  /// Sets [textScaleFactor] to md i.e. 1 or default
-  Text get md => _copyWith(textScaleFactor: 1.0);
+  /// Sets [TextScaler] to md i.e. 1 or default
+  Text get md => _copyWith(textScaler: TextScaler.noScaling);
 
-  /// Sets [textScaleFactor] to large i.e. 1.125
-  Text get lg => _copyWith(textScaleFactor: 1.125);
+  /// Sets [TextScaler] to large i.e. 1.125
+  Text get lg => _copyWith(textScaler: const TextScaler.linear(1.125));
 
-  /// Sets [textScaleFactor] to extra large i.e. 1.25
-  Text get xl => _copyWith(textScaleFactor: 1.25);
+  /// Sets [TextScaler] to extra large i.e. 1.25
+  Text get xl => _copyWith(textScaler: const TextScaler.linear(1.25));
 
-  /// Sets [textScaleFactor] to twice extra large i.e. 1.5
-  Text get xl2 => _copyWith(textScaleFactor: 1.5);
+  /// Sets [TextScaler] to twice extra large i.e. 1.5
+  Text get xl2 => _copyWith(textScaler: const TextScaler.linear(1.5));
 
-  /// Sets [textScaleFactor] to thrice extra large i.e. 1.875
-  Text get xl3 => _copyWith(textScaleFactor: 1.875);
+  /// Sets [TextScaler] to thrice extra large i.e. 1.875
+  Text get xl3 => _copyWith(textScaler: const TextScaler.linear(1.875));
 
-  /// Sets [textScaleFactor] to four times extra large i.e. 2.25
-  Text get xl4 => _copyWith(textScaleFactor: 2.25);
+  /// Sets [TextScaler] to four times extra large i.e. 2.25
+  Text get xl4 => _copyWith(textScaler: const TextScaler.linear(2.25));
 
-  /// Sets [textScaleFactor] to five times extra large i.e. 3
-  Text get xl5 => _copyWith(textScaleFactor: 3.0);
+  /// Sets [TextScaler] to five times extra large i.e. 3
+  Text get xl5 => _copyWith(textScaler: const TextScaler.linear(3.0));
 
-  /// Sets [textScaleFactor] to six times extra large i.e. 4
-  Text get xl6 => _copyWith(textScaleFactor: 4.0);
+  /// Sets [TextScaler] to six times extra large i.e. 4
+  Text get xl6 => _copyWith(textScaler: const TextScaler.linear(4.0));
 
   ///A negative value can be used to bring the letters closer.
   Text letterSpacing(double spacing) =>
@@ -222,7 +222,7 @@ extension TextExtension on Text {
           Locale? locale,
           bool? softWrap,
           TextOverflow? overflow,
-          double? textScaleFactor,
+          TextScaler? textScaler,
           int? maxLines,
           String? semanticsLabel,
           TextWidthBasis? textWidthBasis,
@@ -235,7 +235,7 @@ extension TextExtension on Text {
           locale: locale ?? this.locale,
           softWrap: softWrap ?? this.softWrap,
           overflow: overflow ?? this.overflow,
-          textScaleFactor: textScaleFactor ?? this.textScaleFactor,
+          textScaler: textScaler ?? this.textScaler,
           maxLines: maxLines ?? this.maxLines,
           semanticsLabel: semanticsLabel ?? this.semanticsLabel,
           textWidthBasis: textWidthBasis ?? this.textWidthBasis,

@@ -231,7 +231,7 @@ extension ListExtension<T> on List<T> {
   num get median {
     final List<num> list = whereNumbers.sorted();
     final int middleIndex = (list.length / 2).round();
-    if ((list.length).isEven) {
+    if (list.length.isEven) {
       return (list[middleIndex - 1] + list[middleIndex]) / 2;
     } else {
       return list[middleIndex];

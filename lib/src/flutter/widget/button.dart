@@ -58,7 +58,7 @@ class FxButton extends StatelessWidget {
 
   /// The [outlineColor] parameter sets the button's outline color for the
   /// outline button types.
-  final Color outlineColor;
+  final Color? outlineColor;
 
   /// The [color] parameter sets the button's background color for the solid
   /// button type.
@@ -209,10 +209,12 @@ class FxButton extends StatelessWidget {
 
   Border getButtonBorder() {
     if (BtnType.outline == type) {
-      return Border.all(color: color ?? outlineColor, width: 2);
+      return Border.all(
+          color: outlineColor ?? color ?? FxColor.gray200, width: 2);
     }
     if (BtnType.outline2x == type) {
-      return Border.all(color: color ?? outlineColor, width: 3);
+      return Border.all(
+          color: outlineColor ?? color ?? FxColor.gray200, width: 3);
     }
 
     return Border.all(style: BorderStyle.none);
