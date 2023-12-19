@@ -27,6 +27,7 @@ class FxButton extends StatelessWidget {
     this.shadow,
     this.textColor,
     this.iconColor,
+    this.isSplashColor = false,
     this.mainAxisAlignment,
     this.prefixIconSize,
     this.suffixIconSize,
@@ -104,6 +105,8 @@ class FxButton extends StatelessWidget {
 
   final TextStyle? textStyle;
 
+  final bool isSplashColor;
+
   @override
   Widget build(BuildContext context) {
     final Widget textWidget = Text(
@@ -144,8 +147,11 @@ class FxButton extends StatelessWidget {
         : const SizedBox.shrink();
 
     return InkWell(
-      splashColor:
-          type == BtnType.solid ? FxColor.dark : color!.withOpacity(.3),
+      splashColor: isSplashColor
+          ? type == BtnType.solid
+              ? FxColor.dark
+              : color!.withOpacity(.3)
+          : FxColor.transparent,
       onTap: onPressed,
       child: Container(
         padding: padding ?? FxPadding.pxy(h: 16, v: 7),

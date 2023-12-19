@@ -1,3 +1,7 @@
+## 4.2.3
+
+- The `FxButton` widget now has splash color set to false by default.
+
 ## 4.2.2
 
 - Replaced the deprecated `TextScalarFactor` with `TextScalar`.
