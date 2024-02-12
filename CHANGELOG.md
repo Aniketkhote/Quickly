@@ -1,3 +1,7 @@
+## 4.2.4
+
+- Support for new SDK version `>=3.2.6 <4.0.0`.
+
 ## 4.2.3
 
 - The `FxButton` widget now has splash color set to false by default.

@@ -101,10 +101,13 @@ class FxButton extends StatelessWidget {
   /// full width available.
   final bool isBlock;
 
+  /// Defines how the children should be placed along the main axis.
   final MainAxisAlignment? mainAxisAlignment;
 
+  /// The style to use for the button's text.
   final TextStyle? textStyle;
 
+  /// A boolean value indicating whether splash color is enabled for the button.
   final bool isSplashColor;
 
   @override
@@ -174,6 +177,7 @@ class FxButton extends StatelessWidget {
     );
   }
 
+  /// A mapping of button shapes to corresponding border radii.
   static final Map<BtnShape, BorderRadius> _borderRadiusByShape =
       <BtnShape, BorderRadius>{
     BtnShape.pill: FxRadius.r30,
@@ -183,10 +187,12 @@ class FxButton extends StatelessWidget {
     BtnShape.leaf: FxRadius.only(bottomLeft: 30, topRight: 30),
   };
 
+  /// Returns the border radius for the button based on its shape.
   BorderRadius getBtnShape() {
     return _borderRadiusByShape[shape] ?? FxRadius.none;
   }
 
+  /// A mapping of button sizes to corresponding size factors.
   static final Map<BtnSize, double> _sizeFactorBySize = <BtnSize, double>{
     BtnSize.tiny: 12,
     BtnSize.small: 14,
@@ -194,16 +200,24 @@ class FxButton extends StatelessWidget {
     BtnSize.large: 20,
   };
 
+  /// Returns the size factor for the button based on its size.
   double getBtnSize() {
     return _sizeFactorBySize[size] ?? 16;
   }
 
+  /// Returns the text color for the button based on the background color.
+  /// If the background color is transparent, returns [FxColor.gray700].
+  /// Otherwise, returns [FxColor.gray700] for light background colors
+  /// and [Colors.white] for dark background colors.
   Color getTextColor(Color color) => color == Colors.transparent
       ? FxColor.gray700
       : color.computeLuminance() > 0.5
           ? FxColor.gray700
           : Colors.white;
 
+  /// Returns the button color based on its type.
+  /// If the type is [BtnType.outline], [BtnType.outline2x], or [BtnType.transparent],
+  /// returns [Colors.transparent]. Otherwise, returns [FxColor.primary].
   Color getBtnType() {
     if (BtnType.outline == type ||
         BtnType.outline2x == type ||
@@ -213,6 +227,15 @@ class FxButton extends StatelessWidget {
     return FxColor.primary;
   }
 
+  /// Returns the appropriate border for the button based on its type.
+  ///
+  /// If [type] is [BtnType.outline], returns a border with the specified [outlineColor] or defaults to [FxColor.gray200]
+  /// with a width of 2.
+  ///
+  /// If [type] is [BtnType.outline2x], returns a border with the specified [outlineColor] or defaults to [FxColor.gray200]
+  /// with a width of 3.
+  ///
+  /// If [type] is neither [BtnType.outline] nor [BtnType.outline2x], returns a border with no style.
   Border getButtonBorder() {
     if (BtnType.outline == type) {
       return Border.all(
