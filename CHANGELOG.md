@@ -1,3 +1,7 @@
+## 4.2.6
+
+- Fixed pub points.
+
 ## 4.2.5
 
 - Support for new SDK version `>=3.3.0 <4.0.0`.
