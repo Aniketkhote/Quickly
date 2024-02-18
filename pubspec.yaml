@@ -1,10 +1,10 @@
 name: quickly
 description: Quickly is build for faster and cleaner development. It provides lots of extension methods on Widget, String, List and Map.
-version: 4.2.6
+version: 4.2.7
 homepage: "https://github.com/Aniketkhote/Quickly"
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ">=3.2.6 <4.0.0"
 
 dependencies:
   flutter:

@@ -1,3 +1,7 @@
+## 4.2.7
+
+- Fixed minor issues in list.
+
 ## 4.2.6
 
 - Fixed pub points.
