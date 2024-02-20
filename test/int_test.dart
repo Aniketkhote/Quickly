@@ -7,7 +7,7 @@ void main() {
       expect(1.getMonthName(), equals('January'));
     });
     test('getMonthName(true) - returns Jan', () {
-      expect(1.getMonthName(true), equals('Jan'));
+      expect(1.getMonthName(isShort: true), equals('Jan'));
     });
     test('getMonthName(invalid number) - returns Invalid number of month', () {
       expect(13.getMonthName(), equals('Invalid number of month'));
@@ -16,7 +16,7 @@ void main() {
       expect(1.getWeekName(), equals('Monday'));
     });
     test('getWeekName(true) - returns Mon', () {
-      expect(1.getWeekName(true), equals('Mon'));
+      expect(1.getWeekName(isShort: true), equals('Mon'));
     });
     test('getWeekName(invalid number) - returns Invalid number of week', () {
       expect(8.getWeekName(), equals('Invalid number of week'));
@@ -28,7 +28,7 @@ void main() {
       expect(12.getMonthName(), equals('December'));
     });
     test('getMonthName(true) - returns Dec', () {
-      expect(12.getMonthName(true), equals('Dec'));
+      expect(12.getMonthName(isShort: true), equals('Dec'));
     });
   });
 }

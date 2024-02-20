@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 /// A responsive widget that renders different UI components based on the screen width.
 ///

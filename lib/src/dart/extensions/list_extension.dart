@@ -8,7 +8,7 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.sorted(true) // create new list with ascending order
   ///```
-  List<T> sorted([bool isDesc = false]) {
+  List<T> sorted({bool isDesc = false}) {
     final List<T> copy = List<T>.of(this);
     copy.sort();
     return isDesc ? copy.reversed.toList() : copy;
@@ -20,7 +20,7 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.sortedDesc() // create new list with descending order
   ///```
-  List<T> get sortedDesc => sorted(true);
+  List<T> get sortedDesc => sorted(isDesc: true);
 
   ///The sortBy method sorts the list of maps by the given key.
   ///
@@ -28,7 +28,7 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.sortBy("price") // create new list with ascending order by according to price
   ///```
-  List<Map<T, T>> sortBy(String key, [bool isDesc = false]) {
+  List<Map<T, T>> sortBy(String key, {bool isDesc = false}) {
     final List<Map<T, T>> maps = whereType<Map<T, T>>()
         .where((Map<T, T> element) => element.containsKey(key))
         .toList();
@@ -57,7 +57,7 @@ extension ListExtension<T> on List<T> {
   ///This method has the same signature as the sortBy method,
   ///but will sort the collection in the opposite order
   ///```
-  List<Map<T, T>> sortDescBy(String key) => sortBy(key, true);
+  List<Map<T, T>> sortDescBy(String key) => sortBy(key, isDesc: true);
 
   ///Group by objects according to condition
   ///
@@ -65,10 +65,10 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.groupBy(fn)
   ///```
-  Map<T, List<T>> groupBy(T Function(T) fn) {
-    return Map<T, List<T>>.fromIterable(map(fn).toSet(),
-        value: (dynamic i) => where((T v) => fn(v) == i).toList());
-  }
+  Map<T, List<T>> groupBy(T Function(T) fn) => Map<T, List<T>>.fromIterable(
+        map(fn).toSet(),
+        value: (i) => where((T v) => fn(v) == i).toList(),
+      );
 
   ///Group the objects according to key
   ///
@@ -77,9 +77,14 @@ extension ListExtension<T> on List<T> {
   ///list.groupByKey("key")
   ///```
   // ignore: avoid_dynamic_calls
-  Map<T, List<T>> groupByKey(String key) => groupBy((dynamic e) => e[key] as T);
+  Map<T, List<T>> groupByKey(String key) => groupBy((T e) {
+        if (e is Map && e.containsKey(key)) {
+          return e[key] as T;
+        }
+        throw ArgumentError('Key not found: $key');
+      });
 
-  ///The latest methods allow you to easily order results by id in descending order.
+  ///The latest methods allow you to easily order results by id in descending.
   ///By default, the result will be ordered by the id field.
   ///Or, you may pass the key that you wish to sort by:
   ///
@@ -87,7 +92,7 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.latest()
   ///```
-  List<Map<T, T>> latest([String key = 'id']) => sortBy(key, true);
+  List<Map<T, T>> latest([String key = 'id']) => sortBy(key, isDesc: true);
 
   ///The latestFirst methods allow you to easily order results by
   ///id in descending order and get first record.
@@ -152,9 +157,12 @@ extension ListExtension<T> on List<T> {
     }
 
     return List<List<T>>.generate(
-        length ~/ size + (length % size == 0 ? 0 : 1),
-        (int index) => sublist(index * size,
-            (index + 1) * size > length ? length : (index + 1) * size));
+      length ~/ size + (length % size == 0 ? 0 : 1),
+      (int index) => sublist(
+        index * size,
+        (index + 1) * size > length ? length : (index + 1) * size,
+      ),
+    );
   }
 
   ///The split method breaks the list into equal sized lists of a given size
@@ -171,9 +179,12 @@ extension ListExtension<T> on List<T> {
     final int size = (length / parts).round();
 
     return List<List<T>>.generate(
-        parts,
-        (int i) => sublist(
-            size * i, (i + 1) * size <= length ? (i + 1) * size : null));
+      parts,
+      (int i) => sublist(
+        size * i,
+        (i + 1) * size <= length ? (i + 1) * size : null,
+      ),
+    );
   }
 
   ///Merge list of lists into single list
@@ -357,8 +368,10 @@ extension ListExtension<T> on List<T> {
     }
     final List<T> result = toList();
     for (final num param in params) {
-      result.removeWhere((T map) =>
-          map is Map<String, T> && map.containsKey(key) && map[key] == param);
+      result.removeWhere(
+        (T map) =>
+            map is Map<String, T> && map.containsKey(key) && map[key] == param,
+      );
     }
     return result;
   }
@@ -426,14 +439,12 @@ extension ListExtension<T> on List<T> {
   /// map.hasKeyValue('age', 25); // true
   /// map.hasKeyValue('gender', 'male'); // false
   ///```
-  bool hasKeyValue(String key, T value) {
-    return any((T element) {
-      if (element is! Map<T, T>) {
-        return false;
-      }
-      return element.has(key, value);
-    });
-  }
+  bool hasKeyValue(String key, T value) => any((T element) {
+        if (element is! Map<T, T>) {
+          return false;
+        }
+        return element.has(key, value);
+      });
 
   ///Checks if the given [key] exists in the map.
   ///
@@ -443,14 +454,12 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///map.hasKey("key") // true
   ///```
-  bool hasKey(String key) {
-    return any((T element) {
-      if (element is! Map<T, T>) {
-        return false;
-      }
-      return element.containsKey(key);
-    });
-  }
+  bool hasKey(String key) => any((T element) {
+        if (element is! Map<T, T>) {
+          return false;
+        }
+        return element.containsKey(key);
+      });
 
   ///Checks if the given [value] exists in the map.
   ///
@@ -460,12 +469,10 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///map.hasValue("value") // true
   ///```
-  bool hasValue(T value) {
-    return any((T element) {
-      if (element is! Map<T, T>) {
-        return false;
-      }
-      return element.containsValue(value);
-    });
-  }
+  bool hasValue(T value) => any((T element) {
+        if (element is! Map<T, T>) {
+          return false;
+        }
+        return element.containsValue(value);
+      });
 }

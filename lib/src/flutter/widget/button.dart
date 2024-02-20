@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../quickly.dart';
+import "package:flutter/material.dart";
+import "package:quickly/quickly.dart";
 
 /// A customizable button widget that follows a specific design style.
 ///
@@ -9,6 +8,7 @@ import '../../../quickly.dart';
 /// like solid, outline, outline2x, and transparent. The appearance and behavior
 /// of the button can be modified using the provided properties.
 class FxButton extends StatelessWidget {
+  /// constructor
   const FxButton({
     required this.text,
     required this.onPressed,
@@ -41,10 +41,10 @@ class FxButton extends StatelessWidget {
   /// when the button is pressed.
   final VoidCallback onPressed;
 
-  /// The [prefixIcon] and [suffixIcon] parameters specify the icons to be
-  /// displayed before and after the button text, respectively.
+  /// The [prefixIcon] parameter specifies the icon to be displayed before the button text.
   final IconData? prefixIcon;
 
+  /// The [suffixIcon] parameter specifies the icon to be displayed after the button text.
   final IconData? suffixIcon;
 
   /// The [padding]  parameters allow customization of the button's internal padding
@@ -188,9 +188,7 @@ class FxButton extends StatelessWidget {
   };
 
   /// Returns the border radius for the button based on its shape.
-  BorderRadius getBtnShape() {
-    return _borderRadiusByShape[shape] ?? FxRadius.none;
-  }
+  BorderRadius getBtnShape() => _borderRadiusByShape[shape] ?? FxRadius.none;
 
   /// A mapping of button sizes to corresponding size factors.
   static final Map<BtnSize, double> _sizeFactorBySize = <BtnSize, double>{
@@ -201,9 +199,7 @@ class FxButton extends StatelessWidget {
   };
 
   /// Returns the size factor for the button based on its size.
-  double getBtnSize() {
-    return _sizeFactorBySize[size] ?? 16;
-  }
+  double getBtnSize() => _sizeFactorBySize[size] ?? 16;
 
   /// Returns the text color for the button based on the background color.
   /// If the background color is transparent, returns [FxColor.gray700].
@@ -239,11 +235,15 @@ class FxButton extends StatelessWidget {
   Border getButtonBorder() {
     if (BtnType.outline == type) {
       return Border.all(
-          color: outlineColor ?? color ?? FxColor.gray200, width: 2);
+        color: outlineColor ?? color ?? FxColor.gray200,
+        width: 2,
+      );
     }
     if (BtnType.outline2x == type) {
       return Border.all(
-          color: outlineColor ?? color ?? FxColor.gray200, width: 3);
+        color: outlineColor ?? color ?? FxColor.gray200,
+        width: 3,
+      );
     }
 
     return Border.all(style: BorderStyle.none);

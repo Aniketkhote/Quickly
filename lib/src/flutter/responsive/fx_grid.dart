@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import 'fx_grid_column.dart';
+import "package:flutter/material.dart";
+import "package:quickly/src/flutter/responsive/fx_grid_column.dart";
 
 /// A responsive grid layout widget that arranges its children in a row.
 ///
@@ -45,7 +44,8 @@ class FxGrid extends StatelessWidget {
   /// How the columns are aligned vertically.
   final CrossAxisAlignment crossAxisAlignment;
 
-  static const double defaultGutter = 16.0;
+  /// The default gutter value used in the layout.
+  static const double defaultGutter = 16;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,9 @@ class FxGrid extends StatelessWidget {
   /// The [visibleChildren] parameter is a list of `FxGridColumn` widgets that should be visible.
   /// Returns a list of `FxGridColumn` widgets representing the calculated columns.
   List<FxGridColumn> calculateColumns(
-      int totalColumns, List<FxGridColumn> visibleChildren) {
+    int totalColumns,
+    List<FxGridColumn> visibleChildren,
+  ) {
     final List<FxGridColumn> columns = <FxGridColumn>[];
 
     for (int i = 0; i < totalColumns; i++) {

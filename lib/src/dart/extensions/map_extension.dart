@@ -14,7 +14,7 @@ extension MapExtension<T> on Map<T, T> {
   ///print(map.has("id", 1)); // true
   ///print(map.has("id", 2)); // false
   ///```
-  bool has(String key, dynamic value) => containsKey(key) && this[key] == value;
+  bool has(String key, value) => containsKey(key) && this[key] == value;
 
   ///If this map does not contains the given [key]/[value] pair.
   ///
@@ -68,9 +68,8 @@ extension MapExtension<T> on Map<T, T> {
   ///map.diffKeys(map2)
   ///```
   Map<T, T> diffKeys<K, V>(Map<K, V> map) {
-    final Map<T, T> copy = Map<T, T>.from(this);
-    copy.removeWhere((T key, T value) => map.containsKey(key));
-    return copy;
+    removeWhere((T key, T value) => map.containsKey(key));
+    return this;
   }
 
   ///Returns all entries of this map according to values.
@@ -82,9 +81,8 @@ extension MapExtension<T> on Map<T, T> {
   ///map.diffValues(map2)
   ///```
   Map<T, T> diffValues(Map<T, T> map) {
-    final Map<T, T> copy = Map<T, T>.from(this);
-    copy.removeWhere((T key, T value) => map.containsValue(value));
-    return copy;
+    removeWhere((T key, T value) => map.containsValue(value));
+    return this;
   }
 
   /// Reads a [key] value of [bool] type from [Map].

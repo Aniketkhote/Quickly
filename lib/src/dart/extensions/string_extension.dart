@@ -14,7 +14,8 @@ extension StringExtension on String {
 
   ///Checks [string] is valid email or not and return [bool]
   bool get isEmail => regex(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+      );
 
   ///Check this string min length, if satisfied condition then return true
   bool minLen(int min) => length >= min;
@@ -99,16 +100,20 @@ extension StringExtension on String {
 
   ///Converts all characters in this string to capital case.
   String get toCapitalCase => split(' ')
-      .map((String word) => word.isNotEmpty
-          ? word[0].toUpperCase() + word.substring(1).toLowerCase()
-          : '')
+      .map(
+        (String word) => word.isNotEmpty
+            ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+            : '',
+      )
       .join(' ');
 
   ///Converts all first characters in this string to capital case and rest to the lower case.
   String get toTitleCase => split(' ')
-      .map((String word) => word.isNotEmpty
-          ? word[0].toUpperCase() + word.substring(1).toLowerCase()
-          : '')
+      .map(
+        (String word) => word.isNotEmpty
+            ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+            : '',
+      )
       .join(' ');
 
   ///Capitalize first letter of String and convert rest of string into lower case
@@ -165,7 +170,6 @@ extension StringExtension on String {
       _endsWith('.aac') ||
       _endsWith('.m4a');
 
-  bool _endsWith(String pattern) {
-    return toLowerCase().endsWith(pattern.toLowerCase());
-  }
+  bool _endsWith(String pattern) =>
+      toLowerCase().endsWith(pattern.toLowerCase());
 }

@@ -2,6 +2,121 @@
 /// the difference between a given date and the current date in human-readable
 /// format.
 extension DateTimeExtensions on DateTime {
+  /// Formats the DateTime object as a string based on the provided [format].
+  ///
+  /// Supported format tokens:
+  /// - 'dd': Day of the month (01-31)
+  /// - 'MM': Month (01-12)
+  /// - 'MMM': Short month name (Jan-Dec)
+  /// - 'MMMM': Full month name (January-December)
+  /// - 'yyyy': Year
+  /// - 'HH': Hour (00-23)
+  /// - 'hh': Hour (01-12)
+  /// - 'mm': Minute (00-59)
+  /// - 'ss': Second (00-59)
+  /// - 'a': AM/PM marker
+  /// - 'EEE': Short day name (Mon-Sun)
+  /// - 'EEEE': Full day name (Monday-Sunday)
+  ///
+  /// Example usage:
+  /// DateTime now = DateTime.now();
+  /// String formattedDate = now.format('dd/MM/yyyy', monthFormat: 'MMM');
+  String format(String format, {String? monthFormat, String? dayFormat}) {
+    Map<int, String> monthsShort = {
+      1: 'Jan',
+      2: 'Feb',
+      3: 'Mar',
+      4: 'Apr',
+      5: 'May',
+      6: 'Jun',
+      7: 'Jul',
+      8: 'Aug',
+      9: 'Sep',
+      10: 'Oct',
+      11: 'Nov',
+      12: 'Dec'
+    };
+    Map<int, String> monthsFull = {
+      1: 'January',
+      2: 'February',
+      3: 'March',
+      4: 'April',
+      5: 'May',
+      6: 'June',
+      7: 'July',
+      8: 'August',
+      9: 'September',
+      10: 'October',
+      11: 'November',
+      12: 'December'
+    };
+    Map<int, String> daysShort = {
+      1: 'Mon',
+      2: 'Tue',
+      3: 'Wed',
+      4: 'Thu',
+      5: 'Fri',
+      6: 'Sat',
+      7: 'Sun'
+    };
+    Map<int, String> daysFull = {
+      1: 'Monday',
+      2: 'Tuesday',
+      3: 'Wednesday',
+      4: 'Thursday',
+      5: 'Friday',
+      6: 'Saturday',
+      7: 'Sunday'
+    };
+    String result = format.replaceAllMapped(
+        RegExp(r'(dd|MM|MMM|MMMM|yyyy|HH|hh|mm|ss|a|EEE|EEEE)'), (Match m) {
+      switch (m.group(0)) {
+        case 'dd':
+          return this.day.toString().padLeft(2, '0');
+        case 'MM':
+          return monthFormat == 'MMM'
+              ? monthsShort[this.month]! // Short month name: Jan-Dec
+              : this.month.toString().padLeft(2, '0'); // Numeric month: 01-12
+        case 'MMM':
+          return monthsShort[this.month]!; // Short month name: Jan-Dec
+        case 'MMMM':
+          return monthsFull[this.month]!; // Full month name: January-December
+        case 'yyyy':
+          return this.year.toString();
+        case 'HH':
+          return this.hour.toString().padLeft(2, '0');
+        case 'hh':
+          int hour = this.hour > 12 ? this.hour - 12 : this.hour;
+          return hour.toString().padLeft(2, '0');
+        case 'mm':
+          return this.minute.toString().padLeft(2, '0');
+        case 'ss':
+          return this.second.toString().padLeft(2, '0');
+        case 'a':
+          return this.hour < 12 ? 'AM' : 'PM';
+        case 'EEE':
+          return dayFormat == 'EEE'
+              ? daysShort[this.weekday]! // Short day name: Mon-Sun
+              : daysFull[this.weekday]!; // Full day name: Monday-Sunday
+        case 'EEEE':
+          return daysFull[this.weekday]!; // Full day name: Monday-Sunday
+        default:
+          return m.group(0)!;
+      }
+    });
+    return result;
+  }
+
+  /// Returns true if the DateTime object represents a date in the past.
+  bool isPast() {
+    return this.isBefore(DateTime.now());
+  }
+
+  /// Returns true if the DateTime object represents a date in the future.
+  bool isFuture() {
+    return this.isAfter(DateTime.now());
+  }
+
   /// Returns a human-readable string representation of the difference between
   /// this date and the current date.
   ///
@@ -18,7 +133,7 @@ extension DateTimeExtensions on DateTime {
   /// DateTime pastDateTime = DateTime(2022, 10, 1);
   /// print(pastDateTime.diffForHumans(showRelativeDates: true)); // Output: "7 months ago"
   /// ```
-  String diffForHumans({
+  String timeAgo({
     bool abbreviatedUnits = false,
     bool showRelativeDates = false,
     int precision = 2,
@@ -79,7 +194,6 @@ extension DateTimeExtensions on DateTime {
   }
 
   /// Calculates the number of months between this date and the given [dateTime].
-  int _calculateMonths(DateTime now, DateTime dateTime) {
-    return (now.year - dateTime.year) * 12 + now.month - dateTime.month;
-  }
+  int _calculateMonths(DateTime now, DateTime dateTime) =>
+      (now.year - dateTime.year) * 12 + now.month - dateTime.month;
 }

@@ -1,3 +1,12 @@
+## 5.0.0
+
+# Breaking changes
+
+- Removed Queue and Navigation. Instead of using Queue and Navigation, please use Refreshed package available at https://pub.dev/packages/refreshed.
+- Renamed `diffForHumans` method to `timeAgo`.
+- Changed boolean parameters in extension methods from positional parameters to named parameters.
+- Added some more `DateTime` extensions.
+
 ## 4.2.7
 
 - Fixed minor issues in list.
