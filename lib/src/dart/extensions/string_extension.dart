@@ -80,7 +80,7 @@ extension StringExtension on String {
   ///Convert string to [int]
   int? get toInt {
     try {
-      return isNotEmpty ? double.parse(this).toInt() : null;
+      return double.tryParse(this)?.toInt();
     } catch (e) {
       return null;
     }
@@ -89,7 +89,7 @@ extension StringExtension on String {
   ///Convert string to [double]
   double? get toDouble {
     try {
-      return isNotEmpty ? double.parse(this) : null;
+      return double.tryParse(this);
     } catch (e) {
       return null;
     }

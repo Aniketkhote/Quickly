@@ -1,3 +1,9 @@
+## 5.1.0
+
+- Added `removeNullValues()` method to Map extensions, which removes entries with null values from the map.
+- Introduced shorthand getters such as `top5`, `top10`, `left5`, etc., allowing users to specify border radius for individual sides with specific values more conveniently.
+- Added `Shimmer` widget for displaying a shimmer effect.
+
 ## 5.0.0
 
 # Breaking changes

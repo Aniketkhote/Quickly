@@ -203,4 +203,16 @@ extension MapExtension<T> on Map<T, T> {
     }
     return pickedMap;
   }
+
+  /// Returns a new map containing the entries of this map excluding entries with null values.
+  ///
+  /// Example:
+  /// ```dart
+  /// final map = {'a': 1, 'b': null, 'c': 3};
+  /// final filteredMap = map.removeNullValues();
+  /// print(filteredMap); // Output: {'a': 1, 'c': 3}
+  /// ```
+  Map<T, T> removeNullValues() {
+    return Map<T, T>.fromEntries(entries.where((entry) => entry.value != null));
+  }
 }

@@ -83,6 +83,66 @@ mixin FxRadius {
   ///Gives [BorderRadius] 50 for all sides
   static BorderRadius get r50 => all(50);
 
+  ///Gives [BorderRadius] 5 for the top side.
+  static BorderRadius get top5 => top(5);
+
+  ///Gives [BorderRadius] 10 for the top side.
+  static BorderRadius get top10 => top(10);
+
+  ///Gives [BorderRadius] 20 for the top side.
+  static BorderRadius get top20 => top(20);
+
+  ///Gives [BorderRadius] 30 for the top side.
+  static BorderRadius get top30 => top(30);
+
+  ///Gives [BorderRadius] 50 for the top side.
+  static BorderRadius get top50 => top(50);
+
+  ///Gives [BorderRadius] 5 for the left side.
+  static BorderRadius get left5 => left(5);
+
+  ///Gives [BorderRadius] 10 for the left side.
+  static BorderRadius get left10 => left(10);
+
+  ///Gives [BorderRadius] 20 for the left side.
+  static BorderRadius get left20 => left(20);
+
+  ///Gives [BorderRadius] 30 for the left side.
+  static BorderRadius get left30 => left(30);
+
+  ///Gives [BorderRadius] 50 for the left side.
+  static BorderRadius get left50 => left(50);
+
+  ///Gives [BorderRadius] 5 for the right side.
+  static BorderRadius get right5 => right(5);
+
+  ///Gives [BorderRadius] 10 for the right side.
+  static BorderRadius get right10 => right(10);
+
+  ///Gives [BorderRadius] 20 for the right side.
+  static BorderRadius get right20 => right(20);
+
+  ///Gives [BorderRadius] 30 for the right side.
+  static BorderRadius get right30 => right(30);
+
+  ///Gives [BorderRadius] 50 for the right side.
+  static BorderRadius get right50 => right(50);
+
+  ///Gives [BorderRadius] 5 for the bottom side.
+  static BorderRadius get bottom5 => bottom(5);
+
+  ///Gives [BorderRadius] 10 for the bottom side.
+  static BorderRadius get bottom10 => bottom(10);
+
+  ///Gives [BorderRadius] 20 for the bottom side.
+  static BorderRadius get bottom20 => bottom(20);
+
+  ///Gives [BorderRadius] 30 for the bottom side.
+  static BorderRadius get bottom30 => bottom(30);
+
+  ///Gives [BorderRadius] 50 for the bottom side.
+  static BorderRadius get bottom50 => bottom(50);
+
   ///Gives [BorderRadius] 5 for top left side
   static BorderRadius get topLeftl5 => topLeft(5);
 
