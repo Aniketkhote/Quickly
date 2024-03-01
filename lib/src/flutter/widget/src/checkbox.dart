@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../quickly.dart';
+import 'package:quickly/quickly.dart';
 
 /// A checkbox widget with customizable appearance and behavior.
 class FxCheckbox extends StatefulWidget {

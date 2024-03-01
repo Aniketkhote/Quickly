@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "package:quickly/quickly.dart";
-import "package:quickly/src/flutter/widget/form_validation.dart";
 
 /// A custom text form field widget with additional features.
 class FxTextFormField extends StatefulWidget {

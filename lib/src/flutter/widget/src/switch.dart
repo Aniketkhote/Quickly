@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../quickly.dart';
+import 'package:quickly/quickly.dart';
 
 /// A customizable switch widget with additional features provided by FxSwitch.
 class FxSwitch extends StatefulWidget {

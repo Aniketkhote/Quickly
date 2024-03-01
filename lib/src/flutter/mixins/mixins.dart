@@ -1,4 +1,4 @@
-export 'colors.dart';
-export 'padding.dart';
-export 'radius.dart';
-export 'shadow.dart';
+export 'src/colors.dart';
+export 'src/padding.dart';
+export 'src/radius.dart';
+export 'src/shadow.dart';

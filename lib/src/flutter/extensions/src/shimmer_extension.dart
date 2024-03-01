@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../quickly.dart';
+import 'package:quickly/quickly.dart';
 
 /// Extension class to apply shimmer effect to any widget.
 extension ShimmerExtension on Widget {

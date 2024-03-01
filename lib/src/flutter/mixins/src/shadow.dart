@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../quickly.dart';
+import 'package:quickly/quickly.dart';
 
 ///Gives predefined shadows
 mixin FxShadow {

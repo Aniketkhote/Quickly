@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:quickly/src/dart/extensions/int_extension.dart';
+import 'package:quickly/quickly.dart';
 
 void main() {
   group('IntExtension', () {

@@ -1,4 +1,4 @@
-import '../../../quickly.dart';
+import 'package:quickly/quickly.dart';
 
 /// A function that performs validation on a given input value.
 typedef ValidatorFunction = String? Function(String);
