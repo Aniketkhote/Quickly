@@ -56,7 +56,7 @@ extension MapExtension<T> on Map<T, T> {
   /// int id2 = map2.getId;
   /// print(id2); // Output: 0
   ///```
-  T? getId<T>({T? defaultValue}) {
+  T? getId({T? defaultValue}) {
     dynamic value = containsKey('id') ? this['id'] : defaultValue;
     if (value != null && (value is num || value is String)) {
       return value as T;
