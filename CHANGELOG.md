@@ -1,3 +1,7 @@
+## 5.2.0
+
+- Added support for the `defaultValue` parameter in the `getId`, `getString`, `getInt`, and `getDouble` methods.
+
 ## 5.1.0
 
 - Added `removeNullValues()` method to Map extensions, which removes entries with null values from the map.

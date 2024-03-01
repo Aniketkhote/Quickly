@@ -56,8 +56,13 @@ extension MapExtension<T> on Map<T, T> {
   /// int id2 = map2.getId;
   /// print(id2); // Output: 0
   ///```
-  dynamic get getId =>
-      (containsKey('id') && this['id'] != null) ? this['id'] : null;
+  T? getId<T>({T? defaultValue}) {
+    dynamic value = containsKey('id') ? this['id'] : defaultValue;
+    if (value != null && (value is num || value is String)) {
+      return value as T;
+    }
+    return null;
+  }
 
   ///Returns all entries of this map according to keys.
   ///
@@ -110,8 +115,8 @@ extension MapExtension<T> on Map<T, T> {
   /// print(map.getInt('age')); // 30
   /// print(map.getInt('address')); // null
   ///```
-  int? getInt(String key) =>
-      containsKey(key) ? int.tryParse('${this[key]}') : null;
+  int? getInt(String key, {int? defaultValue}) =>
+      containsKey(key) ? int.tryParse('${this[key]}') : defaultValue;
 
   /// Reads a [key] value of [double] type from [Map].
   ///
@@ -127,8 +132,8 @@ extension MapExtension<T> on Map<T, T> {
   ///print(map.getDouble("isStock")); // null
   ///print(map.getDouble("size")); // null
   ///```
-  double? getDouble(String key) =>
-      containsKey(key) ? double.tryParse('${this[key]}') : null;
+  double? getDouble(String key, {double? defaultValue}) =>
+      containsKey(key) ? double.tryParse('${this[key]}') : defaultValue;
 
   /// Reads a [key] value of [String] type from [Map].
   ///
@@ -144,8 +149,8 @@ extension MapExtension<T> on Map<T, T> {
   /// String email = map.getString('email', 'not_provided@example.com');
   /// print(email); // Output: not_provided@example.com
   ///```
-  String? getString(String key, [String? defaultString]) =>
-      this[key] is String ? this[key]! as String : defaultString;
+  String? getString(String key, {String? defaultValue}) =>
+      this[key] is String ? this[key]! as String : defaultValue;
 
   /// This method retrieves the list associated with the given key from the map.
   /// If the key is not present or the value associated with the key is not a list,

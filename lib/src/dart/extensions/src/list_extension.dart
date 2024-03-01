@@ -439,12 +439,14 @@ extension ListExtension<T> on List<T> {
   /// map.hasKeyValue('age', 25); // true
   /// map.hasKeyValue('gender', 'male'); // false
   ///```
-  bool hasKeyValue(String key, T value) => any((T element) {
-        if (element is! Map<T, T>) {
-          return false;
-        }
-        return element.has(key, value);
-      });
+  bool hasKeyValue(String key, T value) => any(
+        (T element) {
+          if (element is! Map<T, T>) {
+            return false;
+          }
+          return element.has(key, value);
+        },
+      );
 
   ///Checks if the given [key] exists in the map.
   ///
@@ -454,12 +456,14 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///map.hasKey("key") // true
   ///```
-  bool hasKey(String key) => any((T element) {
-        if (element is! Map<T, T>) {
-          return false;
-        }
-        return element.containsKey(key);
-      });
+  bool hasKey(String key) => any(
+        (T element) {
+          if (element is! Map<T, T>) {
+            return false;
+          }
+          return element.containsKey(key);
+        },
+      );
 
   ///Checks if the given [value] exists in the map.
   ///
@@ -469,10 +473,12 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///map.hasValue("value") // true
   ///```
-  bool hasValue(T value) => any((T element) {
-        if (element is! Map<T, T>) {
-          return false;
-        }
-        return element.containsValue(value);
-      });
+  bool hasValue(T value) => any(
+        (T element) {
+          if (element is! Map<T, T>) {
+            return false;
+          }
+          return element.containsValue(value);
+        },
+      );
 }
