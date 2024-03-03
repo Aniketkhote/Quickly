@@ -14,7 +14,7 @@
 
 ## 5.0.0
 
-# Breaking changes
+**Breaking changes**
 
 - Removed Queue and Navigation. Instead of using Queue and Navigation, please use Refreshed package available at https://pub.dev/packages/refreshed.
 - Renamed `diffForHumans` method to `timeAgo`.
