@@ -1,3 +1,7 @@
+## 5.2.1
+
+- Updated test cases to accommodate the new defaultValue parameter, ensuring comprehensive coverage and accurate functionality testing.
+
 ## 5.2.0
 
 - Added support for the `defaultValue` parameter in the `getId`, `getString`, `getInt`, and `getDouble` methods.

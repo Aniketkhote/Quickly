@@ -45,10 +45,10 @@ void main() {
     });
 
     test("getId", () {
-      expect(map.getId, equals(1));
+      expect(map.getId(), equals(1));
 
       final Map<String, String> map2 = <String, String>{"name": "Chair"};
-      expect(map2.getId, isNull);
+      expect(map2.getId(), equals(null));
     });
 
     test("diffKeys", () {

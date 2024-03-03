@@ -1,6 +1,6 @@
 name: quickly
 description: Quickly is build for faster and cleaner development. It provides lots of extension methods on Widget, String, List and Map.
-version: 5.2.0
+version: 5.2.1
 homepage: "https://github.com/Aniketkhote/Quickly"
 
 environment:
