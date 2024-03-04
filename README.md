@@ -101,7 +101,7 @@ people = [{'name': 'Bob', 'age': 30}, {'name': 'Alice', 'age': 25}]
 
 ```
 
-- list.sorted(): Returns a new list with the elements sorted in ascending order.
+- **list.sorted():** Returns a new list with the elements sorted in ascending order.
 
 ```dart
 
@@ -109,7 +109,7 @@ numbers.sorted()  // [1, 2, 5, 7, 9]
 
 ```
 
-- list.sortedDec(): Returns a new list with the elements sorted in descending order.
+- **list.sortedDec():** Returns a new list with the elements sorted in descending order.
 
 ```dart
 
@@ -117,7 +117,7 @@ numbers.sortedDec()  // [9, 7, 5, 2, 1]
 
 ```
 
-- list.sortedBy(key): Returns a new list of objects sorted by the provided key.
+- **list.sortedBy(key):** Returns a new list of objects sorted by the provided key.
 
 ```dart
 
@@ -125,7 +125,7 @@ people.sortedBy('age')  // [{'name': 'Alice', 'age': 25}, {'name': 'Bob', 'age':
 
 ```
 
-- list.chunk(n): Divides the list into equal chunks of size n and returns a list of lists.
+- **list.chunk(n):** Divides the list into equal chunks of size n and returns a list of lists.
 
 ```dart
 
@@ -133,7 +133,7 @@ numbers.chunk(2)  // [[5, 2], [9, 1], [7]]
 
 ```
 
-- list.split(n): Divides the list into n equal parts and returns a list of lists.
+- **list.split(n):** Divides the list into n equal parts and returns a list of lists.
 
 ```dart
 
@@ -141,7 +141,7 @@ numbers.split(3)  // [[5, 2], [9], [1, 7]]
 
 ```
 
-- list.pluck(key): Retrieves all of the values for a given key from a list of objects.
+- **list.pluck(key):** Retrieves all of the values for a given key from a list of objects.
 
 ```dart
 
@@ -159,7 +159,7 @@ person = {'name': 'Bob', 'age': 30, 'gender': 'male'}
 
 ```
 
-- map.has("key","value"): Returns a boolean value indicating if the provided key-value pair is present in the map.
+- **map.has("key","value"):** Returns a boolean value indicating if the provided key-value pair is present in the map.
 
 ```dart
 
@@ -167,7 +167,7 @@ person.has('gender', 'male')  // true
 
 ```
 
-- map.getId: Returns the value associated with the key 'id' if it exists, else returns NULL.
+- **map.getId():** Returns the value associated with the key 'id' if it exists, else returns NULL.
 
 ```dart
 
@@ -175,7 +175,7 @@ person.getId  // null
 
 ```
 
-- map.getString('key'): Returns the value associated with the provided key if it exists, else returns NULL.
+- **map.getString('key'):** Returns the value associated with the provided key if it exists, else returns NULL.
 
 ```dart
 
@@ -183,7 +183,7 @@ person.getString('name')  // 'Bob'
 
 ```
 
-- map.getBool('key'): Returns the boolean value associated with the provided key if it exists, else returns false.
+- **map.getBool('key'):** Returns the boolean value associated with the provided key if it exists, else returns false.
 
 ```dart
 
@@ -191,7 +191,7 @@ person.getBool('gender')  // false
 
 ```
 
-- map.retainKeys(keys): Returns a new map with only the key-value pairs that match the provided keys.
+- **map.retainKeys(keys):** Returns a new map with only the key-value pairs that match the provided keys.
 
 ```dart
 
@@ -199,7 +199,7 @@ person.retainKeys(['name', 'age'])  // {'name': 'Bob', 'age': 30}
 
 ```
 
-- map.match(key, [defaultValue]): Returns the value associated with the provided key if it exists, else returns the provided default value or "Invalid input" if no default value is provided.
+- **map.match(key, [defaultValue]):** Returns the value associated with the provided key if it exists, else returns the provided default value or "Invalid input" if no default value is provided.
 
 ```dart
 
