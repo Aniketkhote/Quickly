@@ -273,7 +273,7 @@ enum BtnType { solid, outline, outline2x, transparent }
 ///
 /// The [tiny] size represents the smallest size for the button.
 /// The [small] size represents a small-sized button.
-/// The [normal] size represents a medium-sized button.
-/// The [medium] size represents a large-sized button.
-/// The [large] size represents the largest size for the button.
+/// The [normal] size represents a regular-sized button.
+/// The [medium] size represents a medium-sized button.
+/// The [large] size represents the large size for the button.
 enum BtnSize { tiny, small, normal, medium, large }
