@@ -1,7 +1,7 @@
 /// An extension on the [DateTime] class that provides a method for formatting
 /// the difference between a given date and the current date in human-readable
 /// format.
-extension DateTimeExtensions on DateTime {
+extension DateTimeExtension on DateTime {
   /// Formats the DateTime object as a string based on the provided [format].
   ///
   /// Supported format tokens:

@@ -1,3 +1,7 @@
+## 5.3.0
+
+- Added delay method in `Duration` and `num` extensions.
+
 ## 5.2.1
 
 - Updated test cases to accommodate the new defaultValue parameter, ensuring comprehensive coverage and accurate functionality testing.
