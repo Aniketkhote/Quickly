@@ -1,6 +1,13 @@
+## 5.4.0
+
+- Added `isBool` and `isUrl` methods to String extensions.
+- Added `devicePixelRatio` and `textScaleFactor` methods in Context extensions.
+- Added `BorderColor` and `BoxShadow` methods in TextFormField.
+- Enhanced the isEmail regex for improved accuracy.
+
 ## 5.3.0
 
-- Added delay method in `Duration` and `num` extensions.
+- Added `delay` method in `Duration` and `num` extensions.
 
 ## 5.2.1
 

@@ -98,6 +98,12 @@ extension ContextExtension on BuildContext {
   /// similar to [Theme.of(context).textTheme.titleSmall]
   TextStyle? get titleSmall => textTheme.titleSmall;
 
+  /// similar to [MediaQuery.devicePixelRatioOf(context)]
+  double get devicePixelRatio => MediaQuery.devicePixelRatioOf(this);
+
+  /// similar to [MediaQuery.textScaleFactorOf(context)]
+  TextScaler get textScaleFactor => MediaQuery.textScalerOf(this);
+
   /// Returns the nearest ancestor [Navigator] widget.
   NavigatorState get navigator => Navigator.of(this);
 

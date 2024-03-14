@@ -9,6 +9,7 @@ class FxTextFormField extends StatefulWidget {
     this.hintText,
     this.label,
     this.fieldColor,
+    this.borderColor,
     this.prefixIcon,
     this.suffixIcon,
     this.isSecure = false,
@@ -19,6 +20,7 @@ class FxTextFormField extends StatefulWidget {
     this.controller,
     this.validations,
     this.padding,
+    this.boxShadow,
   });
 
   /// The label displayed above the text form field.
@@ -29,6 +31,9 @@ class FxTextFormField extends StatefulWidget {
 
   /// The background color of the text form field.
   final Color? fieldColor;
+
+  /// The border color of the text form field.
+  final Color? borderColor;
 
   /// The icon displayed as a prefix of the text form field.
   final IconData? prefixIcon;
@@ -60,6 +65,8 @@ class FxTextFormField extends StatefulWidget {
   /// The padding around the text form field container.
   final EdgeInsets? padding;
 
+  final List<BoxShadow>? boxShadow;
+
   @override
   State<FxTextFormField> createState() => _FxTextFormFieldState();
 }
@@ -82,11 +89,14 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
             Container(
               padding: widget.padding ?? FxPadding.px20,
               decoration: BoxDecoration(
-                color: widget.fieldColor ?? FxColor.light.withOpacity(.03),
+                color: widget.fieldColor ?? FxColor.gray100,
                 border: widget.border
-                    ? Border.all(color: Colors.grey.withOpacity(0.3))
+                    ? Border.all(
+                        color: widget.borderColor ?? FxColor.gray100,
+                      )
                     : Border.all(style: BorderStyle.none),
                 borderRadius: widget.borderRadius ?? FxRadius.all(10),
+                boxShadow: widget.boxShadow,
               ),
               child: TextFormField(
                 controller: widget.controller,
