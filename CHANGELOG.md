@@ -1,3 +1,7 @@
+## 5.5.0
+
+- Added `generateOTP` and `generateAvatar` helper method.
+
 ## 5.4.0
 
 - Added `isBool` and `isUrl` methods to String extensions.
