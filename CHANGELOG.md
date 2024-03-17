@@ -1,3 +1,7 @@
+## 5.5.1
+
+- Fixed helper function export issue.
+
 ## 5.5.0
 
 - Added `generateOTP` and `generateAvatar` helper method.
