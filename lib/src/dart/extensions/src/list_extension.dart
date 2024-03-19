@@ -76,7 +76,6 @@ extension ListExtension<T> on List<T> {
   ///```dart
   ///list.groupByKey("key")
   ///```
-  // ignore: avoid_dynamic_calls
   Map<T, List<T>> groupByKey(String key) => groupBy((T e) {
         if (e is Map && e.containsKey(key)) {
           return e[key] as T;
@@ -284,11 +283,11 @@ extension ListExtension<T> on List<T> {
     }
     final List<T> result = <T>[];
     for (final T element in this) {
-      if (element is Map<String, dynamic>) {
-        final Map<String, dynamic> map = <String, dynamic>{};
+      if (element is Map<String, T>) {
+        final Map<String, T> map = <String, T>{};
         for (final String key in keys) {
           if (element.containsKey(key)) {
-            map[key] = element[key];
+            map[key] = element[key]!;
           }
         }
         if (map.isNotEmpty) {
@@ -312,7 +311,7 @@ extension ListExtension<T> on List<T> {
     final List<T> result = <T>[];
 
     for (final T element in this) {
-      if (element is Map<String, dynamic>) {
+      if (element is Map<String, T>) {
         for (final String key in keys) {
           if (element.containsKey(key)) {
             element.remove(key);
@@ -388,7 +387,7 @@ extension ListExtension<T> on List<T> {
     }
     final List<T> result = <T>[];
     for (final T element in this) {
-      if (element is Map<String, dynamic> &&
+      if (element is Map<String, T> &&
           element.containsKey(key) &&
           element[key] is num) {
         if ((element[key] as int >= start) && (element[key] as int <= end)) {
@@ -412,7 +411,7 @@ extension ListExtension<T> on List<T> {
     }
     final List<T> result = <T>[];
     for (final T element in this) {
-      if (element is Map<dynamic, dynamic> &&
+      if (element is Map<T, T> &&
           element.containsKey(key) &&
           element[key] is num) {
         final num value = element[key] as num;

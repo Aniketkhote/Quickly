@@ -1,3 +1,7 @@
+## 5.5.2
+
+- Fixed datatypes in list and map extension.
+
 ## 5.5.1
 
 - Fixed helper function export issue.

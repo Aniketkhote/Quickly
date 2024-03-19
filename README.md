@@ -172,7 +172,7 @@ person.has('gender', 'male')  // true
 
 ```dart
 
-person.getId  // null
+person.getId()  // null
 
 ```
 
@@ -221,23 +221,23 @@ person.match('age', 'Unknown')  // 30
 
 ```
 
-- int.getMonthName([short = false]): Returns the name of the month corresponding to the integer
+- int.getMonthName({isShort}): Returns the name of the month corresponding to the integer
 
 ```dart
 
 1.getMonthName()  // 'January'
 
-1.getMonthName(true)  // 'Jan'
+1.getMonthName(isShort:true)  // 'Jan'
 
 ```
 
-- int.getWeekName([short = false]): Returns the name of the day of the week corresponding to the integer
+- int.getWeekName({isShort}): Returns the name of the day of the week corresponding to the integer
 
 ```dart
 
 3.getWeekName()  // 'Wednesday'
 
-3.getWeekName(true)  // 'Wed'
+3.getWeekName(isShort:true)  // 'Wed'
 
 ```
 
