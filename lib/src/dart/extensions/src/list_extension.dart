@@ -287,7 +287,7 @@ extension ListExtension<T> on List<T> {
         final Map<String, T> map = <String, T>{};
         for (final String key in keys) {
           if (element.containsKey(key)) {
-            map[key] = element[key]!;
+            map[key] = element[key] as T;
           }
         }
         if (map.isNotEmpty) {

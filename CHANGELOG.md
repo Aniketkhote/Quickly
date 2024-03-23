@@ -1,3 +1,7 @@
+## 5.5.3
+
+- Fixed linting issues.
+
 ## 5.5.2
 
 - Fixed datatypes in list and map extension.
