@@ -19,6 +19,7 @@ class FxButton extends StatelessWidget {
     this.size = BtnSize.normal,
     this.type = BtnType.solid,
     this.isBlock = false,
+    this.icon,
     this.prefixIcon,
     this.suffixIcon,
     this.padding,
@@ -29,8 +30,7 @@ class FxButton extends StatelessWidget {
     this.iconColor,
     this.isSplashColor = false,
     this.mainAxisAlignment,
-    this.prefixIconSize,
-    this.suffixIconSize,
+    this.iconSize,
     this.textStyle,
   });
 
@@ -40,6 +40,9 @@ class FxButton extends StatelessWidget {
   /// The [onPressed] parameter is required and defines the callback function
   /// when the button is pressed.
   final VoidCallback onPressed;
+
+  /// The [icon] parameter specifies the icon to be displayed in the center without text.
+  final IconData? icon;
 
   /// The [prefixIcon] parameter specifies the icon to be displayed before the button text.
   final IconData? prefixIcon;
@@ -87,11 +90,8 @@ class FxButton extends StatelessWidget {
   /// the values in the [BtnSize] enum.
   final BtnSize size;
 
-  /// The [prefixIconSize] parameter determines the prefix icons's size, which can be one of
-  final double? prefixIconSize;
-
-  /// The [suffixIconSize] parameter determines the suffix icon's size, which can be one of
-  final double? suffixIconSize;
+  /// The [iconSize] parameter determines the icons's size, which can be one of
+  final double? iconSize;
 
   /// The [type] parameter defines the button's type, which can be one of the
   /// values in the [BtnType] enum.
@@ -112,42 +112,35 @@ class FxButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget textWidget = Text(
-      text,
-      style: textStyle != null
-          ? TextStyle(
-              color: type == BtnType.solid
-                  ? textColor ?? getTextColor(color ?? getBtnType())
-                  : color,
-              fontSize: getBtnSize(),
-            ).merge(textStyle)
-          : TextStyle(
-              color: type == BtnType.solid
-                  ? textColor ?? getTextColor(color ?? getBtnType())
-                  : color,
-              fontSize: getBtnSize(),
-            ),
-    ).px4;
+    TextStyle baseTextStyle = TextStyle(
+      color: type == BtnType.solid
+          ? textColor ?? getTextColor(color ?? getBtnType())
+          : color,
+      fontSize: getBtnSize(),
+    );
+
+    final Widget textWidget = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: Text(
+        text,
+        style:
+            textStyle != null ? baseTextStyle.merge(textStyle) : baseTextStyle,
+      ),
+    );
 
     final Color? getIconColor = type == BtnType.solid
         ? iconColor ?? getTextColor(color ?? getBtnType())
         : color;
 
-    final Widget prefixIconWidget = prefixIcon != null
-        ? Icon(
-            prefixIcon,
-            color: getIconColor,
-            size: prefixIconSize ?? getBtnSize(),
-          )
-        : const SizedBox.shrink();
-
-    final Widget suffixIconWidget = suffixIcon != null
-        ? Icon(
-            suffixIcon,
-            color: getIconColor,
-            size: suffixIconSize ?? getBtnSize(),
-          )
-        : const SizedBox.shrink();
+    Widget createIconWidget(IconData? icon) {
+      return icon != null
+          ? Icon(
+              icon,
+              color: getIconColor,
+              size: iconSize ?? getBtnSize(),
+            )
+          : const SizedBox.shrink();
+    }
 
     return InkWell(
       splashColor: isSplashColor
@@ -167,11 +160,13 @@ class FxButton extends StatelessWidget {
         child: Row(
           mainAxisSize: isBlock ? MainAxisSize.max : MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
-          children: <Widget>[
-            prefixIconWidget,
-            if (isBlock) textWidget.px8 else textWidget.px4,
-            suffixIconWidget,
-          ],
+          children: icon != null
+              ? <Widget>[createIconWidget(icon)]
+              : <Widget>[
+                  createIconWidget(prefixIcon),
+                  if (isBlock) textWidget.px8 else textWidget.px4,
+                  createIconWidget(suffixIcon),
+                ],
         ),
       ),
     );
@@ -233,16 +228,10 @@ class FxButton extends StatelessWidget {
   ///
   /// If [type] is neither [BtnType.outline] nor [BtnType.outline2x], returns a border with no style.
   Border getButtonBorder() {
-    if (BtnType.outline == type) {
+    if (type == BtnType.outline || type == BtnType.outline2x) {
       return Border.all(
         color: outlineColor ?? color ?? FxColor.gray200,
-        width: 2,
-      );
-    }
-    if (BtnType.outline2x == type) {
-      return Border.all(
-        color: outlineColor ?? color ?? FxColor.gray200,
-        width: 3,
+        width: type == BtnType.outline ? 2 : 3,
       );
     }
 

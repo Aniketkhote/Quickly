@@ -180,6 +180,5 @@ extension StringExtension on String {
       _endsWith('.aac') ||
       _endsWith('.m4a');
 
-  bool _endsWith(String pattern) =>
-      toLowerCase().endsWith(pattern.toLowerCase());
+  bool _endsWith(String pattern) => toLowerCase().endsWith(pattern);
 }

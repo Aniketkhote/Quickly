@@ -1,3 +1,8 @@
+## 5.6.0
+
+- Added only icon option for FxButton, which is now displayed centered.
+- Replaced prefixIconSize and suffixIconSize with iconSize.
+
 ## 5.5.3
 
 - Fixed linting issues.
