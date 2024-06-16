@@ -10,16 +10,16 @@ import "package:quickly/quickly.dart";
 class FxButton extends StatelessWidget {
   /// constructor
   const FxButton({
-    required this.text,
     required this.onPressed,
     super.key,
+    this.text,
+    this.icon,
     this.color = FxColor.primary,
     this.outlineColor = FxColor.primary,
     this.shape = BtnShape.rounded,
     this.size = BtnSize.normal,
     this.type = BtnType.solid,
     this.isBlock = false,
-    this.icon,
     this.prefixIcon,
     this.suffixIcon,
     this.padding,
@@ -32,10 +32,10 @@ class FxButton extends StatelessWidget {
     this.mainAxisAlignment,
     this.iconSize,
     this.textStyle,
-  });
+  }) : assert(icon == null && text == null);
 
   /// The [text] parameter is required and specifies the button's label text.
-  final String text;
+  final String? text;
 
   /// The [onPressed] parameter is required and defines the callback function
   /// when the button is pressed.
@@ -119,14 +119,17 @@ class FxButton extends StatelessWidget {
       fontSize: getBtnSize(),
     );
 
-    final Widget textWidget = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: Text(
-        text,
-        style:
-            textStyle != null ? baseTextStyle.merge(textStyle) : baseTextStyle,
-      ),
-    );
+    final Widget textWidget = text != null
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: Text(
+              text!,
+              style: textStyle != null
+                  ? baseTextStyle.merge(textStyle)
+                  : baseTextStyle,
+            ),
+          )
+        : const SizedBox.shrink();
 
     final Color? getIconColor = type == BtnType.solid
         ? iconColor ?? getTextColor(color ?? getBtnType())
@@ -150,7 +153,7 @@ class FxButton extends StatelessWidget {
           : FxColor.transparent,
       onTap: onPressed,
       child: Container(
-        padding: padding ?? FxPadding.pxy(h: 16, v: 7),
+        padding: padding ?? FxPadding.pxy(h: 10, v: 7),
         decoration: BoxDecoration(
           borderRadius: radius ?? getBtnShape(),
           color: type == BtnType.solid ? color : getBtnType(),

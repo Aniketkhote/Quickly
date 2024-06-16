@@ -1,3 +1,8 @@
+## 5.6.1
+
+- Fixed padding issue in `FxButton`.
+- Made text field optional in `FxButton`.
+
 ## 5.6.0
 
 - Added only icon option for FxButton, which is now displayed centered.
