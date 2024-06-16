@@ -32,7 +32,8 @@ class FxButton extends StatelessWidget {
     this.mainAxisAlignment,
     this.iconSize,
     this.textStyle,
-  }) : assert(icon == null && text == null);
+  }) : assert(icon != null || text != null,
+            'Either icon or text must be provided');
 
   /// The [text] parameter is required and specifies the button's label text.
   final String? text;
@@ -135,12 +136,16 @@ class FxButton extends StatelessWidget {
         ? iconColor ?? getTextColor(color ?? getBtnType())
         : color;
 
-    Widget createIconWidget(IconData? icon) {
+    Widget createIconWidget(IconData? icon, {String? type}) {
       return icon != null
           ? Icon(
               icon,
               color: getIconColor,
-              size: iconSize ?? getBtnSize(),
+              size: iconSize != null
+                  ? iconSize
+                  : type == 'icon'
+                      ? getBtnSize()
+                      : (getBtnSize() + 8),
             )
           : const SizedBox.shrink();
     }
@@ -164,7 +169,7 @@ class FxButton extends StatelessWidget {
           mainAxisSize: isBlock ? MainAxisSize.max : MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: icon != null
-              ? <Widget>[createIconWidget(icon)]
+              ? <Widget>[createIconWidget(icon).px8]
               : <Widget>[
                   createIconWidget(prefixIcon),
                   if (isBlock) textWidget.px8 else textWidget.px4,

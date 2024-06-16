@@ -1,5 +1,9 @@
 ## 5.6.1
 
+- Fixed icon size isses in `FxButon`.
+
+## 5.6.1
+
 - Fixed padding issue in `FxButton`.
 - Made text field optional in `FxButton`.
 
