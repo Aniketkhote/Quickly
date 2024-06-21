@@ -87,7 +87,6 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
                 style: const TextStyle(fontSize: 18, color: FxColor.kcText),
               ).pb8,
             Container(
-              padding: widget.padding ?? FxPadding.px20,
               decoration: BoxDecoration(
                 color: widget.fieldColor ?? FxColor.gray100,
                 border: widget.border
@@ -101,6 +100,7 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
               child: TextFormField(
                 controller: widget.controller,
                 decoration: InputDecoration(
+                  contentPadding: widget.padding ?? FxPadding.px20,
                   suffixIconConstraints: const BoxConstraints(maxWidth: 30),
                   prefixIconConstraints: const BoxConstraints(maxWidth: 30),
                   suffixIcon:

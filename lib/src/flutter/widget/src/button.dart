@@ -117,6 +117,7 @@ class FxButton extends StatelessWidget {
       color: type == BtnType.solid
           ? textColor ?? getTextColor(color ?? getBtnType())
           : color,
+      fontWeight: FontWeight.w500,
       fontSize: getBtnSize(),
     );
 
@@ -146,7 +147,7 @@ class FxButton extends StatelessWidget {
                   : type == 'icon'
                       ? getBtnSize()
                       : (getBtnSize() + 8),
-            )
+            ).px4
           : const SizedBox.shrink();
     }
 
@@ -158,7 +159,7 @@ class FxButton extends StatelessWidget {
           : FxColor.transparent,
       onTap: onPressed,
       child: Container(
-        padding: padding ?? FxPadding.pxy(h: 10, v: 7),
+        padding: padding ?? FxPadding.pxy(h: 8, v: 6),
         decoration: BoxDecoration(
           borderRadius: radius ?? getBtnShape(),
           color: type == BtnType.solid ? color : getBtnType(),
@@ -169,10 +170,10 @@ class FxButton extends StatelessWidget {
           mainAxisSize: isBlock ? MainAxisSize.max : MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: icon != null
-              ? <Widget>[createIconWidget(icon).px8]
+              ? <Widget>[createIconWidget(icon).px4]
               : <Widget>[
                   createIconWidget(prefixIcon),
-                  if (isBlock) textWidget.px8 else textWidget.px4,
+                  textWidget,
                   createIconWidget(suffixIcon),
                 ],
         ),
@@ -236,14 +237,10 @@ class FxButton extends StatelessWidget {
   ///
   /// If [type] is neither [BtnType.outline] nor [BtnType.outline2x], returns a border with no style.
   Border getButtonBorder() {
-    if (type == BtnType.outline || type == BtnType.outline2x) {
-      return Border.all(
-        color: outlineColor ?? color ?? FxColor.gray200,
-        width: type == BtnType.outline ? 2 : 3,
-      );
-    }
-
-    return Border.all(style: BorderStyle.none);
+    return Border.all(
+      color: outlineColor ?? color ?? FxColor.gray200,
+      width: type == BtnType.outline2x ? 2 : 1,
+    );
   }
 }
 

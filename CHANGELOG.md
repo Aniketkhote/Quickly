@@ -1,4 +1,9 @@
-## 5.6.1
+## 5.6.3
+
+- Fixed border size isses in `FxButon`.
+- Fixed padding isses in `FxTextFormField`.
+
+## 5.6.2
 
 - Fixed icon size isses in `FxButon`.
 
