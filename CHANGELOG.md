@@ -1,3 +1,8 @@
+## 5.7.0
+
+- Added more validations.
+- Fixed outline color isses in `FxButon`.
+
 ## 5.6.3
 
 - Fixed border size isses in `FxButon`.

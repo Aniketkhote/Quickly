@@ -2,6 +2,9 @@ import 'package:quickly/quickly.dart';
 
 /// A function that performs validation on a given input value.
 typedef ValidatorFunction = String? Function(String);
+typedef MatchValidatorFunction = String? Function(String, String);
+typedef RangeValidatorFunction = String? Function(String,
+    {required double min, required double max});
 
 /// Validates whether the input value is empty or not.
 String? requiredValidator(String value) =>
@@ -50,6 +53,57 @@ String? alphanumericValidator(String value) {
   return null;
 }
 
+/// Validates whether the input value is a valid date in the format yyyy-mm-dd.
+String? dateValidator(String value) {
+  try {
+    final date = DateTime.parse(value);
+    if (date.toString() == value) {
+      return null;
+    }
+  } catch (e) {
+    return 'Please enter a valid date (yyyy-mm-dd).';
+  }
+  return 'Please enter a valid date (yyyy-mm-dd).';
+}
+
+/// Validates the strength of a password.
+String? passwordStrengthValidator(String value) {
+  if (value.length < 8) {
+    return 'Password must be at least 8 characters long.';
+  }
+  if (!RegExp(r'[A-Z]').hasMatch(value)) {
+    return 'Password must contain at least one uppercase letter.';
+  }
+  if (!RegExp(r'[a-z]').hasMatch(value)) {
+    return 'Password must contain at least one lowercase letter.';
+  }
+  if (!RegExp(r'[0-9]').hasMatch(value)) {
+    return 'Password must contain at least one digit.';
+  }
+  if (!RegExp(r'[!@#\$&*~]').hasMatch(value)) {
+    return 'Password must contain at least one special character.';
+  }
+  return null;
+}
+
+/// Validates if the input value matches another value.
+String? matchValidator(String value, String matchValue) {
+  if (value != matchValue) {
+    return 'The values do not match.';
+  }
+  return null;
+}
+
+/// Validates if the input value is within a specified numeric range.
+String? rangeValidator(String value,
+    {required double min, required double max}) {
+  final numValue = double.tryParse(value);
+  if (numValue == null || numValue < min || numValue > max) {
+    return 'Value must be between $min and $max.';
+  }
+  return null;
+}
+
 /// A map containing pre-defined validator functions.
 final Map<String, ValidatorFunction> validators = <String, ValidatorFunction>{
   'required': requiredValidator,
@@ -58,4 +112,18 @@ final Map<String, ValidatorFunction> validators = <String, ValidatorFunction>{
   'numeric': numericValidator,
   'alphabetic': alphabeticValidator,
   'alphanumeric': alphanumericValidator,
+  'date': dateValidator,
+  'password': passwordStrengthValidator,
+};
+
+/// A map containing match validator functions.
+final Map<String, MatchValidatorFunction> matchValidators =
+    <String, MatchValidatorFunction>{
+  'match': matchValidator,
+};
+
+/// A map containing range validator functions.
+final Map<String, RangeValidatorFunction> rangeValidators =
+    <String, RangeValidatorFunction>{
+  'range': rangeValidator,
 };

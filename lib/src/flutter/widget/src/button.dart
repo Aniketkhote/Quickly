@@ -15,7 +15,7 @@ class FxButton extends StatelessWidget {
     this.text,
     this.icon,
     this.color = FxColor.primary,
-    this.outlineColor = FxColor.primary,
+    this.outlineColor,
     this.shape = BtnShape.rounded,
     this.size = BtnSize.normal,
     this.type = BtnType.solid,
