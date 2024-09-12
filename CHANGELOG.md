@@ -1,3 +1,31 @@
+## 5.8.0
+
+### Added basic string manipulation methods
+
+- `isPhone`: Validates if the string is a phone number.
+- `isHexColor`: Validates if the string is a valid hexadecimal color code.
+- `isCreditCard`: Validates if the string is a valid credit card number.
+- `isJson`: Validates if the string is a valid JSON format.
+- `isUUID`: Validates if the string is a valid UUID.
+- `isHtml`: Checks if the string contains HTML.
+- `isDate`: Validates if the string is a valid date in 'YYYY-MM-DD' format.
+- `isTime`: Validates if the string is a valid time in 'HH' format.
+- `isIPv4`: Validates if the string is a valid IPv4 address.
+- `isIPv6`: Validates if the string is a valid IPv6 address.
+
+### Transformation Methods
+
+- `reverse`: Reverses the entire string.
+- `removeDigits`: Removes all digits from the string.
+- `removeSpecialChars`: Removes all special characters, leaving only alphanumeric values.
+- `toggleCase`: Toggles the case of each character in the string (uppercase to lowercase and vice versa).
+
+### Content Extraction
+
+- `extractEmails`: Extracts all valid email addresses from the string.
+- `extractUrls`: Extracts all valid URLs from the string.
+- `removeHtmlTags`: Removes all HTML tags from the string.
+
 ## 5.7.0
 
 - Added more validations.

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 ///String extensions to get basic functionality on strings
 extension StringExtension on String {
   ///match string with regex pattern
@@ -21,6 +23,76 @@ extension StringExtension on String {
   bool get isEmail => regex(
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
       );
+
+  /// Checks if the string is a valid phone number.
+  bool get isPhone => regex(r'^\+?[0-9]{10,15}$');
+
+  /// Checks if the string is a valid hexadecimal color code.
+  bool get isHexColor => regex(r'^#(?:[0-9a-fA-F]{3}){1,2}$');
+
+  /// Checks if the string is a valid credit card number using a basic regex.
+  bool get isCreditCard => regex(r'^[0-9]{13,19}$');
+
+  /// Checks if the string is a valid JSON format.
+  bool get isJson {
+    try {
+      json.decode(this);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Checks if the string is a valid UUID.
+  bool get isUUID => regex(
+      r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
+
+  /// Checks if the string contains HTML.
+  bool get isHtml => regex(r'<[^>]*>');
+
+  /// Checks if the string is a valid date in 'YYYY-MM-DD' format.
+  bool get isDate => regex(r'^\d{4}-\d{2}-\d{2}$');
+
+  /// Checks if the string is a valid time in 'HH:MM' format.
+  bool get isTime => regex(r'^([01]\d|2[0-3]):([0-5]\d)$');
+
+  /// Checks if the string is a valid IPv4 address.
+  bool get isIPv4 => regex(
+      r'^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$');
+
+  /// Checks if the string is a valid IPv6 address.
+  bool get isIPv6 => regex(r'^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$');
+
+  /// Reverses the entire string.
+  String get reverse => split('').reversed.join('');
+
+  /// Removes all digits from the string.
+  String get removeDigits => replaceAll(RegExp(r'\d+'), '');
+
+  /// Removes all special characters, leaving only alphanumeric values.
+  String get removeSpecialChars => replaceAll(RegExp(r'[^\w\s]+'), '');
+
+  /// Toggles the case of each character in the string.
+  String get toggleCase => split('').map((char) {
+        return char == char.toUpperCase()
+            ? char.toLowerCase()
+            : char.toUpperCase();
+      }).join('');
+
+  /// Extracts all valid email addresses from the string.
+  List<String> extractEmails() {
+    final emailRegex = RegExp(r'[\w\.-]+@[\w\.-]+\.\w+');
+    return emailRegex.allMatches(this).map((match) => match.group(0)!).toList();
+  }
+
+  /// Extracts all valid URLs from the string.
+  List<String> extractUrls() {
+    final urlRegex = RegExp(r'https?://[^\s/$.?#].[^\s]*');
+    return urlRegex.allMatches(this).map((match) => match.group(0)!).toList();
+  }
+
+  /// Removes all HTML tags from the string.
+  String get removeHtmlTags => replaceAll(RegExp(r'<[^>]*>'), '');
 
   /// Checks if string is boolean.
   static bool isBool(String value) {
