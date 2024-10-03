@@ -216,7 +216,12 @@ void main() {
         () => expect(
           list.oldestFirst("name"),
           equals(
-            <String, dynamic>{},
+            <String, dynamic>{
+              'id': 1,
+              'name': 'P 1',
+              'price': 49,
+              'stock': true
+            },
           ),
         ),
       );
@@ -233,8 +238,8 @@ void main() {
           <String, dynamic>{"id": 3, "name": "Bookcase", "price": 150},
         ].whereIn("price", <int>[150, 200]),
         <dynamic>[
-          <String, dynamic>{"id": 3, "name": "Bookcase", "price": 150},
           <String, dynamic>{"id": 1, "name": "Desk", "price": 200},
+          <String, dynamic>{"id": 3, "name": "Bookcase", "price": 150},
         ],
       ),
     );

@@ -32,10 +32,11 @@ class FxButton extends StatelessWidget {
     this.mainAxisAlignment,
     this.iconSize,
     this.textStyle,
-  }) : assert(icon != null || text != null,
-            'Either icon or text must be provided');
+    this.child,
+  }) : assert(icon != null || text != null || child != null,
+            'Either icon, text, or child must be provided');
 
-  /// The [text] parameter is required and specifies the button's label text.
+  /// The [text] parameter specifies the button's label text.
   final String? text;
 
   /// The [onPressed] parameter is required and defines the callback function
@@ -91,7 +92,7 @@ class FxButton extends StatelessWidget {
   /// the values in the [BtnSize] enum.
   final BtnSize size;
 
-  /// The [iconSize] parameter determines the icons's size, which can be one of
+  /// The [iconSize] parameter determines the icons's size.
   final double? iconSize;
 
   /// The [type] parameter defines the button's type, which can be one of the
@@ -111,9 +112,12 @@ class FxButton extends StatelessWidget {
   /// A boolean value indicating whether splash color is enabled for the button.
   final bool isSplashColor;
 
+  /// A custom child widget to use instead of text and icons.
+  final Widget? child;
+
   @override
   Widget build(BuildContext context) {
-    TextStyle baseTextStyle = TextStyle(
+    final TextStyle baseTextStyle = TextStyle(
       color: type == BtnType.solid
           ? textColor ?? getTextColor(color ?? getBtnType())
           : color,
@@ -142,31 +146,14 @@ class FxButton extends StatelessWidget {
           ? Icon(
               icon,
               color: getIconColor,
-              size: iconSize != null
-                  ? iconSize
-                  : type == 'icon'
-                      ? getBtnSize()
-                      : (getBtnSize() + 8),
+              size: iconSize ??
+                  (type == 'icon' ? getBtnSize() : (getBtnSize() + 8)),
             ).px4
           : const SizedBox.shrink();
     }
 
-    return InkWell(
-      splashColor: isSplashColor
-          ? type == BtnType.solid
-              ? FxColor.dark
-              : color!.withOpacity(.3)
-          : FxColor.transparent,
-      onTap: onPressed,
-      child: Container(
-        padding: padding ?? FxPadding.pxy(h: 8, v: 6),
-        decoration: BoxDecoration(
-          borderRadius: radius ?? getBtnShape(),
-          color: type == BtnType.solid ? color : getBtnType(),
-          boxShadow: shadow ?? FxShadow.none,
-          border: getButtonBorder(),
-        ),
-        child: Row(
+    final Widget buttonContent = child ??
+        Row(
           mainAxisSize: isBlock ? MainAxisSize.max : MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: icon != null
@@ -176,7 +163,26 @@ class FxButton extends StatelessWidget {
                   textWidget,
                   createIconWidget(suffixIcon),
                 ],
+        );
+
+    return InkWell(
+      splashColor: isSplashColor
+          ? type == BtnType.solid
+              ? FxColor.dark
+              : color!.withOpacity(.3)
+          : FxColor.transparent,
+      onTap: onPressed,
+      borderRadius: radius ?? getBtnShape(),
+      child: Container(
+        padding: padding ?? FxPadding.pxy(h: 8, v: 6),
+        margin: margin,
+        decoration: BoxDecoration(
+          borderRadius: radius ?? getBtnShape(),
+          color: type == BtnType.solid ? color : getBtnType(),
+          boxShadow: shadow ?? FxShadow.none,
+          border: getButtonBorder(),
         ),
+        child: buttonContent,
       ),
     );
   }
@@ -230,17 +236,20 @@ class FxButton extends StatelessWidget {
   /// Returns the appropriate border for the button based on its type.
   ///
   /// If [type] is [BtnType.outline], returns a border with the specified [outlineColor] or defaults to [FxColor.gray200]
-  /// with a width of 2.
+  /// with a width of 1.
   ///
   /// If [type] is [BtnType.outline2x], returns a border with the specified [outlineColor] or defaults to [FxColor.gray200]
-  /// with a width of 3.
+  /// with a width of 2.
   ///
   /// If [type] is neither [BtnType.outline] nor [BtnType.outline2x], returns a border with no style.
   Border getButtonBorder() {
-    return Border.all(
-      color: outlineColor ?? color ?? FxColor.gray200,
-      width: type == BtnType.outline2x ? 2 : 1,
-    );
+    if (type == BtnType.outline || type == BtnType.outline2x) {
+      return Border.all(
+        color: outlineColor ?? color ?? FxColor.gray200,
+        width: type == BtnType.outline2x ? 2 : 1,
+      );
+    }
+    return Border.all(width: 0, color: Colors.transparent);
   }
 }
 

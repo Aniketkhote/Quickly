@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:quickly/quickly.dart";
 
-/// A custom text form field widget with additional features.
+/// A custom text form field widget with additional features and improved functionality.
 class FxTextFormField extends StatefulWidget {
   /// Constructs a FxTextFormField.
   const FxTextFormField({
@@ -21,6 +21,12 @@ class FxTextFormField extends StatefulWidget {
     this.validations,
     this.padding,
     this.boxShadow,
+    this.onChanged,
+    this.focusNode,
+    this.enabled = true,
+    this.textInputAction,
+    this.style,
+    this.textCapitalization = TextCapitalization.none,
   });
 
   /// The label displayed above the text form field.
@@ -65,85 +71,131 @@ class FxTextFormField extends StatefulWidget {
   /// The padding around the text form field container.
   final EdgeInsets? padding;
 
+  /// The box shadow for the text form field container.
   final List<BoxShadow>? boxShadow;
+
+  /// Called when the text changes.
+  final ValueChanged<String>? onChanged;
+
+  /// Defines the keyboard focus for this widget.
+  final FocusNode? focusNode;
+
+  /// Whether the form field is enabled.
+  final bool enabled;
+
+  /// The type of action button to use for the keyboard.
+  final TextInputAction? textInputAction;
+
+  /// The style to use for the text being edited.
+  final TextStyle? style;
+
+  /// Configures how the platform keyboard will select an uppercase or lowercase keyboard.
+  final TextCapitalization textCapitalization;
 
   @override
   State<FxTextFormField> createState() => _FxTextFormFieldState();
 }
 
 class _FxTextFormFieldState extends State<FxTextFormField> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final Map<String, String> _errors = <String, String>{};
+  final GlobalKey<FormFieldState<String>> _fieldKey =
+      GlobalKey<FormFieldState<String>>();
+  late final TextEditingController _controller;
+  bool _obscureText = false;
 
   @override
-  Widget build(BuildContext context) => Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (widget.label != null)
-              Text(
-                widget.label!,
-                style: const TextStyle(fontSize: 18, color: FxColor.kcText),
-              ).pb8,
-            Container(
-              decoration: BoxDecoration(
-                color: widget.fieldColor ?? FxColor.gray100,
-                border: widget.border
-                    ? Border.all(
-                        color: widget.borderColor ?? FxColor.gray100,
-                      )
-                    : Border.all(style: BorderStyle.none),
-                borderRadius: widget.borderRadius ?? FxRadius.all(10),
-                boxShadow: widget.boxShadow,
-              ),
-              child: TextFormField(
-                controller: widget.controller,
-                decoration: InputDecoration(
-                  contentPadding: widget.padding ?? FxPadding.px20,
-                  suffixIconConstraints: const BoxConstraints(maxWidth: 30),
-                  prefixIconConstraints: const BoxConstraints(maxWidth: 30),
-                  suffixIcon:
-                      Icon(widget.suffixIcon).hide(widget.suffixIcon == null),
-                  prefixIcon:
-                      Icon(widget.prefixIcon).hide(widget.prefixIcon == null),
-                  hintText: widget.hintText ?? "",
-                  border: InputBorder.none,
-                ),
-                keyboardType: widget.keyboardType,
-                obscureText: widget.isSecure,
-                maxLines: widget.maxLines ?? 1,
-                onChanged: (_) {
-                  // Clear error message when input changes
-                  _errors.clear();
-                  _formKey.currentState?.validate();
-                },
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return "This field is required.";
-                  }
-                  if (widget.validations != null) {
-                    for (final String validation in widget.validations!) {
-                      final ValidatorFunction? validate =
-                          validators[validation];
-                      if (validate != null) {
-                        final String? error = _errors[value];
-                        if (error != null) {
-                          return error;
-                        }
-                        final String? result = validate(value);
-                        if (result != null) {
-                          _errors[value] = result;
-                          return result;
-                        }
-                      }
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? TextEditingController();
+    _obscureText = widget.isSecure;
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        if (widget.label != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Text(
+              widget.label!,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: FxColor.kcText),
+            ),
+          ),
+        Container(
+          decoration: BoxDecoration(
+            color: widget.fieldColor ?? FxColor.gray100,
+            border: widget.border
+                ? Border.all(color: widget.borderColor ?? FxColor.gray300)
+                : null,
+            borderRadius: widget.borderRadius ?? BorderRadius.circular(8),
+            boxShadow: widget.boxShadow,
+          ),
+          child: TextFormField(
+            key: _fieldKey,
+            controller: _controller,
+            focusNode: widget.focusNode,
+            decoration: InputDecoration(
+              contentPadding: widget.padding ??
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              suffixIcon: widget.isSecure
+                  ? IconButton(
+                      icon: Icon(_obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () =>
+                          setState(() => _obscureText = !_obscureText),
+                    )
+                  : (widget.suffixIcon != null
+                      ? Icon(widget.suffixIcon)
+                      : null),
+              prefixIcon:
+                  widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+              hintText: widget.hintText,
+              border: InputBorder.none,
+            ),
+            keyboardType: widget.keyboardType,
+            obscureText: _obscureText,
+            maxLines: widget.isSecure ? 1 : widget.maxLines,
+            enabled: widget.enabled,
+            style: widget.style,
+            textInputAction: widget.textInputAction,
+            textCapitalization: widget.textCapitalization,
+            onChanged: (value) {
+              widget.onChanged?.call(value);
+              _fieldKey.currentState?.validate();
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "This field is required.";
+              }
+              if (widget.validations != null) {
+                for (final validation in widget.validations!) {
+                  final validate = validators[validation];
+                  if (validate != null) {
+                    final result = validate(value);
+                    if (result != null) {
+                      return result;
                     }
                   }
-                  return null;
-                },
-              ),
-            ),
-          ],
+                }
+              }
+              return null;
+            },
+          ),
         ),
-      );
+      ],
+    );
+  }
 }

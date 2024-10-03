@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
-///Text extension to directly style on Text
+/// Extension on [Text] widget to provide convenient styling methods
 extension TextExtension on Text {
-  ///Apply [TextStyle] to existing textstyle
+  /// Applies a [TextStyle] to the existing text style
+  ///
+  /// This method allows you to modify various text properties in a single call
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').style(fontSize: 20, color: Colors.red)
+  /// ```
   Text style({
     Key? key,
     TextStyle? style,
@@ -32,188 +39,233 @@ extension TextExtension on Text {
         textAlign: textAlign,
       );
 
-  ///Sets [fontSize] to this text
+  /// Sets the font size of the text
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').fontSize(20)
+  /// ```
   Text fontSize(double fontSize) =>
       _copyWith(style: TextStyle(fontSize: fontSize));
 
-  ///Sets [fontSize] to 96 logical pixel and [fontWeight] to light
+  /// Applies h1 style: font size 96 logical pixels and light font weight
   Text get h1 => _copyWith(
       style: const TextStyle(fontSize: 96.0, fontWeight: FontWeight.w300));
 
-  ///Sets [fontSize] to 60 logical pixel and [fontWeight] to light
+  /// Applies h2 style: font size 60 logical pixels and light font weight
   Text get h2 => _copyWith(
       style: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.w300));
 
-  ///Sets [fontSize] to 48 logical pixel and [fontWeight] to regular
+  /// Applies h3 style: font size 48 logical pixels and regular font weight
   Text get h3 => _copyWith(style: const TextStyle(fontSize: 48.0));
 
-  ///Sets [fontSize] to 34 logical pixel and [fontWeight] to regular
+  /// Applies h4 style: font size 34 logical pixels and regular font weight
   Text get h4 => _copyWith(style: const TextStyle(fontSize: 34.0));
 
-  ///Sets [fontSize] to 24 logical pixel and [fontWeight] to regular
+  /// Applies h5 style: font size 24 logical pixels and regular font weight
   Text get h5 => _copyWith(style: const TextStyle(fontSize: 24.0));
 
-  ///Sets [fontSize] to 20 logical pixel and [fontWeight] to medium
+  /// Applies h6 style: font size 20 logical pixels and medium font weight
   Text get h6 => _copyWith(
       style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500));
 
-  ///Sets [fontSize] to 16 logical pixel and [fontWeight] to Light
+  /// Applies body1 style: font size 16 logical pixels and light font weight
   Text get body1 => _copyWith(style: const TextStyle(fontSize: 16.0));
 
-  ///Sets [fontSize] to 14 logical pixel and [fontWeight] to Light
+  /// Applies body2 style: font size 14 logical pixels and medium font weight
   Text get body2 => _copyWith(
       style: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500));
 
-  ///Sets [fontSize] to 12 logical pixel and [fontWeight] to Light
+  /// Applies caption1 style: font size 12 logical pixels and light font weight
   Text get caption1 => _copyWith(style: const TextStyle(fontSize: 12.0));
 
-  ///Sets [fontSize] to 10 logical pixel and [fontWeight] to Light
+  /// Applies caption2 style: font size 10 logical pixels and light font weight
   Text get caption2 => _copyWith(style: const TextStyle(fontSize: 10.0));
 
-  /// Sets custom [lineHeight] with [height]
+  /// Sets custom line height
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').lineHeight(1.5)
+  /// ```
   Text lineHeight(double height) => _copyWith(style: TextStyle(height: height));
 
-  ///Sets text color with either [Colors] or [FxColors]
+  /// Sets text color
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').color(Colors.red)
+  /// ```
   Text color(Color color) => _copyWith(style: TextStyle(color: color));
 
-  ///Sets text background color with either [Colors] or [FxColors]
+  /// Sets text background color
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').bgColor(Colors.yellow)
+  /// ```
   Text bgColor(Color backgroundColor) =>
       _copyWith(style: TextStyle(backgroundColor: backgroundColor));
 
-  ///Align the text on the left edge of the container.
+  /// Aligns the text to the left edge of the container
   Text get textLeft => _copyWith(textAlign: TextAlign.left);
 
-  ///Align the text on the right edge of the container.
+  /// Aligns the text to the right edge of the container
   Text get textRight => _copyWith(textAlign: TextAlign.right);
 
-  ///Align the text in the center of the container.
+  /// Aligns the text in the center of the container
   Text get textCenter => _copyWith(textAlign: TextAlign.center);
 
-  ///Lines that end with hard line breaks are aligned towards the [start] edge.
+  /// Justifies the text
   Text get textJustify => _copyWith(textAlign: TextAlign.justify);
 
-  ///Align the text start edge of the container
+  /// Aligns the text to the start edge of the container (depends on text direction)
   Text get textStart => _copyWith(textAlign: TextAlign.start);
 
-  ///Align the text end edge of the container
+  /// Aligns the text to the end edge of the container (depends on text direction)
   Text get textEnd => _copyWith(textAlign: TextAlign.end);
 
-  ///The text flows from right to left (e.g. Arabic, Hebrew).
+  /// Sets the text direction to right-to-left
   Text get rtl => _copyWith(textDirection: TextDirection.rtl);
 
-  ///If false, the glyphs in the text will be positioned as if there was unlimited horizontal space.
+  /// Controls whether the text should break at soft line breaks
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello World').softWrap(false)
+  /// ```
   Text softWrap(bool softWrap) => _copyWith(softWrap: softWrap);
 
-  /// Render overflowing text outside of its container.
+  /// Sets overflow behavior to visible (text can overflow its bounds)
   Text get visible => _copyWith(overflow: TextOverflow.visible);
 
-  /// [Clip] the overflowing text to fix its container.
+  /// Sets overflow behavior to clip (overflowing text is clipped)
   Text get clip => _copyWith(overflow: TextOverflow.clip);
 
-  /// [Fade] the overflowing text to transparent.
+  /// Sets overflow behavior to fade (overflowing text fades out)
   Text get fade => _copyWith(overflow: TextOverflow.fade);
 
-  /// Use an [ellipsis] to indicate that the text has overflowed.
+  /// Sets overflow behavior to ellipsis (overflowing text is replaced with an ellipsis)
   Text get ellipsis => _copyWith(overflow: TextOverflow.ellipsis);
 
-  /// Draw a line underneath each line of text
+  /// Adds an underline to the text
   Text get underline =>
       _copyWith(style: const TextStyle(decoration: TextDecoration.underline));
 
-  ///Set [fontFamily] for the text
+  /// Sets the font family for the text
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').fontFamily('Roboto')
+  /// ```
   Text fontFamily(String fontFamily) =>
       _copyWith(style: TextStyle(fontFamily: fontFamily));
 
-  ///set [TextScaler] to text
+  /// Sets the text scale factor
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').textScale(TextScaler.linear(1.5))
+  /// ```
   Text textScale(TextScaler textScaler) => _copyWith(textScaler: textScaler);
 
-  /// Sets [TextScaler] to extra small i.e. 0.75
+  /// Sets text scale to extra small (0.75)
   Text get xs => _copyWith(textScaler: const TextScaler.linear(.75));
 
-  /// Sets [TextScaler] to small i.e. 0.875
+  /// Sets text scale to small (0.875)
   Text get sm => _copyWith(textScaler: const TextScaler.linear(0.875));
 
-  /// Sets [TextScaler] to md i.e. 1 or default
+  /// Sets text scale to medium (1.0, default)
   Text get md => _copyWith(textScaler: TextScaler.noScaling);
 
-  /// Sets [TextScaler] to large i.e. 1.125
+  /// Sets text scale to large (1.125)
   Text get lg => _copyWith(textScaler: const TextScaler.linear(1.125));
 
-  /// Sets [TextScaler] to extra large i.e. 1.25
+  /// Sets text scale to extra large (1.25)
   Text get xl => _copyWith(textScaler: const TextScaler.linear(1.25));
 
-  /// Sets [TextScaler] to twice extra large i.e. 1.5
+  /// Sets text scale to 2x extra large (1.5)
   Text get xl2 => _copyWith(textScaler: const TextScaler.linear(1.5));
 
-  /// Sets [TextScaler] to thrice extra large i.e. 1.875
+  /// Sets text scale to 3x extra large (1.875)
   Text get xl3 => _copyWith(textScaler: const TextScaler.linear(1.875));
 
-  /// Sets [TextScaler] to four times extra large i.e. 2.25
+  /// Sets text scale to 4x extra large (2.25)
   Text get xl4 => _copyWith(textScaler: const TextScaler.linear(2.25));
 
-  /// Sets [TextScaler] to five times extra large i.e. 3
+  /// Sets text scale to 5x extra large (3.0)
   Text get xl5 => _copyWith(textScaler: const TextScaler.linear(3.0));
 
-  /// Sets [TextScaler] to six times extra large i.e. 4
+  /// Sets text scale to 6x extra large (4.0)
   Text get xl6 => _copyWith(textScaler: const TextScaler.linear(4.0));
 
-  ///A negative value can be used to bring the letters closer.
+  /// Sets letter spacing
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').letterSpacing(1.5)
+  /// ```
   Text letterSpacing(double spacing) =>
       _copyWith(style: TextStyle(letterSpacing: spacing));
 
-  ///The amount of space (in logical pixels) to add at each sequence of white-space
+  /// Sets word spacing
   ///
-  ///(i.e. between each word).
-  ///A negative value can be used to bring the words closer.
+  /// Example:
+  /// ```dart
+  /// Text('Hello World').wordSpacing(5.0)
+  /// ```
   Text wordSpacing(double spacing) =>
       _copyWith(style: TextStyle(wordSpacing: spacing));
 
-  ///Sets [fontWeight] to [FontWeight.w100]
+  /// Sets font weight to thin (w100)
   Text get thin =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w100));
 
-  ///Sets [fontWeight] to [FontWeight.w200]
+  /// Sets font weight to extra light (w200)
   Text get extraLight =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w200));
 
-  ///Sets [fontWeight] to [FontWeight.w300]
+  /// Sets font weight to light (w300)
   Text get light =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w300));
 
-  ///Sets [fontWeight] to [FontWeight.w400]
+  /// Sets font weight to normal (w400)
   Text get normal =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w400));
 
-  ///Sets [fontWeight] to [FontWeight.w500]
+  /// Sets font weight to medium (w500)
   Text get medium =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w500));
 
-  ///Sets [fontWeight] to [FontWeight.w600]
-  Text get bold =>
+  /// Sets font weight to semi-bold (w600)
+  Text get semiBold =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w600));
 
-  ///Sets [fontWeight] to [FontWeight.w700]
-  Text get semiBold =>
+  /// Sets font weight to bold (w700)
+  Text get bold =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w700));
 
-  ///Sets [fontWeight] to [FontWeight.w800]
+  /// Sets font weight to extra bold (w800)
   Text get extraBold =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w800));
 
-  ///Sets [fontWeight] to [FontWeight.w900]
-  Text get darkBold =>
+  /// Sets font weight to black (w900)
+  Text get black =>
       _copyWith(style: const TextStyle(fontWeight: FontWeight.w900));
 
-  ///Use glyphs designed for slanting
+  /// Sets font style to italic
   Text get italic =>
       _copyWith(style: const TextStyle(fontStyle: FontStyle.italic));
 
-  ///An optional maximum number of lines for the text to span, wrapping if necessary.
+  /// Sets maximum number of lines for the text
   ///
-  ///If the text exceeds the given number of lines, it will be truncated according to [overflow].
-  ///If this is 1, text will not wrap. Otherwise, text will be wrapped at the edge of the box.
+  /// Example:
+  /// ```dart
+  /// Text('Long text...').maxLine(2)
+  /// ```
   Text maxLine([int? maxLines]) => _copyWith(maxLines: maxLines ?? 1);
 
+  /// Internal method to create a new [Text] widget with modified properties
   Text _copyWith(
           {Key? key,
           StrutStyle? strutStyle,

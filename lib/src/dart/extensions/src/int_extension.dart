@@ -1,26 +1,33 @@
-/// IntExtension is an extension method on the int class that provides additional functionality for working with months and weeks.
+/// Extension on [int] providing additional functionality for working with months and weeks.
 extension IntExtension on int {
-  /// Extension method to get the name of a month from a given number.
+  /// Returns the name of a month corresponding to the integer value.
   ///
-  /// Example usage:
+  /// This method assumes that the integer represents a month number (1-12).
+  /// If the integer is outside this range, it returns 'Invalid number of month'.
+  ///
+  /// Parameters:
+  /// - [isShort]: If true, returns the abbreviated month name. Defaults to false.
+  ///
+  /// Returns:
+  /// A [String] representing the month name.
+  ///
+  /// Example:
   /// ```dart
-  /// 1.getMonthName() => "January"
-  /// 2.getMonthName(true) => "Feb"
+  /// print(1.getMonthName()); // Output: January
+  /// print(3.getMonthName(isShort: true)); // Output: Mar
+  /// print(13.getMonthName()); // Output: Invalid number of month
   /// ```
-  ///
-  /// @param [isShort] If true, returns the short form of the month name. Default is false.
-  /// @return Returns the name of the month as a string. If the input number is not a valid month, returns "Invalid number of month".
   String getMonthName({bool isShort = false}) {
     final Map<int, String> monthNames = <int, String>{
       1: isShort ? 'Jan' : 'January',
       2: isShort ? 'Feb' : 'February',
       3: isShort ? 'Mar' : 'March',
       4: isShort ? 'Apr' : 'April',
-      5: isShort ? 'May' : 'May',
+      5: 'May',
       6: isShort ? 'Jun' : 'June',
       7: isShort ? 'Jul' : 'July',
       8: isShort ? 'Aug' : 'August',
-      9: isShort ? 'Sept' : 'September',
+      9: isShort ? 'Sep' : 'September',
       10: isShort ? 'Oct' : 'October',
       11: isShort ? 'Nov' : 'November',
       12: isShort ? 'Dec' : 'December',
@@ -29,16 +36,24 @@ extension IntExtension on int {
     return monthNames[this] ?? 'Invalid number of month';
   }
 
-  /// Extension method to get the name of a week from a given number.
+  /// Returns the name of a week day corresponding to the integer value.
   ///
-  /// Example usage:
+  /// This method assumes that the integer represents a day of the week (1-7),
+  /// where 1 is Monday and 7 is Sunday. If the integer is outside this range,
+  /// it returns 'Invalid number of week'.
+  ///
+  /// Parameters:
+  /// - [isShort]: If true, returns the abbreviated day name. Defaults to false.
+  ///
+  /// Returns:
+  /// A [String] representing the day name.
+  ///
+  /// Example:
   /// ```dart
-  /// 1.getWeekName() => "Monday"
-  /// 2.getWeekName(true) => "Tue"
+  /// print(1.getWeekName()); // Output: Monday
+  /// print(5.getWeekName(isShort: true)); // Output: Fri
+  /// print(8.getWeekName()); // Output: Invalid number of week
   /// ```
-  ///
-  /// @param [isShort] If true, returns the short form of the week name. Default is false.
-  /// @return Returns the name of the week as a string. If the input number is not a valid week, returns "Invalid number of week".
   String getWeekName({bool isShort = false}) {
     final Map<int, String> weekNames = <int, String>{
       1: isShort ? 'Mon' : 'Monday',

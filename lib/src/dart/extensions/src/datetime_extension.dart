@@ -1,6 +1,5 @@
-/// An extension on the [DateTime] class that provides a method for formatting
-/// the difference between a given date and the current date in human-readable
-/// format.
+/// An extension on the [DateTime] class that provides methods for formatting
+/// and comparing dates in human-readable formats.
 extension DateTimeExtension on DateTime {
   /// Formats the DateTime object as a string based on the provided [format].
   ///
@@ -19,8 +18,13 @@ extension DateTimeExtension on DateTime {
   /// - 'EEEE': Full day name (Monday-Sunday)
   ///
   /// Example usage:
+  /// ```dart
   /// DateTime now = DateTime.now();
   /// String formattedDate = now.format('dd/MM/yyyy');
+  /// ```
+  ///
+  /// @param format The format string to use for formatting the date.
+  /// @return A formatted string representation of the date.
   String format(String format) {
     final Map<String, String> shortMonths = {
       '01': 'Jan',
@@ -108,12 +112,16 @@ extension DateTimeExtension on DateTime {
     );
   }
 
-  /// Returns true if the DateTime object represents a date in the past.
+  /// Checks if the DateTime object represents a date in the past.
+  ///
+  /// @return True if the date is in the past, false otherwise.
   bool isPast() {
     return this.isBefore(DateTime.now());
   }
 
-  /// Returns true if the DateTime object represents a date in the future.
+  /// Checks if the DateTime object represents a date in the future.
+  ///
+  /// @return True if the date is in the future, false otherwise.
   bool isFuture() {
     return this.isAfter(DateTime.now());
   }
@@ -129,11 +137,16 @@ extension DateTimeExtension on DateTime {
   /// Examples:
   /// ```dart
   /// DateTime dateTime = DateTime(2023, 5, 10, 15, 30);
-  /// print(dateTime.diffForHumans()); // Output: "2 days ago"
+  /// print(dateTime.timeAgo()); // Output: "2 days ago"
   ///
   /// DateTime pastDateTime = DateTime(2022, 10, 1);
-  /// print(pastDateTime.diffForHumans(showRelativeDates: true)); // Output: "7 months ago"
+  /// print(pastDateTime.timeAgo(showRelativeDates: true)); // Output: "7 months ago"
   /// ```
+  ///
+  /// @param abbreviatedUnits Whether to use abbreviated units.
+  /// @param showRelativeDates Whether to show relative dates for recent times.
+  /// @param precision The number of units to display in the result.
+  /// @return A human-readable string representing the time difference.
   String timeAgo({
     bool abbreviatedUnits = false,
     bool showRelativeDates = false,
@@ -175,15 +188,12 @@ extension DateTimeExtension on DateTime {
     }
   }
 
-  /// Returns a string representing the given [count] of units, using the
-  /// singular or plural form based on the count and the [unit]. If [abbreviated]
-  /// is `true`, returns the abbreviated unit form.
+  /// Formats a unit count with its appropriate label.
   ///
-  /// Examples:
-  /// ```dart
-  /// print(_formatUnit(1, false, 'hour'));  // Output: "1 hour"
-  /// print(_formatUnit(3, true, 'day'));    // Output: "3 days"
-  /// ```
+  /// @param count The number of units.
+  /// @param abbreviated Whether to use abbreviated unit labels.
+  /// @param unit The base unit name (e.g., 'day', 'hour').
+  /// @return A formatted string representing the count and unit.
   String _formatUnit(int count, bool abbreviated, String unit) {
     final String pluralUnit =
         abbreviated ? '${unit[0]}${unit[1]}' : '$unit${count != 1 ? 's' : ''}';
@@ -194,7 +204,11 @@ extension DateTimeExtension on DateTime {
     }
   }
 
-  /// Calculates the number of months between this date and the given [dateTime].
+  /// Calculates the number of months between two dates.
+  ///
+  /// @param now The current date.
+  /// @param dateTime The date to compare against.
+  /// @return The number of months between the two dates.
   int _calculateMonths(DateTime now, DateTime dateTime) =>
       (now.year - dateTime.year) * 12 + now.month - dateTime.month;
 }

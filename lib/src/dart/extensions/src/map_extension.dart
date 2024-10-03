@@ -1,37 +1,50 @@
-/// Map extension to extend Map functionality
+/// Extension on [Map] to provide additional functionality and utility methods.
 ///
-/// This extension allows you to perform various operations on a `Map<T, T>` such as checking if a key/value pair exists,
-/// getting the value of a specific key and casting it to a certain type, removing key-value pairs from the map based
-/// on their keys or values, and getting a list from the map.
+/// This extension enhances the capabilities of [Map<T, T>] by adding methods for:
+/// - Checking key-value pair existence
+/// - Retrieving and casting values to specific types
+/// - Manipulating the map based on keys or values
+/// - Comparing maps
+/// - Safely accessing values with type-specific getters
+///
+/// These methods aim to simplify common map operations and provide more robust
+/// ways of working with map data in Dart.
 extension MapExtension<T> on Map<T, T> {
-  ///Whether this map contains the given [key]/[value] pair.
+  /// Checks if the map contains the given [key]/[value] pair.
   ///
-  ///This method checks if the key exists in the map and the value of the key is equal to the value passed to the method.
+  /// This method verifies both the existence of the key and the equality of its value.
   ///
-  ///Example:
-  ///```dart
-  ///Map<String, dynamic> map = {'id': 1, 'name': 'Desk', 'price': 200};
-  ///print(map.has("id", 1)); // true
-  ///print(map.has("id", 2)); // false
-  ///```
-  bool has(String key, value) => containsKey(key) && this[key] == value;
+  /// Example:
+  /// ```dart
+  /// Map<String, dynamic> map = {'id': 1, 'name': 'Desk', 'price': 200};
+  /// print(map.has("id", 1)); // true
+  /// print(map.has("id", 2)); // false
+  /// ```
+  ///
+  /// @param key The key to check for in the map.
+  /// @param value The value to compare against the key's value.
+  /// @return True if the key exists and its value matches the given value, false otherwise.
+  bool has(String key, dynamic value) => containsKey(key) && this[key] == value;
 
-  ///If this map does not contains the given [key]/[value] pair.
+  /// Checks if the map does not contain the given [key]/[value] pair.
   ///
+  /// This is the inverse of the [has] method.
   ///
-  ///Example:
-  ///```dart
+  /// Example:
+  /// ```dart
   /// Map<String, dynamic> map = {"name": "John", "age": 30};
-  ///
   /// print(map.doesntHave("gender", "male")); // true
+  /// print(map.doesntHave("name", "John")); // false
+  /// ```
   ///
-  /// print(map.doesntHave("gender", null)); // true
-  ///```
+  /// @param key The key to check for in the map.
+  /// @param value The value to compare against the key's value.
+  /// @return True if the key doesn't exist or its value doesn't match the given value, false otherwise.
   bool doesntHave(String key, T value) => !has(key, value);
 
-  /// Removes the key/value pairs from the map whose keys are not present in the given [keys] list.
+  /// Removes key/value pairs from the map whose keys are not in the given [keys] list.
   ///
-  /// Returns a new map containing only the key/value pairs whose keys are present in the given [keys] list.
+  /// This method modifies the original map and returns it.
   ///
   /// Example:
   /// ```dart
@@ -39,184 +52,213 @@ extension MapExtension<T> on Map<T, T> {
   /// var newMap = map.retainKeys(["id", "name"]);
   /// print(newMap); // {"id": 1, "name": "John"}
   /// ```
+  ///
+  /// @param keys List of keys to retain in the map.
+  /// @return The modified map containing only the key/value pairs with keys present in [keys].
   Map<T, T> retainKeys(List<T> keys) {
     removeWhere((T key, T value) => !keys.contains(key));
     return this;
   }
 
-  ///Returns the ID of the object if exists otherwise return 0;
+  /// Retrieves the value associated with the 'id' key, if it exists.
   ///
-  ///Example:
-  ///```dart
+  /// If the 'id' key doesn't exist or its value is neither a number nor a string,
+  /// the method returns the provided [defaultValue] or null.
+  ///
+  /// Example:
+  /// ```dart
   /// Map<String, dynamic> map = {'id': 111, 'name': 'Desk'};
-  /// int id = map.getId;
+  /// var id = map.getId();
   /// print(id); // Output: 111
   ///
   /// Map<String, dynamic> map2 = {'name': 'Chair'};
-  /// int id2 = map2.getId;
+  /// var id2 = map2.getId(defaultValue: 0);
   /// print(id2); // Output: 0
-  ///```
+  /// ```
+  ///
+  /// @param defaultValue The value to return if 'id' is not found or invalid.
+  /// @return The value of 'id' if it exists and is valid, otherwise [defaultValue] or null.
   T? getId({T? defaultValue}) {
     T? value = containsKey('id') ? this['id'] : defaultValue;
     if (value != null && (value is num || value is String)) {
       return value as T;
     }
-    return null;
+    return defaultValue;
   }
 
-  ///Returns all entries of this map according to keys.
+  /// Returns a new map containing entries from this map that are not in [map].
   ///
-  ///which is not in second map.
+  /// The comparison is based on keys.
   ///
-  ///Example:
-  ///```dart
-  ///map.diffKeys(map2)
-  ///```
+  /// Example:
+  /// ```dart
+  /// var map1 = {'a': 1, 'b': 2, 'c': 3};
+  /// var map2 = {'b': 2, 'c': 4, 'd': 5};
+  /// print(map1.diffKeys(map2)); // {'a': 1}
+  /// ```
+  ///
+  /// @param map The map to compare against.
+  /// @return A new map containing entries not present in [map] based on keys.
   Map<T, T> diffKeys<K, V>(Map<K, V> map) {
-    removeWhere((T key, T value) => map.containsKey(key));
-    return this;
+    return Map<T, T>.fromEntries(
+      entries.where((entry) => !map.containsKey(entry.key)),
+    );
   }
 
-  ///Returns all entries of this map according to values.
+  /// Returns a new map containing entries from this map that are not in [map].
   ///
-  ///which is not in second map.
+  /// The comparison is based on values.
   ///
-  ///Example:
-  ///```dart
-  ///map.diffValues(map2)
-  ///```
+  /// Example:
+  /// ```dart
+  /// var map1 = {'a': 1, 'b': 2, 'c': 3};
+  /// var map2 = {'x': 2, 'y': 3, 'z': 4};
+  /// print(map1.diffValues(map2)); // {'a': 1}
+  /// ```
+  ///
+  /// @param map The map to compare against.
+  /// @return A new map containing entries not present in [map] based on values.
   Map<T, T> diffValues(Map<T, T> map) {
-    removeWhere((T key, T value) => map.containsValue(value));
-    return this;
+    return Map<T, T>.fromEntries(
+      entries.where((entry) => !map.containsValue(entry.value)),
+    );
   }
 
-  /// Reads a [key] value of [bool] type from [Map].
+  /// Retrieves a boolean value for the given [key].
   ///
-  /// If the key is not present in the map or the value of the key is not of type bool,
-  /// the method will return the default value of `false`.
+  /// If the key is not present or its value is not a boolean, returns false.
   ///
   /// Example:
-  ///```dart
+  /// ```dart
   /// Map<String, dynamic> map = {'isAdmin': true, 'isActive': false};
-  /// print(map.getBool('isAdmin'));  // Output: true
-  /// print(map.getBool('isActive'));  // Output: false
-  /// print(map.getBool('isDeleted'));  // Output: false
-  ///```
-  bool getBool(String key) => containsKey(key) && this[key] is bool;
-
-  /// Reads a [key] value of [int] type from [Map].
+  /// print(map.getBool('isAdmin'));  // true
+  /// print(map.getBool('isActive')); // false
+  /// print(map.getBool('isDeleted')); // false
+  /// ```
   ///
-  /// If the key is not present in the map or the value of the key is not of type int, it will return null.
+  /// @param key The key to look up in the map.
+  /// @return The boolean value associated with [key], or false if not found or not a boolean.
+  bool getBool(String key) =>
+      containsKey(key) && this[key] is bool ? this[key] as bool : false;
+
+  /// Retrieves an integer value for the given [key].
+  ///
+  /// If the key is not present or its value cannot be parsed as an integer,
+  /// returns the [defaultValue] or null.
   ///
   /// Example:
-  ///```dart
-  /// Map<String, dynamic> map = {'id': 11, 'name': 'John Doe', 'age': 30};
+  /// ```dart
+  /// Map<String, dynamic> map = {'id': 11, 'name': 'John Doe', 'age': '30'};
   /// print(map.getInt('id')); // 11
   /// print(map.getInt('age')); // 30
-  /// print(map.getInt('address')); // null
-  ///```
-  int? getInt(String key, {int? defaultValue}) =>
-      containsKey(key) ? int.tryParse('${this[key]}') : defaultValue;
-
-  /// Reads a [key] value of [double] type from [Map].
+  /// print(map.getInt('salary', defaultValue: 0)); // 0
+  /// ```
   ///
-  /// If the map contains the key and the value of that key is a double, it will return the value as a double.
-  /// Otherwise, it will return null.
+  /// @param key The key to look up in the map.
+  /// @param defaultValue The value to return if the key is not found or its value is not an integer.
+  /// @return The integer value associated with [key], the [defaultValue], or null.
+  int? getInt(String key, {int? defaultValue}) => containsKey(key)
+      ? int.tryParse('${this[key]}') ?? defaultValue
+      : defaultValue;
+
+  /// Retrieves a double value for the given [key].
+  ///
+  /// If the key is not present or its value cannot be parsed as a double,
+  /// returns the [defaultValue] or null.
   ///
   /// Example:
-  ///```dart
-  ///Map<String, dynamic> map = {'price': 27.32, 'qty': '27.32', 'inStock': true};
+  /// ```dart
+  /// Map<String, dynamic> map = {'price': 27.32, 'qty': '27.32', 'inStock': true};
+  /// print(map.getDouble('price')); // 27.32
+  /// print(map.getDouble('qty')); // 27.32
+  /// print(map.getDouble('discount', defaultValue: 0.0)); // 0.0
+  /// ```
   ///
-  ///print(map.getDouble("price")); // 27.32
-  ///print(map.getDouble("qty")); // 27.32
-  ///print(map.getDouble("isStock")); // null
-  ///print(map.getDouble("size")); // null
-  ///```
-  double? getDouble(String key, {double? defaultValue}) =>
-      containsKey(key) ? double.tryParse('${this[key]}') : defaultValue;
+  /// @param key The key to look up in the map.
+  /// @param defaultValue The value to return if the key is not found or its value is not a double.
+  /// @return The double value associated with [key], the [defaultValue], or null.
+  double? getDouble(String key, {double? defaultValue}) => containsKey(key)
+      ? double.tryParse('${this[key]}') ?? defaultValue
+      : defaultValue;
 
-  /// Reads a [key] value of [String] type from [Map].
+  /// Retrieves a string value for the given [key].
   ///
-  /// If value/map is NULL or not [String] type return empty string
+  /// If the key is not present or its value is not a string,
+  /// returns the [defaultValue] or null.
   ///
   /// Example:
-  ///```dart
+  /// ```dart
   /// Map<String, dynamic> map = {'username': 'thor', 'age': 35};
+  /// print(map.getString('username')); // 'thor'
+  /// print(map.getString('email', defaultValue: 'not_provided@example.com')); // 'not_provided@example.com'
+  /// ```
   ///
-  /// String username = map.getString('username');
-  /// print(username); // Output: thor
-  ///
-  /// String email = map.getString('email', 'not_provided@example.com');
-  /// print(email); // Output: not_provided@example.com
-  ///```
+  /// @param key The key to look up in the map.
+  /// @param defaultValue The value to return if the key is not found or its value is not a string.
+  /// @return The string value associated with [key], the [defaultValue], or null.
   String? getString(String key, {String? defaultValue}) =>
-      this[key] is String ? this[key]! as String : defaultValue;
+      this[key] is String ? this[key] as String : defaultValue;
 
-  /// This method retrieves the list associated with the given key from the map.
-  /// If the key is not present or the value associated with the key is not a list,
-  /// it returns an empty list of the generic type T.
+  /// Retrieves a list of type [T] for the given [key].
   ///
-  /// @param key - a string key of the list you want to retrieve from the map
+  /// If the key is not present or its value is not a list of type [T],
+  /// returns an empty list.
   ///
   /// Example:
   /// ```dart
   /// Map<String, dynamic> map = {'items': [1, 2, 3, 4], 'prices': [20.0, 30.0, 40.0]};
-  ///
-  /// map.getList<int>('items') // returns [1, 2, 3, 4]
-  /// map.getList<double>('prices') // returns [20.0, 30.0, 40.0]
-  /// map.getList<int>('invalidKey') // returns []
+  /// print(map.getList<int>('items')); // [1, 2, 3, 4]
+  /// print(map.getList<double>('prices')); // [20.0, 30.0, 40.0]
+  /// print(map.getList<String>('names')); // []
   /// ```
+  ///
+  /// @param key The key to look up in the map.
+  /// @return The list of type [T] associated with [key], or an empty list if not found or not of type List<T>.
   List<T> getList<K>(String key) =>
-      containsKey(key) && this[key] is List<T> ? this[key]! as List<T> : <T>[];
+      containsKey(key) && this[key] is List<T> ? this[key] as List<T> : <T>[];
 
-  /// The match() function also works similarly to switch
+  /// Retrieves the value associated with [condition] key.
   ///
-  /// i.e, it finds the matching case according to the condition passed in it.
+  /// If the key is not found, returns [byDefault].
   ///
+  /// Example:
   /// ```dart
-  /// Map<String, String> map = {
-  /// 'apple': 'red',
-  /// 'banana': 'yellow',
-  /// 'orange': 'orange'
-  /// };
-  ///
-  /// print(map.match('apple')); // returns 'red'
-  /// print(map.match('pear'));  // returns 'Invalid input'
+  /// Map<String, String> map = {'apple': 'red', 'banana': 'yellow', 'orange': 'orange'};
+  /// print(map.match('apple')); // 'red'
+  /// print(map.match('grape', 'Not found')); // 'Not found'
   /// ```
+  ///
+  /// @param condition The key to look up in the map.
+  /// @param byDefault The default value to return if the key is not found.
+  /// @return The value associated with [condition], or [byDefault] if not found.
   Object? match(T condition, [String? byDefault = 'Invalid input']) =>
       containsKey(condition) ? this[condition] : byDefault;
 
-  /// This extension method picks specific keys from a map and
-  /// returns a new map containing only the selected keys and their corresponding values.
+  /// Creates a new map containing only the specified [keys] from this map.
   ///
+  /// Example:
   /// ```dart
-  /// Map<String, String> map = {
-  /// 'apple': 'red',
-  /// 'banana': 'yellow',
-  /// 'orange': 'orange'
-  /// };
-  ///
-  /// print(map.pick(['apple'])); // returns {'apple': 'red'}
-  /// print(map.pick(['orange','pear']));  // returns {'orange': 'orange'}
+  /// Map<String, String> map = {'apple': 'red', 'banana': 'yellow', 'orange': 'orange'};
+  /// print(map.pick(['apple', 'orange'])); // {'apple': 'red', 'orange': 'orange'}
   /// ```
+  ///
+  /// @param keys The list of keys to include in the new map.
+  /// @return A new map containing only the key-value pairs for the specified [keys].
   Map<T, T> pick(List<T> keys) {
-    final Map<T, T> pickedMap = <T, T>{};
-    for (final MapEntry<T, T> entry in entries) {
-      if (keys.contains(entry.key)) {
-        pickedMap[entry.key] = entry.value;
-      }
-    }
-    return pickedMap;
+    return Map<T, T>.fromEntries(
+      entries.where((entry) => keys.contains(entry.key)),
+    );
   }
 
-  /// Returns a new map containing the entries of this map excluding entries with null values.
+  /// Creates a new map excluding entries with null values from this map.
   ///
   /// Example:
   /// ```dart
   /// final map = {'a': 1, 'b': null, 'c': 3};
-  /// final filteredMap = map.removeNullValues();
-  /// print(filteredMap); // Output: {'a': 1, 'c': 3}
+  /// print(map.removeNullValues()); // {'a': 1, 'c': 3}
   /// ```
+  ///
+  /// @return A new map containing all non-null entries from this map.
   Map<T, T> removeNullValues() {
     return Map<T, T>.fromEntries(entries.where((entry) => entry.value != null));
   }

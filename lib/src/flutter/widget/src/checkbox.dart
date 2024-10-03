@@ -1,89 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:quickly/quickly.dart';
 
-/// A checkbox widget with customizable appearance and behavior.
-class FxCheckbox extends StatefulWidget {
+/// A customizable checkbox widget with smooth animation.
+class FxCheckbox extends StatelessWidget {
   /// Constructs a FxCheckbox.
   const FxCheckbox({
-    required this.onChange,
-    required this.isChecked,
+    required this.onChanged,
+    required this.value,
     super.key,
-    this.size,
-    this.iconSize,
+    this.size = 24.0,
+    this.iconSize = 20.0,
     this.backgroundColor,
     this.iconColor,
-    this.icon,
+    this.icon = Icons.check,
     this.borderColor,
+    this.duration = const Duration(milliseconds: 200),
+    this.curve = Curves.easeInOut,
   });
 
   /// The size of the checkbox.
-  final double? size;
+  final double size;
 
   /// The size of the checkbox icon.
-  final double? iconSize;
+  final double iconSize;
 
   /// Callback function called when the checkbox state changes.
-  final Function(bool value) onChange;
+  final ValueChanged<bool> onChanged;
 
-  /// The background color of the checkbox.
+  /// The background color of the checkbox when checked.
   final Color? backgroundColor;
 
   /// The color of the checkbox icon.
   final Color? iconColor;
 
   /// The icon displayed when the checkbox is checked.
-  final IconData? icon;
+  final IconData icon;
 
   /// The color of the checkbox border.
   final Color? borderColor;
 
   /// Indicates whether the checkbox is checked or not.
-  final bool isChecked;
+  final bool value;
+
+  /// The duration of the animation when the checkbox state changes.
+  final Duration duration;
+
+  /// The curve of the animation when the checkbox state changes.
+  final Curve curve;
 
   @override
-  State<FxCheckbox> createState() => _FxCheckboxState();
-}
+  Widget build(BuildContext context) {
+    final effectiveBackgroundColor = backgroundColor ?? FxColor.primary;
+    final effectiveBorderColor = borderColor ?? effectiveBackgroundColor;
+    final effectiveIconColor = iconColor ?? Colors.white;
 
-class _FxCheckboxState extends State<FxCheckbox> {
-  bool isChecked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    isChecked = widget.isChecked;
-  }
-
-  @override
-  Widget build(BuildContext context) => GestureDetector(
-        onTap: () {
-          setState(() {
-            isChecked = !isChecked;
-            widget.onChange(isChecked);
-          });
-        },
-        child: AnimatedContainer(
-          height: widget.size ?? 24,
-          width: widget.size ?? 24,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.fastLinearToSlowEaseIn,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(2),
-            color: isChecked
-                ? widget.backgroundColor ?? FxColor.primary
-                : Colors.transparent,
-            border: Border.all(
-              color: widget.borderColor ??
-                  widget.backgroundColor ??
-                  FxColor.primary,
-            ),
-          ),
-          child: isChecked
-              ? Icon(
-                  widget.icon ?? Icons.check,
-                  color: widget.iconColor ?? Colors.white,
-                  size: widget.iconSize ?? 20,
-                )
-              : null,
+    return GestureDetector(
+      onTap: () => onChanged(!value),
+      child: AnimatedContainer(
+        height: size,
+        width: size,
+        duration: duration,
+        curve: curve,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: value ? effectiveBackgroundColor : Colors.transparent,
+          border: Border.all(color: effectiveBorderColor),
         ),
-      );
+        child: value
+            ? Icon(
+                icon,
+                color: effectiveIconColor,
+                size: iconSize,
+              )
+            : null,
+      ),
+    );
+  }
 }

@@ -1,22 +1,25 @@
 import 'dart:math';
 
-/// Helper methods
+/// Helper methods for generating OTPs and avatars
 class Helpers {
-  // Generate a random OTP
+  /// Generates a random OTP (One-Time Password)
+  ///
+  /// [otpLength] The length of the OTP to generate. Defaults to 6.
+  /// Returns a string containing the generated OTP.
   static String generateOTP([int otpLength = 6]) {
-    Random random = Random();
-    String otp = '';
-
-    for (int i = 0; i < otpLength; i++) {
-      otp += random.nextInt(10).toString();
+    if (otpLength <= 0) {
+      throw ArgumentError('OTP length must be greater than 0');
     }
 
-    return otp;
+    final random = Random.secure();
+    return List.generate(otpLength, (_) => random.nextInt(10)).join();
   }
 
-  /// Generate Avatar string from [multiavatar]
+  /// Generates an avatar URL using the multiavatar API
+  ///
+  /// Returns a string containing the URL of the generated avatar.
   static String generateAvatar() {
-    String uuid = generateOTP();
-    return 'https://api.multiavatar.com/${uuid}.png';
+    final uuid = generateOTP(10); // Using a longer OTP for more uniqueness
+    return 'https://api.multiavatar.com/$uuid.png';
   }
 }

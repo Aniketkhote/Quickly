@@ -1,33 +1,37 @@
-import 'map_extension.dart';
-
-///List extension to extend List functionality
+/// Extension on List<T> to provide additional functionality.
 extension ListExtension<T> on List<T> {
-  ///Get sorted list
+  /// Returns a new sorted list.
   ///
-  ///Example:
-  ///```dart
-  ///list.sorted(true) // create new list with ascending order
-  ///```
+  /// If [isDesc] is true, the list will be sorted in descending order.
+  /// Otherwise, it will be sorted in ascending order.
+  ///
+  /// Example:
+  /// ```dart
+  /// final sortedList = list.sorted(isDesc: true);
+  /// ```
   List<T> sorted({bool isDesc = false}) {
     final List<T> copy = List<T>.of(this);
     copy.sort();
     return isDesc ? copy.reversed.toList() : copy;
   }
 
-  ///Get sorted list
+  /// Returns a new list sorted in descending order.
   ///
-  ///Example:
-  ///```dart
-  ///list.sortedDesc() // create new list with descending order
-  ///```
+  /// Example:
+  /// ```dart
+  /// final descendingList = list.sortedDesc;
+  /// ```
   List<T> get sortedDesc => sorted(isDesc: true);
 
-  ///The sortBy method sorts the list of maps by the given key.
+  /// Sorts a list of maps by the given key.
   ///
-  ///Example:
-  ///```dart
-  ///list.sortBy("price") // create new list with ascending order by according to price
-  ///```
+  /// [key] is the key to sort by.
+  /// If [isDesc] is true, the list will be sorted in descending order.
+  ///
+  /// Example:
+  /// ```dart
+  /// final sortedMaps = list.sortBy("price");
+  /// ```
   List<Map<T, T>> sortBy(String key, {bool isDesc = false}) {
     final List<Map<T, T>> maps = whereType<Map<T, T>>()
         .where((Map<T, T> element) => element.containsKey(key))
@@ -36,46 +40,46 @@ extension ListExtension<T> on List<T> {
       maps.sort((Map<T, T> a, Map<T, T> b) {
         final T? aValue = a[key];
         final T? bValue = b[key];
-        if (aValue is int && bValue is int) {
+        if (aValue is Comparable && bValue is Comparable) {
           return aValue.compareTo(bValue);
         }
-        throw ArgumentError('Values for key "$key" must be of type int');
+        throw ArgumentError('Values for key "$key" must be comparable');
       });
     } on ArgumentError {
-      // If an error is thrown, return an empty list
       return <Map<T, T>>[];
     }
     return isDesc ? maps.reversed.toList() : maps;
   }
 
-  ///The sortDescBy method sorts the list of objects by the given key.
+  /// Sorts a list of maps by the given key in descending order.
   ///
-  ///Example:
-  ///```dart
-  ///list.sortDescBy("price")
-  ///
-  ///This method has the same signature as the sortBy method,
-  ///but will sort the collection in the opposite order
-  ///```
+  /// Example:
+  /// ```dart
+  /// final descendingSortedMaps = list.sortDescBy("price");
+  /// ```
   List<Map<T, T>> sortDescBy(String key) => sortBy(key, isDesc: true);
 
-  ///Group by objects according to condition
+  /// Groups the list elements according to a given condition.
   ///
-  ///Example:
-  ///```dart
-  ///list.groupBy(fn)
-  ///```
+  /// [fn] is a function that determines the grouping key for each element.
+  ///
+  /// Example:
+  /// ```dart
+  /// final groupedList = list.groupBy((item) => item.category);
+  /// ```
   Map<T, List<T>> groupBy(T Function(T) fn) => Map<T, List<T>>.fromIterable(
         map(fn).toSet(),
         value: (i) => where((T v) => fn(v) == i).toList(),
       );
 
-  ///Group the objects according to key
+  /// Groups the list elements according to a specified key in each element.
   ///
-  ///Example:
-  ///```dart
-  ///list.groupByKey("key")
-  ///```
+  /// [key] is the key to group by.
+  ///
+  /// Example:
+  /// ```dart
+  /// final groupedByKey = list.groupByKey("category");
+  /// ```
   Map<T, List<T>> groupByKey(String key) => groupBy((T e) {
         if (e is Map && e.containsKey(key)) {
           return e[key] as T;
@@ -83,80 +87,75 @@ extension ListExtension<T> on List<T> {
         throw ArgumentError('Key not found: $key');
       });
 
-  ///The latest methods allow you to easily order results by id in descending.
-  ///By default, the result will be ordered by the id field.
-  ///Or, you may pass the key that you wish to sort by:
+  /// Returns a list of maps sorted by the given key in descending order.
   ///
-  ///Example:
-  ///```dart
-  ///list.latest()
-  ///```
+  /// By default, it sorts by the 'id' key.
+  ///
+  /// Example:
+  /// ```dart
+  /// final latestItems = list.latest("timestamp");
+  /// ```
   List<Map<T, T>> latest([String key = 'id']) => sortBy(key, isDesc: true);
 
-  ///The latestFirst methods allow you to easily order results by
-  ///id in descending order and get first record.
-  ///By default, the result will be ordered by the id field.
-  ///Or, you may pass the key that you wish to sort by:
+  /// Returns the first item from a list of maps sorted by the given key in descending order.
   ///
-  ///Example:
-  ///```dart
-  ///list.latestFirst()
-  ///```
+  /// By default, it sorts by the 'id' key.
+  ///
+  /// Example:
+  /// ```dart
+  /// final mostRecentItem = list.latestFirst("timestamp");
+  /// ```
   Map<T, T> latestFirst([String key = 'id']) {
     final List<Map<T, T>> sortedMaps = latest(key);
-    if (sortedMaps.isEmpty || sortedMaps.first.isEmpty) {
-      return <T, T>{};
-    }
-    return sortedMaps.first;
+    return sortedMaps.isNotEmpty ? sortedMaps.first : <T, T>{};
   }
 
-  ///The oldest methods allow you to easily order results by id.
-  ///By default, the result will be ordered by the id field.
-  ///Or, you may pass the column name that you wish to sort by:
+  /// Returns a list of maps sorted by the given key in ascending order.
   ///
-  ///Example:
-  ///```dart
-  ///list.oldest()
-  ///```
+  /// By default, it sorts by the 'id' key.
+  ///
+  /// Example:
+  /// ```dart
+  /// final oldestItems = list.oldest("timestamp");
+  /// ```
   List<Map<T, T>> oldest([String key = 'id']) => sortBy(key);
 
-  ///The oldestFirst methods allow you to easily order results by id and get first record.
-  ///By default, the result will be ordered by the id field.
-  ///Or, you may pass the column name that you wish to sort by:
+  /// Returns the first item from a list of maps sorted by the given key in ascending order.
   ///
-  ///Example:
-  ///```dart
-  ///list.oldestFirst()
-  ///```
+  /// By default, it sorts by the 'id' key.
+  ///
+  /// Example:
+  /// ```dart
+  /// final oldestItem = list.oldestFirst("timestamp");
+  /// ```
   Map<T, T> oldestFirst([String key = 'id']) {
     final List<Map<T, T>> sortedMaps = oldest(key);
-    if (sortedMaps.isEmpty || sortedMaps.first.isEmpty) {
-      return <T, T>{};
-    }
-    return sortedMaps.first;
+    return sortedMaps.isNotEmpty ? sortedMaps.first : <T, T>{};
   }
 
-  ///Returns random value from this list
+  /// Returns a random element from the list.
   ///
-  ///Example:
-  ///```dart
-  ///list.random // [1,2,3,4,5] -> 4
-  ///```
+  /// Example:
+  /// ```dart
+  /// final randomItem = list.random;
+  /// ```
   T get random => (this..shuffle()).first;
 
-  ///The chunk method breaks the list into multiple, smaller list of a given size
+  /// Breaks the list into multiple smaller lists of a given size.
   ///
-  ///Example:
-  ///```dart
-  ///list.chunk(2) // [1,2,3,4,5] -> [[1,2], [3,4], [5]]
-  ///```
+  /// [size] is the size of each chunk.
+  ///
+  /// Example:
+  /// ```dart
+  /// final chunks = list.chunk(3);
+  /// ```
   List<List<T>> chunk(int size) {
-    if (size < 1 && length < 1) {
+    if (size < 1 || isEmpty) {
       return <List<T>>[];
     }
 
     return List<List<T>>.generate(
-      length ~/ size + (length % size == 0 ? 0 : 1),
+      (length / size).ceil(),
       (int index) => sublist(
         index * size,
         (index + 1) * size > length ? length : (index + 1) * size,
@@ -164,18 +163,20 @@ extension ListExtension<T> on List<T> {
     );
   }
 
-  ///The split method breaks the list into equal sized lists of a given size
+  /// Splits the list into a specified number of approximately equal parts.
   ///
-  ///Example:
-  ///```dart
-  ///list.split(2) // [1,2,3,4,5] -> [[1,2,3], [4,5]]
-  ///```
+  /// [parts] is the number of parts to split the list into.
+  ///
+  /// Example:
+  /// ```dart
+  /// final splitList = list.split(2);
+  /// ```
   List<List<T>> split(int parts) {
-    if (parts < 1 && length < 1) {
+    if (parts < 1 || isEmpty) {
       return <List<T>>[];
     }
 
-    final int size = (length / parts).round();
+    final int size = (length / parts).ceil();
 
     return List<List<T>>.generate(
       parts,
@@ -186,61 +187,82 @@ extension ListExtension<T> on List<T> {
     );
   }
 
-  ///Merge list of lists into single list
+  /// Flattens a list of lists into a single list.
   ///
-  ///Example:
-  ///```dart
-  ///list.flatten // [[1,2],[3,4]] -> [1,2,3,4]
-  ///```
+  /// Example:
+  /// ```dart
+  /// final flatList = nestedList.flatten;
+  /// ```
   List<T> get flatten => expand((T i) => i as List<T>).toList();
 
-  ///The [pluck] method retrieves all of the values for a given key
+  /// Retrieves all values for a given key from a list of maps.
   ///
-  ///Example:
-  ///```dart
+  /// [key] is the key to pluck values for.
   ///
-  ///list.pluck("id")
-  ///
-  /// [
-  ///     {"id":1,"name":"Tony"},
-  ///     {"id":2,"name":"Thor"}
-  /// ]
-  ///
-  /// [1,2]
-  ///```
+  /// Example:
+  /// ```dart
+  /// final ids = list.pluck("id");
+  /// ```
   List<T?> pluck(String key) {
     if (isEmpty) {
       return <T>[];
     }
-    final List<T> result = <T>[];
-    for (final T element in this) {
-      if (element is Map<String, T> && element.containsKey(key)) {
-        result.add(element[key] as T);
-      }
-    }
-    return result;
+    return whereType<Map<String, T>>()
+        .where((map) => map.containsKey(key))
+        .map((map) => map[key])
+        .toList();
   }
 
-  ///Get minimum number
+  /// Returns the minimum value in the list.
+  ///
+  /// Example:
+  /// ```dart
+  /// final minValue = list.min;
+  /// ```
   T get min => sorted().first;
 
-  ///Get maximum number
+  /// Returns the maximum value in the list.
+  ///
+  /// Example:
+  /// ```dart
+  /// final maxValue = list.max;
+  /// ```
   T get max => sortedDesc.first;
 
-  ///Get sum of numbers
+  /// Calculates the sum of all numeric values in the list.
+  ///
+  /// Example:
+  /// ```dart
+  /// final total = list.sum;
+  /// ```
   num get sum => whereNumbers.reduce((num a, num b) => a + b);
 
-  ///Get average of numbers
+  /// Calculates the average of all numeric values in the list.
+  ///
+  /// Example:
+  /// ```dart
+  /// final average = list.avg;
+  /// ```
   num get avg => whereNumbers.sum / whereNumbers.length;
 
-  ///Get numbers from a list
+  /// Returns a list containing only the numeric values from the original list.
+  ///
+  /// Example:
+  /// ```dart
+  /// final numericValues = list.whereNumbers;
+  /// ```
   List<num> get whereNumbers =>
       where((T element) => element is num).cast<num>().toList();
 
-  ///Get median of numbers
+  /// Calculates the median value of all numeric values in the list.
+  ///
+  /// Example:
+  /// ```dart
+  /// final medianValue = list.median;
+  /// ```
   num get median {
     final List<num> list = whereNumbers.sorted();
-    final int middleIndex = (list.length / 2).round();
+    final int middleIndex = list.length ~/ 2;
     if (list.length.isEven) {
       return (list[middleIndex - 1] + list[middleIndex]) / 2;
     } else {
@@ -248,236 +270,189 @@ extension ListExtension<T> on List<T> {
     }
   }
 
-  ///Get mode of numbers
+  /// Calculates the mode (most frequent value) of all numeric values in the list.
+  ///
+  /// Example:
+  /// ```dart
+  /// final modeValue = list.mode;
+  /// ```
   num get mode {
     final List<num> list = whereNumbers;
-
-    num maxValue = 0.0;
-    num maxCount = 0;
-
-    for (int i = 0; i < list.length; ++i) {
-      num count = 0;
-      for (int j = 0; j < list.length; ++j) {
-        if (list[j] == list[i]) {
-          count++;
-        }
-      }
-
-      if (count > maxCount) {
-        maxCount = count;
-        maxValue = list[i];
-      }
+    final Map<num, int> frequencyMap = {};
+    for (final num value in list) {
+      frequencyMap[value] = (frequencyMap[value] ?? 0) + 1;
     }
-    return maxValue;
+    return frequencyMap.entries.reduce((a, b) => a.value > b.value ? a : b).key;
   }
 
-  ///Gets only those values which is given
+  /// Filters the list to include only the specified keys for map elements.
   ///
-  ///Example:
-  ///```dart
-  ///list.whereOnly([key1, key2])
-  ///```
+  /// [keys] is a list of keys to include.
+  ///
+  /// Example:
+  /// ```dart
+  /// final filteredList = list.whereOnly(["name", "age"]);
+  /// ```
   List<T> whereOnly(List<String> keys) {
     if (isEmpty) {
       return <T>[];
     }
-    final List<T> result = <T>[];
-    for (final T element in this) {
-      if (element is Map<String, T>) {
-        final Map<String, T> map = <String, T>{};
-        for (final String key in keys) {
-          if (element.containsKey(key)) {
-            map[key] = element[key] as T;
-          }
-        }
-        if (map.isNotEmpty) {
-          result.add(map as T);
-        }
-      }
-    }
-    return result;
+    return whereType<Map<String, T>>()
+        .map((Map<String, T> element) {
+          return Map<String, T>.fromEntries(
+            element.entries.where((entry) => keys.contains(entry.key)),
+          ) as T;
+        })
+        .where((element) => (element as Map).isNotEmpty)
+        .toList();
   }
 
-  ///Removes elements from the list which is given
+  /// Filters the list to exclude the specified keys for map elements.
   ///
-  ///Example:
-  ///```dart
-  ///list.whereNotOnly([key1, key2])
-  ///```
+  /// [keys] is a list of keys to exclude.
+  ///
+  /// Example:
+  /// ```dart
+  /// final filteredList = list.whereNotOnly(["id", "createdAt"]);
+  /// ```
   List<T> whereNotOnly(List<String> keys) {
     if (isEmpty) {
       return <T>[];
     }
-    final List<T> result = <T>[];
-
-    for (final T element in this) {
-      if (element is Map<String, T>) {
-        for (final String key in keys) {
-          if (element.containsKey(key)) {
-            element.remove(key);
-          }
-        }
-        if (element.isNotEmpty) {
-          result.add(element);
-        }
-      }
-    }
-
-    return this;
+    return whereType<Map<String, T>>()
+        .map((Map<String, T> element) {
+          return Map<String, T>.fromEntries(
+            element.entries.where((entry) => !keys.contains(entry.key)),
+          ) as T;
+        })
+        .where((element) => (element as Map).isNotEmpty)
+        .toList();
   }
 
-  ///Removes elements from the list that do not have a specified item value
+  /// Filters the list to include only elements where the specified key's value is in the given list.
   ///
-  ///that is not contained within the given list
-  ///
-  ///Example:
-  ///```dart
-  ///list.whereIn("key", [value1, value2])
-  ///```
-  List<T> whereIn(String key, List<num> params) {
-    if (isEmpty) {
-      return <T>[];
-    }
-    final List<T> result = <T>[];
-
-    for (final num param in params) {
-      for (final T element in this) {
-        if (element is Map<T, T> &&
-            element.containsKey(key) &&
-            element[key] == param) {
-          result.add(element);
-        }
-      }
-    }
-
-    return result;
-  }
-
-  ///Removes elements from the list that have a specified item value
-  ///
-  ///that is not contained within the given list
-  ///
-  ///Example:
-  ///```dart
-  ///list.whereNotIn("key", [value1, value2])
-  ///```
-  List<T> whereNotIn(String key, List<num> params) {
-    if (isEmpty) {
-      return <T>[];
-    }
-    final List<T> result = toList();
-    for (final num param in params) {
-      result.removeWhere(
-        (T map) =>
-            map is Map<String, T> && map.containsKey(key) && map[key] == param,
-      );
-    }
-    return result;
-  }
-
-  /// Filters the collection by determining if a specified item value is within a given range
+  /// [key] is the key to check.
+  /// [params] is the list of values to match against.
   ///
   /// Example:
-  ///```dart
-  ///list.whereBetween("key",start, end)
-  ///```
+  /// ```dart
+  /// final filteredList = list.whereIn("status", ["active", "pending"]);
+  /// ```
+  List<T> whereIn(String key, List<T> params) {
+    if (isEmpty) {
+      return <T>[];
+    }
+    return whereType<Map<T, T>>()
+        .where((element) =>
+            element.containsKey(key) && params.contains(element[key]))
+        .map((e) => e as T)
+        .toList();
+  }
+
+  /// Filters the list to exclude elements where the specified key's value is in the given list.
+  ///
+  /// [key] is the key to check.
+  /// [params] is the list of values to match against.
+  ///
+  /// Example:
+  /// ```dart
+  /// final filteredList = list.whereNotIn("status", ["inactive", "deleted"]);
+  /// ```
+  List<T> whereNotIn(String key, List<T> params) {
+    if (isEmpty) {
+      return <T>[];
+    }
+    return whereType<Map<String, T>>()
+        .where((element) =>
+            element.containsKey(key) && !params.contains(element[key]))
+        .map((e) => e as T)
+        .toList();
+  }
+
+  /// Filters the list to include only elements where the specified key's value is within the given range.
+  ///
+  /// [key] is the key to check.
+  /// [start] is the lower bound of the range (inclusive).
+  /// [end] is the upper bound of the range (inclusive).
+  ///
+  /// Example:
+  /// ```dart
+  /// final filteredList = list.whereBetween("age", 18, 30);
+  /// ```
   List<T> whereBetween(String key, num start, num end) {
     if (isEmpty) {
       return <T>[];
     }
-    final List<T> result = <T>[];
-    for (final T element in this) {
-      if (element is Map<String, T> &&
-          element.containsKey(key) &&
-          element[key] is num) {
-        if ((element[key] as int >= start) && (element[key] as int <= end)) {
-          result.add(element);
-        }
-      }
-    }
-
-    return this;
+    return whereType<Map<String, dynamic>>()
+        .where((element) =>
+            element.containsKey(key) &&
+            element[key] is num &&
+            (element[key] as num) >= start &&
+            (element[key] as num) <= end)
+        .map((e) => e as T)
+        .toList();
   }
 
-  ///Filters the collection by determining if a specified item value is outside of a given range
+  /// Filters the list to exclude elements where the specified key's value is within the given range.
   ///
-  ///Example:
-  ///```dart
-  ///list.whereNotBetween("key", start, end)
-  ///```
+  /// [key] is the key to check.
+  /// [start] is the lower bound of the range (exclusive).
+  /// [end] is the upper bound of the range (exclusive).
+  ///
+  /// Example:
+  /// ```dart
+  /// final filteredList = list.whereNotBetween("price", 100, 1000);
+  /// ```
   List<T> whereNotBetween(String key, num start, num end) {
     if (isEmpty) {
       return <T>[];
     }
-    final List<T> result = <T>[];
-    for (final T element in this) {
-      if (element is Map<T, T> &&
-          element.containsKey(key) &&
-          element[key] is num) {
-        final num value = element[key] as num;
-        if (value < start || value > end) {
-          result.add(element);
-        }
-      }
-    }
-
-    return result;
+    return whereType<Map<String, dynamic>>()
+        .where((element) =>
+            element.containsKey(key) &&
+            element[key] is num &&
+            ((element[key] as num) < start || (element[key] as num) > end))
+        .map((e) => e as T)
+        .toList();
   }
 
-  ///Checks given key/value is exists or not
+  /// Checks if any map in the list contains the specified key-value pair.
   ///
-  /// [key] is the key of the map.
-  /// [value] is the value of the map.
-  ///
-  /// Returns true if the key/value pair exists in the map.
+  /// [key] is the key to check.
+  /// [value] is the value to match.
   ///
   /// Example:
-  ///```dart
-  /// var map = {'name': 'John', 'age': 25};
-  /// map.hasKeyValue('name', 'John'); // true
-  /// map.hasKeyValue('age', 25); // true
-  /// map.hasKeyValue('gender', 'male'); // false
-  ///```
+  /// ```dart
+  /// final hasAdmin = list.hasKeyValue("role", "admin");
+  /// ```
   bool hasKeyValue(String key, T value) => any(
-        (T element) {
-          if (element is! Map<T, T>) {
-            return false;
-          }
-          return element.has(key, value);
-        },
+        (T element) =>
+            element is Map<T, T> &&
+            element.containsKey(key) &&
+            element[key] == value,
       );
 
-  ///Checks if the given [key] exists in the map.
+  /// Checks if any map in the list contains the specified key.
   ///
-  ///Returns true if any of the keys in the map are equal to [key].
+  /// [key] is the key to check for.
   ///
   /// Example:
-  ///```dart
-  ///map.hasKey("key") // true
-  ///```
+  /// ```dart
+  /// final hasAgeField = list.hasKey("age");
+  /// ```
   bool hasKey(String key) => any(
-        (T element) {
-          if (element is! Map<T, T>) {
-            return false;
-          }
-          return element.containsKey(key);
-        },
+        (T element) => element is Map<T, T> && element.containsKey(key),
       );
 
-  ///Checks if the given [value] exists in the map.
+  /// Checks if any map in the list contains the specified value.
   ///
-  ///Returns true if any of the values in the map are equal to [value].
+  /// [value] is the value to search for.
   ///
   /// Example:
-  ///```dart
-  ///map.hasValue("value") // true
-  ///```
+  /// ```dart
+  /// final hasJohnDoe = list.hasValue("John Doe");
+  /// ```
   bool hasValue(T value) => any(
-        (T element) {
-          if (element is! Map<T, T>) {
-            return false;
-          }
-          return element.containsValue(value);
-        },
+        (T element) => element is Map<T, T> && element.containsValue(value),
       );
 }

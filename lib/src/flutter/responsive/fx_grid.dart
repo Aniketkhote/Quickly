@@ -1,35 +1,34 @@
-import "package:flutter/material.dart";
-import "package:quickly/src/flutter/responsive/fx_grid_column.dart";
+import 'package:flutter/material.dart';
+import 'package:quickly/src/flutter/responsive/fx_grid_column.dart';
 
 /// A responsive grid layout widget that arranges its children in a row.
 ///
-/// This widget is used to create a responsive grid layout where children are laid out horizontally.
+/// This widget creates a responsive grid layout where children are laid out horizontally.
 /// The number of columns in the grid is determined based on the screen width and the provided breakpoints.
 /// The grid supports hiding or showing specific columns using the `hideOn` and `showOn` properties.
 class FxGrid extends StatelessWidget {
   /// Constructs an `FxGrid` widget.
   ///
-  /// The [children] parameter is a list of `FxGridColumn` widgets that represent the columns in the grid.
-  /// The [breakpoints] parameter is a list of screen widths at which the number of columns in the grid changes.
-  /// The [hideOn] parameter is a list of column indices to hide.
-  /// The [showOn] parameter is a list of column indices to show, regardless of other conditions.
-  /// The [mainAxisAlignment] parameter determines how the columns are aligned horizontally.
-  /// The [crossAxisAlignment] parameter determines how the columns are aligned vertically.
-  /// The [key] parameter is an optional key that can be used to identify and differentiate this widget.
+  /// [children] A list of `FxGridColumn` widgets representing the columns in the grid.
+  /// [breakpoints] A list of screen widths at which the number of columns changes. Defaults to [576, 768, 992, 1200].
+  /// [hideOn] A list of column indices to hide. Defaults to an empty list.
+  /// [showOn] A list of column indices to show, regardless of other conditions. Defaults to an empty list.
+  /// [mainAxisAlignment] Determines how the columns are aligned horizontally. Defaults to MainAxisAlignment.start.
+  /// [crossAxisAlignment] Determines how the columns are aligned vertically. Defaults to CrossAxisAlignment.start.
   const FxGrid({
     required this.children,
     super.key,
-    this.breakpoints = const <int>[576, 768, 992, 1200],
-    this.hideOn = const <int>[],
-    this.showOn = const <int>[],
+    this.breakpoints = const [576, 768, 992, 1200],
+    this.hideOn = const [],
+    this.showOn = const [],
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.start,
   });
 
-  /// The list of `FxGridColumn` widgets that represent the columns in the grid.
+  /// The list of `FxGridColumn` widgets representing the columns in the grid.
   final List<FxGridColumn> children;
 
-  /// The list of screen widths at which the number of columns in the grid changes.
+  /// The list of screen widths at which the number of columns changes.
   final List<int> breakpoints;
 
   /// The list of column indices to hide.
@@ -49,70 +48,60 @@ class FxGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final int totalColumns = calculateTotalColumns(screenWidth);
-
-    final List<FxGridColumn> visibleChildren = filterVisibleChildren();
-
-    final List<FxGridColumn> columns =
-        calculateColumns(totalColumns, visibleChildren);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final totalColumns = _calculateTotalColumns(screenWidth);
+    final visibleChildren = _filterVisibleChildren();
 
     return Row(
       mainAxisAlignment: mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment,
-      children: columns,
+      children: _calculateColumns(totalColumns, visibleChildren),
     );
   }
 
-  /// Calculates the total number of columns in the grid based on the screen width.
-  ///
-  /// The [screenWidth] parameter represents the width of the screen.
-  /// The total number of columns is determined by comparing the screen width with the provided breakpoints.
-  /// Returns the total number of columns.
-  int calculateTotalColumns(double screenWidth) {
-    int totalColumns = 12;
-
+  /// Calculates the total number of columns based on the screen width.
+  int _calculateTotalColumns(double screenWidth) {
     for (int i = 0; i < breakpoints.length; i++) {
       if (screenWidth < breakpoints[i]) {
-        totalColumns = i + 1;
-        break;
+        return i + 1;
       }
     }
-
-    return totalColumns;
+    return 12; // Default to 12 columns for larger screens
   }
 
   /// Filters the visible children based on the `showOn` and `hideOn` parameters.
-  ///
-  /// Returns a list of `FxGridColumn` widgets that should be visible in the grid.
-  List<FxGridColumn> filterVisibleChildren() {
-    final List<FxGridColumn> visibleChildren = <FxGridColumn>[];
-
-    for (int i = 0; i < children.length; i++) {
-      if (showOn.contains(i) || (hideOn.isNotEmpty && !hideOn.contains(i))) {
-        visibleChildren.add(children[i]);
-      }
-    }
-
-    return visibleChildren;
+  List<FxGridColumn> _filterVisibleChildren() {
+    return children
+        .asMap()
+        .entries
+        .where((entry) {
+          final index = entry.key;
+          return showOn.contains(index) ||
+              (hideOn.isEmpty || !hideOn.contains(index));
+        })
+        .map((entry) => entry.value)
+        .toList();
   }
 
-  /// Calculates the columns to be rendered in the grid based on the total number of columns and the visible children.
-  ///
-  /// The [totalColumns] parameter represents the total number of columns in the grid.
-  /// The [visibleChildren] parameter is a list of `FxGridColumn` widgets that should be visible.
-  /// Returns a list of `FxGridColumn` widgets representing the calculated columns.
-  List<FxGridColumn> calculateColumns(
-    int totalColumns,
-    List<FxGridColumn> visibleChildren,
-  ) {
-    final List<FxGridColumn> columns = <FxGridColumn>[];
+  /// Calculates the columns to be rendered in the grid.
+  List<FxGridColumn> _calculateColumns(
+      int totalColumns, List<FxGridColumn> visibleChildren) {
+    if (visibleChildren.isEmpty) return [];
 
-    for (int i = 0; i < totalColumns; i++) {
-      final FxGridColumn column = visibleChildren[i % visibleChildren.length];
-      columns.add(column);
-    }
+    return List.generate(totalColumns, (index) {
+      final column = visibleChildren[index % visibleChildren.length];
+      return FxGridColumn(
+        child: column.child,
+        flex: column.flex ?? _calculateFlex(column, totalColumns),
+        gutter: column.gutter,
+      );
+    });
+  }
 
-    return columns;
+  /// Calculates the flex factor for a column based on its properties and the total number of columns.
+  int _calculateFlex(FxGridColumn column, int totalColumns) {
+    // Implement logic to calculate flex based on xs, sm, md, lg, xl properties
+    // This is a placeholder and should be replaced with actual logic
+    return 1;
   }
 }

@@ -1,17 +1,20 @@
 import "package:flutter/material.dart";
 import "package:quickly/quickly.dart";
 
-/// A customizable radio button widget with additional features provided by FxRadio.
-class FxRadio<T> extends StatefulWidget {
+/// A customizable radio button widget with smooth animation and additional features.
+class FxRadio<T> extends StatelessWidget {
   /// Constructs an FxRadio.
   const FxRadio({
     required this.groupValue,
     required this.value,
     required this.onChanged,
     super.key,
-    this.size,
+    this.size = 24.0,
     this.activeColor,
+    this.inactiveColor,
     this.borderColor,
+    this.duration = const Duration(milliseconds: 200),
+    this.curve = Curves.easeInOut,
   });
 
   /// The value of the currently selected radio button in the group.
@@ -24,56 +27,56 @@ class FxRadio<T> extends StatefulWidget {
   final ValueChanged<T> onChanged;
 
   /// The size of the radio button.
-  final double? size;
+  final double size;
 
   /// The color used when the radio button is selected.
   final Color? activeColor;
 
+  /// The color used when the radio button is not selected.
+  final Color? inactiveColor;
+
   /// The color of the radio button border.
   final Color? borderColor;
 
-  @override
-  State<FxRadio<T>> createState() => _FxRadioState<T>();
-}
+  /// The duration of the animation when the radio button state changes.
+  final Duration duration;
 
-class _FxRadioState<T> extends State<FxRadio<T>> {
-  bool isChecked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    isChecked = widget.groupValue == widget.value;
-  }
+  /// The curve of the animation when the radio button state changes.
+  final Curve curve;
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        onTap: () {
-          setState(() {
-            isChecked = true;
-            widget.onChanged(widget.value);
-          });
-        },
-        child: Container(
-          width: widget.size ?? 24.0,
-          height: widget.size ?? 24.0,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: isChecked
-                  ? widget.activeColor ?? FxColor.primary
-                  : widget.borderColor ?? Colors.grey,
-            ),
-            color: isChecked ? widget.activeColor : Colors.transparent,
-          ),
-          child: isChecked
-              ? Center(
-                  child: Icon(
-                    Icons.check,
-                    color: Colors.white,
-                    size: widget.size != null ? widget.size! / 2 : 12.0,
-                  ),
-                )
-              : null,
+  Widget build(BuildContext context) {
+    final isSelected = groupValue == value;
+    final effectiveActiveColor = activeColor ?? FxColor.primary;
+    final effectiveInactiveColor = inactiveColor ?? Colors.transparent;
+    final effectiveBorderColor =
+        borderColor ?? (isSelected ? effectiveActiveColor : Colors.grey);
+
+    return GestureDetector(
+      onTap: () => onChanged(value),
+      child: AnimatedContainer(
+        width: size,
+        height: size,
+        duration: duration,
+        curve: curve,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: effectiveBorderColor),
+          color: isSelected ? effectiveActiveColor : effectiveInactiveColor,
         ),
-      );
+        child: isSelected
+            ? Center(
+                child: Container(
+                  width: size * 0.5,
+                  height: size * 0.5,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            : null,
+      ),
+    );
+  }
 }

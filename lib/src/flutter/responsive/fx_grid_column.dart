@@ -13,9 +13,10 @@ class FxGridColumn extends StatelessWidget {
   ///
   /// The [xs], [sm], [md], [lg], and [xl] parameters define the number of columns
   /// the current column should span for different screen sizes. If a specific
-  /// parameter is not provided, the default is 12 columns.
+  /// parameter is not provided, it will use the value from the next smaller breakpoint.
   ///
-  /// The [offset] parameter defines the number of columns the current column should be offset by.
+  /// The [xsOffset], [smOffset], [mdOffset], [lgOffset], and [xlOffset] parameters
+  /// define the number of columns the current column should be offset by for different screen sizes.
   ///
   /// The [gutter] parameter specifies the spacing between columns in the grid.
   ///
@@ -29,8 +30,12 @@ class FxGridColumn extends StatelessWidget {
     this.md,
     this.lg,
     this.xl,
-    this.offset,
-    this.gutter,
+    this.xsOffset,
+    this.smOffset,
+    this.mdOffset,
+    this.lgOffset,
+    this.xlOffset,
+    this.gutter = 16.0,
   });
 
   /// The widget to be placed within the column.
@@ -54,36 +59,60 @@ class FxGridColumn extends StatelessWidget {
   /// The number of columns the column should span for extra-large screens (1200px and above).
   final int? xl;
 
-  /// The number of columns the column should be offset by.
-  final int? offset;
+  /// The number of columns the column should be offset by for extra-small screens.
+  final int? xsOffset;
+
+  /// The number of columns the column should be offset by for small screens.
+  final int? smOffset;
+
+  /// The number of columns the column should be offset by for medium screens.
+  final int? mdOffset;
+
+  /// The number of columns the column should be offset by for large screens.
+  final int? lgOffset;
+
+  /// The number of columns the column should be offset by for extra-large screens.
+  final int? xlOffset;
 
   /// The spacing between columns in the grid.
-  final double? gutter;
+  final double gutter;
 
   @override
   Widget build(BuildContext context) {
+    final int columnSpan = getColumnSpan(context);
+    final int columnOffset = getColumnOffset(context);
+
     return Expanded(
-      flex: flex ?? getColumnFlex(context),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: gutter! / 2),
+      flex: flex ?? columnSpan,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: gutter / 2 + (columnOffset * gutter),
+          right: gutter / 2,
+        ),
         child: child,
       ),
     );
   }
 
-  /// Calculates the flex factor for the column based on the screen width and breakpoints.
-  int getColumnFlex(BuildContext context) {
+  /// Calculates the number of columns to span based on the screen width and breakpoints.
+  int getColumnSpan(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth >= 1200 && xl != null) {
-      return xl!;
-    } else if (screenWidth >= 992 && lg != null) {
-      return lg!;
-    } else if (screenWidth >= 768 && md != null) {
-      return md!;
-    } else if (screenWidth >= 576 && sm != null) {
-      return sm!;
-    } else {
-      return xs ?? 12;
-    }
+    if (screenWidth >= 1200) return xl ?? lg ?? md ?? sm ?? xs ?? 12;
+    if (screenWidth >= 992) return lg ?? md ?? sm ?? xs ?? 12;
+    if (screenWidth >= 768) return md ?? sm ?? xs ?? 12;
+    if (screenWidth >= 576) return sm ?? xs ?? 12;
+    return xs ?? 12;
+  }
+
+  /// Calculates the number of columns to offset based on the screen width and breakpoints.
+  int getColumnOffset(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth >= 1200)
+      return xlOffset ?? lgOffset ?? mdOffset ?? smOffset ?? xsOffset ?? 0;
+    if (screenWidth >= 992)
+      return lgOffset ?? mdOffset ?? smOffset ?? xsOffset ?? 0;
+    if (screenWidth >= 768) return mdOffset ?? smOffset ?? xsOffset ?? 0;
+    if (screenWidth >= 576) return smOffset ?? xsOffset ?? 0;
+    return xsOffset ?? 0;
   }
 }

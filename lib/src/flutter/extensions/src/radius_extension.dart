@@ -1,36 +1,59 @@
 import 'package:flutter/material.dart';
 
-///Radius extension to extend Container functionality
+/// Extension on [Widget] to add rounded corners functionality.
 extension RadiusExtension on Widget {
-  /// The `withRounded` getter adds rounded corners to the `Container` with a specified radius.
+  /// Adds rounded corners to the widget with a specified radius.
   ///
-  /// The radius can be defined as a double value, and it will be applied to all corners of the `Container`.
+  /// [radius] is the radius to be applied to all corners of the widget.
+  ///
+  /// Returns a [ClipRRect] widget with the specified border radius.
   ClipRRect withRounded({required double radius}) => _rounded(radius: radius);
 
-  /// The `roundedNone` getter removes the border radius from the `Container`, making it square.
+  /// Removes the border radius from the widget, making it square.
+  ///
+  /// Returns a [ClipRRect] widget with no border radius.
   ClipRRect get roundedNone => _rounded(radius: 0);
 
-  /// The `roundedFull` getter applies a circular border radius to the `Container`, making it a full circle.
-  ClipRRect get roundedFull => _rounded(radius: 999999);
+  /// Applies a circular border radius to the widget, making it a full circle.
+  ///
+  /// Returns a [ClipRRect] widget with a very large border radius, effectively making it circular.
+  ClipRRect get roundedFull => _rounded(radius: double.infinity);
 
-  /// The `roundedXs` getter applies a border radius of 5 dp to the `Container`, making it slightly rounded.
+  /// Applies a border radius of 5 logical pixels to the widget, making it slightly rounded.
+  ///
+  /// Returns a [ClipRRect] widget with a border radius of 5 logical pixels.
   ClipRRect get roundedXs => _rounded(radius: 5);
 
-  /// The `roundedSm` getter applies a border radius of 10 dp to the `Container`, making it more rounded.
+  /// Applies a border radius of 10 logical pixels to the widget, making it more rounded.
+  ///
+  /// Returns a [ClipRRect] widget with a border radius of 10 logical pixels.
   ClipRRect get roundedSm => _rounded(radius: 10);
 
-  /// The `rounded` getter applies a border radius of 15 dp to the `Container`, making it even more rounded.
+  /// Applies a border radius of 15 logical pixels to the widget.
+  ///
+  /// Returns a [ClipRRect] widget with a border radius of 15 logical pixels.
   ClipRRect get rounded => _rounded(radius: 15);
 
-  /// The `roundedMd` getter applies a border radius of 20 dp to the `Container`, making it even more rounded.
+  /// Applies a border radius of 20 logical pixels to the widget.
+  ///
+  /// Returns a [ClipRRect] widget with a border radius of 20 logical pixels.
   ClipRRect get roundedMd => _rounded(radius: 20);
 
-  /// The `roundedLg` getter applies a border radius of 25 dp to the `Container`, making it even more rounded.
+  /// Applies a border radius of 25 logical pixels to the widget.
+  ///
+  /// Returns a [ClipRRect] widget with a border radius of 25 logical pixels.
   ClipRRect get roundedLg => _rounded(radius: 25);
 
-  /// The `roundedXl` getter applies a border radius of 30 dp to the `Container`, making it even more rounded.
+  /// Applies a border radius of 30 logical pixels to the widget.
+  ///
+  /// Returns a [ClipRRect] widget with a border radius of 30 logical pixels.
   ClipRRect get roundedXl => _rounded(radius: 30);
 
+  /// Private method to create a [ClipRRect] with the specified border radius.
+  ///
+  /// [radius] is the radius to be applied to all corners of the widget.
+  ///
+  /// Returns a [ClipRRect] widget with the specified border radius.
   ClipRRect _rounded({required double radius}) =>
       ClipRRect(borderRadius: BorderRadius.circular(radius), child: this);
 }

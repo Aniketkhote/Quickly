@@ -1,3 +1,24 @@
+## 6.0.0
+
+### Added
+
+- `child` widget in `FxButton` for more flexible content.
+- Smooth animations in `FxCheckbox`, `FxRadio`, and `FxSwitch` for improved user experience.
+- `inActive` field in `FxRadio` for better control over radio button states.
+- `thumbColor` property in `FxSwitch` for customizable switch appearance.
+- Additional fields in `FxTextFormField` for enhanced functionality.
+- More granular offset options (`xsOffset`, `smOffset`, `mdOffset`, `lgOffset`, `xlOffset`) in place of a single `offset` for improved responsive design.
+
+### Changed
+
+- Renamed `onChange` function to `onChanged` in `FxCheckbox` for consistency with Flutter conventions.
+- Renamed `isChecked` property to `value` in `FxCheckbox` for clarity.
+- Renamed `Shimmer` widget to `FxShimmer` for consistency with library naming conventions.
+
+### Improved
+
+- Enhanced `FxGrid` and `FxResponsive` widgets for better performance and flexibility in responsive layouts.
+
 ## 5.8.0
 
 ### Added basic string manipulation methods
