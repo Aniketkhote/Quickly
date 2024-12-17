@@ -58,30 +58,41 @@ String? dateValidator(String value) {
 /// Validates the strength of a password.
 String? passwordStrengthValidator(String value) {
   final password = value.trim();
-  if (password.length < 8)
+  if (password.length < 8) {
     return 'Password must be at least 8 characters long.';
-  if (!password.contains(RegExp(r'[A-Z]')))
+  }
+  if (!password.contains(RegExp(r'[A-Z]'))) {
     return 'Password must contain at least one uppercase letter.';
-  if (!password.contains(RegExp(r'[a-z]')))
+  }
+  if (!password.contains(RegExp(r'[a-z]'))) {
     return 'Password must contain at least one lowercase letter.';
-  if (!password.contains(RegExp(r'[0-9]')))
+  }
+  if (!password.contains(RegExp(r'[0-9]'))) {
     return 'Password must contain at least one digit.';
-  if (!password.contains(RegExp(r'[!@#\$&*~]')))
+  }
+  if (!password.contains(RegExp(r'[!@#\$&*~]'))) {
     return 'Password must contain at least one special character.';
+  }
+
   return null;
 }
 
 /// Validates if the input value matches another value.
-String? matchValidator(String value, String matchValue) =>
-    value.trim() != matchValue.trim() ? 'The values do not match.' : null;
+String? matchValidator(String value, String matchValue) {
+  if (value.trim() != matchValue.trim()) {
+    return 'The values do not match.';
+  }
+  return null;
+}
 
 /// Validates if the input value is within a specified numeric range.
 String? rangeValidator(String value,
     {required double min, required double max}) {
   final numValue = double.tryParse(value.trim());
-  return (numValue == null || numValue < min || numValue > max)
-      ? 'Value must be between $min and $max.'
-      : null;
+  if (numValue == null || numValue < min || numValue > max) {
+    return 'Value must be between $min and $max.';
+  }
+  return null;
 }
 
 /// A map containing pre-defined validator functions.
