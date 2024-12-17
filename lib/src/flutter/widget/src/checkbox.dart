@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quickly/quickly.dart';
 
-/// A customizable checkbox widget with smooth animation.
 class FxCheckbox extends StatelessWidget {
-  /// Constructs a FxCheckbox.
   const FxCheckbox({
-    required this.onChanged,
     required this.value,
+    this.onChanged,
     super.key,
     this.size = 24.0,
     this.iconSize = 20.0,
@@ -14,65 +11,79 @@ class FxCheckbox extends StatelessWidget {
     this.iconColor,
     this.icon = Icons.check,
     this.borderColor,
+    this.borderRadius = 4.0,
+    this.isDisabled = false,
+    this.semanticLabel,
     this.duration = const Duration(milliseconds: 200),
     this.curve = Curves.easeInOut,
+    this.focusNode,
   });
 
-  /// The size of the checkbox.
-  final double size;
-
-  /// The size of the checkbox icon.
-  final double iconSize;
-
-  /// Callback function called when the checkbox state changes.
-  final ValueChanged<bool> onChanged;
-
-  /// The background color of the checkbox when checked.
-  final Color? backgroundColor;
-
-  /// The color of the checkbox icon.
-  final Color? iconColor;
-
-  /// The icon displayed when the checkbox is checked.
-  final IconData icon;
-
-  /// The color of the checkbox border.
-  final Color? borderColor;
-
-  /// Indicates whether the checkbox is checked or not.
   final bool value;
-
-  /// The duration of the animation when the checkbox state changes.
+  final ValueChanged<bool>? onChanged;
+  final double size;
+  final double iconSize;
+  final Color? backgroundColor;
+  final Color? iconColor;
+  final IconData icon;
+  final Color? borderColor;
+  final double borderRadius;
+  final bool isDisabled;
+  final String? semanticLabel;
   final Duration duration;
-
-  /// The curve of the animation when the checkbox state changes.
   final Curve curve;
+  final FocusNode? focusNode;
+
+  bool get _isInteractive => !isDisabled;
 
   @override
   Widget build(BuildContext context) {
-    final effectiveBackgroundColor = backgroundColor ?? FxColor.primary;
-    final effectiveBorderColor = borderColor ?? effectiveBackgroundColor;
-    final effectiveIconColor = iconColor ?? Colors.white;
+    final effectiveBackgroundColor =
+        backgroundColor ?? Theme.of(context).primaryColor;
+    final effectiveBorderColor = borderColor ?? Theme.of(context).dividerColor;
+    final effectiveIconColor =
+        iconColor ?? Theme.of(context).iconTheme.color ?? Colors.white;
 
-    return GestureDetector(
-      onTap: () => onChanged(!value),
-      child: AnimatedContainer(
-        height: size,
-        width: size,
-        duration: duration,
-        curve: curve,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          color: value ? effectiveBackgroundColor : Colors.transparent,
-          border: Border.all(color: effectiveBorderColor),
+    return Semantics(
+      label: semanticLabel ?? 'Checkbox',
+      selected: value,
+      child: Focus(
+        focusNode: focusNode,
+        child: InkWell(
+          onTap: _isInteractive && onChanged != null
+              ? () => onChanged!(!value)
+              : null,
+          borderRadius: BorderRadius.circular(borderRadius),
+          child: AnimatedContainer(
+            duration: duration,
+            curve: curve,
+            height: size,
+            width: size,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(borderRadius),
+              color: value ? effectiveBackgroundColor : Colors.transparent,
+              border: Border.all(
+                color: effectiveBorderColor,
+                width: value ? 2 : 1,
+              ),
+            ),
+            child: AnimatedSwitcher(
+              duration: duration,
+              child: value
+                  ? Icon(
+                      icon,
+                      key: const ValueKey('checked'),
+                      color: effectiveIconColor,
+                      size: iconSize,
+                    )
+                  : SizedBox(
+                      key: const ValueKey('unchecked'),
+                      width: iconSize,
+                      height: iconSize,
+                    ),
+            ),
+          ),
         ),
-        child: value
-            ? Icon(
-                icon,
-                color: effectiveIconColor,
-                size: iconSize,
-              )
-            : null,
       ),
     );
   }

@@ -33,7 +33,7 @@ mixin FxShadow {
   ///
   /// Returns a list containing a single [BoxShadow] with a very light shadow effect.
   static List<BoxShadow> get subtle => _createShadow(
-        color: FxColor.dark.withOpacity(0.05),
+        color: FxColor.dark.withValues(alpha: 0.05),
         blurRadius: 4.0,
         offset: const Offset(0.0, 2.0),
       );
@@ -42,7 +42,7 @@ mixin FxShadow {
   ///
   /// Returns a list containing a single [BoxShadow] with a light shadow effect.
   static List<BoxShadow> get light => _createShadow(
-        color: FxColor.dark.withOpacity(0.1),
+        color: FxColor.dark.withValues(alpha: 0.1),
         blurRadius: 6.0,
         offset: const Offset(0.0, 3.0),
       );
@@ -51,7 +51,7 @@ mixin FxShadow {
   ///
   /// Returns a list containing a single [BoxShadow] with a standard shadow effect.
   static List<BoxShadow> get normal => _createShadow(
-        color: FxColor.dark.withOpacity(0.15),
+        color: FxColor.dark.withValues(alpha: 0.15),
         blurRadius: 8.0,
         offset: const Offset(0.0, 4.0),
       );
@@ -60,7 +60,7 @@ mixin FxShadow {
   ///
   /// Returns a list containing a single [BoxShadow] with a moderately strong shadow effect.
   static List<BoxShadow> get medium => _createShadow(
-        color: FxColor.dark.withOpacity(0.2),
+        color: FxColor.dark.withValues(alpha: 0.2),
         blurRadius: 10.0,
         offset: const Offset(0.0, 6.0),
       );
@@ -69,7 +69,7 @@ mixin FxShadow {
   ///
   /// Returns a list containing a single [BoxShadow] with a strong shadow effect.
   static List<BoxShadow> get strong => _createShadow(
-        color: FxColor.dark.withOpacity(0.25),
+        color: FxColor.dark.withValues(alpha: 0.25),
         blurRadius: 12.0,
         offset: const Offset(0.0, 8.0),
         spreadRadius: 1.0,
@@ -79,7 +79,7 @@ mixin FxShadow {
   ///
   /// Returns a list containing a single [BoxShadow] with a very strong shadow effect.
   static List<BoxShadow> get deep => _createShadow(
-        color: FxColor.dark.withOpacity(0.3),
+        color: FxColor.dark.withValues(alpha: 0.3),
         blurRadius: 16.0,
         offset: const Offset(0.0, 12.0),
         spreadRadius: 2.0,

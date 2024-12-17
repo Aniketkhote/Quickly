@@ -29,14 +29,15 @@ class FxShimmer extends StatefulWidget {
   final double height;
 
   /// The theme of the shimmer effect.
-  ///
   /// If specified, overrides [highlightColor] and [baseColor].
   final ShimmerTheme? theme;
 
   /// The delay time before updating the color.
-  ///
   /// Use this to make loading items animate following each other instead of in parallel.
   final Duration delay;
+
+  /// The duration of the shimmer animation.
+  final Duration animationDuration;
 
   /// Creates a shimmer container widget.
   const FxShimmer({
@@ -48,6 +49,7 @@ class FxShimmer extends StatefulWidget {
     this.baseColor,
     this.width = double.infinity,
     this.height = 80,
+    this.animationDuration = const Duration(milliseconds: 1200),
   }) : super(key: key);
 
   /// Creates a round shimmer container widget.
@@ -58,6 +60,7 @@ class FxShimmer extends StatefulWidget {
     Duration delay = Duration.zero,
     Color? baseColor,
     ShimmerTheme? theme,
+    Duration animationDuration = const Duration(milliseconds: 1200),
   }) =>
       FxShimmer(
         key: key,
@@ -68,6 +71,7 @@ class FxShimmer extends StatefulWidget {
         highlightColor: highlightColor,
         theme: theme,
         delay: delay,
+        animationDuration: animationDuration,
       );
 
   @override
@@ -84,7 +88,7 @@ class _FxShimmerState extends State<FxShimmer>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1200),
+      duration: widget.animationDuration,
     );
 
     _colorAnimation = ColorTween(
@@ -131,18 +135,14 @@ class _FxShimmerState extends State<FxShimmer>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _colorAnimation,
-      builder: (context, child) {
-        return Container(
-          width: widget.width,
-          height: widget.height,
-          decoration: BoxDecoration(
-            color: _colorAnimation.value,
-            borderRadius: BorderRadius.circular(widget.radius),
-          ),
-        );
-      },
+    return AnimatedContainer(
+      duration: widget.animationDuration,
+      width: widget.width,
+      height: widget.height,
+      decoration: BoxDecoration(
+        color: _colorAnimation.value,
+        borderRadius: BorderRadius.circular(widget.radius),
+      ),
     );
   }
 }

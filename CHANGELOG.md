@@ -1,3 +1,36 @@
+## 6.1.0
+
+### Added
+
+- **Accessibility Enhancements**: Added `Semantics` support for better screen reader compatibility in `FxCheckbox`, `FxRadio`, `FxSwitch`, and `FxTextFormField`.
+- **Customization Options**:
+  - `isDisabled` property in `FxCheckbox` and `FxRadio` for disabling interactions with visual feedback.
+  - `thumbColor` in `FxSwitch` and `innerCircleColor`, `innerCircleScale` in `FxRadio` for improved customization.
+  - Optional `borderColor` for better visual customization in `FxSwitch`.
+  - Customizable `animationDuration` in `FxShimmer` for flexible shimmer effects.
+- **Dynamic Theming**: Support for dynamic theming in `FxCheckbox`, `FxRadio`, `FxSwitch`, and `FxTextFormField` to respect app’s theme colors.
+
+### Changed
+
+- **UI Updates**:
+  - Replaced `GestureDetector` with `InkWell` in `FxCheckbox`, `FxRadio`, and `FxSwitch` for ripple effects and hover support.
+  - Replaced `AnimatedBuilder` with `AnimatedContainer` in `FxShimmer` for better performance and simpler code.
+  - Updated `FxTextFormField` to align with Material 3 guidelines, introducing `FilledTextField` and `OutlinedTextField` styles.
+  - Renamed `onChange` to `onChanged` for consistency with Flutter conventions.
+- **Input Decoration**:
+  - Replaced custom border handling in `FxTextFormField` with `OutlineInputBorder` for consistent Material 3 border styles.
+  - Added `filled` and `fillColor` properties in `FxTextFormField`.
+
+### Improved
+
+- **Performance**: Optimized code readability and modularity for better maintainability and smoother animations in `FxCheckbox`, `FxRadio`, `FxSwitch`, and `FxTextFormField`.
+- **Shimmer Animation**: Refined shimmer effect with smoother transitions and customizable animation duration.
+- **Focus and Error States**: Enhanced error and focus state handling in `FxTextFormField` for better user experience.
+
+### Fixed
+
+- **Color Handling**: Fixed color handling for active, inactive, and thumb states in `FxSwitch` and `FxRadio` to fallback to theme defaults when not specified.
+
 ## 6.0.0
 
 ### Added

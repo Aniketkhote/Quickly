@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quickly/quickly.dart';
 
-/// A customizable switch widget with additional features provided by FxSwitch.
+/// A customizable switch widget with smooth animations and additional features.
 class FxSwitch extends StatelessWidget {
   /// Constructs an FxSwitch.
   const FxSwitch({
@@ -12,6 +12,8 @@ class FxSwitch extends StatelessWidget {
     this.activeColor,
     this.inactiveColor,
     this.thumbColor,
+    this.borderColor,
+    this.isDisabled = false,
     this.duration = const Duration(milliseconds: 200),
     this.curve = Curves.easeInOut,
   });
@@ -22,7 +24,7 @@ class FxSwitch extends StatelessWidget {
   /// Called when the user toggles the switch on or off.
   final ValueChanged<bool> onChanged;
 
-  /// The size of the switch. This affects both height and width.
+  /// The size of the switch. Affects height, width, and thumb size.
   final double size;
 
   /// The color used when the switch is in the "on" position.
@@ -34,6 +36,12 @@ class FxSwitch extends StatelessWidget {
   /// The color of the movable thumb.
   final Color? thumbColor;
 
+  /// The border color of the switch.
+  final Color? borderColor;
+
+  /// Whether the switch is disabled.
+  final bool isDisabled;
+
   /// The duration of the transition animation.
   final Duration duration;
 
@@ -44,33 +52,60 @@ class FxSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final effectiveActiveColor = activeColor ?? FxColor.primary;
-    final effectiveInactiveColor = inactiveColor ?? theme.unselectedWidgetColor;
+    final effectiveInactiveColor =
+        inactiveColor ?? theme.unselectedWidgetColor.withValues(alpha: 0.5);
     final effectiveThumbColor = thumbColor ?? Colors.white;
+    final effectiveBorderColor =
+        borderColor ?? Colors.grey.withValues(alpha: 0.5);
 
-    return GestureDetector(
-      onTap: () => onChanged(!value),
-      child: AnimatedContainer(
-        height: size,
-        width: size * 1.875, // Maintain aspect ratio
-        duration: duration,
-        curve: curve,
-        decoration: BoxDecoration(
+    return Opacity(
+      opacity: isDisabled ? 0.5 : 1.0,
+      child: Semantics(
+        label: 'Switch',
+        value: value ? 'On' : 'Off',
+        enabled: !isDisabled,
+        child: InkWell(
+          onTap: isDisabled ? null : () => onChanged(!value),
           borderRadius: BorderRadius.circular(size / 2),
-          color: value ? effectiveActiveColor : effectiveInactiveColor,
-        ),
-        child: AnimatedAlign(
-          duration: duration,
-          curve: curve,
-          alignment: value ? Alignment.centerRight : Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.all(
-                size * 0.0625), // Small padding for visual appeal
-            child: Container(
-              width: size * 0.875,
-              height: size * 0.875,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: effectiveThumbColor,
+          child: AnimatedContainer(
+            height: size,
+            width: size * 1.875,
+            duration: duration,
+            curve: curve,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(size / 2),
+              color: value ? effectiveActiveColor : effectiveInactiveColor,
+              border: Border.all(
+                color: effectiveBorderColor,
+                width: 1.5,
+              ),
+            ),
+            child: AnimatedAlign(
+              duration: duration,
+              curve: curve,
+              alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.all(size * 0.08),
+                child: AnimatedScale(
+                  duration: duration,
+                  scale: value ? 1.1 : 1.0,
+                  curve: curve,
+                  child: Container(
+                    width: size * 0.875,
+                    height: size * 0.875,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: effectiveThumbColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
