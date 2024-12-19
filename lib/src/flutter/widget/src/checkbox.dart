@@ -63,7 +63,7 @@ class FxCheckbox extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius),
               color: value ? effectiveBackgroundColor : Colors.transparent,
               border: Border.all(
-                color: effectiveBorderColor,
+                color: !value ? effectiveBorderColor : effectiveBackgroundColor,
                 width: value ? 2 : 1,
               ),
             ),

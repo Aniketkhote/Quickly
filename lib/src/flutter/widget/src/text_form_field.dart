@@ -23,6 +23,8 @@ class FxTextFormField extends StatefulWidget {
     this.onChanged,
     this.focusNode,
     this.enabled = true,
+    this.filled = true,
+    this.isRequired = true,
     this.textInputAction,
     this.style,
     this.textCapitalization = TextCapitalization.none,
@@ -35,7 +37,7 @@ class FxTextFormField extends StatefulWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool isSecure;
-  final BorderRadiusGeometry? borderRadius;
+  final BorderRadius? borderRadius;
   final int? maxLines;
   final TextInputType? keyboardType;
   final bool border;
@@ -45,7 +47,9 @@ class FxTextFormField extends StatefulWidget {
   final List<BoxShadow>? boxShadow;
   final ValueChanged<String>? onChanged;
   final FocusNode? focusNode;
+  final bool filled;
   final bool enabled;
+  final bool isRequired;
   final TextInputAction? textInputAction;
   final TextStyle? style;
   final TextCapitalization textCapitalization;
@@ -91,68 +95,68 @@ class _FxTextFormFieldState extends State<FxTextFormField> {
                   ),
             ),
           ),
-        Container(
-          decoration: BoxDecoration(
-            color: widget.fieldColor ?? Colors.grey[100],
-            borderRadius: widget.borderRadius ?? BorderRadius.circular(8),
-            boxShadow: widget.boxShadow,
+        TextFormField(
+          key: _fieldKey,
+          controller: _controller,
+          focusNode: widget.focusNode,
+          decoration: InputDecoration(
+            contentPadding: widget.padding ??
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            suffixIcon: widget.isSecure
+                ? IconButton(
+                    icon: Icon(
+                        _obscureText ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () =>
+                        setState(() => _obscureText = !_obscureText),
+                  )
+                : (widget.suffixIcon != null ? Icon(widget.suffixIcon) : null),
+            prefixIcon:
+                widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+            hintText: widget.hintText,
+            hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Colors.grey[600],
+                ),
+            filled: widget.filled,
+            fillColor: widget.fieldColor ?? Colors.grey[100],
+            border: widget.border
+                ? OutlineInputBorder(
+                    borderRadius:
+                        widget.borderRadius ?? BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: widget.borderColor ?? FxColor.gray100,
+                    ),
+                  )
+                : InputBorder.none,
           ),
-          child: TextFormField(
-            key: _fieldKey,
-            controller: _controller,
-            focusNode: widget.focusNode,
-            decoration: InputDecoration(
-              contentPadding: widget.padding ??
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              suffixIcon: widget.isSecure
-                  ? IconButton(
-                      icon: Icon(_obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      onPressed: () =>
-                          setState(() => _obscureText = !_obscureText),
-                    )
-                  : (widget.suffixIcon != null
-                      ? Icon(widget.suffixIcon)
-                      : null),
-              prefixIcon:
-                  widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
-              hintText: widget.hintText,
-              hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
-              border: InputBorder.none,
-            ),
-            keyboardType: widget.keyboardType,
-            obscureText: _obscureText,
-            maxLines: widget.isSecure ? 1 : widget.maxLines,
-            enabled: widget.enabled,
-            style: widget.style ?? Theme.of(context).textTheme.bodyLarge,
-            textInputAction: widget.textInputAction,
-            textCapitalization: widget.textCapitalization,
-            onChanged: (value) {
-              widget.onChanged?.call(value);
-              _fieldKey.currentState?.validate();
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "This field is required.";
-              }
-              if (widget.validations != null) {
-                for (final validation in widget.validations!) {
-                  // Assuming you have a list of validation functions
-                  final validate = validators[validation];
-                  if (validate != null) {
-                    final result = validate(value);
-                    if (result != null) {
-                      return result;
-                    }
+          keyboardType: widget.keyboardType,
+          obscureText: _obscureText,
+          maxLines: widget.isSecure ? 1 : widget.maxLines,
+          enabled: widget.enabled,
+          style: widget.style ?? Theme.of(context).textTheme.bodyLarge,
+          textInputAction: widget.textInputAction,
+          textCapitalization: widget.textCapitalization,
+          onChanged: (value) {
+            widget.onChanged?.call(value);
+            _fieldKey.currentState?.validate();
+          },
+          validator: (value) {
+            if (widget.isRequired && (value == null || value.isEmpty)) {
+              return "This field is required.";
+            }
+            if (widget.isRequired && widget.validations != null) {
+              for (final validation in widget.validations!) {
+                // Assuming you have a list of validation functions
+                final validate = validators[validation];
+                if (validate != null) {
+                  final result = validate(value!);
+                  if (result != null) {
+                    return result;
                   }
                 }
               }
-              return null;
-            },
-          ),
+            }
+            return null;
+          },
         ),
       ],
     );

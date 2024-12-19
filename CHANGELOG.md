@@ -1,3 +1,7 @@
+## 6.1.1
+
+- Fixed color style according to material 3
+
 ## 6.1.0
 
 ### Added

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quickly/quickly.dart';
 
 /// A customizable switch widget with smooth animations and additional features.
 class FxSwitch extends StatelessWidget {
@@ -51,7 +50,7 @@ class FxSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final effectiveActiveColor = activeColor ?? FxColor.primary;
+    final effectiveActiveColor = activeColor ?? Theme.of(context).primaryColor;
     final effectiveInactiveColor =
         inactiveColor ?? theme.unselectedWidgetColor.withValues(alpha: 0.5);
     final effectiveThumbColor = thumbColor ?? Colors.white;
