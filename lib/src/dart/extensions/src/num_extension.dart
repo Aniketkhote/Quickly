@@ -19,23 +19,15 @@ extension NumExtension on num {
     if (suffix.isNotEmpty) {
       return '$this$suffix';
     }
-    switch (this % 100) {
-      case 11:
-      case 12:
-      case 13:
-        return '${this}th';
-      default:
-        switch (this % 10) {
-          case 1:
-            return '${this}st';
-          case 2:
-            return '${this}nd';
-          case 3:
-            return '${this}rd';
-          default:
-            return '${this}th';
-        }
-    }
+    return switch (this % 100) {
+      11 || 12 || 13 => '${this}th',
+      _ => switch (this % 10) {
+        1 => '${this}st',
+        2 => '${this}nd',
+        3 => '${this}rd',
+        _ => '${this}th',
+      },
+    };
   }
 
   /// Returns a `Duration` object representing the number of seconds.

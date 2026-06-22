@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Custom color palette for easy access to predefined color options.
 /// This abstract class provides a set of static color constants for consistent theming across the application.
-abstract class FxColor {
+final class FxColor {
   /// The primary color of the application.
   /// Used for key UI elements and primary actions.
   static const Color primary = Color(0xFF006EFF);

@@ -68,9 +68,9 @@ extension ListExtension<T> on List<T> {
   /// final groupedList = list.groupBy((item) => item.category);
   /// ```
   Map<T, List<T>> groupBy(T Function(T) fn) => Map<T, List<T>>.fromIterable(
-        map(fn).toSet(),
-        value: (i) => where((T v) => fn(v) == i).toList(),
-      );
+    map(fn).toSet(),
+    value: (i) => where((T v) => fn(v) == i).toList(),
+  );
 
   /// Groups the list elements according to a specified key in each element.
   ///
@@ -81,11 +81,11 @@ extension ListExtension<T> on List<T> {
   /// final groupedByKey = list.groupByKey("category");
   /// ```
   Map<T, List<T>> groupByKey(String key) => groupBy((T e) {
-        if (e is Map && e.containsKey(key)) {
-          return e[key] as T;
-        }
-        throw ArgumentError('Key not found: $key');
-      });
+    if (e is Map && e.containsKey(key)) {
+      return e[key] as T;
+    }
+    throw ArgumentError('Key not found: $key');
+  });
 
   /// Returns a list of maps sorted by the given key in descending order.
   ///
@@ -180,10 +180,8 @@ extension ListExtension<T> on List<T> {
 
     return List<List<T>>.generate(
       parts,
-      (int i) => sublist(
-        size * i,
-        (i + 1) * size <= length ? (i + 1) * size : null,
-      ),
+      (int i) =>
+          sublist(size * i, (i + 1) * size <= length ? (i + 1) * size : null),
     );
   }
 
@@ -300,8 +298,9 @@ extension ListExtension<T> on List<T> {
     return whereType<Map<String, T>>()
         .map((Map<String, T> element) {
           return Map<String, T>.fromEntries(
-            element.entries.where((entry) => keys.contains(entry.key)),
-          ) as T;
+                element.entries.where((entry) => keys.contains(entry.key)),
+              )
+              as T;
         })
         .where((element) => (element as Map).isNotEmpty)
         .toList();
@@ -322,8 +321,9 @@ extension ListExtension<T> on List<T> {
     return whereType<Map<String, T>>()
         .map((Map<String, T> element) {
           return Map<String, T>.fromEntries(
-            element.entries.where((entry) => !keys.contains(entry.key)),
-          ) as T;
+                element.entries.where((entry) => !keys.contains(entry.key)),
+              )
+              as T;
         })
         .where((element) => (element as Map).isNotEmpty)
         .toList();
@@ -343,8 +343,10 @@ extension ListExtension<T> on List<T> {
       return <T>[];
     }
     return whereType<Map<T, T>>()
-        .where((element) =>
-            element.containsKey(key) && params.contains(element[key]))
+        .where(
+          (element) =>
+              element.containsKey(key) && params.contains(element[key]),
+        )
         .map((e) => e as T)
         .toList();
   }
@@ -363,8 +365,10 @@ extension ListExtension<T> on List<T> {
       return <T>[];
     }
     return whereType<Map<String, T>>()
-        .where((element) =>
-            element.containsKey(key) && !params.contains(element[key]))
+        .where(
+          (element) =>
+              element.containsKey(key) && !params.contains(element[key]),
+        )
         .map((e) => e as T)
         .toList();
   }
@@ -384,11 +388,13 @@ extension ListExtension<T> on List<T> {
       return <T>[];
     }
     return whereType<Map<String, dynamic>>()
-        .where((element) =>
-            element.containsKey(key) &&
-            element[key] is num &&
-            (element[key] as num) >= start &&
-            (element[key] as num) <= end)
+        .where(
+          (element) =>
+              element.containsKey(key) &&
+              element[key] is num &&
+              (element[key] as num) >= start &&
+              (element[key] as num) <= end,
+        )
         .map((e) => e as T)
         .toList();
   }
@@ -408,10 +414,12 @@ extension ListExtension<T> on List<T> {
       return <T>[];
     }
     return whereType<Map<String, dynamic>>()
-        .where((element) =>
-            element.containsKey(key) &&
-            element[key] is num &&
-            ((element[key] as num) < start || (element[key] as num) > end))
+        .where(
+          (element) =>
+              element.containsKey(key) &&
+              element[key] is num &&
+              ((element[key] as num) < start || (element[key] as num) > end),
+        )
         .map((e) => e as T)
         .toList();
   }
@@ -426,11 +434,11 @@ extension ListExtension<T> on List<T> {
   /// final hasAdmin = list.hasKeyValue("role", "admin");
   /// ```
   bool hasKeyValue(String key, T value) => any(
-        (T element) =>
-            element is Map<T, T> &&
-            element.containsKey(key) &&
-            element[key] == value,
-      );
+    (T element) =>
+        element is Map<T, T> &&
+        element.containsKey(key) &&
+        element[key] == value,
+  );
 
   /// Checks if any map in the list contains the specified key.
   ///
@@ -440,9 +448,8 @@ extension ListExtension<T> on List<T> {
   /// ```dart
   /// final hasAgeField = list.hasKey("age");
   /// ```
-  bool hasKey(String key) => any(
-        (T element) => element is Map<T, T> && element.containsKey(key),
-      );
+  bool hasKey(String key) =>
+      any((T element) => element is Map<T, T> && element.containsKey(key));
 
   /// Checks if any map in the list contains the specified value.
   ///
@@ -452,7 +459,6 @@ extension ListExtension<T> on List<T> {
   /// ```dart
   /// final hasJohnDoe = list.hasValue("John Doe");
   /// ```
-  bool hasValue(T value) => any(
-        (T element) => element is Map<T, T> && element.containsValue(value),
-      );
+  bool hasValue(T value) =>
+      any((T element) => element is Map<T, T> && element.containsValue(value));
 }

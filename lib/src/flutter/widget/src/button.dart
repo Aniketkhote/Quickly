@@ -33,8 +33,10 @@ class FxButton extends StatelessWidget {
     this.iconSize,
     this.textStyle,
     this.child,
-  }) : assert(icon != null || text != null || child != null,
-            'Either icon, text, or child must be provided');
+  }) : assert(
+         icon != null || text != null || child != null,
+         'Either icon, text, or child must be provided',
+       );
 
   /// The [text] parameter specifies the button's label text.
   final String? text;
@@ -146,13 +148,15 @@ class FxButton extends StatelessWidget {
           ? Icon(
               icon,
               color: getIconColor,
-              size: iconSize ??
+              size:
+                  iconSize ??
                   (type == 'icon' ? getBtnSize() : (getBtnSize() + 4)),
             ).px4
           : const SizedBox.shrink();
     }
 
-    final Widget buttonContent = child ??
+    final Widget buttonContent =
+        child ??
         Row(
           mainAxisSize: isBlock ? MainAxisSize.max : MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
@@ -168,8 +172,8 @@ class FxButton extends StatelessWidget {
     return InkWell(
       splashColor: isSplashColor
           ? type == BtnType.solid
-              ? FxColor.dark
-              : color!.withValues(alpha: .3)
+                ? FxColor.dark
+                : color!.withValues(alpha: .3)
           : FxColor.transparent,
       onTap: onPressed,
       borderRadius: radius ?? getBtnShape(),
@@ -192,12 +196,12 @@ class FxButton extends StatelessWidget {
   /// A mapping of button shapes to corresponding border radii.
   static final Map<BtnShape, BorderRadius> _borderRadiusByShape =
       <BtnShape, BorderRadius>{
-    BtnShape.pill: FxRadius.r30,
-    BtnShape.rounded: FxRadius.r5,
-    BtnShape.rleft: FxRadius.left(30),
-    BtnShape.rright: FxRadius.right(30),
-    BtnShape.leaf: FxRadius.only(bottomLeft: 30, topRight: 30),
-  };
+        BtnShape.pill: FxRadius.r30,
+        BtnShape.rounded: FxRadius.r5,
+        BtnShape.rleft: FxRadius.left(30),
+        BtnShape.rright: FxRadius.right(30),
+        BtnShape.leaf: FxRadius.only(bottomLeft: 30, topRight: 30),
+      };
 
   /// Returns the border radius for the button based on its shape.
   BorderRadius getBtnShape() => _borderRadiusByShape[shape] ?? FxRadius.none;
@@ -210,20 +214,13 @@ class FxButton extends StatelessWidget {
     BtnSize.large: 20,
   };
 
-  EdgeInsets getBtnPadding() {
-    switch (size) {
-      case BtnSize.tiny:
-        return EdgeInsets.symmetric(horizontal: 4, vertical: 4);
-      case BtnSize.small:
-        return EdgeInsets.symmetric(horizontal: 8, vertical: 6);
-      case BtnSize.normal:
-        return EdgeInsets.symmetric(horizontal: 12, vertical: 8);
-      case BtnSize.medium:
-        return EdgeInsets.symmetric(horizontal: 16, vertical: 10);
-      case BtnSize.large:
-        return EdgeInsets.symmetric(horizontal: 20, vertical: 12);
-    }
-  }
+  EdgeInsets getBtnPadding() => switch (size) {
+    BtnSize.tiny => const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+    BtnSize.small => const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+    BtnSize.normal => const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+    BtnSize.medium => const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+    BtnSize.large => const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+  };
 
   /// Returns the size factor for the button based on its size.
   double getBtnSize() => _sizeFactorBySize[size] ?? 16;
@@ -235,8 +232,8 @@ class FxButton extends StatelessWidget {
   Color getTextColor(Color color) => color == Colors.transparent
       ? FxColor.gray700
       : color.computeLuminance() > 0.5
-          ? FxColor.gray700
-          : Colors.white;
+      ? FxColor.gray700
+      : Colors.white;
 
   /// Returns the button color based on its type.
   /// If the type is [BtnType.outline], [BtnType.outline2x], or [BtnType.transparent],

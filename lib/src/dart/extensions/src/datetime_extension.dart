@@ -38,7 +38,7 @@ extension DateTimeExtension on DateTime {
       '09': 'Sep',
       '10': 'Oct',
       '11': 'Nov',
-      '12': 'Dec'
+      '12': 'Dec',
     };
 
     final Map<String, String> fullMonths = {
@@ -53,7 +53,7 @@ extension DateTimeExtension on DateTime {
       '09': 'September',
       '10': 'October',
       '11': 'November',
-      '12': 'December'
+      '12': 'December',
     };
 
     final Map<String, String> shortDays = {
@@ -63,7 +63,7 @@ extension DateTimeExtension on DateTime {
       '4': 'Thu',
       '5': 'Fri',
       '6': 'Sat',
-      '7': 'Sun'
+      '7': 'Sun',
     };
 
     final Map<String, String> fullDays = {
@@ -73,41 +73,29 @@ extension DateTimeExtension on DateTime {
       '4': 'Thursday',
       '5': 'Friday',
       '6': 'Saturday',
-      '7': 'Sunday'
+      '7': 'Sunday',
     };
 
     return format.replaceAllMapped(
       RegExp(r'(dd|MM|MMM|MMMM|yyyy|HH|hh|mm|ss|a|EEE|EEEE|[^\w])'),
-      (Match m) {
-        switch (m.group(0)) {
-          case 'dd':
-            return this.day.toString().padLeft(2, '0');
-          case 'MM':
-            return this.month.toString().padLeft(2, '0');
-          case 'MMM':
-            return shortMonths[this.month.toString().padLeft(2, '0')]!;
-          case 'MMMM':
-            return fullMonths[this.month.toString().padLeft(2, '0')]!;
-          case 'yyyy':
-            return this.year.toString();
-          case 'HH':
-            return this.hour.toString().padLeft(2, '0');
-          case 'hh':
-            int hour = this.hour > 12 ? this.hour - 12 : this.hour;
-            return hour.toString().padLeft(2, '0');
-          case 'mm':
-            return this.minute.toString().padLeft(2, '0');
-          case 'ss':
-            return this.second.toString().padLeft(2, '0');
-          case 'a':
-            return this.hour < 12 ? 'AM' : 'PM';
-          case 'EEE':
-            return shortDays[this.weekday.toString()]!;
-          case 'EEEE':
-            return fullDays[this.weekday.toString()]!;
-          default:
-            return m.group(0)!;
-        }
+      (Match m) => switch (m.group(0)) {
+        'dd' => this.day.toString().padLeft(2, '0'),
+        'MM' => this.month.toString().padLeft(2, '0'),
+        'MMM' => shortMonths[this.month.toString().padLeft(2, '0')]!,
+        'MMMM' => fullMonths[this.month.toString().padLeft(2, '0')]!,
+        'yyyy' => this.year.toString(),
+        'HH' => this.hour.toString().padLeft(2, '0'),
+        'hh' =>
+          (this.hour > 12 ? this.hour - 12 : this.hour).toString().padLeft(
+            2,
+            '0',
+          ),
+        'mm' => this.minute.toString().padLeft(2, '0'),
+        'ss' => this.second.toString().padLeft(2, '0'),
+        'a' => this.hour < 12 ? 'AM' : 'PM',
+        'EEE' => shortDays[this.weekday.toString()]!,
+        'EEEE' => fullDays[this.weekday.toString()]!,
+        _ => m.group(0)!,
       },
     );
   }
@@ -195,8 +183,9 @@ extension DateTimeExtension on DateTime {
   /// @param unit The base unit name (e.g., 'day', 'hour').
   /// @return A formatted string representing the count and unit.
   String _formatUnit(int count, bool abbreviated, String unit) {
-    final String pluralUnit =
-        abbreviated ? '${unit[0]}${unit[1]}' : '$unit${count != 1 ? 's' : ''}';
+    final String pluralUnit = abbreviated
+        ? '${unit[0]}${unit[1]}'
+        : '$unit${count != 1 ? 's' : ''}';
     if (count == 1) {
       return '1 $pluralUnit';
     } else {
